@@ -4,10 +4,24 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from collections import defaultdict, Counter
 from parse import load_all, METHODS, ORDER, inline
 from icons import icon, dial, anatomy
+sys.path.insert(0, str(Path(__file__).resolve().parent / 'art'))
+from compose import pick_icons, hero_svg, step_glyph, action_svg
 
 ROOT = Path(__file__).resolve().parent.parent
 HERE = Path(__file__).resolve().parent
 NM = ROOT / 'node_modules'
+IMG = ROOT / 'images'
+IMG.mkdir(exist_ok=True)
+
+_MIME = {'.jpg': 'jpeg', '.jpeg': 'jpeg', '.png': 'png', '.webp': 'webp'}
+
+def photo(stem):
+    """Return a data: URI for images/<stem>.<ext> if the user has supplied one."""
+    for ext, mime in _MIME.items():
+        f = IMG / (stem + ext)
+        if f.exists():
+            return f'data:image/{mime};base64,' + base64.b64encode(f.read_bytes()).decode()
+    return None
 b64 = lambda p: base64.b64encode(Path(p).read_bytes()).decode()
 FR = NM / '@fontsource-variable/fraunces/files'; IN = NM / '@fontsource/inter/files'
 FONTS = f"""
@@ -22,7 +36,7 @@ CSS = (HERE / 'style.css').read_text()
 
 def page(cls, topcolor, inner, folio=None):
     bar = f'<div class="topbar" style="background:{topcolor}"></div>' if topcolor else ''
-    f = f'<div class="folio">{folio}</div>' if folio else ''
+    f = (f'<div class="folio">{folio}</div><div class="pageno">{{{{PN}}}}</div>') if folio else ''
     return f'<section class="page {cls}">{bar}<div class="inner">{inner}</div>{f}</section>'
 
 def esc(s): return html.escape(s, quote=False)
@@ -33,6 +47,12 @@ def build(recipes):
     allc  = len({r['cuisine'] for r in recipes})
     counts = Counter(r['method'] for r in recipes)
     pages = []
+    FRONT = 8                       # cover, foreword, pantry, 2 contents, 2 cuisine, when-to-cook
+    MAINS_START = FRONT + 2         # + the section divider
+    BREK_DIVIDER = MAINS_START + 2 * len(mains)
+    BREK_START = BREK_DIVIDER + 1
+    pageno = {r['num']: MAINS_START + 2 * i for i, r in enumerate(mains)}
+    pageno.update({r['num']: BREK_START + 2 * j for j, r in enumerate(brek)})
 
     def texture(rs):
         return ' &nbsp;·&nbsp; '.join(esc(r['title']) for r in rs)
@@ -86,7 +106,7 @@ def build(recipes):
     <div class="anat">
       <div class="anat-fig">{anatomy()}<div class="anat-cap">Every recipe page, without exception</div></div>
       <div class="anat-key"><div class="pkicker" style="margin-bottom:4mm">How a page works</div>{keyhtml}</div>
-    </div>"""))
+    </div>""", 'TWENTY MINUTES IS PLENTY'))
 
     # ============================== PANTRY ==============================
     pantry = [
@@ -114,7 +134,7 @@ def build(recipes):
     <div class="pan">{''.join(f'<div class="pcard"><h4>{t}</h4><p>{b}</p></div>' for t,b in pantry)}</div>
     <div class="hrule" style="margin:6mm 0"></div>
     <div class="pkicker" style="margin-bottom:4mm">Five rules for a twenty-minute dinner</div>
-    <div class="rules">{''.join(f'<div class="rule-item"><div class="rn d">{i+1}</div><div class="rt"><b>{t}</b> {b}</div></div>' for i,(t,b) in enumerate(rules))}</div>"""))
+    <div class="rules">{''.join(f'<div class="rule-item"><div class="rn d">{i+1}</div><div class="rt"><b>{t}</b> {b}</div></div>' for i,(t,b) in enumerate(rules))}</div>""", 'THE FAST PANTRY'))
 
     # ============================== CONTENTS ==============================
     def toc_group(m, rs):
@@ -173,19 +193,39 @@ def build(recipes):
       <p class="legend-note">Every recipe serves four, lists metric quantities first with US cups and ounces alongside, and assumes a cold start. The ring beside each title shows the total time against a twenty-minute dial; the strip at the foot of the page gives approximate nutrition per serving, and the line beneath it tells you exactly what you will be washing.</p>
     </div>""", 'CONTENTS &nbsp;·&nbsp; BREAKFAST'))
 
-    # ============================== BY CUISINE ==============================
+    # ============================== BY CUISINE (two pages) ==============================
     by = defaultdict(list)
     for r in recipes: by[r['cuisine']].append(r)
-    cols = ''.join(
-      f'<div class="ci"><h4>{esc(c)}</h4><div class="u"></div>' +
-      ''.join(f'<p><span class="n">{r["num"]}</span><span>{esc(r["title"])}</span></p>' for r in rs) + '</div>'
-      for c, rs in sorted(by.items()))
+    entries = sorted(by.items())
+    weights = [len(rs) + 1.6 for _, rs in entries]
+    half, run, cut = sum(weights) / 2, 0, len(entries)
+    for i, w in enumerate(weights):
+        run += w
+        if run >= half:
+            cut = i + 1
+            break
+
+    def ci_block(items):
+        return ''.join(
+            f'<div class="ci"><h4>{esc(c)}</h4><div class="u"></div>' +
+            ''.join(f'<p><span class="n">{r["num"]}</span><span>{esc(r["title"])}</span>'
+                    f'<span class="cp">{pageno[r["num"]]}</span></p>' for r in rs) + '</div>'
+            for c, rs in items)
+
+    first, last = entries[0][0], entries[cut - 1][0]
     pages.append(page('', '#2C6B7B', f"""
-    <div class="pkicker">{len(by)} kitchens</div>
+    <div class="pkicker">{len(by)} kitchens &nbsp;·&nbsp; {esc(first)} to {esc(last)}</div>
     <h2 class="ptitle d">By Cuisine</h2>
-    <p class="pintro">Cook your way around the world on a Tuesday. Nothing here has been simplified into blandness &mdash; the shortcuts are in the technique and the cut, not in the seasoning.</p>
-    <div class="hrule" style="margin:5.5mm 0"></div>
-    <div class="cindex">{cols}</div>""", 'BY CUISINE'))
+    <p class="pintro">Cook your way around the world on a Tuesday. The shortcuts here are in the technique and the cut, never in the seasoning. The number on the left is the recipe; the number on the right is the page.</p>
+    <div class="hrule" style="margin:5mm 0"></div>
+    <div class="cindex">{ci_block(entries[:cut])}</div>""", 'BY CUISINE &nbsp;·&nbsp; I'))
+
+    pages.append(page('', '#2C6B7B', f"""
+    <div class="pkicker">{esc(entries[cut][0])} to {esc(entries[-1][0])}</div>
+    <h2 class="ptitle d">By Cuisine <span style="color:var(--ink4)">II</span></h2>
+    <p class="pintro">Seventy recipes, {len(by)} kitchens, and not one of them longer than twenty minutes.</p>
+    <div class="hrule" style="margin:5mm 0"></div>
+    <div class="cindex">{ci_block(entries[cut:])}</div>""", 'BY CUISINE &nbsp;·&nbsp; II'))
 
     # ============================== WHAT TO COOK WHEN ==============================
     byn = {r['num']: r for r in recipes}
@@ -262,27 +302,40 @@ def build(recipes):
 
     byn2 = {r['num']: r for r in recipes}
 
-    def recipe_page(r):
+    def recipe_pages(r):
+        """A recipe is a spread: the plate page, then the method page."""
         c, tint = r['m']['color'], r['m']['tint']
+        num, title = r['num'], esc(r['title'])
+
+        # ---------- hero: a supplied photograph, else a composed illustration
+        hero_photo = photo(f"{num}-hero")
+        if hero_photo:
+            hero = f'<div class="hero"><img src="{hero_photo}" alt=""></div>'
+        else:
+            hero = (f'<div class="hero" style="background:{tint}">{hero_svg(r, c, "#ffffff")}'
+                    f'<span class="hero-tag" style="color:{c}">Illustrated</span></div>')
+
         ings = ''
         for g in r['ing_groups']:
-            if g['name']: ings += f'<div class="ing-group">{inline(g["name"])}</div>'
+            if g['name']:
+                ings += f'<div class="ing-group">{inline(g["name"])}</div>'
             ings += ''.join(f'<div class="ing"><span class="bt" style="background:{c}"></span>'
                             f'<span>{inline(x)}</span></div>' for x in g['items'])
-        steps = ''.join(f'<div class="step"><div class="sn d" style="color:{c}">{n+1}</div>'
-                        f'<div class="st">{inline(s)}</div></div>' for n, s in enumerate(r['steps']))
-        notes = ''.join(f'<div class="note"><b style="color:{c}">{inline(t)}</b>{inline(b)}</div>'
-                        for t, b in r['notes'])
-        keys = ['Calories', 'Protein', 'Carbs', 'Fat', 'Fibre']; units = ['kcal', 'g', 'g', 'g', 'g']
+
+        keys = ['Calories', 'Protein', 'Carbs', 'Fat', 'Fibre']
+        units = ['kcal', 'g', 'g', 'g', 'g']
         macs = ''.join(f'<div class="mac"><div class="v d" style="color:{c}">{v}'
                        f'<span class="mu"> {u}</span></div><div class="k">{k}</div></div>'
                        for v, k, u in zip(r['macros'], keys, units))
-        prep = f'<span class="sep"></span><span>{r["prep"]} prep / {r["cook"]} cook</span>' if r['prep'] else ''
-        return page('', c, f"""
+        prep = (f'<span class="sep"></span><span>{r["prep"]} prep / {r["cook"]} cook</span>'
+                if r['prep'] else '')
+
+        page_a = page('', c, f"""
+        {hero}
         <div class="rhead">
-          <div class="rnum d" style="color:{c}">{r['num']}</div>
+          <div class="rnum d" style="color:{c}">{num}</div>
           <div class="rht">
-            <h1 class="rtitle d">{esc(r['title'])}</h1>
+            <h1 class="rtitle d">{title}</h1>
             <div class="rmeta">
               <span class="pill" style="background:{c}">{icon(r['m']['key'],'3.5mm',1.7)}{r['m']['label']}</span>
               <span>{esc(r['cuisine'])}</span>{prep}<span class="sep"></span><span>Serves {r['serves']}</span>
@@ -293,30 +346,63 @@ def build(recipes):
           </div>
         </div>
         <p class="hook d" style="border-color:{c};color:{c}">{inline(r['hook'])}</p>
-        <div class="rbody">
-          <div><div class="blab" style="color:{c}">Ingredients</div><div class="ing-panel">{ings}</div></div>
-          <div><div class="blab" style="color:{c}">Why it works</div><p class="why">{inline(r['why'])}</p>
-            <div class="blab" style="color:{c}">Method</div>{steps}</div>
+        <div class="rbody rgrid{' wide' if r['ing_count'] >= 13 else ''}">
+          <div class="rcol"><div class="blab" style="color:{c}">Ingredients</div>
+            <div class="ing-panel{' two' if r['ing_count'] >= 13 else ''}">{ings}</div></div>
+          <div class="rcol"><div class="blab" style="color:{c}">Why it works</div>
+            <p class="why">{inline(r['why'])}</p></div>
         </div>
         <div class="rfoot">
-          <div class="notes">{notes}</div>
           <div class="strip" style="background:{tint}">{macs}</div>
           <div class="wash"><b style="color:{c}">Washing up</b><span>{inline(r['washing'])}</span></div>
-        </div>""", f"{r['num']} &nbsp;·&nbsp; {esc(r['title']).upper()}")
+        </div>""", f"{num} &nbsp;·&nbsp; {title.upper()}")
+
+        # ---------- method page
+        total = len(r['steps'])
+        steps = ''
+        for i, st in enumerate(r['steps']):
+            sp = photo(f"{num}-step-{i+1}")
+            if sp:
+                mark = f'<div class="sphoto"><img src="{sp}" alt=""></div>'
+            else:
+                mark = (f'<div class="sglyph" style="background:{tint};color:{c}">'
+                        f'{action_svg(step_glyph(st, i, total), c, "100%")}</div>')
+            steps += (f'<div class="mstep"><div class="mmark">{mark}'
+                      f'<div class="mnum d" style="background:{c}">{i+1}</div></div>'
+                      f'<div class="mtext">{inline(st)}</div></div>')
+
+        notes = ''.join(f'<div class="note"><b style="color:{c}">{inline(t)}</b>{inline(bd)}</div>'
+                        for t, bd in r['notes'])
+
+        page_b = page('', c, f"""
+        <div class="mhead">
+          <div class="mh-num d" style="color:{c}">{num}</div>
+          <div class="mh-title d">{title}</div>
+          <div class="mh-meta"><span class="pill" style="background:{c}">
+            {icon(r['m']['key'],'3.5mm',1.7)}{r['m']['label']}</span>
+            <span>{r['minutes']} min</span><span class="sep"></span><span>Serves {r['serves']}</span></div>
+        </div>
+        <div class="blab mblab" style="color:{c}">Method</div>
+        <div class="rbody msteps">{steps}</div>
+        <div class="rfoot">
+          <div class="notes">{notes}</div>
+        </div>""", f"{num} &nbsp;·&nbsp; METHOD")
+
+        return [page_a, page_b]
 
     pages.append(divider('Section one &nbsp;·&nbsp; Fifty recipes', 'Lunch<br><em>&amp;</em> Dinner',
         'Everything on the table inside twenty minutes from a cold start, across thirty-six kitchens, leaving one pan or one basket behind.', mains, 'dv-1',
         [('16','Twelve minutes, one wok, and the dish that converts people to cooking fast.'),
          ('01','The whole dinner in one basket, and a sauce you stir in a mug while it cooks.'),
          ('29','Prawns, tomatoes and feta in a pan, on the table before anyone has finished a drink.')]))
-    pages += [recipe_page(r) for r in mains]
+    for r in mains: pages += recipe_pages(r)
 
     pages.append(divider('Section two &nbsp;·&nbsp; Twenty recipes', '<em>Breakfast</em>',
         'Savoury more often than sweet, hot more often than cold, and quick enough that eating standing up stops being the only option.', brek, 'dv-2',
         [('57','Ten minutes, one pan, and the best argument there is for keeping cooked rice in the fridge.'),
          ('61','Eggs, beans and a charred tomato salsa. Weekend food that happens to take fifteen minutes.'),
          ('68','Bircher without the overnight wait, because the apple is grated rather than chopped.')]))
-    pages += [recipe_page(r) for r in brek]
+    for r in brek: pages += recipe_pages(r)
 
     # ============================== ENDNOTE ==============================
     KNOW = [
@@ -346,6 +432,8 @@ def build(recipes):
         <div><h6>The numbers</h6><p>Nutrition figures are estimates for a quarter of the finished dish, rounded, and exclude anything listed under &ldquo;bulk it out&rdquo;. Cook the food, not the numbers.</p></div>
       </div>
     </div>""", 'A FEW THINGS WORTH KNOWING'))
+
+    pages = [p.replace('{{PN}}', str(i + 1), 1) for i, p in enumerate(pages)]
 
     doc = (f'<!doctype html><html><head><meta charset="utf-8"><title>The 20-Minute Table</title>'
            f'<style>{FONTS}{CSS}</style></head><body>{"".join(pages)}</body></html>')

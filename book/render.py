@@ -13,37 +13,54 @@ async def main(pdf=True):
         await pg.evaluate("document.fonts.ready")
         await pg.wait_for_timeout(1500)
 
-        # --- vertical justification pass: shrink or grow leading to fit the page ---
+        # --- vertical justification: fit each page by trading leading, per page type ---
         await pg.evaluate("""()=>{
           const MM=96/25.4, TARGET=4.5*MM;
-          const L=[
-            {s:'.step',prop:'marginBottom',b:3.4,hi:4.5,lo:1.5},
-            {s:'.ing',prop:'marginBottom',b:1.9,hi:2.4,lo:0.85},
-            {s:'.why',prop:'marginBottom',b:6.5,hi:9,lo:3.2},
-            {s:'.rbody',prop:'marginTop',b:7.5,hi:8,lo:3.5},
+          const PLATE=[
+            {s:'.hero',prop:'height',b:88,hi:14,lo:70},
+            {s:'.hero',prop:'marginBottom',b:8,hi:3,lo:4},
+            {s:'.ing',prop:'marginBottom',b:1.9,hi:2.4,lo:0.75},
+            {s:'.why',prop:'marginBottom',b:6.5,hi:9,lo:3},
+            {s:'.rbody',prop:'marginTop',b:7.5,hi:8,lo:3.2},
             {s:'.hook',prop:'marginTop',b:6,hi:6,lo:3},
             {s:'.blab',prop:'marginBottom',b:3,hi:3,lo:1.4},
-            {s:'.ing-group:not(:first-child)',prop:'marginTop',b:3.4,hi:2.5,lo:1.6},
-            {s:'.ing-panel',prop:'paddingTop',b:5,hi:6,lo:3.4},
-            {s:'.ing-panel',prop:'paddingBottom',b:5,hi:6,lo:3.4},
-            {s:'.rfoot',prop:'paddingTop',b:7,hi:0,lo:3.5}
+            {s:'.ing-group:not(:first-child)',prop:'marginTop',b:3.4,hi:2.5,lo:1.5},
+            {s:'.ing-panel',prop:'paddingTop',b:5,hi:6,lo:3.2},
+            {s:'.ing-panel',prop:'paddingBottom',b:5,hi:6,lo:3.2},
+            {s:'.rfoot',prop:'paddingTop',b:7,hi:2,lo:3.4}
+          ];
+          const METHOD=[
+            {s:'.mstep',prop:'marginBottom',b:7,hi:15,lo:1.6},
+            {s:'.mtext',prop:'paddingTop',b:2.6,hi:4,lo:1.0},
+            {s:'.mtext',prop:'fontSize',b:10.4,hi:1.3,lo:9.3,u:'pt'},
+            {s:'.sglyph,.sphoto',prop:'width',b:15,hi:5,lo:11.5},
+            {s:'.sglyph,.sphoto',prop:'height',b:15,hi:5,lo:11.5},
+            {s:'.mhead',prop:'paddingBottom',b:4,hi:2,lo:2.4},
+            {s:'.mblab',prop:'marginTop',b:7,hi:7,lo:2.6},
+            {s:'.blab',prop:'marginBottom',b:3,hi:3,lo:1.4},
+            {s:'.rfoot',prop:'paddingTop',b:7,hi:3,lo:3.2}
+          ];
+          const FRONT=[
+            {s:'.rbody',prop:'marginTop',b:7.5,hi:8,lo:3.5}
           ];
           document.querySelectorAll('.page').forEach(pgEl=>{
             const body=pgEl.querySelector('.rbody'),foot=pgEl.querySelector('.rfoot');
             if(!body||!foot)return;
+            const L = pgEl.querySelector('.hero') ? PLATE
+                    : pgEl.querySelector('.msteps') ? METHOD : FRONT;
             const gap=()=>foot.getBoundingClientRect().top-body.getBoundingClientRect().bottom;
             const apply=t=>L.forEach(l=>pgEl.querySelectorAll(l.s).forEach(e=>{
-              e.style[l.prop]=(t>=0? l.b+l.hi*t : l.b-(l.b-l.lo)*(-t))+'mm';}));
+              e.style[l.prop]=(t>=0? l.b+l.hi*t : l.b-(l.b-l.lo)*(-t))+(l.u||'mm');}));
             const g0=gap();
             if(Math.abs(g0-TARGET)<2)return;
             let lo,hi;
             if(g0>TARGET){ apply(1); if(gap()>=TARGET)return; lo=0; hi=1; }
-            else { apply(-1); if(gap()<0){return;} lo=-1; hi=0; }
+            else { apply(-1); if(gap()<0)return; lo=-1; hi=0; }
             for(let k=0;k<24;k++){const m=(lo+hi)/2;apply(m);if(gap()>=TARGET)lo=m;else hi=m;}
             apply(lo);
           });
         }""")
-        await pg.wait_for_timeout(300)
+        await pg.wait_for_timeout(400)
         over = await pg.evaluate("""() => {
           const out=[];
           document.querySelectorAll('.page').forEach((pgEl,i)=>{
@@ -59,7 +76,11 @@ async def main(pdf=True):
             const cs=getComputedStyle(inner);
             const limit=ib.bottom-parseFloat(cs.paddingBottom);
             const spill=deepest-limit;
-            const label=(pgEl.querySelector('.rtitle,.ptitle,h1')||{}).textContent||('page '+(i+1));
+            const f=pgEl.parentElement.querySelector(':scope > .folio');
+            const fo=pgEl.querySelector('.folio')||pgEl.nextElementSibling;
+            let label=(pgEl.querySelector('.rtitle,.ptitle,.mh-title,h1')||{}).textContent||'';
+            const kind=pgEl.querySelector('.hero')?'PLATE':pgEl.querySelector('.msteps')?'METHOD':'FRONT';
+            label=kind+' '+label;
             out.push({i:i+1,label:label.trim().slice(0,46),spill:Math.round(spill*100)/100,
                       scroll:inner.scrollHeight-inner.clientHeight});
           });

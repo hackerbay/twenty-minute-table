@@ -11,6 +11,8 @@ body{font-family:'Inter',sans-serif;color:var(--ink);background:#DDD6C8;font-fea
 .topbar{position:absolute;top:0;left:0;right:0;height:5mm;}
 .folio{position:absolute;bottom:6.5mm;left:0;right:0;text-align:center;font-size:7pt;
   letter-spacing:.16em;color:var(--ink4);font-weight:500;}
+.pageno{position:absolute;bottom:6.2mm;right:16mm;font-size:7.6pt;font-weight:600;
+  color:var(--ink3);font-feature-settings:'tnum' 1;letter-spacing:.02em;}
 .ico{flex:none;vertical-align:-.5mm;}
 
 /* ===== COVER & DIVIDERS ===== */
@@ -94,10 +96,10 @@ body{font-family:'Inter',sans-serif;color:var(--ink);background:#DDD6C8;font-fea
 .legend-note{margin-top:5mm;font-size:7.6pt;color:var(--ink3);line-height:1.5;}
 
 /* ===== BY CUISINE ===== */
-.cindex{column-count:4;column-gap:7mm;}
+.cindex{column-count:3;column-gap:9mm;}
 .ci{break-inside:avoid;margin-bottom:3.2mm;}
 .ci h4{font-size:7.5pt;font-weight:700;letter-spacing:.02em;margin-bottom:1.1mm;}
-.ci .u{height:1px;background:var(--line);margin-bottom:1.3mm;}
+.ci .u{height:1px;background:var(--line);margin-bottom:1.6mm;}
 .ci p{font-size:7.3pt;line-height:1.36;color:var(--ink2);display:flex;gap:1.5mm;}
 .ci p .n{font-weight:600;color:var(--ink4);flex:none;font-feature-settings:'tnum' 1;}
 
@@ -130,8 +132,9 @@ body{font-family:'Inter',sans-serif;color:var(--ink);background:#DDD6C8;font-fea
   font-weight:600;margin-top:.9mm;}
 .hook{font-size:11.4pt;line-height:1.45;font-style:italic;margin-top:6mm;padding-left:5mm;
   border-left:1.6px solid;font-variation-settings:'SOFT' 60,'WONK' 1,'opsz' 40;}
-.rbody{display:grid;grid-template-columns:60mm 1fr;gap:9mm;margin-top:7.5mm;align-items:stretch;}
-.rbody>div{display:flex;flex-direction:column;}
+.rbody{margin-top:7.5mm;}
+.rgrid{display:grid;grid-template-columns:62mm 1fr;gap:9mm;align-items:stretch;}
+.rgrid>.rcol{display:flex;flex-direction:column;min-width:0;}
 .blab{font-size:7.1pt;letter-spacing:.24em;text-transform:uppercase;font-weight:600;
   padding-bottom:1.8mm;border-bottom:1px solid var(--line);margin-bottom:3mm;}
 .ing-panel{background:var(--panel);border-radius:2mm;padding:5mm 5.5mm;flex:1;}
@@ -212,3 +215,44 @@ body{font-family:'Inter',sans-serif;color:var(--ink);background:#DDD6C8;font-fea
 .strio p{font-size:8.4pt;line-height:1.55;color:rgba(253,250,244,.6);}
 .cover h1.dv-1{font-size:60pt;}
 .cover h1.dv-2{font-size:92pt;letter-spacing:-.035em;}
+
+/* ===== RECIPE: PLATE PAGE ===== */
+.hero{position:relative;width:100%;height:88mm;border-radius:2.5mm;overflow:hidden;
+  margin-bottom:8mm;flex:none;}
+.hero img{width:100%;height:100%;object-fit:cover;display:block;}
+.hero-svg{position:absolute;inset:0;width:100%;height:100%;}
+.hero-tag{position:absolute;right:4mm;bottom:3.2mm;font-size:6pt;letter-spacing:.22em;
+  text-transform:uppercase;font-weight:600;opacity:.45;}
+
+/* ===== RECIPE: METHOD PAGE ===== */
+.mhead{display:flex;align-items:center;gap:4mm;padding-bottom:4mm;border-bottom:1px solid var(--line);}
+.mh-num{font-size:19pt;font-weight:600;line-height:1;letter-spacing:-.02em;flex:none;
+  font-variation-settings:'SOFT' 50,'WONK' 1,'opsz' 60;font-feature-settings:'tnum' 1;}
+.mh-title{font-size:14pt;font-weight:600;line-height:1.1;letter-spacing:-.015em;flex:1;min-width:0;
+  font-variation-settings:'SOFT' 50,'WONK' 1,'opsz' 48;}
+.mh-meta{display:flex;align-items:center;gap:2.4mm;font-size:7.2pt;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink3);font-weight:500;flex:none;}
+.mblab{margin-top:7mm;}
+.msteps{display:block;}
+.mstep{display:flex;gap:6mm;align-items:flex-start;margin-bottom:7mm;}
+.mmark{position:relative;flex:none;}
+.sglyph{width:15mm;height:15mm;border-radius:99px;display:flex;align-items:center;justify-content:center;}
+.sglyph svg{width:62%;height:62%;}
+.sphoto{width:15mm;height:15mm;border-radius:99px;overflow:hidden;}
+.sphoto img{width:100%;height:100%;object-fit:cover;display:block;}
+.mnum{position:absolute;top:-1.4mm;left:-1.4mm;width:6.2mm;height:6.2mm;border-radius:99px;
+  color:#fff;font-size:8pt;font-weight:600;display:flex;align-items:center;justify-content:center;
+  font-variation-settings:'SOFT' 40,'WONK' 1,'opsz' 30;font-feature-settings:'tnum' 1;
+  border:1.1px solid var(--cream);}
+.mtext{font-size:10.4pt;line-height:1.58;color:var(--ink2);padding-top:2.6mm;}
+
+/* long ingredient lists run in two columns and take a wider column */
+.rgrid.wide{grid-template-columns:104mm 1fr;}
+.ing-panel.two{column-count:2;column-gap:6mm;}
+.ing-panel.two .ing,.ing-panel.two .ing-group{break-inside:avoid;}
+.ing-panel.two .ing-group:first-child{margin-top:0;}
+
+.trow .pn{flex:none;width:7mm;text-align:right;font-size:7.4pt;font-weight:600;color:var(--ink4);
+  font-feature-settings:'tnum' 1;}
+.ci p .cp{margin-left:auto;flex:none;font-size:6.9pt;font-weight:600;color:var(--ink4);
+  font-feature-settings:'tnum' 1;padding-left:2mm;font-size:7.4pt;}
