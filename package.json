@@ -1,0 +1,14 @@
+{
+  "name": "the-20-minute-table",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Seventy fast, whole-food recipes, typeset into a printable A4 cookbook.",
+  "scripts": {
+    "build": "python3 book/build.py && python3 book/render.py",
+    "verify": "python3 book/verify.py"
+  },
+  "dependencies": {
+    "@fontsource-variable/fraunces": "^5.0.0",
+    "@fontsource/inter": "^5.0.0"
+  }
+}

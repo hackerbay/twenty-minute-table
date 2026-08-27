@@ -1,0 +1,358 @@
+import base64, html, math, sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from collections import defaultdict, Counter
+from parse import load_all, METHODS, ORDER, inline
+from icons import icon, dial, anatomy
+
+ROOT = Path(__file__).resolve().parent.parent
+HERE = Path(__file__).resolve().parent
+NM = ROOT / 'node_modules'
+b64 = lambda p: base64.b64encode(Path(p).read_bytes()).decode()
+FR = NM / '@fontsource-variable/fraunces/files'; IN = NM / '@fontsource/inter/files'
+FONTS = f"""
+@font-face{{font-family:'Fraunces';src:url(data:font/woff2;base64,{b64(FR/'fraunces-latin-full-normal.woff2')}) format('woff2-variations');font-weight:100 900;font-style:normal;font-display:block;}}
+@font-face{{font-family:'Fraunces';src:url(data:font/woff2;base64,{b64(FR/'fraunces-latin-full-italic.woff2')}) format('woff2-variations');font-weight:100 900;font-style:italic;font-display:block;}}
+""" + "".join(
+f"@font-face{{font-family:'Inter';src:url(data:font/woff2;base64,{b64(IN/f'inter-latin-{w}-normal.woff2')}) format('woff2');font-weight:{w};font-style:normal;font-display:block;}}\n"
+for w in (400, 500, 600, 700))
+
+DARK = {'Air fryer': '#E58A62', 'One pan': '#98BE7C', 'Wok': '#DDA05F', 'No cook': '#77BFD1'}
+CSS = (HERE / 'style.css').read_text()
+
+def page(cls, topcolor, inner, folio=None):
+    bar = f'<div class="topbar" style="background:{topcolor}"></div>' if topcolor else ''
+    f = f'<div class="folio">{folio}</div>' if folio else ''
+    return f'<section class="page {cls}">{bar}<div class="inner">{inner}</div>{f}</section>'
+
+def esc(s): return html.escape(s, quote=False)
+
+def build(recipes):
+    mains = [r for r in recipes if int(r['num']) <= 50]
+    brek  = [r for r in recipes if int(r['num']) > 50]
+    allc  = len({r['cuisine'] for r in recipes})
+    counts = Counter(r['method'] for r in recipes)
+    pages = []
+
+    def texture(rs):
+        return ' &nbsp;·&nbsp; '.join(esc(r['title']) for r in rs)
+
+    def chips(rs):
+        c = Counter(r['method'] for r in rs)
+        return ''.join(
+            f'<div class="cchip" style="border-color:{DARK[m]}55;color:{DARK[m]}">{icon(METHODS[m]["key"],"4mm")}'
+            f'<b class="d">{c[m]}</b><span>{METHODS[m]["label"]}</span></div>'
+            for m in ORDER if c[m])
+
+    # ============================== COVER ==============================
+    stats = [('70', 'Recipes'), (str(allc), 'Cuisines'), ('20', 'Minutes, max'), ('1', 'Pan or basket')]
+    pages.append(page('cover', None, f"""
+    <div class="cover-rule"></div>
+    <div style="margin-top:5mm" class="eyebrow">A cookbook for weeknights and slow mornings</div>
+    <h1 class="d">The<br>20&#8209;Minute<br><em>Table</em></h1>
+    <p class="cover-sub">Seventy fast, whole-food recipes for people who want breakfast in ten minutes and dinner in twenty &mdash; and who would rather not spend the evening washing up.</p>
+    <div style="flex:1.05"></div>
+    <div class="stats">{''.join(f'<div class="stat"><div class="sv d">{v}</div><div class="sl">{l}</div></div>' for v,l in stats)}</div>
+    <div style="flex:1"></div>
+    <div class="texture">{texture(recipes)}</div>
+    <div style="height:9mm"></div>
+    <div class="cover-chips">{chips(recipes)}</div>
+    <div style="height:8mm"></div>
+    <div class="cover-rule"></div>
+    <div class="cover-foot" style="margin-top:4mm"><div>Compiled for Nawaz Dhandala</div><div>August 2026</div></div>"""))
+
+    # ============================== FOREWORD ==============================
+    KEY = [
+      ("The ring", "Total time against a twenty-minute dial, so you can see the cost of a recipe before you read it."),
+      ("The number", "Every recipe is numbered once. The contents, the cuisine index and the what-to-cook-when list all point back to it."),
+      ("The panel", "Everything you need, listed in the order you will reach for it, grouped when the dish has two parts."),
+      ("Why it works", "The one piece of technique that makes the dish fast, or good, or both. Read it once; you will not need it again."),
+      ("The strip", "Approximate nutrition for a quarter of the finished dish. Estimates, rounded, and worth exactly what estimates are worth."),
+      ("Washing up", "What you are actually committing to. This is the number that decides whether a recipe gets cooked twice."),
+    ]
+    keyhtml = ''.join(
+      f'<div class="kitem"><div class="kn">{i+1}</div><div><b>{t}</b>{b}</div></div>'
+      for i,(t,b) in enumerate(KEY))
+    pages.append(page('', '#A5632A', f"""
+    <div class="pkicker">A short note first</div>
+    <h2 class="ptitle d">Twenty Minutes<br>Is Plenty</h2>
+    <div class="fw">
+      <p class="lede">Most of what makes cooking slow has nothing to do with cooking. It is the deciding, the shopping, the hunting for a jar of something at the back of a cupboard, and the twenty minutes of washing up that follow a meal that took thirty to make.</p>
+      <p>So this book removes those parts rather than the good ones. Nothing here is a shortcut version of a longer dish &mdash; no simmering-for-an-hour recipe with the hour taken out. These are dishes that were always fast, drawn from the kitchens where fast cooking is not a compromise but the whole tradition: a wok of chicken and holy basil, a basket of cauliflower under harissa, eggs cooked in tomatoes in a pan the size of a dinner plate.</p>
+      <p>Everything is built on whole ingredients, which is less an ideology than a practical matter: they cook faster than you think, they taste of what they are, and they let you season a dish rather than negotiate with something already seasoned for you. And every recipe was written to leave one pan or one basket behind. That constraint is the reason these end up in the weekly rotation rather than the someday pile.</p>
+      <p>A word on the timings. They are honest, and they assume a cold start: knife out, nothing chopped, the pan not yet on. They also assume you read the recipe through once before you begin, which for a fifteen-minute dish is less a suggestion than the method itself.</p>
+      <p class="sign">Cook them in any order. Break them freely. The swap notes exist because you will not have everything, and that has never once mattered.</p>
+    </div>
+    <div class="anat">
+      <div class="anat-fig">{anatomy()}<div class="anat-cap">Every recipe page, without exception</div></div>
+      <div class="anat-key"><div class="pkicker" style="margin-bottom:4mm">How a page works</div>{keyhtml}</div>
+    </div>"""))
+
+    # ============================== PANTRY ==============================
+    pantry = [
+      ("Oils &amp; acids", "Extra virgin olive oil for finishing, a neutral high-smoke oil (groundnut or rapeseed) for anything hot, toasted sesame oil, red wine vinegar, rice vinegar. Lemons and limes, always, in quantity."),
+      ("The spice tin", "Cumin (ground and seed), smoked paprika, ground coriander, turmeric, chilli flakes, cinnamon, dried oregano, za&rsquo;atar, ras el hanout, garam masala, berbere, Chinese five-spice, a Cajun blend, sumac."),
+      ("Pastes &amp; bottles", "Rose harissa, gochujang, white miso, Thai green curry paste, sambal oelek, chipotle in adobo, tahini, fish sauce, light and dark soy, mirin, runny honey."),
+      ("Tins &amp; jars", "Chickpeas, black beans, cannellini, brown and dried split fava beans, chopped tomatoes, full-fat coconut milk, tuna in olive oil, anchovies, olives, capers."),
+      ("The fridge", "Eggs by the dozen, thick Greek yoghurt, feta, cottage cheese, a knob of ginger, a head of garlic, spring onions, fresh chillies, a bag of spinach, coriander and parsley kept stems-down in water."),
+      ("The freezer", "Raw king prawns, salmon fillets, peas, edamame. Ginger and garlic blitzed to a paste and frozen in an ice-cube tray is the single best twenty-minute-dinner investment there is."),
+      ("Fast carbohydrate", "Cooked rice, always &mdash; a batch on Sunday feeds four breakfasts. Orzo, rice noodles, couscous, oats, rye bread, flatbreads in the freezer."),
+      ("Finishers", "Toasted almonds, walnuts, sesame and pumpkin seeds, nori, dates. The handful scattered at the end is what makes a fast dish taste considered."),
+    ]
+    rules = [
+      ("Preheat before you chop.", "The air fryer or the pan should be properly hot by the time the board is clear. This alone takes three or four minutes off almost every recipe here."),
+      ("Cut for the clock.", "Nothing cooking in under fifteen minutes should be thicker than your thumb. Small and even beats big and hopeful."),
+      ("Season twice.", "Once in the pan, once at the table. The second pass is nearly always acid &mdash; a squeeze of lemon, a splash of vinegar &mdash; and it is what makes fast food taste finished."),
+      ("Always add something raw.", "Herbs, sliced chilli, spring onion, a spoonful of yoghurt. Fifteen seconds of work, and it is the difference between a meal and a plate of cooked ingredients."),
+      ("Wash up while it rests.", "Two minutes with the pan still warm, instead of ten with it cold. Every recipe here is built around one pan or one basket for exactly this reason."),
+    ]
+    pages.append(page('', '#C1502E', f"""
+    <div class="pkicker">Before you start</div>
+    <h2 class="ptitle d">The Fast Pantry</h2>
+    <p class="pintro">Twenty-minute cooking only works when the slow part &mdash; the shopping, the searching, the standing in front of an open cupboard &mdash; has already happened. Keep the shelves below stocked and any of the seventy recipes in this book becomes a decision rather than a project.</p>
+    <div class="hrule" style="margin:6mm 0"></div>
+    <div class="pan">{''.join(f'<div class="pcard"><h4>{t}</h4><p>{b}</p></div>' for t,b in pantry)}</div>
+    <div class="hrule" style="margin:6mm 0"></div>
+    <div class="pkicker" style="margin-bottom:4mm">Five rules for a twenty-minute dinner</div>
+    <div class="rules">{''.join(f'<div class="rule-item"><div class="rn d">{i+1}</div><div class="rt"><b>{t}</b> {b}</div></div>' for i,(t,b) in enumerate(rules))}</div>"""))
+
+    # ============================== CONTENTS ==============================
+    def toc_group(m, rs):
+        info = METHODS[m]
+        rows = ''.join(
+            f'<div class="trow"><span class="n" style="color:{info["color"]}">{r["num"]}</span>'
+            f'<span class="t">{esc(r["title"])}</span><span class="lead"></span>'
+            f'<span class="mn">{r["minutes"]}&#8202;min</span></div>'
+            for r in rs if r['method'] == m)
+        n = sum(1 for r in rs if r['method'] == m)
+        if not n: return ''
+        return (f'<div class="toc-group"><div class="tg-head" style="color:{info["color"]}">'
+                f'{icon(info["key"],"4.2mm")}<span class="nm">{info["label"]}</span>'
+                f'<span class="ct">{n} {"recipe" if n==1 else "recipes"}</span></div>{rows}</div>')
+
+    pages.append(page('', '#5A7A48', f"""
+    <div class="pkicker">Fifty recipes &nbsp;·&nbsp; Section one</div>
+    <h2 class="ptitle d">Lunch &amp; Dinner</h2>
+    <p class="pintro" style="max-width:130mm">Grouped by how much of your attention they need. The air fryer looks after itself while you set the table; the stove wants five unbroken minutes; the no-cook recipes want nothing but a sharp knife.</p>
+    <div class="hrule" style="margin:5.5mm 0"></div>
+    <div class="toc">
+      <div>{toc_group('Air fryer',mains)}{toc_group('Wok',mains)}{toc_group('No cook',mains)}</div>
+      <div>{toc_group('One pan',mains)}</div>
+    </div>""", 'CONTENTS &nbsp;·&nbsp; LUNCH &amp; DINNER'))
+
+    LEGEND = {
+      'Air fryer': 'Everything goes in one basket. Preheat, load, walk away, come back to something blistered at the edges.',
+      'One pan':   'A single wide pan on the hob, start to finish. Nothing is browned in batches and set aside.',
+      'Wok':       'Very high heat and constant movement. Have every ingredient cut and within reach before it goes on.',
+      'No cook':   'No heat at all beyond, occasionally, a kettle. A knife, a board, a bowl.',
+    }
+    legend = ''.join(
+      f'<div class="lg"><h5 style="color:{METHODS[m]["color"]}">{icon(METHODS[m]["key"],"4.4mm")}'
+      f'{METHODS[m]["label"]}</h5><p>{LEGEND[m]}</p></div>' for m in ORDER)
+
+    pages.append(page('', '#A5632A', f"""
+    <div class="pkicker">Twenty recipes &nbsp;·&nbsp; Section two</div>
+    <h2 class="ptitle d">Breakfast</h2>
+    <p class="pintro" style="max-width:130mm">Savoury more often than sweet, because savoury is faster and keeps you full until lunch. Six of these are on the table in ten minutes; three of them never see heat.</p>
+    <div class="hrule" style="margin:5.5mm 0"></div>
+    <div class="toc">
+      <div>{toc_group('Air fryer',brek)}{toc_group('Wok',brek)}{toc_group('No cook',brek)}</div>
+      <div>{toc_group('One pan',brek)}</div>
+    </div>
+    <div class="sunday">
+      <div class="sun-head"><span class="sun-k">Twenty minutes on Sunday</span>
+        <span class="sun-s">Three small jobs that turn nine of these breakfasts into five-minute ones</span></div>
+      <div class="sun-grid">
+        <div><h4>Cook a large pot of rice</h4><p>Cold cooked rice is the backbone of five recipes here &mdash; the congee, the two fried rices, the egg rice and the rice soup. It keeps three days and fries far better cold than warm.</p></div>
+        <div><h4>Toast a tray of nuts and seeds</h4><p>Almonds, walnuts, pumpkin and sesame seeds, eight minutes in the air fryer at 160&deg;C. Into a jar, and every bowl and salad in the book gets its finish for free.</p></div>
+        <div><h4>Blitz ginger and garlic</h4><p>A whole head of garlic and a thumb of ginger to a paste, frozen in an ice-cube tray. One cube is roughly one recipe, and it removes the only fiddly job most of these have.</p></div>
+      </div>
+    </div>
+    <div class="legend-wrap">
+      <div class="legend">{legend}</div>
+      <p class="legend-note">Every recipe serves four, lists metric quantities first with US cups and ounces alongside, and assumes a cold start. The ring beside each title shows the total time against a twenty-minute dial; the strip at the foot of the page gives approximate nutrition per serving, and the line beneath it tells you exactly what you will be washing.</p>
+    </div>""", 'CONTENTS &nbsp;·&nbsp; BREAKFAST'))
+
+    # ============================== BY CUISINE ==============================
+    by = defaultdict(list)
+    for r in recipes: by[r['cuisine']].append(r)
+    cols = ''.join(
+      f'<div class="ci"><h4>{esc(c)}</h4><div class="u"></div>' +
+      ''.join(f'<p><span class="n">{r["num"]}</span><span>{esc(r["title"])}</span></p>' for r in rs) + '</div>'
+      for c, rs in sorted(by.items()))
+    pages.append(page('', '#2C6B7B', f"""
+    <div class="pkicker">{len(by)} kitchens</div>
+    <h2 class="ptitle d">By Cuisine</h2>
+    <p class="pintro">Cook your way around the world on a Tuesday. Nothing here has been simplified into blandness &mdash; the shortcuts are in the technique and the cut, not in the seasoning.</p>
+    <div class="hrule" style="margin:5.5mm 0"></div>
+    <div class="cindex">{cols}</div>""", 'BY CUISINE'))
+
+    # ============================== WHAT TO COOK WHEN ==============================
+    byn = {r['num']: r for r in recipes}
+    SHORT = {'16':'Pad Krapow','22':'Shogayaki','37':'Moqueca Express','46':'Vietnamese Summer Roll Bowl',
+             '57':'Gyeran Bap','58':'Ginger Congee','65':'Khao Tom','67':'Sinangag','59':'Rava Uttapam',
+             '39':'Nasi Goreng Cauliflower Rice','12':'Cajun Blackened Cod','25':'Chana Masala',
+             '55':'Crispy Chickpea & Avocado Toast','69':'Danish Rye & Cottage Cheese',
+             '70':'Orange, Date & Almond Yoghurt','50':'Turkish Coban Salad','68':'Bircher Muesli',
+             '34':'Smoky Paprika Chicken','51':'Sweet Potato, Egg & Chilli Hash','54':'Banana & Oat Bake',
+             '02':'Miso-Glazed Salmon','18':'Ginger-Garlic Prawn Stir-Fry','62':'Pan con Tomate & Soft Eggs',
+             '09':'Jerk Chicken','36':'Lomo Saltado','48':'Salmon Poke Bowl','33':'Gambas al Ajillo',
+             '08':'Sicilian Sea Bass','29':'Prawn Saganaki','49':'Prawn Ceviche Tostada','07':'Chilli-Lime Prawns',
+             '11':'Berbere Sweet Potato','31':'Tuscan White Bean & Kale','47':'Fattoush & Crisped Chickpeas',
+             '32':'Tuna Puttanesca Beans','63':'Ful Medames','24':'Egg & Spinach Bhurji','26':'Turkish Menemen',
+             '27':'Green Shakshuka','60':'Persian Herb & Feta Omelette','66':'Egg & Tomato Stir-Fry',
+             '30':'Broccoli Aglio e Olio','42':'Ethiopian Gomen','45':'Georgian Green Beans',
+             '05':'Gochujang Tofu','44':'West African Peanut Stew','64':'Buckwheat Galette','53':'Masala Omelette Muffins'}
+    def short(n):
+        return SHORT.get(n) or byn[n]['title']
+    WHEN = [
+      ("There is nothing in the house but eggs", "24 26 27 60 66"),
+      ("You have ten minutes, and that is the whole budget", "07 18 57 62 66"),
+      ("Someone is arriving at eight and it is ten to", "02 07 18 32 62"),
+      ("You want it to taste like a holiday", "09 16 33 36 48"),
+      ("It is cold, and grey, and has been for weeks", "25 37 44 58 65"),
+      ("You want to feel virtuous without feeling deprived", "11 31 46 47 68"),
+      ("Payday is Friday and it is Tuesday", "24 25 31 32 63"),
+      ("You cannot face the washing up at all", "02 12 50 69 70"),
+      ("You want something green on the plate", "05 27 30 42 45"),
+      ("You are cooking to impress someone", "08 09 29 36 48"),
+      ("It is Sunday and you have twenty unhurried minutes", "49 51 54 59 64"),
+      ("You need it to keep you full until two o&rsquo;clock", "51 53 55 63 67"),
+      ("It is far too hot to turn anything on", "46 48 49 50 69"),
+      ("You want the whole flat to smell extraordinary", "04 09 23 41 59"),
+      ("Someone claims not to like vegetables", "16 20 35 61 67"),
+      ("There is half a cabbage and a lot of optimism", "05 15 22 48 68"),
+    ]
+    when_html = ''.join(
+      f'<div class="when"><div class="wq d">{q}</div><div class="wl">' +
+      ''.join(f'<span><b>{n}</b>{esc(short(n))}</span>' for n in ns.split()) +
+      '</div></div>' for q, ns in WHEN)
+    pages.append(page('', '#5A7A48', f"""
+    <div class="pkicker">The real index</div>
+    <h2 class="ptitle d">What to Cook When</h2>
+    <p class="pintro">Nobody stands in the kitchen at seven o&rsquo;clock thinking in cuisines. This is the index for the way the question actually arrives.</p>
+    <div class="hrule" style="margin:5mm 0"></div>
+    <div class="whens">{when_html}</div>""", 'WHAT TO COOK WHEN'))
+
+    # ============================== SECTION DIVIDERS + RECIPES ==============================
+    def divider(kicker, title, blurb, rs, size, trio):
+        cz = len({r['cuisine'] for r in rs})
+        fastest = min(r['minutes'] for r in rs)
+        under = sum(1 for r in rs if r['minutes'] <= 12)
+        st = [(str(len(rs)), 'Recipes'), (str(cz), 'Cuisines'),
+              (str(fastest), 'Minutes, fastest'), (str(under), 'Under twelve minutes')]
+        sh = ''.join(f'<div class="stat"><div class="sv d">{v}</div><div class="sl">{l}</div></div>' for v,l in st)
+        return page('cover divider', None, f"""
+        <div class="cover-rule"></div>
+        <div style="margin-top:5mm" class="eyebrow">{kicker}</div>
+        <h1 class="d dv {size}">{title}</h1>
+        <p class="cover-sub">{blurb}</p>
+        <div style="flex:1"></div>
+        <div class="stats">{sh}</div>
+        <div style="flex:1"></div>
+        <div class="starts"><div class="st-k">If you only cook three</div>
+          <div class="strio">{''.join(f'<div><div class="sn">{n}</div><h4>{esc(byn2[n]["title"])}</h4><p>{why}</p></div>' for n, why in trio)}</div>
+        </div>
+        <div style="flex:.7"></div>
+        <div class="texture">{texture(rs)}</div>
+        <div style="height:9mm"></div>
+        <div class="cover-chips">{chips(rs)}</div>
+        <div style="height:7mm"></div>
+        <div class="cover-rule"></div>""")
+
+    byn2 = {r['num']: r for r in recipes}
+
+    def recipe_page(r):
+        c, tint = r['m']['color'], r['m']['tint']
+        ings = ''
+        for g in r['ing_groups']:
+            if g['name']: ings += f'<div class="ing-group">{inline(g["name"])}</div>'
+            ings += ''.join(f'<div class="ing"><span class="bt" style="background:{c}"></span>'
+                            f'<span>{inline(x)}</span></div>' for x in g['items'])
+        steps = ''.join(f'<div class="step"><div class="sn d" style="color:{c}">{n+1}</div>'
+                        f'<div class="st">{inline(s)}</div></div>' for n, s in enumerate(r['steps']))
+        notes = ''.join(f'<div class="note"><b style="color:{c}">{inline(t)}</b>{inline(b)}</div>'
+                        for t, b in r['notes'])
+        keys = ['Calories', 'Protein', 'Carbs', 'Fat', 'Fibre']; units = ['kcal', 'g', 'g', 'g', 'g']
+        macs = ''.join(f'<div class="mac"><div class="v d" style="color:{c}">{v}'
+                       f'<span class="mu"> {u}</span></div><div class="k">{k}</div></div>'
+                       for v, k, u in zip(r['macros'], keys, units))
+        prep = f'<span class="sep"></span><span>{r["prep"]} prep / {r["cook"]} cook</span>' if r['prep'] else ''
+        return page('', c, f"""
+        <div class="rhead">
+          <div class="rnum d" style="color:{c}">{r['num']}</div>
+          <div class="rht">
+            <h1 class="rtitle d">{esc(r['title'])}</h1>
+            <div class="rmeta">
+              <span class="pill" style="background:{c}">{icon(r['m']['key'],'3.5mm',1.7)}{r['m']['label']}</span>
+              <span>{esc(r['cuisine'])}</span>{prep}<span class="sep"></span><span>Serves {r['serves']}</span>
+            </div>
+          </div>
+          <div class="dialwrap">{dial(r['minutes'], c)}
+            <div class="dialtext"><div class="dv d" style="color:{c}">{r['minutes']}</div><div class="dl">min</div></div>
+          </div>
+        </div>
+        <p class="hook d" style="border-color:{c};color:{c}">{inline(r['hook'])}</p>
+        <div class="rbody">
+          <div><div class="blab" style="color:{c}">Ingredients</div><div class="ing-panel">{ings}</div></div>
+          <div><div class="blab" style="color:{c}">Why it works</div><p class="why">{inline(r['why'])}</p>
+            <div class="blab" style="color:{c}">Method</div>{steps}</div>
+        </div>
+        <div class="rfoot">
+          <div class="notes">{notes}</div>
+          <div class="strip" style="background:{tint}">{macs}</div>
+          <div class="wash"><b style="color:{c}">Washing up</b><span>{inline(r['washing'])}</span></div>
+        </div>""", f"{r['num']} &nbsp;·&nbsp; {esc(r['title']).upper()}")
+
+    pages.append(divider('Section one &nbsp;·&nbsp; Fifty recipes', 'Lunch<br><em>&amp;</em> Dinner',
+        'Everything on the table inside twenty minutes from a cold start, across thirty-six kitchens, leaving one pan or one basket behind.', mains, 'dv-1',
+        [('16','Twelve minutes, one wok, and the dish that converts people to cooking fast.'),
+         ('01','The whole dinner in one basket, and a sauce you stir in a mug while it cooks.'),
+         ('29','Prawns, tomatoes and feta in a pan, on the table before anyone has finished a drink.')]))
+    pages += [recipe_page(r) for r in mains]
+
+    pages.append(divider('Section two &nbsp;·&nbsp; Twenty recipes', '<em>Breakfast</em>',
+        'Savoury more often than sweet, hot more often than cold, and quick enough that eating standing up stops being the only option.', brek, 'dv-2',
+        [('57','Ten minutes, one pan, and the best argument there is for keeping cooked rice in the fridge.'),
+         ('61','Eggs, beans and a charred tomato salsa. Weekend food that happens to take fifteen minutes.'),
+         ('68','Bircher without the overnight wait, because the apple is grated rather than chopped.')]))
+    pages += [recipe_page(r) for r in brek]
+
+    # ============================== ENDNOTE ==============================
+    KNOW = [
+      ("Salt", "Season the pan, not the plate. A dish salted at the end tastes of salt; a dish salted as it cooks tastes of itself. The exception is anything raw or dressed, which wants it at the last moment or it weeps."),
+      ("Acid", "If something tastes flat and you have already salted it, it wants acid, not more salt. Lemon, lime, vinegar, a spoonful of yoghurt. This is the single most useful thing in this book."),
+      ("Heat", "Almost every fast recipe that disappoints was cooked in a pan that was not hot enough. Food that steams instead of browning has lost the only advantage speed gives you."),
+      ("Crowding", "Two batches in a hot pan beat one batch in a full one, every time. In the air fryer, a single layer with gaps is not a suggestion."),
+      ("Resting", "Even four minutes off the heat will do more for a chicken thigh than any amount of extra cooking. Use the time to wash the pan."),
+      ("Storing", "Cooked grains, roasted vegetables and cooked pulses keep three days and turn nearly any recipe here into a five-minute one. Dressed leaves and raw marinated fish keep for none."),
+      ("Fat", "Do not be frightened of the tablespoon of oil. It carries flavour, it conducts heat, and a dish cooked in too little of it browns unevenly and tastes thin."),
+      ("Herbs", "Soft herbs &mdash; coriander, basil, mint, parsley &mdash; go in off the heat or they turn to hay. Hard herbs like thyme and oregano go in early or they taste raw."),
+      ("Garlic", "Grated garlic burns in ninety seconds. Sliced garlic takes three minutes. Choose the cut to suit the time the dish has, rather than the other way round."),
+      ("Tasting", "Taste at the second-to-last minute, not after plating. Once it is on the plate the only thing you can still add is lemon."),
+    ]
+    pages.append(page('', '#2C6B7B', f"""
+    <div class="pkicker">Afterwards</div>
+    <h2 class="ptitle d">A Few Things<br>Worth Knowing</h2>
+    <p class="pintro">None of these are recipes. They are the six things that make the seventy recipes work, and they will make everything else you cook better too.</p>
+    <div class="hrule" style="margin:6mm 0"></div>
+    <div class="pan">{''.join(f'<div class="pcard"><h4>{t}</h4><p>{b}</p></div>' for t,b in KNOW)}</div>
+    <div class="colophon">
+      <p class="signoff">The best cooking you will do this year will almost certainly take under twenty minutes, be eaten standing at the counter, and never be photographed. That is rather the point.</p>
+      <div class="hrule" style="margin:0 0 5mm"></div>
+      <div class="colo-grid">
+        <div><h6>The book</h6><p>Seventy recipes across {allc} cuisines. Fifty for lunch and dinner, twenty for breakfast. Twenty air fryer, thirty-five one pan, seven wok, eight with no heat at all.</p></div>
+        <div><h6>The type</h6><p>Set in Fraunces, drawn by Phaedra Charles and Flavia Zimbardi, and Inter, drawn by Rasmus Andersson. Both are open source.</p></div>
+        <div><h6>The numbers</h6><p>Nutrition figures are estimates for a quarter of the finished dish, rounded, and exclude anything listed under &ldquo;bulk it out&rdquo;. Cook the food, not the numbers.</p></div>
+      </div>
+    </div>""", 'A FEW THINGS WORTH KNOWING'))
+
+    doc = (f'<!doctype html><html><head><meta charset="utf-8"><title>The 20-Minute Table</title>'
+           f'<style>{FONTS}{CSS}</style></head><body>{"".join(pages)}</body></html>')
+    Path(ROOT / 'build' / 'cookbook.html').write_text(doc, encoding='utf-8')
+    return len(pages)
+
+if __name__ == '__main__':
+    (ROOT / 'build').mkdir(exist_ok=True)
+    n = build(load_all())
+    print('pages:', n, '| html', round((ROOT/'build'/'cookbook.html').stat().st_size/1e6, 2), 'MB')
