@@ -1,6 +1,6 @@
 # 64 · Buckwheat Galette with Egg & Greens
 
-**Cuisine:** French (Breton) · **Method:** One pan · **Total time:** 18 min (4 prep / 14 cook) · **Serves:** 4
+**Cuisine:** French (Breton) · **Method:** One pan · **Total time:** 18 min (4 prep / 14 cook) · **Serves:** 4 · **Vegetarian**
 
 > A lacy buckwheat pancake with the egg cracked straight onto it and the four sides folded in to frame the yolk.
 
@@ -27,7 +27,7 @@ Buckwheat has no gluten to relax, so a batter thin enough to pour like single cr
 ## Chef's notes
 - **Swap:** Half buckwheat and half plain flour makes a softer, less earthy galette that folds more easily.
 - **Make it faster:** Whisk the batter the night before; it keeps three days and only needs a stir.
-- **Bulk it out:** Add a slice of ham or a spoon of soft goat's cheese under the egg.
+- **On the side:** Add a slice of ham or a spoon of soft goat's cheese under the egg.
 - **Leftovers:** Cook plain galettes with what is left of the batter, stack between baking paper and reheat in the dry pan.
 
 ## Nutrition (per serving, approx.)

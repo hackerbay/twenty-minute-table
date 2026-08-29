@@ -1,6 +1,6 @@
 # 60 · Persian Herb & Feta Omelette
 
-**Cuisine:** Iranian · **Method:** One pan · **Total time:** 15 min (6 prep / 9 cook) · **Serves:** 4
+**Cuisine:** Iranian · **Method:** One pan · **Total time:** 15 min (6 prep / 9 cook) · **Serves:** 4 · **Vegetarian**
 
 > More herb than egg, in the manner of a kuku, cooked flat in one pan and cut into wedges at the table.
 
@@ -31,7 +31,7 @@ A kuku is close to half herbs by volume, and chopping them properly fine is what
 ## Chef's notes
 - **Swap:** Fenugreek leaves in place of some of the parsley take it closer to a Nowruz kuku. Any soft white cheese stands in for feta.
 - **Make it faster:** Chop the herbs the night before and box them with a sheet of kitchen paper.
-- **Bulk it out:** Warm flatbread in the pan afterwards and put thick yoghurt and sliced radish on the table.
+- **On the side:** Warm flatbread in the pan afterwards and put thick yoghurt and sliced radish on the table.
 - **Leftovers:** Better cold than hot. Keeps 3 days chilled and travels well in a lunchbox.
 
 ## Nutrition (per serving, approx.)

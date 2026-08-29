@@ -1,6 +1,6 @@
 # 53 · Masala Omelette Muffins
 
-**Cuisine:** Indian · **Method:** Air fryer · **Total time:** 15 min (5 prep / 10 cook) · **Serves:** 4
+**Cuisine:** Indian · **Method:** Air fryer · **Total time:** 15 min (5 prep / 10 cook) · **Serves:** 4 · **Vegetarian**
 
 > The masala omelette poured into silicone muffin cases, so eight of them cook at once and nobody has to stand over a pan.
 
@@ -34,7 +34,7 @@ You need 8 silicone muffin cases or 8 small ramekins — anything that sits flat
 ## Chef's notes
 - **Swap:** A handful of chopped spinach or grated courgette folded in adds bulk without loosening the mix. Curry leaves, torn in, are worth it if you have them.
 - **Make it faster:** Chop the onion, tomato and chilli the night before; the mixture itself takes 90 seconds to put together.
-- **Bulk it out:** Serve two each on buttered toast, or with a spoonful of yoghurt and mango chutney.
+- **On the side:** Serve two each on buttered toast, or with a spoonful of yoghurt and mango chutney.
 - **Leftovers:** Keep 3 days chilled. Eat cold from the fridge or warm for 3 minutes at 160°C (320°F).
 
 ## Nutrition (per serving, approx.)

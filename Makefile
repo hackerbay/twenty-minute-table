@@ -1,6 +1,6 @@
-.PHONY: all deps verify build clean
+.PHONY: all deps verify book site clean
 
-all: verify build
+all: verify book site
 
 deps:
 	npm install
@@ -8,9 +8,12 @@ deps:
 verify:
 	python3 book/verify.py
 
-build:
+book:
 	python3 book/build.py
 	python3 book/render.py
 
+site: book
+	python3 book/site.py
+
 clean:
-	rm -rf build
+	rm -rf build site

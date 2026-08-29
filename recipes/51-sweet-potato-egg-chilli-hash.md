@@ -1,6 +1,6 @@
 # 51 · Sweet Potato, Egg & Chilli Hash
 
-**Cuisine:** American · **Method:** Air fryer · **Total time:** 18 min (5 prep / 13 cook) · **Serves:** 4
+**Cuisine:** American · **Method:** Air fryer · **Total time:** 18 min (5 prep / 13 cook) · **Serves:** 4 · **Vegetarian**
 
 > Diced sweet potato goes craggy at the edges, then you push it into four mounds and crack the eggs straight into the basket.
 
@@ -36,7 +36,7 @@ Cutting the sweet potato into 1.5 cm dice gives enough surface area to crisp in 
 ## Chef's notes
 - **Swap:** Butternut squash or waxy new potatoes work on the same timer. For more smoke, add another ½ tsp paprika and a pinch of caraway.
 - **Make it faster:** Dice the vegetables the night before and keep them covered in the fridge — prep drops to a minute.
-- **Bulk it out:** A tin of drained black beans stirred in at the shaking stage, or warm corn tortillas alongside.
+- **On the side:** A tin of drained black beans stirred in at the shaking stage, or warm corn tortillas alongside.
 - **Leftovers:** The hash keeps 3 days chilled and re-crisps in 4 minutes at 200°C (400°F). Cook the eggs fresh.
 
 ## Nutrition (per serving, approx.)

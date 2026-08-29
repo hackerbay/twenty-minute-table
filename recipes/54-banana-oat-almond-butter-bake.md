@@ -1,6 +1,6 @@
 # 54 · Banana, Oat & Almond Butter Bake
 
-**Cuisine:** British · **Method:** Air fryer · **Total time:** 18 min (4 prep / 14 cook) · **Serves:** 4
+**Cuisine:** British · **Method:** Air fryer · **Total time:** 18 min (4 prep / 14 cook) · **Serves:** 4 · **Vegetarian**
 
 > A shallow tin of baked oats that sets like a soft flapjack, spooned out hot under cold yoghurt.
 
@@ -31,7 +31,7 @@ Very ripe bananas carry enough sugar and moisture that the bake needs no added s
 ## Chef's notes
 - **Swap:** Peanut or cashew butter instead of almond. Blueberries or chopped pear pressed into the top need no extra time.
 - **Make it faster:** Mash the bananas and mix the wet ingredients the night before, then stir in the oats straight from the fridge.
-- **Bulk it out:** A handful of chopped walnuts through the mix, or serve with sliced banana on the side.
+- **On the side:** A handful of chopped walnuts through the mix, or serve with sliced banana on the side.
 - **Leftovers:** Keeps 4 days chilled and firms as it sits. Cut into squares and eat cold, or warm through for 3 minutes.
 
 ## Nutrition (per serving, approx.)

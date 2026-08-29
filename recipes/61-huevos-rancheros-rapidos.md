@@ -1,6 +1,6 @@
 # 61 · Huevos Rancheros Rápidos
 
-**Cuisine:** Mexican · **Method:** One pan · **Total time:** 15 min (5 prep / 10 cook) · **Serves:** 4
+**Cuisine:** Mexican · **Method:** One pan · **Total time:** 15 min (5 prep / 10 cook) · **Serves:** 4 · **Vegetarian**
 
 > Tinned tomatoes fried hard with dried chilli, black beans stirred through, and eight eggs sunk into the lot under a lid.
 
@@ -32,7 +32,7 @@ Frying the tomatoes over high heat until they darken and stop smelling raw is wh
 ## Chef's notes
 - **Swap:** Pinto or kidney beans behave the same. No dried chilli means 2 tsp smoked paprika and a pinch of cayenne.
 - **Make it faster:** Build the sauce to the end of step 3 the night before; it takes the eggs in 5 minutes from cold.
-- **Bulk it out:** Wilt a bag of spinach into the sauce before the eggs, or add plain rice.
+- **On the side:** Wilt a bag of spinach into the sauce before the eggs, or add plain rice.
 - **Leftovers:** The sauce keeps 3 days; the eggs do not, so poach only what you will eat.
 
 ## Nutrition (per serving, approx.)

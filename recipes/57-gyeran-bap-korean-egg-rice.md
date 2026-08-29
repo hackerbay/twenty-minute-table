@@ -1,6 +1,6 @@
 # 57 · Gyeran Bap — Korean Egg Rice
 
-**Cuisine:** Korean · **Method:** One pan · **Total time:** 10 min (3 prep / 7 cook) · **Serves:** 4
+**Cuisine:** Korean · **Method:** One pan · **Total time:** 10 min (3 prep / 7 cook) · **Serves:** 4 · **Vegetarian**
 
 > Rice loosened in a hot pan, eggs fried hard in sesame oil until the edges frill and brown, all mixed together at the table.
 
@@ -29,7 +29,7 @@ A splash of water in the pan steams cold rice apart in two minutes, so yesterday
 ## Chef's notes
 - **Swap:** Brown rice works and takes a minute longer to loosen. Gochujang stirred through instead of the dried chilli flakes.
 - **Make it faster:** Cook double the rice whenever you make it and keep it chilled — this becomes a five-minute breakfast.
-- **Bulk it out:** A handful of spinach wilted into the rice, or kimchi and cucumber on the side.
+- **On the side:** A handful of spinach wilted into the rice, or kimchi and cucumber on the side.
 - **Leftovers:** None worth keeping; a fried egg on rice does not survive the fridge. Cook only what you will eat.
 
 ## Nutrition (per serving, approx.)

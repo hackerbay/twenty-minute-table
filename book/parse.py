@@ -31,6 +31,7 @@ def parse(path):
     meta = re.search(r'\*\*Cuisine:\*\* (.+?) · \*\*Method:\*\* (.+?) · \*\*Total time:\*\* (.+?) · \*\*Serves:\*\* (\d+)', t)
     r['cuisine'], r['method'], r['time'], r['serves'] = [g.strip() for g in meta.groups()]
     r['minutes'] = int(re.match(r'(\d+)', r['time']).group(1))
+    r['veg'] = '**Vegetarian**' in t.split('\n')[2]
     r['time_short'] = f"{r['minutes']} min"
     tm = re.search(r'\((\d+) prep / (\d+) cook\)', r['time'])
     r['prep'], r['cook'] = (tm.group(1), tm.group(2)) if tm else ('', '')

@@ -1,6 +1,6 @@
 # 52 · Halloumi, Tomato & Za'atar Plate
 
-**Cuisine:** Cypriot · **Method:** Air fryer · **Total time:** 12 min (4 prep / 8 cook) · **Serves:** 4
+**Cuisine:** Cypriot · **Method:** Air fryer · **Total time:** 12 min (4 prep / 8 cook) · **Serves:** 4 · **Vegetarian**
 
 > Thick halloumi slices sit on a bed of cherry tomatoes; the tomatoes collapse into their own dressing while the cheese takes on a blistered gold crust.
 
@@ -32,7 +32,7 @@ Halloumi holds its shape above 200°C because the curd is heated before it is br
 ## Chef's notes
 - **Swap:** Firm feta in a block behaves similarly but needs only 6 minutes. Cherry tomatoes on the vine look better and taste the same.
 - **Make it faster:** Slice the halloumi and leave it uncovered on a plate in the fridge overnight; it dries out and browns faster.
-- **Bulk it out:** A soft-boiled egg each, or a spoonful of cooked green lentils dressed with the same za'atar oil.
+- **On the side:** A soft-boiled egg each, or a spoonful of cooked green lentils dressed with the same za'atar oil.
 - **Leftovers:** Halloumi turns squeaky and tough once cold. Chop it small and fry it back to life in a dry pan for a minute.
 
 ## Nutrition (per serving, approx.)

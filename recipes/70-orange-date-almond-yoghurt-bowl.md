@@ -1,6 +1,6 @@
 # 70 · Orange, Date & Almond Yoghurt Bowl
 
-**Cuisine:** Moroccan · **Method:** No cook · **Total time:** 8 min (8 prep / 0 cook) · **Serves:** 4
+**Cuisine:** Moroccan · **Method:** No cook · **Total time:** 8 min (8 prep / 0 cook) · **Serves:** 4 · **Vegetarian**
 
 > Oranges cut into rounds on the board so every drop of juice ends up on the yoghurt, with dates and almonds for chew.
 
@@ -32,7 +32,7 @@ Cutting the peel and pith away with a knife and slicing the oranges across into 
 ## Chef's notes
 - **Swap:** Blood oranges in late winter, or ripe peaches in high summer, cut the same way. Pistachios in place of almonds.
 - **Make it faster:** Chop the dates and almonds first and leave them on the board, then use the same board for the oranges.
-- **Bulk it out:** Stir a spoonful of rolled oats through the yoghurt at step 1; they soften while you slice the oranges.
+- **On the side:** Stir a spoonful of rolled oats through the yoghurt at step 1; they soften while you slice the oranges.
 - **Leftovers:** Fruit and yoghurt keep three days apart. Assembled, the juice thins the yoghurt overnight.
 
 ## Nutrition (per serving, approx.)

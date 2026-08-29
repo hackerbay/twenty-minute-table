@@ -33,7 +33,7 @@ body{font-family:'Inter',sans-serif;color:var(--ink);background:#DDD6C8;font-fea
   font-variation-settings:'SOFT' 50,'WONK' 1,'opsz' 90;}
 .stat .sl{font-size:7.2pt;letter-spacing:.22em;text-transform:uppercase;font-weight:600;
   color:rgba(253,250,244,.55);margin-top:2.6mm;}
-.texture{font-size:6.5pt;line-height:1.66;letter-spacing:.055em;color:rgba(253,250,244,.30);
+.texture{font-size:5.9pt;line-height:1.58;letter-spacing:.055em;color:rgba(253,250,244,.30);
   text-transform:uppercase;font-weight:500;text-align:justify;}
 .cover-chips{display:flex;gap:3.5mm;flex-wrap:wrap;}
 .cchip{border:1px solid;border-radius:99px;padding:2.2mm 5mm;display:flex;align-items:center;gap:2.2mm;}
@@ -256,3 +256,40 @@ body{font-family:'Inter',sans-serif;color:var(--ink);background:#DDD6C8;font-fea
   font-feature-settings:'tnum' 1;}
 .ci p .cp{margin-left:auto;flex:none;font-size:6.9pt;font-weight:600;color:var(--ink4);
   font-feature-settings:'tnum' 1;padding-left:2mm;font-size:7.4pt;}
+
+/* ===== PANTRY CHECKLIST ===== */
+.shelves{column-count:4;column-gap:8mm;}
+.shelf{break-inside:avoid;margin-bottom:5.4mm;}
+.shelf h4{font-size:7.3pt;letter-spacing:.19em;text-transform:uppercase;font-weight:600;
+  color:#A5632A;margin-bottom:2mm;padding-bottom:1.4mm;border-bottom:1px solid var(--line);}
+.ck{display:flex;align-items:flex-start;gap:2.4mm;font-size:8.3pt;line-height:1.32;
+  color:var(--ink2);margin-bottom:2mm;}
+.ck .box{flex:none;width:3.2mm;height:3.2mm;border:1.1px solid var(--ink4);border-radius:.6mm;
+  margin-top:.55mm;background:#fff;}
+.shelf.kit{column-count:3;column-gap:8mm;}
+.kitwrap{margin-top:auto;padding-top:7mm;}
+.rules.big .rule-item{margin-bottom:5.4mm;}
+.rules.big .rn{font-size:20pt;width:11mm;}
+.rules.big .rt{font-size:9.9pt;line-height:1.58;}
+
+/* ===== VEGETARIAN MARKERS ===== */
+.vpill{border:1px solid #5A7A48;color:#5A7A48;border-radius:99px;padding:.8mm 2.4mm;
+  font-size:6.4pt;letter-spacing:.14em;font-weight:600;text-transform:uppercase;}
+.trow .vg{flex:none;width:3mm;text-align:center;font-size:7pt;font-weight:700;
+  color:#5A7A48;font-style:italic;}
+
+.mfoot{display:flex;align-items:center;gap:3mm;padding-top:4mm;border-top:1px solid var(--line);
+  font-size:7.4pt;letter-spacing:.13em;text-transform:uppercase;color:var(--ink3);font-weight:500;}
+.mfoot .mf-wash{margin-left:auto;text-transform:none;letter-spacing:0;font-size:7.9pt;
+  color:var(--ink4);font-weight:400;}
+
+.rules.big{column-count:2;column-gap:11mm;}
+.rules.big .rule-item{break-inside:avoid;margin-bottom:5mm;}
+.rules.big .rn{font-size:18pt;width:9mm;}
+.rules.big .rt{font-size:9.2pt;line-height:1.55;}
+
+.goes{margin-top:3.2mm;font-size:7.9pt;color:var(--ink3);display:flex;gap:2.6mm;
+  align-items:baseline;flex-wrap:wrap;}
+.goes b{font-size:6.9pt;letter-spacing:.19em;text-transform:uppercase;font-weight:600;flex:none;}
+.gitem{display:inline-flex;gap:1.4mm;align-items:baseline;color:var(--ink2);}
+.gitem i{font-style:normal;font-weight:700;font-feature-settings:'tnum' 1;font-size:7.3pt;}

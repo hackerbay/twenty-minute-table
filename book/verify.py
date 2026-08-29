@@ -39,7 +39,7 @@ for f in files:
     # method steps
     steps = re.findall(r'^\d+\. ', t.split('## Method')[1].split('## ')[0], re.M)
     if not (3 <= len(steps) <= 7): problems.append(f"{n}: {len(steps)} method steps")
-    for note in ['**Swap:**','**Make it faster:**','**Bulk it out:**','**Leftovers:**']:
+    for note in ['**Swap:**','**Make it faster:**','**On the side:**','**Leftovers:**']:
         if note not in t: problems.append(f"{n}: missing {note}")
     rows.append((os.path.basename(f)[:2], h1[0], cuisine, method, mins))
 

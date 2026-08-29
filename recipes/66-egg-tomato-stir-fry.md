@@ -1,6 +1,6 @@
 # 66 · Egg & Tomato Stir-Fry
 
-**Cuisine:** Chinese · **Method:** Wok · **Total time:** 10 min (4 prep / 6 cook) · **Serves:** 4
+**Cuisine:** Chinese · **Method:** Wok · **Total time:** 10 min (4 prep / 6 cook) · **Serves:** 4 · **Vegetarian**
 
 > Soft-scrambled eggs folded back into collapsed tomatoes, over cold rice fried underneath to catch the juices.
 
@@ -31,7 +31,7 @@ Cooking the eggs first and lifting them out while glossy keeps them tender; they
 ## Chef's notes
 - **Swap:** Tinned plum tomatoes carry this out of season; drain them well or the rice goes soggy.
 - **Make it faster:** Beat the eggs in the bowl you will serve from, and tip them onto the board in step 2.
-- **Bulk it out:** A handful of frozen peas or shredded spinach goes in with the rice.
+- **On the side:** A handful of frozen peas or shredded spinach goes in with the rice.
 - **Leftovers:** Good cold next day. Reheat in a hot dry pan, never the microwave, or the eggs weep.
 
 ## Nutrition (per serving, approx.)

@@ -1,11 +1,11 @@
 # 09 · Jerk Chicken with Charred Pineapple
 
-**Cuisine:** Jamaican · **Method:** Air fryer · **Total time:** 18 min (6 prep / 12 cook) · **Serves:** 4
+**Cuisine:** Jamaican · **Method:** Air fryer · **Total time:** 20 min (7 prep / 13 cook) · **Serves:** 4
 
 > A jerk rub stirred in a bowl rather than blitzed in a blender, with pineapple going dark and jammy in the gaps between the thighs.
 
 ## Why it works
-Allspice, thyme and scotch bonnet are the backbone of jerk, and a rub built on grated aromatics gets there without a blender to wash. Pineapple has enough sugar to caramelise in twelve minutes and enough acid to season the chicken as its juices run into the drawer.
+Allspice, thyme and scotch bonnet are the backbone of jerk, and a rub built on grated aromatics gets there without a blender to wash. Pineapple has enough sugar to caramelise in twelve minutes and enough acid to season the chicken as its juices run into the drawer. Rice and peas goes on the hob first and cooks itself while the basket runs, and the cabbage only needs scrunching with lime to turn into a slaw.
 
 ## Ingredients
 
@@ -24,32 +24,48 @@ Allspice, thyme and scotch bonnet are the backbone of jerk, and a rub built on g
 - 2 tbsp (30 ml) olive oil
 - ¾ tsp fine sea salt
 
+**For the rice and peas**
+- 250 g (1¼ cups) long-grain rice, rinsed until the water runs clear
+- 1 x 400 g (14 oz) tin kidney beans, drained
+- 100 ml (scant ½ cup) coconut milk
+- 400 ml (1⅔ cups) boiling water
+- 1 tsp dried thyme, or 2 thyme sprigs
+- ½ tsp fine sea salt
+
 **For the basket**
-- 800 g (1¾ lb) boneless, skinless chicken thighs
+- 700 g (1½ lb) boneless, skinless chicken thighs
 - ½ pineapple (~400 g / 14 oz prepared), cut into 2 cm (¾ in) wedges
+
+**For the slaw**
+- 400 g (14 oz) white cabbage, shredded as thinly as you can
+- 2 carrots (~200 g / 7 oz), coarsely grated
+- 1 tbsp (15 ml) olive oil
+- Juice of 1 lime
+- ¼ tsp fine sea salt
 
 **To finish**
 - 15 g (⅓ cup, packed) coriander
 - 1 lime, cut into wedges
 
 ## Method
-1. Heat the air fryer to 200°C (400°F). Stir every rub ingredient together in a bowl into a thick, dark, spoonable paste.
-2. Open the thighs out flat on the board so they are an even thickness, add them to the bowl and work the rub in by hand. Wash your hands afterwards; the scotch bonnet lingers.
-3. Lay the chicken in the basket in one layer and tuck the pineapple into the gaps.
+1. Boil the kettle and heat the air fryer to 200°C (400°F). Put the rinsed rice, kidney beans, coconut milk, thyme, salt and boiling water in a pan, bring back to the boil, then clamp on a lid and cook on the lowest heat for 10 minutes. Leave it covered off the heat until you serve.
+2. Stir every rub ingredient together in a bowl into a thick, dark, spoonable paste.
+3. Open the thighs out flat on the board so they are an even thickness, add them to the bowl and work the rub in by hand. Wash your hands afterwards; the scotch bonnet lingers. Lay the chicken in the basket in one layer and tuck the pineapple into the gaps.
 4. Air fry for 12 minutes, turning chicken and pineapple at 7 minutes. The chicken is ready when the rub has dried to a near-black crust and the juices run clear — 74°C (165°F) on a probe. The pineapple should be blistered and slumping.
-5. Serve straight from the basket, coriander torn over, lime to squeeze.
+5. While the basket runs, toss the cabbage and carrot in a large bowl with the oil, lime juice and salt, scrunching with your hands until the cabbage slackens.
+6. Fork the rice and beans loose and spoon onto four plates. Add the chicken and pineapple with everything left in the basket, pile the slaw alongside, tear the coriander over and add lime wedges.
 
 ## Chef's notes
 - **Swap:** Half a habanero or a hot red chilli if scotch bonnet is hard to find. Mango chars the same way.
-- **Make it faster:** The rub keeps a week in a jar — make it ahead and this is a 14-minute dinner.
-- **Bulk it out:** Rice and peas, or flatbreads warmed in the empty basket.
-- **Leftovers:** Chop the cold chicken and pineapple together into a slaw. Keeps 3 days chilled.
+- **Make it faster:** The rub keeps a week in a jar — make it ahead and this is a 17-minute dinner. Two 250 g pouches of microwave rice, stirred through the drained beans, instead of the pan.
+- **On the side:** Fried plantain, hot pepper sauce, and a wedge of hard dough bread for the last of the juices.
+- **Leftovers:** Chop the cold chicken and pineapple through the slaw. Keeps 3 days chilled.
 
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |
 |---|---|---|---|---|
-| 475 kcal | 38 g | 18 g | 27 g | 3 g |
+| 760 kcal | 42 g | 78 g | 27 g | 10 g |
 
 ## Washing up
-Air fryer basket, one mixing bowl, one chopping board.
+Air fryer basket, one lidded pan, two mixing bowls, one chopping board.

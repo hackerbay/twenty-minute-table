@@ -31,7 +31,7 @@ Cooked rice has already gelatinised, so it only needs to swell and warm through:
 ## Chef's notes
 - **Swap:** Flaked salmon, shredded chicken or firm tofu all sit in this broth as happily as prawns. Cold brown rice wants 8 minutes rather than 5.
 - **Make it faster:** Leave the ginger unpeeled and slice it thin — the skin softens away in the broth.
-- **Bulk it out:** Beat an egg and stir it through the boiling soup in step 3 for ribbons.
+- **On the side:** Beat an egg and stir it through the boiling soup in step 3 for ribbons.
 - **Leftovers:** The rice drinks the broth overnight, so loosen with water when you reheat.
 
 ## Nutrition (per serving, approx.)

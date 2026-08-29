@@ -1,6 +1,6 @@
 # 55 · Crispy Chickpea, Avocado & Lemon Toast
 
-**Cuisine:** Modern Levantine · **Method:** Air fryer · **Total time:** 12 min (4 prep / 8 cook) · **Serves:** 4
+**Cuisine:** Modern Levantine · **Method:** Air fryer · **Total time:** 12 min (4 prep / 8 cook) · **Serves:** 4 · **Vegetarian**
 
 > The chickpeas rattle around getting crisp while the bread toasts beside them in the same basket, picking up the cumin oil on the way.
 
@@ -35,7 +35,7 @@ Chickpeas patted properly dry crisp in eight minutes at 200°C; any water left c
 ## Chef's notes
 - **Swap:** Butter beans crisp in the same window and go creamier inside. Tahini loosened with lemon and water instead of avocado.
 - **Make it faster:** Drain and dry the chickpeas the night before and leave them uncovered in the fridge; they crisp a minute quicker.
-- **Bulk it out:** A soft-boiled egg halved over each slice, or a second tin of chickpeas in the basket.
+- **On the side:** A soft-boiled egg halved over each slice, or a second tin of chickpeas in the basket.
 - **Leftovers:** The chickpeas keep 3 days in an open jar at room temperature and stay crisp. Mashed avocado does not keep; make only what you need.
 
 ## Nutrition (per serving, approx.)

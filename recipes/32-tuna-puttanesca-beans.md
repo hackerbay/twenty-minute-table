@@ -1,45 +1,49 @@
 # 32 · Tuna Puttanesca Beans
 
-**Cuisine:** Italian · **Method:** One pan · **Total time:** 12 min (4 prep / 8 cook) · **Serves:** 4
+**Cuisine:** Italian · **Method:** One pan · **Total time:** 18 min (4 prep / 14 cook) · **Serves:** 4
 
 > Everything comes out of a tin or a jar, and eight minutes later it tastes like it took an hour.
 
 ## Why it works
-Starting the garlic and anchovies in cold oil over gentle heat lets them infuse as the pan comes up, instead of scorching the moment they land. The tuna goes in off the heat and gets folded once — stir it twice and it shreds into the sauce and disappears.
+Starting the garlic and anchovies in cold oil over gentle heat lets them infuse as the pan comes up, instead of scorching the moment they land. The tuna goes in off the heat and gets folded once — stir it twice and it shreds into the sauce and disappears. The penne cooks alongside in salted water and lands in the pan a minute early, so it finishes in the sauce and drinks some of it.
 
 ## Ingredients
-- 3 tbsp (45 ml) olive oil
+- 400 g (14 oz) penne or rigatoni
+- 2 tbsp (30 ml) olive oil
 - 4 garlic cloves, thinly sliced
-- 4 anchovy fillets in olive oil
+- 6 anchovy fillets in olive oil
 - ½ tsp chilli flakes
 - 1 x 400 g (14 oz) tin cherry or chopped tomatoes
+- 250 g (9 oz) cherry tomatoes, halved
 - 2 tbsp capers, rinsed
-- 100 g (¾ cup) black olives, torn off their stones
+- 60 g (½ cup) black olives, torn off their stones
 - 1 tsp dried oregano
 - 2 x 400 g (14 oz) tins butter beans, drained
-- 2 x 160 g (5½ oz) tins tuna in olive oil, drained
+- 200 g (7 oz) baby spinach
+- 3 x 200 g (7 oz) tins tuna in olive oil, drained
 - 20 g (½ cup, packed) flat-leaf parsley, chopped
 - 1 lemon
 - Black pepper
 
 ## Method
-1. Put the oil, garlic, anchovies and chilli into a cold frying pan and set it over medium heat. Cook 2 minutes as it warms, pressing the anchovies until they collapse and the garlic sizzles pale gold.
-2. Add the tomatoes, capers, olives and oregano. Simmer hard 4 minutes, until the sauce darkens a shade and pulls away from the side of the pan when you push it.
-3. Stir in the beans with 50 ml (3 tbsp) water and warm through for 2 minutes, so they take on the sauce without breaking up.
-4. Take the pan off the heat. Flake the tuna over the top in large pieces and fold it through once, no more.
-5. Finish with parsley, a good squeeze of lemon and black pepper. It needs no salt — the anchovies, capers and olives have done that job.
+1. Boil a full kettle, pour it into a large pan, salt it well and bring it back to the boil. Add the penne and cook a minute under the packet time, about 10 minutes. Keep a mugful of the water back before you drain it.
+2. Meanwhile, put the oil, garlic, anchovies and chilli into a cold frying pan and set it over medium heat. Cook 2 minutes as it warms, pressing the anchovies until they collapse and the garlic sizzles pale gold.
+3. Add both lots of tomatoes, the capers, olives and oregano. Simmer hard 5 minutes, until the cherry tomatoes burst under the back of a spoon and the sauce pulls away from the side of the pan when you push it.
+4. Stir in the beans with a splash of water ladled from the pasta pan and warm through for 2 minutes, so they take on the sauce without breaking up, then fold the spinach through in handfuls until it collapses.
+5. Drain the penne and tip it into the sauce — or the sauce into the pasta pan, if your frying pan is already full. Toss 1 minute over low heat, loosening with pasta water until every tube is coated.
+6. Take the pan off the heat. Flake the tuna over the top in large pieces and fold it through once, no more. Finish with parsley, a good squeeze of lemon and black pepper. It needs no salt — the anchovies, capers and olives have done that job.
 
 ## Chef's notes
 - **Swap:** Tinned sardines or mackerel in place of tuna. Cannellini or chickpeas for the butter beans.
 - **Make it faster:** Buy pitted olives, though torn olives off the stone taste better.
-- **Bulk it out:** Fold through cooked penne, or pile onto toasted sourdough.
-- **Leftovers:** Excellent cold, straight from the fridge, on toast. Keeps 3 days chilled.
+- **On the side:** Chicory and radicchio in a mustard dressing, or bread rubbed with a cut tomato and salted.
+- **Leftovers:** Excellent cold, straight from the fridge, with another squeeze of lemon. Keeps 3 days chilled.
 
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |
 |---|---|---|---|---|
-| 345 kcal | 25 g | 23 g | 16 g | 8 g |
+| 770 kcal | 51 g | 97 g | 20 g | 12 g |
 
 ## Washing up
-One frying pan, one sieve, one chopping board.
+One frying pan, one pasta pan, one colander, one chopping board.

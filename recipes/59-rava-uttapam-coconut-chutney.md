@@ -1,6 +1,6 @@
 # 59 · Rava Uttapam with Coconut Chutney
 
-**Cuisine:** Indian (South) · **Method:** One pan · **Total time:** 18 min (8 prep / 10 cook) · **Serves:** 4
+**Cuisine:** Indian (South) · **Method:** One pan · **Total time:** 18 min (8 prep / 10 cook) · **Serves:** 4 · **Vegetarian**
 
 > A thick, freckled semolina pancake with onion and tomato pressed into the top, and no fermenting involved.
 
@@ -37,7 +37,7 @@ Fine semolina swells in yoghurt within minutes, so a short stand does what an ov
 ## Chef's notes
 - **Swap:** Grated carrot or courgette instead of tomato adds no water.
 - **Make it faster:** Make the chutney the night before; it keeps 3 days chilled.
-- **Bulk it out:** Stir cooked chana dal through the batter, or add soft-boiled eggs.
+- **On the side:** Stir cooked chana dal through the batter, or add soft-boiled eggs.
 - **Leftovers:** Reheat dry in the pan, a minute a side, never in the microwave.
 
 ## Nutrition (per serving, approx.)

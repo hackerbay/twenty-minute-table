@@ -1,6 +1,6 @@
 # 67 · Sinangag — Filipino Garlic Rice & Egg
 
-**Cuisine:** Filipino · **Method:** Wok · **Total time:** 12 min (4 prep / 8 cook) · **Serves:** 4
+**Cuisine:** Filipino · **Method:** Wok · **Total time:** 12 min (4 prep / 8 cook) · **Serves:** 4 · **Vegetarian**
 
 > A whole head of garlic in last night's rice, half fried to crisp gold and saved for the top.
 
@@ -33,7 +33,7 @@ Starting the garlic in cold oil draws out its sugars before the edges colour, so
 ## Chef's notes
 - **Swap:** Day-old brown or red rice fries just as well; give it an extra minute to loosen.
 - **Make it faster:** Slice the garlic the night before and keep it submerged in oil in a jar.
-- **Bulk it out:** Flake in a tin of sardines or some smoked mackerel with the rice at step 3.
+- **On the side:** Flake in a tin of sardines or some smoked mackerel with the rice at step 3.
 - **Leftovers:** Cold garlic rice fries again happily. Store the crisp garlic in a dry jar or it goes soft.
 
 ## Nutrition (per serving, approx.)

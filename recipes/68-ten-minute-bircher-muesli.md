@@ -1,6 +1,6 @@
 # 68 · Ten-Minute Bircher Muesli
 
-**Cuisine:** Swiss · **Method:** No cook · **Total time:** 10 min (10 prep / 0 cook) · **Serves:** 4
+**Cuisine:** Swiss · **Method:** No cook · **Total time:** 10 min (10 prep / 0 cook) · **Serves:** 4 · **Vegetarian**
 
 > The overnight soak is only a hydration problem, and warm milk with a grated apple solves it while you chop the nuts.
 
@@ -33,7 +33,7 @@ Oats take up liquid far faster when it is warm, so milk at body temperature does
 ## Chef's notes
 - **Swap:** Warmed cloudy apple juice in place of milk makes a sharper dairy-free version; use coconut yoghurt with it.
 - **Make it faster:** Pulse jumbo oats three or four times in a blender. Smaller flakes hydrate in half the time.
-- **Bulk it out:** A grated pear, a spoonful of ground almonds or a handful of raisins, stirred in at step 4.
+- **On the side:** A grated pear, a spoonful of ground almonds or a handful of raisins, stirred in at step 4.
 - **Leftovers:** Keeps three days chilled and genuinely improves. Hold the nuts back until serving so they stay crisp.
 
 ## Nutrition (per serving, approx.)

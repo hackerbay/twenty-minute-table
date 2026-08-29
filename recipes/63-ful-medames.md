@@ -1,6 +1,6 @@
 # 63 · Ful Medames
 
-**Cuisine:** Egyptian · **Method:** One pan · **Total time:** 12 min (4 prep / 8 cook) · **Serves:** 4
+**Cuisine:** Egyptian · **Method:** One pan · **Total time:** 12 min (4 prep / 8 cook) · **Serves:** 4 · **Vegetarian**
 
 > Fava beans crushed against the side of the pan with cumin and lemon, eggs cracked into the middle, eaten with your hands.
 
@@ -31,7 +31,7 @@ Crushing only half the beans gives you a thick base that holds the olive oil and
 ## Chef's notes
 - **Swap:** Tinned brown lentils or borlotti beans crush the same way if fava beans are hard to find.
 - **Make it faster:** Use ready-ground cumin and toast it in the oil for 10 seconds instead of step 1.
-- **Bulk it out:** Warm flatbread for scooping, and add sliced cucumber and radish alongside.
+- **On the side:** Warm flatbread for scooping, and add sliced cucumber and radish alongside.
 - **Leftovers:** The beans keep 3 days and thicken; loosen with water and a squeeze of lemon over low heat.
 
 ## Nutrition (per serving, approx.)

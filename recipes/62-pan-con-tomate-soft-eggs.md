@@ -1,6 +1,6 @@
 # 62 · Pan con Tomate with Soft Eggs
 
-**Cuisine:** Spanish · **Method:** One pan · **Total time:** 10 min (3 prep / 7 cook) · **Serves:** 4
+**Cuisine:** Spanish · **Method:** One pan · **Total time:** 10 min (3 prep / 7 cook) · **Serves:** 4 · **Vegetarian**
 
 > Bread fried in olive oil until it crackles, cold grated tomato spooned over, and an egg from the same pan with the yolk still loose.
 
@@ -25,7 +25,7 @@ Grating a halved tomato on the coarse holes of a box grater leaves the skin flat
 ## Chef's notes
 - **Swap:** Out of season, use 250 g (9 oz) tinned whole tomatoes crushed by hand and drained for a minute.
 - **Make it faster:** Grate the tomatoes while the pan heats and the whole thing lands in eight minutes.
-- **Bulk it out:** Add a few slices of manchego under the tomato, or serve with a plate of sliced cucumber and olives.
+- **On the side:** Add a few slices of manchego under the tomato, or serve with a plate of sliced cucumber and olives.
 - **Leftovers:** The tomato keeps overnight and is better for it; the bread must be fried to order.
 
 ## Nutrition (per serving, approx.)
