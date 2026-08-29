@@ -34,12 +34,22 @@ the step actually asks you to do, and the swap / faster / bulk / leftovers notes
 
 ## Illustrations, and how to replace them with photographs
 
-There are no stock photographs in this book. Each plate page gets a flat-lay illustration
-composed at build time from the recipe's own ingredient list: `book/art/compose.py` matches
-each ingredient line against a rule table, picks up to nine icons from a library of 72
-hand-drawn line-art foods, sorts them so the star ingredient is largest, and scatters them
-with a seed derived from the recipe number — so a given recipe always draws the same picture.
-Method steps are matched the same way against 20 action pictograms.
+There are no stock photographs in this book. Every plate page carries an original
+full-colour illustration, composed at build time from the recipe's own ingredient list.
+
+`book/art/compose.py` matches each ingredient line against a rule table and picks up to
+eleven items from a library of 72 hand-drawn foods. `colors.py` gives each one a fill, an
+accent for the parts that differ (yolks, stones, pips) and a derived outline in the same
+hue, so the line work belongs to the colour rather than sitting on top in black — the
+renderer fills only the closed paths of an icon, leaving detail strokes as line work.
+
+The scene is then assembled: a vessel matched to the method (an air-fryer basket, a pan
+with a handle, a plate), a heap of translucent colour under the food so the plate reads as
+a dish rather than floating objects, the four star ingredients served on top, and the
+supporting cast laid out around it on the counter. Everything is placed with a seed taken
+from the recipe number, so a given recipe always draws the same picture, and best-candidate
+sampling keeps items from colliding. Method steps are matched the same way against 20
+action pictograms.
 
 To use real photographs instead, drop them into `images/` as `NN-hero.jpg` and
 `NN-step-K.jpg`. The build picks them up automatically and falls back to the illustration

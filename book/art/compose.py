@@ -10,6 +10,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from food import PART as FOOD
 from actions import PART as ACTIONS
+from colors import of as colour_of, shade, tone
 
 # --- ingredient -> icon ------------------------------------------------------
 # Ordered: the first pattern that matches a line wins, so put the specific
@@ -108,7 +109,7 @@ def tier(key):
     return 2 if key in TIER2 else 1 if key in TIER1 else -1 if key in STAR else 0
 
 
-def pick_icons(recipe, lo=5, hi=9):
+def pick_icons(recipe, lo=5, hi=11):
     """Icon keys for a recipe: star ingredients first, pantry last."""
     found, seen = [], set()
     lines = [i for g in recipe['ing_groups'] for i in g['items']]
@@ -131,15 +132,58 @@ def pick_icons(recipe, lo=5, hi=9):
 
 # --- layout -----------------------------------------------------------------
 VB_W, VB_H = 400, 205          # hero viewBox; ratio sits mid-range of the printed box
-PAD = 46                       # generous, so `slice` cropping never bites
+
+_EL = re.compile(r'<[^>]+/>')
+_D = re.compile(r'd="([^"]*)"')
 
 
-def _best_candidate(rng, placed, r, tries=110):
-    """Mitchell's best-candidate sampling: the point furthest from what is placed."""
+def _is_closed(el):
+    """Closed shapes get a fill; open detail strokes stay as line work."""
+    if el.startswith(('<circle', '<ellipse', '<rect', '<polygon')):
+        return True
+    d = _D.search(el)
+    return bool(d and 'z' in d.group(1).lower())
+
+
+def paint(key, sw=2.0):
+    """Render one food icon as a flat colour illustration in a 48x48 space."""
+    base, accent = colour_of(key)
+    line = shade(base, .5)
+    out, seen_body = '', False
+    for el in _EL.findall(FOOD[key]):
+        if _is_closed(el):
+            fill = base if not seen_body else accent
+            seen_body = True
+            out += el.replace('/>', f' fill="{fill}"/>')
+        else:
+            out += el
+    return f'<g stroke="{line}" stroke-width="{sw}" fill="none">{out}</g>'
+
+
+# --- the plate -------------------------------------------------------------
+def _vessel(method, cx, cy, r, ink):
+    """A plate, a pan or an air-fryer basket, seen from above."""
+    rim, face, edge = '#FFFFFF', '#FDFAF4', '#E4DACA'
+    sh = f'<ellipse cx="{cx:.0f}" cy="{cy + r * .10:.0f}" rx="{r * 1.03:.0f}" ry="{r * 1.0:.0f}" fill="#000" opacity=".07"/>'
+    if method == 'Air fryer':
+        k = r * .96
+        return (sh + f'<rect x="{cx-k:.0f}" y="{cy-k:.0f}" width="{k*2:.0f}" height="{k*2:.0f}" rx="{k*.30:.0f}" '
+                f'fill="{rim}" stroke="{edge}" stroke-width="2"/>'
+                f'<rect x="{cx-k*.84:.0f}" y="{cy-k*.84:.0f}" width="{k*1.68:.0f}" height="{k*1.68:.0f}" '
+                f'rx="{k*.24:.0f}" fill="{face}" stroke="{edge}" stroke-width="1.4"/>')
+    if method in ('One pan', 'Wok'):
+        return (sh + f'<path d="M{cx+r*.99:.0f} {cy-r*.15:.0f}h{r*.42:.0f}a{r*.08:.0f} {r*.08:.0f} 0 0 1 0 {r*.30:.0f}'
+                f'h{-r*.42:.0f}z" fill="{edge}"/>'
+                f'<circle cx="{cx:.0f}" cy="{cy:.0f}" r="{r:.0f}" fill="{rim}" stroke="{edge}" stroke-width="2.4"/>'
+                f'<circle cx="{cx:.0f}" cy="{cy:.0f}" r="{r*.86:.0f}" fill="{face}" stroke="{edge}" stroke-width="1.4"/>')
+    return (sh + f'<circle cx="{cx:.0f}" cy="{cy:.0f}" r="{r:.0f}" fill="{rim}" stroke="{edge}" stroke-width="2"/>'
+            f'<circle cx="{cx:.0f}" cy="{cy:.0f}" r="{r*.80:.0f}" fill="{face}" stroke="{edge}" stroke-width="1.2"/>')
+
+
+def _place(rng, placed, r, x0, x1, y0, y1, tries=140):
     best, best_d = None, -1
     for _ in range(tries):
-        x = rng.uniform(PAD + r * .4, VB_W - PAD - r * .4)
-        y = rng.uniform(PAD * .74 + r * .4, VB_H - PAD * .74 - r * .4)
+        x, y = rng.uniform(x0, x1), rng.uniform(y0, y1)
         if not placed:
             return x, y
         d = min(math.hypot(x - px, y - py) - pr for px, py, pr in placed)
@@ -148,45 +192,72 @@ def _best_candidate(rng, placed, r, tries=110):
     return best
 
 
-SIZES = [94, 76, 70, 62, 56, 52, 48, 44, 42, 40, 38]
+def _node(key, x, y, size, rng, sw=2.0):
+    k = size / 48.0
+    return (f'<g transform="translate({x:.1f} {y:.1f}) rotate({rng.uniform(-14, 14):.1f}) '
+            f'scale({k:.4f}) translate(-24 -24)">{paint(key, sw / k)}</g>')
 
 
-def hero_svg(recipe, color, halo='#ffffff'):
+def hero_svg(recipe, color, tint):
+    """A plated dish: the star ingredients heaped in the vessel the recipe uses,
+    with the supporting cast laid out around it on the counter."""
     keys = pick_icons(recipe)
-    rng = random.Random(int(recipe['num']) * 7919 + 31)
-    n = len(keys)
+    rng = random.Random(int(recipe['num']) * 7919 + 17)
+    method = recipe['method']
 
-    placed, nodes = [], []
-    for i, key in enumerate(keys):
-        size = SIZES[min(i, len(SIZES) - 1)] * rng.uniform(.94, 1.06)
-        r = size * .5
-        x, y = _best_candidate(rng, placed, r)
-        placed.append((x, y, r * .92))
-        nodes.append((key, x, y, size))
+    surface = tone(tint, 1.10)
+    left = int(recipe['num']) % 2 == 0
+    cx = VB_W * (0.33 if left else 0.67)
+    cy = VB_H * 0.50
+    R = 74
 
-    haloes = ''
-    for _, x, y, sz in nodes[:2]:
-        rr = min(sz * .68, x - 4, y - 4, VB_W - x - 4, VB_H - y - 4)
-        if rr > sz * .40:
-            haloes += f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{rr:.1f}" fill="{halo}" opacity=".42"/>'
+    on = keys[:4]
+    around = keys[4:]
 
-    specks = ''
-    for _ in range(26):
-        x = rng.uniform(10, VB_W - 10); y = rng.uniform(10, VB_H - 10)
-        specks += (f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{rng.uniform(.9,1.9):.1f}" '
-                   f'fill="{color}" opacity=".2"/>')
+    # a heap of food under the ingredients, so the plate reads as a dish
+    mound = ''
+    for i in range(3):
+        mc = colour_of(on[min(i, len(on) - 1)])[0]
+        ang = rng.uniform(0, 180)
+        rx, ry = rng.uniform(R * .50, R * .64), rng.uniform(R * .38, R * .50)
+        mx = cx + rng.uniform(-R * .18, R * .18)
+        my = cy + rng.uniform(-R * .16, R * .16)
+        mound += (f'<ellipse cx="{mx:.0f}" cy="{my:.0f}" rx="{rx:.0f}" ry="{ry:.0f}" '
+                  f'transform="rotate({ang:.0f} {mx:.0f} {my:.0f})" fill="{mc}" opacity=".30"/>')
 
-    items = ''
-    for i, (key, x, y, size) in enumerate(nodes):
-        k = size / 48.0
-        rot = rng.uniform(-16, 16)
-        op = 1.0 if i < 3 else (.78 if i < 6 else .62)
-        items += (f'<g transform="translate({x:.1f} {y:.1f}) rotate({rot:.1f}) scale({k:.4f}) '
-                  f'translate(-24 -24)" stroke-width="{2.05/k:.3f}" opacity="{op}">{FOOD[key]}</g>')
+    plate_items, placed = '', []
+    for i, key in enumerate(on):
+        size = (70 if i == 0 else rng.uniform(52, 60))
+        px, py = _place(rng, placed, size * .5,
+                        cx - R * .44, cx + R * .44, cy - R * .42, cy + R * .42)
+        placed.append((px, py, size * .40))
+        plate_items += _node(key, px, py, size, rng, 2.2)
+
+    counter_items, cplaced = '', [(cx, cy, R * 1.10)]
+    for key in around[:8]:
+        size = rng.uniform(40, 52)
+        px, py = _place(rng, cplaced, size * .5, 30, VB_W - 30, 34, VB_H - 34)
+        cplaced.append((px, py, size * .50))
+        counter_items += _node(key, px, py, size, rng, 2.1)
+
+    flecks = ''
+    for _ in range(34):
+        x, y = rng.uniform(10, VB_W - 10), rng.uniform(10, VB_H - 10)
+        if math.hypot(x - cx, y - cy) < R * 1.04:
+            continue
+        flecks += (f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{rng.uniform(1.2, 2.6):.1f}" '
+                   f'fill="{color}" opacity="{rng.choice([.18, .24, .3]):.2f}"/>')
+
+    clip = f'plate{recipe["num"]}'
+    shape = (f'<rect x="{cx-R*.96:.0f}" y="{cy-R*.96:.0f}" width="{R*1.92:.0f}" height="{R*1.92:.0f}" rx="{R*.29:.0f}"/>'
+             if method == 'Air fryer' else f'<circle cx="{cx:.0f}" cy="{cy:.0f}" r="{R*.84:.0f}"/>')
 
     return (f'<svg viewBox="0 0 {VB_W} {VB_H}" class="hero-svg" preserveAspectRatio="xMidYMid slice" '
-            f'fill="none" stroke="{color}" stroke-linecap="round" stroke-linejoin="round">'
-            f'{haloes}{specks}{items}</svg>')
+            f'stroke-linecap="round" stroke-linejoin="round">'
+            f'<defs><clipPath id="{clip}">{shape}</clipPath></defs>'
+            f'<rect width="{VB_W}" height="{VB_H}" fill="{surface}"/>'
+            f'{flecks}{_vessel(method, cx, cy, R, color)}'
+            f'<g clip-path="url(#{clip})">{mound}</g>{plate_items}{counter_items}</svg>')
 
 
 # --- method step -> action glyph --------------------------------------------

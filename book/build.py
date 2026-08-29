@@ -312,7 +312,7 @@ def build(recipes):
         if hero_photo:
             hero = f'<div class="hero"><img src="{hero_photo}" alt=""></div>'
         else:
-            hero = (f'<div class="hero" style="background:{tint}">{hero_svg(r, c, "#ffffff")}'
+            hero = (f'<div class="hero" style="background:{tint}">{hero_svg(r, c, tint)}'
                     f'<span class="hero-tag" style="color:{c}">Illustrated</span></div>')
 
         ings = ''
