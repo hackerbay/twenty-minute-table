@@ -10,7 +10,7 @@ body{font-family:'Inter',sans-serif;color:var(--ink);background:#DDD6C8;font-fea
 .inner{position:absolute;inset:0;padding:16mm 16mm 12mm;display:flex;flex-direction:column;}
 .topbar{position:absolute;top:0;left:0;right:0;height:5mm;}
 .folio{position:absolute;bottom:6.5mm;left:0;right:0;text-align:center;font-size:7pt;
-  letter-spacing:.16em;color:var(--ink4);font-weight:500;}
+  letter-spacing:.16em;text-indent:.16em;color:var(--ink4);font-weight:500;}
 .pageno{position:absolute;bottom:6.2mm;right:16mm;font-size:7.6pt;font-weight:600;
   color:var(--ink3);font-feature-settings:'tnum' 1;letter-spacing:.02em;}
 .ico{flex:none;vertical-align:-.5mm;}
@@ -126,11 +126,11 @@ body{font-family:'Inter',sans-serif;color:var(--ink);background:#DDD6C8;font-fea
 .sep{width:2.6mm;height:1px;background:var(--line);}
 .dialwrap{flex:none;position:relative;width:13.5mm;height:13.5mm;margin-top:.5mm;}
 .dialtext{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
-  justify-content:center;line-height:1;}
+  justify-content:center;line-height:1;transform:translateY(-.11mm);}
 .dialtext .dv{font-size:12.5pt;font-weight:600;font-variation-settings:'SOFT' 40,'WONK' 1,'opsz' 40;
   font-feature-settings:'tnum' 1;}
-.dialtext .dl{font-size:5.9pt;letter-spacing:.18em;text-transform:uppercase;color:var(--ink4);
-  font-weight:600;margin-top:.9mm;}
+.dialtext .dl{font-size:5.9pt;letter-spacing:.18em;padding-left:.18em;text-transform:uppercase;
+  color:var(--ink4);font-weight:600;margin-top:1mm;}
 .hook{font-size:11.4pt;line-height:1.45;font-style:italic;margin-top:6mm;padding-left:5mm;
   border-left:1.6px solid;font-variation-settings:'SOFT' 60,'WONK' 1,'opsz' 40;}
 .rbody{margin-top:7.5mm;}
@@ -160,8 +160,8 @@ body{font-family:'Inter',sans-serif;color:var(--ink);background:#DDD6C8;font-fea
 .mac .v{font-size:12.5pt;font-weight:600;line-height:1;
   font-variation-settings:'SOFT' 40,'WONK' 1,'opsz' 40;font-feature-settings:'tnum' 1;}
 .mac .mu{font-size:6.6pt;font-weight:500;letter-spacing:.04em;}
-.mac .k{font-size:6.3pt;letter-spacing:.19em;text-transform:uppercase;color:var(--ink3);
-  margin-top:1.4mm;font-weight:600;}
+.mac .k{font-size:6.3pt;letter-spacing:.19em;text-indent:.19em;text-transform:uppercase;
+  color:var(--ink3);margin-top:1.4mm;font-weight:600;}
 .wash{margin-top:3.5mm;font-size:7.9pt;color:var(--ink3);display:flex;gap:2.6mm;align-items:baseline;}
 .wash b{font-size:6.9pt;letter-spacing:.19em;text-transform:uppercase;font-weight:600;flex:none;}
 
@@ -172,8 +172,8 @@ body{font-family:'Inter',sans-serif;color:var(--ink);background:#DDD6C8;font-fea
   font-variation-settings:'SOFT' 50,'WONK' 1,'opsz' 40;}
 .anat{margin-top:auto;padding-top:8mm;border-top:1px solid var(--line);
   display:grid;grid-template-columns:64mm 1fr;gap:11mm;align-items:start;}
-.anat-cap{font-size:6.9pt;letter-spacing:.16em;text-transform:uppercase;color:var(--ink4);
-  font-weight:600;margin-top:2.6mm;text-align:center;}
+.anat-cap{font-size:6.9pt;letter-spacing:.16em;text-indent:.16em;text-transform:uppercase;
+  color:var(--ink4);font-weight:600;margin-top:2.6mm;text-align:center;}
 .kitem{display:flex;gap:3mm;margin-bottom:3.2mm;}
 .kitem .kn{flex:none;width:4.6mm;height:4.6mm;border-radius:99px;background:#C1502E;color:#fff;
   font-size:6.6pt;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:.4mm;}

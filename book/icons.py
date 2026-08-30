@@ -16,14 +16,24 @@ def icon(key, size='4.6mm', sw=1.45):
             f'stroke="currentColor" stroke-width="{sw}" stroke-linecap="round" stroke-linejoin="round">'
             f'{ICONS[key]}</svg>')
 
-def dial(minutes, color, size='15mm', cap=20):
-    r = 10.4
-    c = 2 * math.pi * r
-    frac = min(minutes / cap, 1.0)
-    return (f'<svg viewBox="0 0 26 26" width="{size}" height="{size}">'
-            f'<circle cx="13" cy="13" r="{r}" fill="none" stroke="{color}" stroke-opacity=".16" stroke-width="1.7"/>'
-            f'<circle cx="13" cy="13" r="{r}" fill="none" stroke="{color}" stroke-width="1.7" stroke-linecap="round" '
-            f'stroke-dasharray="{c*frac:.2f} {c:.2f}" transform="rotate(-90 13 13)"/></svg>')
+def dial(minutes, color, size='100%', cap=20):
+    """A ring showing a recipe's total time against a twenty-minute dial.
+
+    The arc is inset by half a stroke at each end so its round caps sit inside
+    the sweep rather than overshooting the twelve o'clock start, and the SVG
+    fills its wrapper so the ring and the label centre on the same box.
+    """
+    r, sw = 10.4, 1.7
+    circ = 2 * math.pi * r
+    frac = max(0.05, min(minutes / cap, 1.0))
+    arc = max(circ * frac - sw, 0.01)
+    return (f'<svg viewBox="0 0 26 26" width="{size}" height="{size}" '
+            f'style="display:block" aria-hidden="true">'
+            f'<circle cx="13" cy="13" r="{r}" fill="none" stroke="{color}" '
+            f'stroke-opacity=".15" stroke-width="{sw}"/>'
+            f'<circle cx="13" cy="13" r="{r}" fill="none" stroke="{color}" stroke-width="{sw}" '
+            f'stroke-linecap="round" stroke-dasharray="{arc:.2f} {circ:.2f}" '
+            f'stroke-dashoffset="{-sw / 2:.2f}" transform="rotate(-90 13 13)"/></svg>')
 
 
 def anatomy(c='#C1502E', tint='#FAEDE7', w='64mm'):

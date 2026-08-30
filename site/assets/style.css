@@ -157,8 +157,8 @@ a{color:inherit}
 .macros b{display:block;font-size:19px;font-weight:600;color:var(--c);line-height:1;
   font-feature-settings:'tnum' 1;font-variation-settings:'SOFT' 45,'WONK' 1,'opsz' 40}
 .macros b i{font-style:normal;font-size:10px;font-family:'Inter',sans-serif;font-weight:500}
-.macros span{display:block;margin-top:6px;font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;
-  color:var(--ink4);font-weight:600}
+.macros span{display:block;margin-top:6px;font-size:9.5px;letter-spacing:.13em;text-indent:.13em;
+  text-transform:uppercase;color:var(--ink4);font-weight:600}
 .wash{margin:16px 0 0;font-size:13px;line-height:1.5;color:var(--ink4)}
 .wash b{color:var(--ink3);text-transform:uppercase;letter-spacing:.14em;font-size:10px;
   display:block;margin-bottom:3px}
