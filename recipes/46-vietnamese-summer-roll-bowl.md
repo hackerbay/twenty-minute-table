@@ -43,6 +43,9 @@ Fine rice vermicelli is thin enough to soften right through in off-the-boil kett
 - **On the side:** Prawn crackers, and a saucer of carrot and daikon pickled in rice vinegar to pile on as you eat.
 - **Leftovers:** Keep the dressing separate and it holds 2 days. Dressed noodles go soft overnight.
 
+## For the toddler
+Build their bowl before the nuoc cham comes near it, with noodles, vegetables, herbs and a few slabs of undressed tofu. The dressing is fish sauce, chilli and honey, and honey is not for a baby under one, so leave it off theirs and moisten the noodles with a little lime juice and oil instead. Cut the noodles short, squash the soya beans, and keep the crushed peanuts off, as nuts are a choking risk under five.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

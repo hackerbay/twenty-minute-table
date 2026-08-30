@@ -18,6 +18,7 @@ from icons import icon
 from compose import step_glyph, action_svg
 from pairings import sides_for, mains_for
 from pantry_data import SHELVES, KIT, RULES
+from toddler_data import INTRO as TOD_INTRO, POINTS as TOD_POINTS, DISCLAIMER as TOD_DISC
 
 SITE = ROOT / 'site'
 ASSETS = SITE / 'assets'
@@ -77,7 +78,8 @@ def shell(title, body, depth=0, desc='', extra_head=''):
 
 def nav(depth=0, active=''):
     up = '../' * depth
-    items = [('index.html', 'Recipes'), ('pantry.html', 'Pantry'), ('about.html', 'About')]
+    items = [('index.html', 'Recipes'), ('pantry.html', 'Pantry'),
+             ('toddlers.html', 'Toddlers'), ('about.html', 'About')]
     parts = []
     for h, t in items:
         cls = ' class="on"' if active and h.startswith(active) else ''
@@ -94,6 +96,7 @@ def footer(depth=0):
             f'<p class="foot-t">The 20-Minute Table</p>'
             f'<p>Every recipe serves four, is on the table inside twenty minutes from a cold start, '
             f'and is built on whole ingredients. Nutrition figures are estimates. '
+            f'<a href="{up}toddlers.html">Cooking for a toddler</a> &nbsp;·&nbsp; '
             f'<a href="{up}about.html">More about the book</a>.</p>'
             f'</div></footer>')
 
@@ -246,6 +249,8 @@ def build_recipe(r, prev, nxt):
     <div class="main">
       <section class="why"><h2>Why it works</h2><p>{inline(r['why'])}</p></section>
       <section class="method"><h2>Method</h2><ol class="steps">{steps}</ol></section>
+      <section class="todbox"><h2>For the toddler</h2><p>{inline(r['toddler'])}</p>
+        <a class="todlink" href="../toddlers.html">How the toddler notes work</a></section>
       <section class="notes"><h2>Chef&rsquo;s notes</h2><div class="ngrid">{notes}</div></section>
       {goes}
     </div>
@@ -280,6 +285,23 @@ def build_pantry(shelves, kit, n_recipes):
 {footer(0)}"""
     (SITE / 'pantry.html').write_text(shell('The Fast Pantry — The 20-Minute Table', body, 0,
         'The shopping list that makes twenty-minute cooking possible.'), encoding='utf-8')
+
+
+def build_toddlers(recipes):
+    pts = ''.join(f'<div class="tcard"><h3>{t}</h3><p>{b}</p></div>' for t, b in TOD_POINTS)
+    body = f"""{nav(0, 'toddlers')}
+<section class="phero"><div class="wrap">
+  <p class="eyebrow">One dinner, two eaters</p>
+  <h1 class="d">Cooking for a Toddler</h1>
+  <p class="lede">{TOD_INTRO}</p>
+</div></section>
+<main class="wrap">
+  <div class="tgrid">{pts}</div>
+  <p class="disclaimer">{TOD_DISC}</p>
+</main>
+{footer(0)}"""
+    (SITE / 'toddlers.html').write_text(shell('Cooking for a Toddler — The 20-Minute Table',
+        body, 0, "How to get a toddler's portion out of the same pan."), encoding='utf-8')
 
 
 def build_about(recipes, rules):
@@ -347,6 +369,7 @@ def main():
                      recipes[i + 1] if i + 1 < len(recipes) else None)
 
     build_pantry(SHELVES, KIT, len(recipes))
+    build_toddlers(recipes)
     build_about(recipes, RULES)
 
     files = list(SITE.rglob('*'))

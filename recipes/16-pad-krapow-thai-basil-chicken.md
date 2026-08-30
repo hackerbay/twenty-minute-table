@@ -45,6 +45,9 @@ Chopping thigh meat by knife leaves ragged pieces that brown in patches and stay
 - **On the side:** A fried egg per person with lacy edges, cooked in the same pan after, and a saucer of nam pla prik — fish sauce with sliced chilli and a squeeze of lime.
 - **Leftovers:** Keeps 3 days and reheats well, though the basil fades — add fresh leaves at the table.
 
+## For the toddler
+The chilli paste hits the pan at step 3, so there is no moment to lift a mild portion out and theirs is best cooked apart. At step 2, set aside a handful of the chopped chicken with a few beans and baby corn, fry them in plain oil in a small pan, and leave out the fish sauce and soy entirely. Chop the chicken fine and cut the beans and corn into short soft pieces.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

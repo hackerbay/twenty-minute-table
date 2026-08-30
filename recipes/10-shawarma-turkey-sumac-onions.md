@@ -54,6 +54,9 @@ Cutting turkey breast into 1 cm strips triples the surface area, so the spices t
 - **On the side:** Warm flatbreads, 30 seconds each in the empty basket, with olives and pickled chillies.
 - **Leftovers:** Excellent cold in a wrap with the onions and bulgur. Keeps 3 days chilled.
 
+## For the toddler
+The spicing is warm rather than hot, so salt is the only thing to hold back. Take a few turkey strips out at step 2, before the salt and lemon go into the bowl, and toss theirs in the spices and oil alone. Cut the cooked strips into short pieces across their length, since 1 cm strips are stringy for small mouths. Keep the sumac onions off their plate and give them plain bulgur with cucumber.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

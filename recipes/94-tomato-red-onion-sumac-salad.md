@@ -29,6 +29,9 @@ Rinsing the sliced onion under cold water for ten seconds and wringing it dry st
 - **On the side:** Lamb kofte off the grill, fried halloumi, or a slow white bean stew that needs something sharp and cold beside it.
 - **Leftovers:** Keeps a day chilled but softens. Tip the lot, juices included, over toasted flatbread tomorrow.
 
+## For the toddler
+Take a few tomato wedges out at step 1, before you salt the rest. Cut them into small pieces, and quarter any cherry tomatoes lengthways rather than leaving them whole. Leave the onion, the vinegar and the sumac out of theirs, all of which read as sharp at this age, and dress with a little olive oil instead. If you add olives for the adults, keep them off their plate.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

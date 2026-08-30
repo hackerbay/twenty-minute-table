@@ -49,6 +49,9 @@ Blackening is a dry rub meeting dry fish at high heat, so patting the fillets is
 - **On the side:** Warm corn tortillas, a bowl of soured cream and a bottle of hot sauce on the table.
 - **Leftovers:** Flake the cold fish through the remaining salsa with more lime for a next-day lunch.
 
+## For the toddler
+Set a piece of cod aside at step 3, before the rub goes on, and cook it with nothing but a little oil, since the cayenne and salt are mixed in at step 2. Lift out some corn and pepper before the salsa is built at step 5, where the chilli, onion and lime go in. Quarter the cherry tomatoes lengthways, cut the pepper into soft strips, flake the fish for bones and mash a little avocado.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

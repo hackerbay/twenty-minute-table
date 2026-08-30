@@ -30,6 +30,9 @@ Halving carrots lengthways gives you a flat face that sits against the hot baske
 - **On the side:** Lamb chops, merguez sausages, or a lentil and tomato stew that wants something sweet next to it.
 - **Leftovers:** Keeps 3 days chilled. Chop them cold into a grain salad, or blitz with stock into a quick soup.
 
+## For the toddler
+Pull two carrot halves out of the bowl at step 1, before the harissa, salt and caraway go in, and toss them with a little oil alone. They cook on the same timer. Spoon them a little plain yoghurt with no garlic or salt stirred in, and a squeeze of lemon. Cut the carrots the long way into soft finger-length strips rather than coins.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

@@ -31,6 +31,9 @@ Kheer takes its time because raw grains must soften and then release starch into
 - **On the side:** Very little — a small cup of masala chai, or orange segments to cut across the richness.
 - **Leftovers:** Keeps 3 days chilled and firms to a spoonable set. Loosen with cold milk before serving.
 
+## For the toddler
+Kheer suits them well: it is milk, rice and dates, with no added sugar at all. Take a small bowlful out at the end of step 3, before the rose water and the nuts go in, and let it cool to barely warm. Slivered pistachios and flaked almonds are a choking risk under five, so grind a few to a powder and dust them over, or leave them off. Two spoonfuls is a portion.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

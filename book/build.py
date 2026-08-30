@@ -8,6 +8,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent / 'art'))
 from compose import pick_icons, hero_svg, step_glyph, action_svg
 from pairings import sides_for, mains_for
 from pantry_data import SHELVES, KIT, RULES
+from toddler_data import INTRO as TOD_INTRO, POINTS as TOD_POINTS, DISCLAIMER as TOD_DISC
 
 ROOT = Path(__file__).resolve().parent.parent
 HERE = Path(__file__).resolve().parent
@@ -52,7 +53,7 @@ def build(recipes):
     allc  = len({r['cuisine'] for r in recipes})
     counts = Counter(r['method'] for r in recipes)
     pages = []
-    FRONT = 11                      # cover, foreword, pantry, rules, 4 contents, 2 cuisine, when-to-cook
+    FRONT = 12                      # + the toddler page
     ORDERED = [mains, sides, brek, puds]   # the order the sections appear in the book
     pageno, _p = {}, FRONT + 1
     for _sec in ORDERED:
@@ -146,6 +147,19 @@ def build(recipes):
       <div class="pkicker" style="margin-bottom:3.5mm">The kit &mdash; and nothing else</div>
       <div class="shelf kit">{''.join(f'<label class="ck"><span class="box"></span>{k}</label>' for k in KIT)}</div>
     </div>""", 'TEN RULES'))
+
+    # ============================== COOKING FOR A TODDLER ==============================
+    tp = ''.join(f'<div class="pcard"><h4>{t}</h4><p>{b}</p></div>' for t, b in TOD_POINTS)
+    pages.append(page('', '#5A7A48', f"""
+    <div class="pkicker">One dinner, two eaters</div>
+    <h2 class="ptitle d">Cooking for a Toddler</h2>
+    <p class="pintro">{TOD_INTRO}</p>
+    <div class="hrule" style="margin:5.5mm 0"></div>
+    <div class="pan">{tp}</div>
+    <div class="kitwrap">
+      <div class="hrule" style="margin:0 0 4.5mm"></div>
+      <p class="legend-note" style="margin:0">{TOD_DISC}</p>
+    </div>""", 'COOKING FOR A TODDLER'))
 
     # ============================== CONTENTS ==============================
     def toc_group(m, rs):
@@ -443,6 +457,9 @@ def build(recipes):
         <div class="blab mblab" style="color:{c}">Method</div>
         <div class="rbody msteps">{steps}</div>
         <div class="rfoot">
+          <div class="tod" style="background:{tint}">
+            <b style="color:{c}">For the toddler</b>
+            <p>{inline(r['toddler'])}</p></div>
           <div class="mfoot"><span style="color:{c}">{icon(r['m']['key'],'4mm')}</span>
             <span>{r['m']['label']} &nbsp;·&nbsp; {r['minutes']} minutes &nbsp;·&nbsp; serves {r['serves']}</span>
             <span class="mf-wash">{inline(r['washing'])}</span></div>

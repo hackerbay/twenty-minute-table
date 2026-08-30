@@ -44,6 +44,9 @@ A thin coat of cornflour pulls surface moisture off the tofu and sets into a she
 - **On the side:** Chilli oil and black vinegar at the table, or cucumber smashed with the flat of a knife and steeped in rice vinegar with a pinch of sugar.
 - **Leftovers:** The coating softens overnight. Bring it back with 4 minutes at 200°C rather than a microwave.
 
+## For the toddler
+Lift a few tofu cubes and some broccoli out of the basket at the start of step 4, before the chilli and garlic go in, and well before the salt and pepper mix is scattered at step 5 — that mix is flaky salt and pepper and cannot be shaken off once it is on. Cut the tofu into small cubes and the broccoli into soft finger-length strips. A quarter of an adult bowl is plenty.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

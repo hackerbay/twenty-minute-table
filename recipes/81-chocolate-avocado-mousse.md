@@ -33,6 +33,9 @@ Avocado fat already sits in a fine emulsion inside the fruit, so a blender turns
 - **On the side:** Small cups of strong coffee, or orange segments with a pinch of chilli salt.
 - **Leftovers:** Keeps 2 days with film pressed onto the surface; air browns the top without harming the taste. Do not freeze.
 
+## For the toddler
+Blend everything but the chipotle at step 4, spoon a couple of tablespoons into a small dish for them, then blitz the chipotle into what is left. There is no honey here and the dates do all the sweetening, so nothing needs changing. Keep the grated chocolate off the top and loosen theirs with a splash of milk if it is very thick. A couple of spoonfuls is a portion; it is rich.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

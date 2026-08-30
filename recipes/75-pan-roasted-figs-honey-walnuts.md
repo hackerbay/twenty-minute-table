@@ -30,6 +30,9 @@ A fig has little free water at the cut face, so it takes colour fast in a dry pa
 - **On the side:** A wedge of hard sheep's cheese, and something cold and resinous in a glass.
 - **Leftovers:** Keeps 2 days chilled, though the figs soften. Spoon them and their syrup over yoghurt at breakfast.
 
+## For the toddler
+Lift two fig halves out of the pan at the end of step 3, before the honey, salt and pepper go in at step 4. Honey is not for a baby under one year old, and a ripe fig needs nothing added. Crushed walnuts are a choking risk under five, so grind them to a powder over their ricotta or leave them off. Cut the figs lengthways into quarters and then into small pieces.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

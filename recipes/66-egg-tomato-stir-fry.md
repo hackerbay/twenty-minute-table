@@ -34,6 +34,9 @@ Cooking the eggs first and lifting them out while glossy keeps them tender; they
 - **On the side:** A handful of frozen peas or shredded spinach goes in with the rice.
 - **Leftovers:** Good cold next day. Reheat in a hot dry pan, never the microwave, or the eggs weep.
 
+## For the toddler
+Beat one of the eggs on its own without the salt and pepper, and cook it in a corner of the wok at step 2. Lift out a small plateful of the rice and tomato part-way through step 4, before the honey and soy go in. Honey is not for a baby under one, and a little grated apple sweetens theirs if you want it. Chop the egg and spring onion small.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

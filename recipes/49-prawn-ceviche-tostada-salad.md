@@ -43,6 +43,9 @@ Using cooked cold king prawns means the lime is doing the seasoning rather than 
 - **On the side:** Pickled jalapeños, and a bowl of soured cream or crumbled queso fresco to spoon over as you go.
 - **Leftovers:** The ceviche keeps overnight without the avocado. Never dress the tostadas ahead.
 
+## For the toddler
+The prawns are already cooked, but the lime, aji amarillo and raw onion they steep in are not for a toddler. Keep a few back at step 3, before the rest meet the lime, warm them through in a pan with a little oil and chop them small. Crush some black beans for them without the salt and lime. Tostada shards are too brittle, so give them a soft tortilla, and quarter the tomatoes lengthways.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

@@ -31,6 +31,9 @@ Peaches carry enough of their own sugar that the cut face caramelises on dry hea
 - **On the side:** Strong black coffee, or something chilled and sweet poured very short.
 - **Leftovers:** Keeps 3 days chilled and is better cold than reheated. Fold the peaches through porridge at breakfast.
 
+## For the toddler
+Brush two halves with cinnamon alone at step 2 and leave the honey off, since honey is not for a baby under one year old and a ripe peach is sweet enough without it. Let theirs stand a few minutes out of the basket, as the middle stays hot longest. Slip off the skins and chop the fruit small. Chopped pistachios are a choking risk under five, so grind them to a powder or leave them off.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

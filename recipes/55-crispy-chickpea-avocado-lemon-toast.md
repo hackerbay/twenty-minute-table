@@ -38,6 +38,9 @@ Chickpeas patted properly dry crisp in eight minutes at 200°C; any water left c
 - **On the side:** A soft-boiled egg halved over each slice, or a second tin of chickpeas in the basket.
 - **Leftovers:** The chickpeas keep 3 days in an open jar at room temperature and stay crisp. Mashed avocado does not keep; make only what you need.
 
+## For the toddler
+Hold back a spoonful of chickpeas at step 1, before the oil, cumin and salt, and crush them with a fork for theirs. Mash a little avocado with lemon before the garlic and salt go into the bowl at step 4, and keep the chilli flakes and sumac off. Dry, rigid toast is hard going, so give them a soft slice spread thickly rather than the crisped one, cut into fingers.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

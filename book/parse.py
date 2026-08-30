@@ -67,6 +67,7 @@ def parse(path):
     nut = re.search(r'\|\s*(\d+) kcal\s*\|\s*(\d+) g\s*\|\s*(\d+) g\s*\|\s*(\d+) g\s*\|\s*(\d+) g\s*\|',
                     section(t, 'Nutrition (per serving, approx.)'))
     r['macros'] = list(nut.groups())
+    r['toddler'] = ' '.join(section(t, 'For the toddler').split())
     r['washing'] = ' '.join(section(t, 'Washing up').split())
     r['chars'] = len(t)
     return r

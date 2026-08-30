@@ -34,6 +34,9 @@ A kuku is close to half herbs by volume, and chopping them properly fine is what
 - **On the side:** Warm flatbread in the pan afterwards and put thick yoghurt and sliced radish on the table.
 - **Leftovers:** Better cold than hot. Keeps 3 days chilled and travels well in a lunchbox.
 
+## For the toddler
+Beat one egg with a spoonful of the chopped herbs in a separate bowl before you salt the rest at step 2, and cook it in a small pan under a lid. Feta is salt through and through, so keep it out of theirs. Chopped walnuts are a choking risk under five, so grind them fine or leave them off, and chop the barberries small. Cut the set omelette into soft fingers.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

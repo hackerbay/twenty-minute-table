@@ -37,6 +37,9 @@ Crushing a quarter of the beans against the side of the pan releases their starc
 - **On the side:** Fennel and orange in oil and black pepper, or a plate of salami and olives while the pan gets going.
 - **Leftovers:** Better on day two, once the rosemary has settled in. Keeps 4 days chilled; loosen with water and toast fresh bread for it.
 
+## For the toddler
+Leave the anchovies out at step 2 and hold the chilli to a pinch. Lift a ladleful at step 4, before the cheese and the seasoning go in at step 5, and use water in place of the stock if you want theirs plainer. Crush their beans with a fork, quarter the cherry tomatoes lengthways, chop the kale finely and give them plain toast fingers rather than the garlic-rubbed slices. Quarter any olives lengthways.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

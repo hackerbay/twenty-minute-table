@@ -46,6 +46,9 @@ Boneless thighs opened out flat cook through in thirteen minutes and stay juicy 
 - **On the side:** Tomatoes and red onion in vinegar, or something green and plain — buttered cabbage, or shredded lettuce with lemon.
 - **Leftovers:** Shred the cold chicken through the peppers and crush the potatoes into it with more lemon. Keeps 3 days chilled.
 
+## For the toddler
+Set aside one thigh, a few potato halves and some pepper strips at step 3, before anything meets the rub, and cook theirs in the basket with nothing but a little plain oil. Two bird's eye chillies cannot be toned down after the fact. Shred the cooked chicken finely, crush the potatoes and cut the peppers into soft finger-length strips. Spoon them plain yoghurt with no garlic or salt stirred in.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

@@ -39,6 +39,9 @@ Cutting the sweet potato into 1.5 cm dice gives enough surface area to crisp in 
 - **On the side:** A tin of drained black beans stirred in at the shaking stage, or warm corn tortillas alongside.
 - **Leftovers:** The hash keeps 3 days chilled and re-crisps in 4 minutes at 200°C (400°F). Cook the eggs fresh.
 
+## For the toddler
+This one needs very little. At step 2, hold back a handful of sweet potato and pepper before the chilli flakes and salt go in, toss them with plain oil and cook them in one corner of the basket. Give theirs the extra minute at step 5 so the yolk sets firm rather than running. Squash the sweet potato with a fork and cut the pepper into soft strips.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

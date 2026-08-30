@@ -28,6 +28,9 @@ The blanch is deliberately short: spinach is mostly water, and forty-five second
 - **On the side:** Grilled mackerel and rice, or anything gochujang-heavy that needs a cool, plain green beside it.
 - **Leftovers:** Keeps 3 days chilled and is meant to be eaten fridge-cold. Do not reheat; loosen it with a few drops of sesame oil.
 
+## For the toddler
+Pull one of the four squeezed balls aside at the end of step 3, before the soy, salt and raw garlic go in. Dress theirs with a couple of drops of sesame oil and nothing more. Chop it short with scissors so there are no long strands, and either crush the sesame seeds fine or leave them off. A heaped spoonful is a portion.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

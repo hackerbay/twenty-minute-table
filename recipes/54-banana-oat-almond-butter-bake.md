@@ -34,6 +34,9 @@ Very ripe bananas carry enough sugar and moisture that the bake needs no added s
 - **On the side:** A handful of chopped walnuts through the mix, or serve with sliced banana on the side.
 - **Leftovers:** Keeps 4 days chilled and firms as it sits. Cut into squares and eat cold, or warm through for 3 minutes.
 
+## For the toddler
+Leave one corner of the tin bare when you scatter the flaked almonds at step 4 and cut their square from there, since flaked and chopped nuts are a choking risk under five while the smooth almond butter through the batter is not. Otherwise this needs nothing changed; there is only a quarter teaspoon of salt in the whole tin. Let their piece cool to warm and break it into finger-sized pieces.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

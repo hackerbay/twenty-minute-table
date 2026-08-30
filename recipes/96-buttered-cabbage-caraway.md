@@ -29,6 +29,9 @@ Caraway dropped into foaming butter before the cabbage arrives loses its sharp m
 - **On the side:** Sausages and mustard, roast pork, or a lentil and mushroom stew.
 - **Leftovers:** Keeps 3 days chilled. Fry it hard next day with a cold boiled potato for a two-person bubble and squeak.
 
+## For the toddler
+Before the caraway goes into the butter at step 1, lift a spoonful of the buttery onion into a small pan with a handful of shredded cabbage and a splash of water. Lid on for the same three minutes, and no salt or vinegar at the end. Chop their cabbage short so there are no long strands, and give it an extra minute so it is tender all the way through rather than still crisp.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

@@ -47,6 +47,9 @@ Prawns cook by residual heat as much as anything, so they go in dry and come out
 - **On the side:** Pickled jalapeños, quick-pickled red onion, or a bowl of charred corn cut from the cob.
 - **Leftovers:** Eat within a day, cold, rolled into a tortilla with the beans — reheating turns prawns rubbery.
 
+## For the toddler
+Take a few prawns out of the bowl at step 1, before the chilli flakes and salt go in, and toss theirs with plain oil and a pinch of cumin. Crush a spoonful of black beans for them at step 3, before the salt joins the pan, and mash a little avocado alongside. Chop the prawns small and quarter the cherry tomatoes lengthways rather than halving them.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

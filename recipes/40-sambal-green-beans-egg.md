@@ -43,6 +43,9 @@ Dry-frying the beans before any oil goes in blisters the skins and collapses the
 - **On the side:** Cucumber and pineapple straight from the fridge, and a saucer of kecap manis for anyone who wants the beans sweeter.
 - **Leftovers:** Two days chilled. Eat it at room temperature — reheating toughens the egg.
 
+## For the toddler
+Lift a handful of beans out of the dry wok at the end of step 2, before the sambal, fish sauce and honey arrive. Honey is not for a baby under one, so keep theirs clear of that sauce, with maple syrup standing in. Cook a little unsalted beaten egg in a small pan and fold it through. Split the beans lengthways into soft strips and leave the peanuts off, as crushed nuts are a choking risk under five.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

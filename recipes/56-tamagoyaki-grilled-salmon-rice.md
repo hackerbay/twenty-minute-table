@@ -35,6 +35,9 @@ Salting the salmon and leaving it while the eggs are beaten pulls a film of mois
 - **On the side:** Miso soup, a spoonful of grated daikon with soy, or quick-pickled cucumber.
 - **Leftovers:** Both keep 2 days. Flake the cold salmon through rice with sesame for onigiri, and cut the omelette into thicker slices so it stays juicy.
 
+## For the toddler
+Salt goes on the salmon at step 1 and soy into the eggs, so take theirs before both: a corner of one fillet unsalted, and a spoonful of beaten egg poured off before the mirin and soy go in. Give their piece a minute longer so it is opaque through, flake it off the skin and feel for bones. Cook their egg flat and cut it into strips, and keep the nori and soy off their rice.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

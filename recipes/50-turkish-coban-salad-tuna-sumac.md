@@ -38,6 +38,9 @@
 - **On the side:** Thick yoghurt beaten with garlic and salt, and a plate of olives with long green chillies.
 - **Leftovers:** Two days chilled. It weeps, which is fine — the juice at the bottom is the best part.
 
+## For the toddler
+Take their tomato, cucumber and a little pepper straight off the board at step 2, before any of it meets the dressing bowl. Keep the feta and the olives off, since both are salt through and through, and rinse a spoonful of tuna to lose some of the tin's salt. Crush a few beans with a fork, cut the pepper into soft strips rather than dice, and soften their bread in a little oil.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

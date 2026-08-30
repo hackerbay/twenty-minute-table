@@ -46,6 +46,9 @@ Corn browns before it properly thaws, so it takes its char in a bare pan first a
 - **On the side:** Warm corn tortillas for scooping, or soured cream and quick-pickled red onions to spoon over at the table.
 - **Leftovers:** Three days chilled, better on day two. Reheats with a splash of water, or goes cold into a wrap.
 
+## For the toddler
+Lift a few chicken strips out at the end of step 3, before the chipotle goes in at step 4, along with a spoon of the charred corn. Warm them in a small pan with a little of the tinned tomatoes and some beans, and no salt. Chipotle is chilli and smoke together and cannot be dialled back afterwards. Chop the chicken small, crush the beans, and spoon it over plain rice.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

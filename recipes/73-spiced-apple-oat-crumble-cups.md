@@ -38,6 +38,9 @@ Dates chopped through the apple do the sweetening, and as they collapse they thi
 - **On the side:** Strong tea, and a jug of cold milk to pour into the hot crumble.
 - **Leftovers:** Keeps 3 days chilled. Reheat 4 minutes at 180°C (350°F); a microwave turns the topping soft.
 
+## For the toddler
+Spoon a little of the apple and date mixture into a fifth small ramekin at step 1 and top it with oats rubbed with butter but no flaked almonds, which are a choking risk under five. It cooks on the same timer. Ramekins hold their heat for a long while, so stand theirs on a cold plate for five minutes and stir it through before serving. A couple of spoonfuls is a portion.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

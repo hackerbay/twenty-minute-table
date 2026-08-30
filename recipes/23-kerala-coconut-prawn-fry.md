@@ -51,6 +51,9 @@ Prawns need barely three minutes, so the masala is built first and they go in la
 - **On the side:** Thick yoghurt with a pinch of salt, lime pickle, and poppadoms if you have them.
 - **Leftovers:** 2 days chilled. Warm gently — a hard reheat turns prawns rubbery.
 
+## For the toddler
+Set aside a few prawns at step 2, before the chilli powder and salt, and lift out some shallot and beans at the end of the first four minutes of step 4, before the green chillies go in. Cook their prawns for two minutes in a small pan with a little coconut oil and a spoon of the grated coconut. Cut the beans into short soft pieces and chop the prawns small.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

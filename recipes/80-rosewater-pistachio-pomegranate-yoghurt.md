@@ -35,6 +35,9 @@ Rosewater goes one way only: it never cooks off and cannot be taken back out, so
 - **On the side:** Small glasses of hot mint tea, and a plate of dried apricots or fresh dates.
 - **Leftovers:** The scented yoghurt keeps 3 days chilled. Store the seeds and nuts separately: once they sit on yoghurt they bleed pink within the hour.
 
+## For the toddler
+Set a spoonful of plain yoghurt aside at the start of step 3, before the rosewater goes in, and keep the honey and salt off it at step 5. Honey is not for a baby under one year old; a little mashed ripe banana or grated apple sweetens theirs instead. Crush a few pomegranate seeds under a fork, and grind the pistachios to a powder or leave them off, as chopped nuts are a choking risk under five.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

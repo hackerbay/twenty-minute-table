@@ -45,6 +45,9 @@ Sliced thin across the grain and tossed with cornflour, the beef takes a coat th
 - **On the side:** Smacked cucumber with black vinegar and garlic, and chilli oil for anyone who wants the heat pushed further.
 - **Leftovers:** Keeps 2 days chilled. Reheat in the wok for 60 seconds, or eat it cold.
 
+## For the toddler
+Both the soy and the numbing pepper are in from the start, so theirs is cooked apart. At step 1, before you toss the beef with the soy and cornflour, set aside a few slices with a handful of pepper and beans and fry them in a little plain oil in a small pan for two minutes. No chilli, no Sichuan pepper and no soy on their plate. Chop the beef finely and cut the noodles up.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

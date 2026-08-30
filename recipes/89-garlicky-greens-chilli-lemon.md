@@ -27,6 +27,9 @@ Sliced garlic started in cold oil warms through gently and turns sweet, where ga
 - **On the side:** Grilled fish with the skin crisped, roast lamb, or a plate of white beans and feta.
 - **Leftovers:** Keeps 3 days chilled. Eat it cold with more lemon and oil, the way a taverna would serve it, or stir it through eggs.
 
+## For the toddler
+At step 2, before the chilli goes in, lift a spoonful of the garlic and oil into a small pan and wilt a handful of leaves in it with no salt. That is their portion, and it takes the same two minutes. Chop the cooked leaves and stems short before they go on the plate, since long strands are awkward to manage. A little lemon over the top is welcome.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

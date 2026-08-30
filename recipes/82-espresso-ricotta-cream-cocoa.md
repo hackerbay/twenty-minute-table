@@ -31,6 +31,9 @@ Ricotta leaves the tub grainy, but two or three minutes of hard beating breaks t
 - **On the side:** A small glass of cold milk, or ripe pears cut into wedges.
 - **Leftovers:** Keeps 2 days chilled and firms as it sits. Dust the cocoa fresh each time; it goes patchy overnight.
 
+## For the toddler
+Coffee is not for toddlers, so set a spoonful of plain ricotta aside before you start step 2 and beat it smooth on its own. Leave the honey out of theirs too — honey is not for a baby under one year old — and stir in a little mashed ripe banana or grated pear instead. Keep the cocoa, the grated chocolate and the crushed hazelnuts off, as chopped nuts are a choking risk under five.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

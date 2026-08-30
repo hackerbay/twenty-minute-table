@@ -44,6 +44,9 @@ Draining chickpeas well and tossing them straight with harissa means the paste d
 - **On the side:** A sharp tomato and cucumber salad with dried mint, or olives and pickled chillies straight from the jar.
 - **Leftovers:** Keeps 3 days chilled. Eat cold, the couscous and chickpeas turned together as a salad, rather than reheating — it loses its crunch.
 
+## For the toddler
+Set aside a handful of cauliflower florets and a spoonful of chickpeas at step 2, before the harissa and salt go in, and toss theirs with plain oil alone. Steep a little couscous for them in plain boiling water rather than stock. Crush the chickpeas with a fork, cut the florets small, and keep the almonds off their plate or grind them to a fine powder. A quarter of an adult serving is plenty.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

@@ -28,6 +28,9 @@ Broccoli held close to a fierce dry heat loses its surface water fast, so the fl
 - **On the side:** Roast chicken thighs, a piece of grilled white fish, or sausages with white beans.
 - **Leftovers:** Keeps 2 days chilled. Chop it small and fold it cold through pasta with the almonds and a little more oil.
 
+## For the toddler
+Lift out a handful of florets and a few pieces of stalk before you toss the rest with salt and chilli at step 1, and coat theirs in plain oil. Keep the flaked almonds and the cooked lemon slices off their plate, or grind the almonds to a fine powder and dust it over. Cut the stalk into soft finger-length strips, and the florets small. A quarter of an adult serving is plenty.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

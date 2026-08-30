@@ -28,6 +28,9 @@ Green beans carry enough water to cook themselves, so a dry, properly hot pan bl
 - **On the side:** Grilled salmon and rice, a bowl of miso soup, or sticky teriyaki aubergine.
 - **Leftovers:** Keeps 2 days chilled and is good cold, chopped short and folded through rice with more sesame oil.
 
+## For the toddler
+Give a few beans an extra minute in the pan at step 2 so they are tender all the way through, then lift them out before the soy, mirin and chilli go in. Split those beans lengthways and cut them into short pieces. A drop of sesame oil and a little grated ginger is dressing enough, and crush the sesame seeds fine or leave them off theirs.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

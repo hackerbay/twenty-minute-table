@@ -38,6 +38,9 @@ Cauliflower rice releases water the moment it meets heat, so the wok must be hot
 - **On the side:** Prawn crackers, and acar — cucumber and carrot batons steeped in vinegar with a pinch of sugar and salt while the wok heats.
 - **Leftovers:** Two days chilled, but fry the eggs fresh each time.
 
+## For the toddler
+The sambal goes in at step 1, so theirs is cooked apart — a small pan of the rice and cauliflower in plain oil with two prawns chopped small, and no soy. The honey at step 4 is not for a baby under one, so leave it out of theirs or use maple syrup. Peanuts are a choking risk under five, so keep them off, and quarter their tomato lengthways.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

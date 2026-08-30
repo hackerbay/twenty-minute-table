@@ -40,6 +40,9 @@ Fine semolina swells in yoghurt within minutes, so a short stand does what an ov
 - **On the side:** Stir cooked chana dal through the batter, or add soft-boiled eggs.
 - **Leftovers:** Reheat dry in the pan, a minute a side, never in the microwave.
 
+## For the toddler
+Blitz a spoonful of the coconut and cashew with a little water before the salt, chilli and lemon go into the chutney at step 2, and take it right down to smooth, since chopped nuts are a choking risk under five. Press their uttapam with onion and coriander only, no chilli. Cut it into finger-length strips rather than wedges.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

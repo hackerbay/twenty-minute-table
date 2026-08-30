@@ -28,6 +28,9 @@ Sambol is made by pressure rather than by chopping: squeezing the shallot and ch
 - **On the side:** Dhal and rice, a fish curry, or plain grilled mackerel that wants something fierce beside it.
 - **Leftovers:** Keeps 3 days chilled and gets hotter as it sits. Toast a spoonful in a dry pan and fold it through rice.
 
+## For the toddler
+Take a spoonful of the soaked coconut out at the end of step 1, before the chilli, shallot and salt go in. Make sure it is properly damp rather than dry and powdery, and moisten it with a little more warm water if it is not. The finished sambol is far too hot for them, so keep it off their plate and let the plain coconut stand in for it.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

@@ -52,6 +52,9 @@ Frying the ground spices in hot oil for thirty seconds before the tomatoes arriv
 - **On the side:** Poppadoms, lime pickle, and a plate of red onion and cucumber in lemon juice.
 - **Leftovers:** Better on day two. Keeps 4 days chilled and freezes for 3 months.
 
+## For the toddler
+Leave the green chilli out at step 3 and put it on the table for the adults instead; the half teaspoon of Kashmiri chilli is mild enough to stay. At step 5, add the chickpeas and water, lift a small ladle out for them, then salt the rest of the pan. Crush their chickpeas with a fork, and give them plain yoghurt rather than the salted raita.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

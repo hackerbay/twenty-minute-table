@@ -35,6 +35,9 @@ Frying the tomatoes over high heat until they darken and stop smelling raw is wh
 - **On the side:** Wilt a bag of spinach into the sauce before the eggs, or add plain rice.
 - **Leftovers:** The sauce keeps 3 days; the eggs do not, so poach only what you will eat.
 
+## For the toddler
+The chilli joins the onion at step 2, so theirs is easier made apart, a spoonful of the tinned tomatoes in a small pan with a few beans crushed under a fork and no salt, and an egg cooked in the middle of it. Keep the feta off their plate, since it is salt through and through. Tear the tortilla into strips and slice the avocado into soft fingers.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

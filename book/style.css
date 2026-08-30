@@ -293,3 +293,9 @@ body{font-family:'Inter',sans-serif;color:var(--ink);background:#DDD6C8;font-fea
 .goes b{font-size:6.9pt;letter-spacing:.19em;text-transform:uppercase;font-weight:600;flex:none;}
 .gitem{display:inline-flex;gap:1.4mm;align-items:baseline;color:var(--ink2);}
 .gitem i{font-style:normal;font-weight:700;font-feature-settings:'tnum' 1;font-size:7.3pt;}
+
+/* ===== TODDLER NOTE ===== */
+.tod{border-radius:2.5mm;padding:5mm 6mm;margin-bottom:5mm;}
+.tod b{display:block;font-size:6.9pt;letter-spacing:.19em;text-transform:uppercase;
+  font-weight:600;margin-bottom:2mm;}
+.tod p{font-size:8.6pt;line-height:1.55;color:var(--ink2);}

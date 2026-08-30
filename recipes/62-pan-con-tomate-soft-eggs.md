@@ -28,6 +28,9 @@ Grating a halved tomato on the coarse holes of a box grater leaves the skin flat
 - **On the side:** Add a few slices of manchego under the tomato, or serve with a plate of sliced cucumber and olives.
 - **Leftovers:** The tomato keeps overnight and is better for it; the bread must be fried to order.
 
+## For the toddler
+Spoon a little of the grated tomato into a cup at step 1, before the salt goes in. Fry their slice a shade paler so it stays chewable, skip the garlic rub, and cut the crusts off before slicing it into soft fingers. Chop their egg up over the top. Beyond that this suits them as it is, and a quarter slice with an egg is plenty.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

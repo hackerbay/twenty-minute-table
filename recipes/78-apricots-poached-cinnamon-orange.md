@@ -32,6 +32,9 @@ Apricots keep their shape only if the liquid never rises above a shiver; at a ro
 - **On the side:** Turkish coffee, or walnuts and a wedge of white cheese.
 - **Leftovers:** Keeps 4 days chilled and improves overnight as the syrup soaks in. Eat cold with yoghurt or over porridge.
 
+## For the toddler
+Honey is not for a baby under one year old, and here it goes into the pan at step 1, so leave it out altogether — the orange juice reduces to plenty of sweetness on its own. Lift two halves out before the syrup boils down, let them cool, slip the loosened skins off and cut each half lengthways into quarters. Chopped pistachios are a choking risk under five, so grind them fine or leave them off.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

@@ -47,6 +47,9 @@ Thigh meat browns without drying out, so you can leave it alone on high heat for
 - **On the side:** Oranges and olives dressed with oil and cumin, or bitter leaves in sherry vinegar to cut the paprika.
 - **Leftovers:** Keeps 3 days chilled and reheats well. The paprika deepens overnight.
 
+## For the toddler
+Set a few pieces of chicken aside at step 2, before they meet the two paprikas and the salt, and fry them in plain oil in a small pan with a strip of pepper and a spoon of beans. Hot pimentón cannot be taken back out once it is on. Chop the chicken finely, crush the beans, and grind the almonds fine or leave them off, since chopped nuts are a choking risk under five.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

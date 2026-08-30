@@ -36,6 +36,9 @@ Garlic goes into cold oil and heats with the pan, so it perfumes the whole lot o
 - **On the side:** Oranges with olives and a pinch of cumin, or padrón peppers blistered in the pan before the bread goes in.
 - **Leftovers:** The chickpeas keep 3 days and are good cold. Eat the prawns the same day.
 
+## For the toddler
+The chilli goes into the oil at step 2, so theirs comes out before that — a spoon of chickpeas, a few tomatoes and three prawns cooked in a small pan with plain oil and a flattened garlic clove for two minutes. No paprika, no chilli and no flaky salt at the end. Crush the chickpeas, quarter the tomatoes lengthways, chop the prawns small, and keep the olives from the side plate off theirs.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

@@ -47,6 +47,9 @@ Chermoula is a raw herb sauce, so the cumin and paprika only bloom once they hit
 - **On the side:** Harissa loosened with olive oil for spooning over, and a small plate of olives and preserved lemon.
 - **Leftovers:** Best eaten straight away — reheated prawns toughen. The couscous keeps 2 days and chermoula alone keeps a week under a film of oil.
 
+## For the toddler
+Take a few prawns out at step 3, before they are tossed with the chermoula, and cook theirs with a little plain oil, since the chilli flakes and salt go into the sauce at step 2. The courgette ribbons need no adaptation. Keep the flaked almonds off their plate or grind them to a powder, quarter the cherry tomatoes lengthways, crush the chickpeas and chop the prawns small.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

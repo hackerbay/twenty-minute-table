@@ -31,6 +31,9 @@ A tin of full-fat coconut milk left overnight in the fridge separates into firm 
 - **On the side:** Strong black coffee, or a small glass of calamansi juice over ice.
 - **Leftovers:** The cream keeps 3 days chilled and stiffens; loosen it with the reserved water. Cut mango weeps, so store the two apart.
 
+## For the toddler
+This one is nearly there as it is. Spoon a little of the coconut cream out at the start of step 2, before the honey and salt go in, since honey is not for a baby under one year old and ripe mango is sweet enough for both of you. Cut their mango into short strips rather than cubes, and keep the chopped cashews and coconut flakes off the bowl.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

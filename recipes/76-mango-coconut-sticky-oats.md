@@ -35,6 +35,9 @@ Coconut milk added at the start would split and go grainy over a long simmer, so
 - **On the side:** Jasmine tea, or cucumber slices with salt and lime.
 - **Leftovers:** Keeps 3 days chilled and sets firm. Eat it cold, or loosen with milk over a low heat.
 
+## For the toddler
+This one needs very little. Take a spoonful of oats out at the end of step 2, before the maple syrup goes in at step 3, and loosen it with a little of the coconut milk, since the mango does the sweetening. Keep the toasted coconut flakes off their bowl, as dry flakes are awkward to chew, and cut the mango into short strips rather than fans.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

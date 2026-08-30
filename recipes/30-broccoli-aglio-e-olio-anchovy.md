@@ -36,6 +36,9 @@ Anchovies dissolve completely in warm oil, leaving savoury depth and no fishines
 - **On the side:** Bitter leaves — chicory or radicchio — in a sharp lemon dressing, and olives to pick at while the pasta boils.
 - **Leftovers:** Good cold the next day. Keep the crumbs separate or they go soft.
 
+## For the toddler
+The anchovies and pecorino salt the whole pan and there is no taking that back out. Before step 4, keep a handful of florets and a spoon of beans aside, steam them in a little water and dress them with plain oil and no chilli. Toss through some spaghetti, cut short, and crush the beans. Whole and chopped almonds are a choking risk under five, so grind them fine or leave them and the crumbs off.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

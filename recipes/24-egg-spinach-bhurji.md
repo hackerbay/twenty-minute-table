@@ -38,6 +38,9 @@ Cooking the onion and tomato hard until the fat separates and pools at the edges
 - **On the side:** Thick yoghurt, a spoon of lime pickle, and red onion sliced thin with lemon and salt.
 - **Leftovers:** 2 days chilled. Best cold in a wrap; reheating tightens the eggs.
 
+## For the toddler
+Bhurji suits them well as it is. The one change worth making is the green chilli at step 2 — leave it out of the pan and let the adults add chopped chilli or lime pickle at the table. The half teaspoon of salt across twelve eggs is light enough to leave. Serve theirs with a strip of warm chapati, and chop the spinach small before it goes in.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

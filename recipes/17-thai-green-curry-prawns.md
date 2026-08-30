@@ -44,6 +44,9 @@ Cracking the coconut cream and frying the paste in it toasts the lemongrass and 
 - **On the side:** Cucumber in rice vinegar with a pinch of sugar and salt, or a saucer of fish sauce with sliced bird's eye chilli for spooning over.
 - **Leftovers:** Keeps 2 days. Reheat gently to steaming only, or the prawns turn rubbery.
 
+## For the toddler
+Green curry paste goes in at step 3 and colours everything after it, so theirs needs to be kept apart. When you split the tin at step 2, set aside a few spoons of the thin milk in a small pan, then poach two prawns with a little courgette and beans in it for three minutes while the curry finishes. No fish sauce in theirs. Chop the prawns and cut the courgette into soft strips.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

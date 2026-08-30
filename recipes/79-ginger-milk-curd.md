@@ -27,6 +27,9 @@ Fresh ginger carries a protease called zingibain that behaves like rennet, clipp
 - **On the side:** A pot of jasmine tea and a plate of orange segments.
 - **Leftovers:** Eat within the hour. Chilled overnight the curd weeps, and reheating breaks it for good.
 
+## For the toddler
+Honey is not for a baby under one year old, so leave it out of the pan at step 2 and sweeten the adult bowls at the table — warm milk is sweet enough on its own. Set theirs in a small bowl with the ginger juice scaled down to match, and let it stand until barely warm. Keep the flaked almonds off, as they are a choking risk under five.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

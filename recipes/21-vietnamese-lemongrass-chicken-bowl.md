@@ -48,6 +48,9 @@ Fish sauce and honey reduce in the pan to a lacquer on the meat, so the bowl nee
 - **On the side:** Pickled carrot and mooli in rice vinegar, prawn crackers, or a saucer of nuoc cham with extra chilli in it.
 - **Leftovers:** Keep the dressing separate and it holds 2 days. Good cold, straight from the fridge.
 
+## For the toddler
+Set aside a few pieces of chicken at step 1, before the fish sauce and honey go on, and fry them in plain oil — honey is not for a baby under one, and maple syrup stands in. Peanuts are a choking risk under five, so grind them fine or leave them off. Keep the dressing off their bowl, cut the noodles up and chop the chicken small.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

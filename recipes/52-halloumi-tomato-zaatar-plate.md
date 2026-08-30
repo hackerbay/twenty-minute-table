@@ -35,6 +35,9 @@ Halloumi holds its shape above 200°C because the curd is heated before it is br
 - **On the side:** A soft-boiled egg each, or a spoonful of cooked green lentils dressed with the same za'atar oil.
 - **Leftovers:** Halloumi turns squeaky and tough once cold. Chop it small and fry it back to life in a dry pan for a minute.
 
+## For the toddler
+Halloumi is brine through and through, so leave it off their plate and give them the roasted tomatoes, warm flatbread and a little of the za'atar oil instead, or a slice of the halloumi rinsed and soaked in cold water for a minute if they want what everyone else has. Quarter the tomatoes lengthways once they come out of the basket, and cut the cucumber into soft finger-length strips rather than chunks.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

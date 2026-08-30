@@ -43,6 +43,9 @@ Miso is already fermented and salty, so it seasons and browns at the same time â
 - **On the side:** A bowl of instant miso soup, or cucumber steeped in rice vinegar with a pinch of salt and chilli.
 - **Leftovers:** Excellent cold, flaked into the leftover rice with cucumber.
 
+## For the toddler
+Leave one fillet unglazed at step 3 and set a few broccoli stems beside it, since miso is salt itself and cannot be toned down once it is on. If you make the glaze with honey rather than mirin, keep it away from a baby under one and use the mirin for theirs. Cut the broccoli into soft finger-length strips, flake the plain salmon and check it for bones, and squash the edamame.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

@@ -48,6 +48,9 @@ Because nothing is cooked, the salmon must be sashimi-grade — sold specificall
 - **On the side:** A bowl of miso soup, and pickled ginger with cucumber steeped in rice vinegar and salt.
 - **Leftovers:** Eat the same day. Raw marinated fish does not keep.
 
+## For the toddler
+Raw fish is not for toddlers, so cut a piece off the fillet before it goes into the marinade at step 3 and poach or pan-cook it through, then flake it into their bowl and feel for bones. The marinade is soy and honey in any case, and honey is not for a baby under one. Cut the cucumber into soft strips, squash the soya beans, and mash a little avocado alongside plain rice.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

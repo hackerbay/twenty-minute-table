@@ -46,6 +46,9 @@ Thick yoghurt clings to paneer rather than sliding off, and the milk solids in t
 - **On the side:** Cucumber and mint raita, a bowl of sliced onion in lemon juice, and lime pickle for anyone who wants it.
 - **Leftovers:** Pull the cold pieces off the skewers into a wrap with the chickpeas. Keeps 2 days chilled.
 
+## For the toddler
+Hold back a spoonful of dry chickpeas at step 2, and a few paneer cubes and pepper pieces at step 3, before either meets the marinade — the chilli and salt are stirred into it at step 1. Cook theirs loose in the basket with a little plain oil rather than on a skewer. Cut the paneer small, the peppers into soft finger-length strips, and crush the chickpeas with a fork.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

@@ -28,6 +28,9 @@ The whole thing lives or dies on the dice: cut small and even, the cucumber, tom
 - **On the side:** Grilled chicken or lamb kebabs, saffron rice, or a herby bean stew that needs cutting through.
 - **Leftovers:** Keeps a day chilled, though it slackens. Drain it and spoon it over flatbread with thick yoghurt.
 
+## For the toddler
+Spoon out a little diced cucumber and tomato at step 1, while you are still cutting, and leave the raw onion out of theirs. Dress it with a few drops of the olive oil and nothing else, since the salt and lime go into the main bowl at step 2. The 5 mm dice is already the right size for small hands. Give them about a quarter of an adult bowl.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

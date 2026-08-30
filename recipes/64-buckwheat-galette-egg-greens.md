@@ -30,6 +30,9 @@ Buckwheat has no gluten to relax, so a batter thin enough to pour like single cr
 - **On the side:** Add a slice of ham or a spoon of soft goat's cheese under the egg.
 - **Leftovers:** Cook plain galettes with what is left of the batter, stack between baking paper and reheat in the dry pan.
 
+## For the toddler
+This suits them nearly as it is. Cook one galette with only a scant scattering of the cheese, since Gruyère carries a fair amount of salt, and leave the pepper and nutmeg off. Give their egg an extra minute under the lid so it sets firm, then chop it through the spinach and cut the folded galette into finger-length strips. A quarter of one is about right.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

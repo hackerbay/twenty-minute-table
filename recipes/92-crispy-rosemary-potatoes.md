@@ -28,6 +28,9 @@ Cutting the potatoes into 2 cm dice rather than roast-dinner chunks is what brin
 - **On the side:** A roast chicken thigh, grilled white fish, or a fried egg and brown sauce.
 - **Leftovers:** Keeps 2 days chilled. Reheat 4 minutes at 200°C (400°F); the microwave turns them to wool.
 
+## For the toddler
+Toss a handful of the dice separately at step 1 with oil and semolina but no salt, and tuck them into one corner of the basket. Leave the rosemary and the flaky salt off theirs at the end, or chop the rosemary to dust first. Press each piece lightly with a fork so the crisp shell breaks and the inside is soft. Four or five dice is a portion.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

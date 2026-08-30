@@ -5,7 +5,12 @@ print(f"Files: {len(files)}")
 nums = [int(os.path.basename(f)[:2]) for f in files]
 missing = sorted(set(range(1,71)) - set(nums))
 print("Missing numbers:", missing or "none")
-EXPECT = ["Why it works","Ingredients","Method","Chef's notes","Nutrition (per serving, approx.)","Washing up"]
+def section(t, name):
+    m = re.search(r'^## ' + re.escape(name) + r'\s*$(.*?)(?=^## |\Z)', t, re.M | re.S)
+    return m.group(1).strip() if m else ''
+
+EXPECT = ["Why it works","Ingredients","Method","Chef's notes","For the toddler",
+          "Nutrition (per serving, approx.)","Washing up"]
 BANNED = ["delicious","flavorful","flavourful","elevate","game-changer","game changer","whip up","burst of flavour","burst of flavor"]
 problems=[]
 rows=[]
@@ -32,6 +37,11 @@ for f in files:
         kcal,p,c,fat,fib = map(int, mm.groups())
         calc = 4*p+4*c+9*fat
         if abs(calc-kcal)/kcal > 0.12: problems.append(f"{n}: kcal {kcal} vs calc {calc}")
+    tod = section(t, 'For the toddler')
+    w = len(tod.split())
+    if not (28 <= w <= 120): problems.append(f"{n}: toddler note {w} words")
+    if re.search(r'\bhoney\b', section(t, 'Ingredients').lower()) and 'honey' not in tod.lower():
+        problems.append(f"{n}: honey in recipe but not in the toddler note")
     low = t.lower()
     for b in BANNED:
         if b in low: problems.append(f"{n}: banned word '{b}'")

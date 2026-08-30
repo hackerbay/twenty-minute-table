@@ -45,6 +45,9 @@ The fish goes in last and is never stirred, so it poaches in the coconut milk an
 - **On the side:** Farofa — toasted cassava flour — for scattering over each bowl, and a plate of sliced orange with salt and chilli to cut the coconut.
 - **Leftovers:** Two days chilled. Reheat gently — a hard boil breaks the fish up.
 
+## For the toddler
+This one needs little changing. Toss a chunk of fish with lime and no salt at step 1, cook it with the rest, and lift their portion at step 4 before you season the pan. The chilli only arrives as a garnish at step 6, so leave it off theirs. Flake the fish carefully for bones, cut the peppers into soft finger-length strips, and spoon it over plain rice.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

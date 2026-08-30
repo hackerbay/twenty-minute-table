@@ -43,6 +43,9 @@ Walnuts blitzed with garlic, vinegar and a splash of starchy cooking water make 
 - **On the side:** Warm shoti or any flatbread for the walnut sauce left in the bowl, and a saucer of pickled cabbage or radishes.
 - **Leftovers:** Keeps 3 days chilled and eats well cold. Loosen with a spoonful of water and sharpen with more vinegar.
 
+## For the toddler
+Fry a strip of chicken before the salt goes into the pan at step 1, and boil a few potatoes and beans in a separate pan of unsalted water. The walnut paste has cayenne and garlic blitzed through it from the start, so dress theirs with a little olive oil instead. Cut the potatoes and beans into soft finger-length strips, quarter the tomatoes lengthways, and chop the chicken small. Whole and chopped walnuts are a choking risk under five.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

@@ -42,6 +42,9 @@ Berbere is built on fenugreek and warm spices as much as on chilli, and both wan
 - **On the side:** Warm flatbread for the yoghurt, and raw carrot and cucumber batons with lemon squeezed over them.
 - **Leftovers:** Shred the cold chicken back through the lentils and sweet potato with more lemon. Keeps 3 days chilled.
 
+## For the toddler
+Take a few cubes of sweet potato out at step 1, before the salt, and a piece of chicken at step 2, before it meets the berbere paste, then cook both with plain oil alongside. Berbere is built on chilli and cannot be softened once it is on. Crush the lentils, shred the chicken finely, quarter the cherry tomatoes lengthways and leave the raw onion out of theirs. Spoon over plain yoghurt with no salt.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

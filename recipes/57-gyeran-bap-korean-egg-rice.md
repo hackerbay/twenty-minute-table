@@ -32,6 +32,9 @@ A splash of water in the pan steams cold rice apart in two minutes, so yesterday
 - **On the side:** A handful of spinach wilted into the rice, or kimchi and cucumber on the side.
 - **Leftovers:** None worth keeping; a fried egg on rice does not survive the fridge. Cook only what you will eat.
 
+## For the toddler
+Fill their bowl at step 2 with a little butter stirred through the rice and no soy. Fry their egg with the others, chop it up and fold it in. Keep the gochugaru and the gim off, since the seaweed is salt through and through, and crush the sesame seeds fine. A quarter of an adult serving is plenty.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

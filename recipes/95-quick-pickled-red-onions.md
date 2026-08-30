@@ -29,6 +29,9 @@ Salt worked through thinly sliced onion collapses the cell walls in minutes, whi
 - **On the side:** Black bean tacos, a spiced chicken thigh, or slow pork and rice that needs cutting through.
 - **Leftovers:** Keeps 2 weeks chilled and only improves. Spoon the brine over sliced avocado, or into a dressing in place of vinegar.
 
+## For the toddler
+This one is not for them. The brine is sharp and salty, and the honey in it means it should not go anywhere near a baby under one year old. Give them something plain from the same plate instead — avocado, warm black beans lightly crushed with a fork, or a little of the rice or chicken it is sitting beside. If an older toddler reaches for a slice, rinse it under the tap first.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

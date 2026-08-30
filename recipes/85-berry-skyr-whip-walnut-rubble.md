@@ -31,6 +31,9 @@ Skyr is strained so hard it behaves more like a young cheese than a yoghurt, and
 - **On the side:** Strong black coffee, and a slice of dark rye if this is standing in for breakfast.
 - **Leftovers:** Best within the hour, while the layers are distinct. Overnight it goes pink and thin, though good with oats next morning. Keep the walnuts in a jar.
 
+## For the toddler
+Leave the honey out at step 1, since honey is not for a baby under one year old and the berries sweeten themselves. Beat a spoonful of plain skyr with a little of the crushed berry syrup for them; skyr is sharp, so mash in some ripe banana if they pull a face. Crush any whole berries under a fork and keep the walnut rubble off, as chopped nuts are a choking risk under five.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

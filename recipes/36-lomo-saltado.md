@@ -43,6 +43,9 @@ The wok has to be properly hot and the beef dry and in one layer, or it steams g
 - **On the side:** Salsa criolla — red onion sliced paper-thin, left ten minutes in lime juice with salt and a pinch of chilli. It cuts straight through the fried potatoes.
 - **Leftovers:** Two days chilled. The chips soften, so reheat hard in the wok, never the microwave.
 
+## For the toddler
+Take a few strips of beef out at the end of step 4 and a little potato at step 3, before the chilli joins the pan at step 5 and the soy at step 6. Warm them through with a skinned tomato wedge in a small pan. Chop the beef finely across the grain and cut the chips into short soft pieces rather than long batons. Rice underneath, about a quarter of an adult bowl.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

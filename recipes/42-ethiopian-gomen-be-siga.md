@@ -35,6 +35,9 @@ Gomen be siga is normally a long braise, but the two halves want opposite treatm
 - **On the side:** A bowl of ayib, or cottage cheese loosened with lemon, to cool the berbere, and sliced tomato with green chilli.
 - **Leftovers:** Three days chilled, and better on day two once the greens have taken up the beef juices. Reheat hard and fast in the pan.
 
+## For the toddler
+Take a few strips of beef out at step 2 as they come off the heat, before you season them, and a handful of shredded greens before the berbere goes in at step 4. Cook those greens down in a small pan with a little ghee, water and chopped tomato for five minutes. Berbere is chilli through and through and cannot be softened once it is in. Chop the beef finely and tear the flatbread small.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

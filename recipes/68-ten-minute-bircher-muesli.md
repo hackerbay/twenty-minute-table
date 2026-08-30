@@ -36,6 +36,9 @@ Oats take up liquid far faster when it is warm, so milk at body temperature does
 - **On the side:** A grated pear, a spoonful of ground almonds or a handful of raisins, stirred in at step 4.
 - **Leftovers:** Keeps three days chilled and genuinely improves. Hold the nuts back until serving so they stay crisp.
 
+## For the toddler
+Stir the yoghurt in first at step 4 and take their portion out before the honey follows, since honey is not for a baby under one. The grated apple sweetens it plenty, or mash in a little ripe banana. Pulse their oats fine and give them extra minutes in the milk to soften. Grind the nuts to a powder or leave them off, chop any raisins small, and squash the berries.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

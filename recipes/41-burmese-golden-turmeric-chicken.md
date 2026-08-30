@@ -45,6 +45,9 @@ Burmese cooking builds its base by frying onion, garlic and turmeric in more oil
 - **On the side:** A plate of raw crunch to pick at between mouthfuls — cucumber batons, tomato wedges and shredded white cabbage with lime and salt — and a bowl of clear broth if you want the full Burmese table.
 - **Leftovers:** Three days chilled. The turmeric oil sets on top as a bright orange cap — stir it back through as it reheats.
 
+## For the toddler
+Turmeric and paprika are mild, so most of this suits them as it is. Lift a few pieces of chicken and some beans at the start of step 5, before the fish sauce goes in, and simmer them in a little tomato and plain water in a small pan. The chilli is only scattered at the end, so leave it off theirs. Chop the chicken finely and split the beans lengthways.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

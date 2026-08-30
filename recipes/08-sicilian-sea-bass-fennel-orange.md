@@ -44,6 +44,9 @@ Fennel sliced thin enough to be translucent will soften in the same window as a 
 - **On the side:** Bread for mopping the orange and olive juices, and a bitter leaf salad — chicory or radicchio, lemon, oil, nothing else.
 - **Leftovers:** The fennel, potatoes and olives are better the next day, cold, as a salad. Eat the fish the same evening.
 
+## For the toddler
+Lift a few slices of fennel out at step 2, before the chilli and salt go into the basket, and toss theirs with plain oil. Set a fillet aside unsalted at step 3 and cook it alongside. The olives are salty as well as round, so keep them off their plate, and do the same with capers if you use them. Flake the fish carefully for bones, quarter the tomatoes lengthways, and crush a potato.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

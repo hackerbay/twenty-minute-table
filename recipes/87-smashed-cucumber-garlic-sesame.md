@@ -30,6 +30,9 @@ A smashed cucumber has torn, ragged faces instead of smooth cut ones, and that r
 - **On the side:** Anything rich and roasted — pork belly, five-spice chicken, or a bowl of dan dan noodles.
 - **Leftovers:** Best the day it is made. By day two the cucumber has softened, though the liquid left behind is worth drinking.
 
+## For the toddler
+Set aside a few pieces of cucumber before the salting at step 2. Dress theirs with a little rice vinegar and a drop of sesame oil, and leave out the soy, the raw garlic and the chilli flakes. Cut those pieces into finger-length strips rather than round chunks, and crush the sesame seeds between your fingers if you scatter any over. A quarter of an adult bowl.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

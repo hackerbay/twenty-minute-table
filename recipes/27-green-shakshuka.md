@@ -38,6 +38,9 @@ Spinach and chard carry enough water to steam themselves down in two minutes, gi
 - **On the side:** Thick yoghurt sharpened with lemon, a dish of olives, and pickled chillies or a spoon of zhoug.
 - **Leftovers:** Eggs do not reheat well. Make the greens base ahead — 3 days chilled, 2 minutes to reheat.
 
+## For the toddler
+Eggs and greens suit them well, so this needs little changing. Lift a spoonful of the greens out at step 3 before you season, then crack their egg into a well at the pan's edge and leave the feta out of that corner, since feta is salt through and through. Use one deseeded chilli rather than two, and give the adults zhoug at the table.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

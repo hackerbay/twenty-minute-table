@@ -61,6 +61,9 @@ Allspice, thyme and scotch bonnet are the backbone of jerk, and a rub built on g
 - **On the side:** Fried plantain, hot pepper sauce, and a wedge of hard dough bread for the last of the juices.
 - **Leftovers:** Chop the cold chicken and pineapple through the slaw. Keeps 3 days chilled.
 
+## For the toddler
+Scotch bonnet cannot be toned down, so theirs has to be cooked apart. At step 3, before the rub is worked in, set aside a thigh and two pineapple pieces, rub them with plain oil and cook them in a foil parcel alongside. The rub carries honey, which is not for a baby under one, and maple syrup stands in if you want a mild version. Shred the chicken, chop the pineapple small and crush the beans.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

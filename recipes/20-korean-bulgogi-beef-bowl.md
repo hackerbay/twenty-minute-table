@@ -50,6 +50,9 @@ Pear carries enzymes that start softening muscle fibre on contact, so thin sirlo
 - **On the side:** Little gem leaves and a bowl of ssamjang for wrapping, or a fried egg slid onto each bowl.
 - **Leftovers:** 3 days chilled; better cold in a lettuce wrap than reheated.
 
+## For the toddler
+Set aside a few slices of beef at step 2, before they meet the marinade, and cook them plain — the marinade is soy and honey, and honey is not for a baby under one, though maple syrup stands in. Take their cucumber and carrot out at step 3 before the salt. Keep the kimchi and gochugaru off their plate, chop the beef small and cut the cucumber into soft strips.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

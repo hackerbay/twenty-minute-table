@@ -48,6 +48,9 @@ Tofu is glazed after cooking, not before: the sugar in gochujang scorches long b
 - **On the side:** Shop-bought kimchi, and a bowl of hot stock with spring onion in it if the weather is against you.
 - **Leftovers:** The tofu softens overnight but reheats crisp in 4 minutes. Keeps 3 days chilled.
 
+## For the toddler
+Lift out a few tofu cubes and some edamame at step 6, before the rest meets the gochujang glaze, and leave theirs plain with a drop of sesame oil. The glaze carries chilli and honey, and honey is not for a baby under one, so use maple syrup in its place if you want them to have a little. Take their cucumber before it is salted at step 2. Squash the edamame and cut the tofu small.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

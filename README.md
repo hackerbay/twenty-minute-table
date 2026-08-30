@@ -1,6 +1,6 @@
 # The 20-Minute Table
 
-**97 fast, whole-food recipes**, published two ways: a printable 210-page A4 cookbook
+**97 fast, whole-food recipes**, published two ways: a printable 211-page A4 cookbook
 and a static website you can host anywhere.
 
 Nothing takes over twenty minutes from a cold start. Everything is built on unprocessed
@@ -20,7 +20,7 @@ not in a footnote — and every one is designed to leave a single pan or basket 
 | Vegetarian | 51, marked throughout |
 | Air fryer / one pan / wok / no cook | 28 / 44 / 7 / 18 |
 | Serves | 4 throughout |
-| Pages | 210 |
+| Pages | 211 |
 
 Metric quantities first, US cups and ounces alongside.
 
@@ -86,7 +86,7 @@ regenerate from the recipe files themselves.
 Every file follows the same template and `verify.py` enforces it: a heading with number and
 title, a meta line (cuisine, method, total time, serves, and `**Vegetarian**` where it applies),
 a one-line hook, *Why it works*, *Ingredients*, *Method*, *Chef's notes* (swap / make it faster /
-on the side / leftovers), a nutrition table, and a *Washing up* line. `verify.py` also checks the
+on the side / leftovers), *For the toddler*, a nutrition table, and a *Washing up* line. `verify.py` also checks the
 macro arithmetic, that no recipe exceeds twenty minutes, and that no two share a title.
 
 ## The typesetting
@@ -96,7 +96,20 @@ Each recipe occupies exactly two A4 pages, and recipes vary a lot in length. Bef
 a single parameter that expands or tightens a set of levers — leading between steps and
 ingredients, panel padding, and on the densest pages the body size itself — until the content
 sits a consistent 4.5 mm above the footer block. Long ingredient lists switch to a two-column
-panel automatically. Every one of the 210 pages fits, and none is conspicuously empty.
+panel automatically. Every one of the 211 pages fits, and none is conspicuously empty.
+
+## Cooking for a toddler
+
+Every recipe carries a `## For the toddler` section: when to lift a small portion out of the
+same pan, what to hold back from it, and how to cut it. The general rules behind those notes
+— salt, heat, honey before one year, shapes that catch, textures that work — live in
+`book/toddler_data.py` and are printed as a page of their own in the book and at
+`site/toddlers.html`.
+
+`verify.py` enforces the section on every recipe and fails the build if a recipe containing
+honey does not mention it in its toddler note (27 of the 97 do). The notes are about
+cooking rather than nutrition or medicine; the guidance page says so and points readers at
+their own health service.
 
 ## Photographs
 

@@ -39,6 +39,9 @@ Starting the garlic and anchovies in cold oil over gentle heat lets them infuse 
 - **On the side:** Chicory and radicchio in a mustard dressing, or bread rubbed with a cut tomato and salted.
 - **Leftovers:** Excellent cold, straight from the fridge, with another squeeze of lemon. Keeps 3 days chilled.
 
+## For the toddler
+There is no unsalting this one — the anchovies, capers and olives are the seasoning. Before step 3, warm a spoonful of the tinned tomatoes in a small pan with a little oil, add a few butter beans crushed with a fork and some penne cut short, and flake in a little tuna. Keep the olives and capers off their plate, and if an olive strays, take out the stone and quarter it lengthways.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

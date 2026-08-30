@@ -31,6 +31,9 @@ The almonds go in alone and get blitzed to rubble before the dates arrive, becau
 - **On the side:** Cardamom coffee or mint tea, and a bowl of clementines.
 - **Leftovers:** Keeps 2 weeks in a tub in the fridge and freezes for 3 months. Eat at room temperature; straight from the fridge they are hard work.
 
+## For the toddler
+A firm ball this size is exactly the wrong shape for a small mouth, so do not roll theirs. Blitz the almonds a few seconds longer at step 2 so no gravelly pieces are left, then take a walnut-sized piece at step 4 and press it flat into a thin finger they can hold. Skip the pistachio crumbs, as chopped nuts are a choking risk under five.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

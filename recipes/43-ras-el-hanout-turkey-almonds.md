@@ -43,6 +43,9 @@ Turkey mince is lean enough to sear rather than stew, so pressing it flat and le
 - **On the side:** Harissa loosened with olive oil and lemon for spooning over, and a grated carrot salad with orange juice and a pinch of cumin.
 - **Leftovers:** Three days chilled. Good cold in pitta with more yoghurt and lemon.
 
+## For the toddler
+Lift out a spoonful of mince, courgette and onion at the end of step 3, before the ras el hanout and salt go in. Steep a little couscous for them in plain boiling water rather than stock, and crush a few chickpeas from the tin with a fork. Whole and chopped almonds are a choking risk under five, so keep them off their plate or grind them fine. A quarter of an adult serving is plenty.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

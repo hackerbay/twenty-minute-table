@@ -36,6 +36,9 @@ Starting the garlic in cold oil draws out its sugars before the edges colour, so
 - **On the side:** Flake in a tin of sardines or some smoked mackerel with the rice at step 3.
 - **Leftovers:** Cold garlic rice fries again happily. Store the crisp garlic in a dry jar or it goes soft.
 
+## For the toddler
+This wants almost nothing done. Lift a small handful of the rice out at the start of step 3, before the salt and pepper go in, and fry it in a little of the garlic oil on its own. Chop their egg through it rather than leaving the yolk to run. Cut the tomato into lengthways quarters and the cucumber into soft finger-length strips, and keep the crisp garlic off their plate.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

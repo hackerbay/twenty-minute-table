@@ -39,6 +39,9 @@ Prawns give off water as they cook, so the sauce has to be reduced properly befo
 - **On the side:** Cucumber and red onion in vinegar with dried mint, or a plate of olives and pickled green chillies straight from the jar.
 - **Leftovers:** Keeps 2 days chilled. Reheat gently and briefly, or the prawns turn rubbery, and toast fresh bread rather than yesterday's.
 
+## For the toddler
+The chilli goes in at step 2 and the salt at step 3, so theirs is easiest cooked alongside — a few slices of pepper and onion softened in a small pan with plain oil, a spoonful of tinned tomato, then three prawns for two minutes. Feta cannot be unsalted, so leave it off and crush them some butter beans instead. Chop the prawns small. A quarter of an adult plateful is plenty.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

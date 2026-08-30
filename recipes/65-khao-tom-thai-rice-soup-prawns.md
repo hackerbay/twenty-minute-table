@@ -34,6 +34,9 @@ Cooked rice has already gelatinised, so it only needs to swell and warm through:
 - **On the side:** Beat an egg and stir it through the boiling soup in step 3 for ribbons.
 - **Leftovers:** The rice drinks the broth overnight, so loosen with water when you reheat.
 
+## For the toddler
+Ladle a small bowlful of the broth and rice out at the end of step 3, before the fish sauce and white pepper go in, and use water rather than stock for the pan if you can. Simmer one prawn and a little shredded pak choi in it for two minutes in a small pan, then chop the prawn small. Leave the lime and the coriander stalks off theirs.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

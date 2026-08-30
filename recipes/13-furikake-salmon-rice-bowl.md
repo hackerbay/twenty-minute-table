@@ -47,6 +47,9 @@ Honey and soy brown far faster together than either does alone, so ten minutes i
 - **On the side:** A bowl of instant miso soup, and a small dish of pickled ginger or kimchi.
 - **Leftovers:** Keep salmon and rice separate and eat cold next day; reheating the rice under flaked fish makes it gluey.
 
+## For the toddler
+Brush one fillet with a little sesame oil instead of the glaze at step 3, since the glaze is soy and honey, and honey is not for a baby under one. Keep the furikake off their plate, as it is mostly flaky salt, and crush any sesame seeds fine. Flake the salmon off its skin and check for bones, cut the radishes and cucumber into soft strips rather than rounds, and squash the edamame.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

@@ -50,6 +50,9 @@ Fattoush is a salad that hangs on contrast, so the basket is doing three jobs at
 - **On the side:** Olives, and a dish of pickled turnips for their colour and their sharpness.
 - **Leftovers:** Best within the hour. To keep it, hold back the lettuce, herbs and pitta and add them fresh.
 
+## For the toddler
+Take a few chicken strips and a spoonful of chickpeas out at step 2, before the salt, sumac and garlic go on, and cook theirs in a little plain oil. Dress their salad with a squeeze of lemon alone and keep the olives off. Crisped pitta is hard going, so soften a piece in the yoghurt. Crush the chickpeas, chop the chicken small, and cut the cucumber and radish into soft strips rather than rounds.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

@@ -36,6 +36,9 @@ Hot-smoked mackerel arrives cooked and already salted, so the only real work is 
 - **On the side:** A soft-boiled egg halved onto each plate, or pickled red onion for something sharper.
 - **Leftovers:** Assembled, it softens within the hour. The flaked mackerel and the cream keep 2 days covered in the fridge and make a good sandwich.
 
+## For the toddler
+Smoked mackerel is salted through, so give them one small flake at most, buried in plenty of plain crème fraîche with none of the horseradish stirred in, or poach a piece of fresh white fish and use that instead. Take their cucumber ribbons before the salt at step 1. Cut the rye crusts off and slice it into soft fingers, cut the radish into strips rather than coins, and check every flake for pin bones.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

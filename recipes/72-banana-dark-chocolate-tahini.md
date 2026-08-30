@@ -38,6 +38,9 @@ Slitting the banana lengthways and leaving the skin on turns the fruit into its 
 - **On the side:** Mint tea, or a small cup of cardamom coffee.
 - **Leftovers:** Best within the hour, while the chocolate is soft. Mash survivors cold into porridge the next morning.
 
+## For the toddler
+Cook one banana with no chocolate in the slit, then let it stand a few minutes, as the fruit holds its heat. The tahini sauce carries honey, which is not for a baby under one year old; loosen a spoonful of plain tahini with yoghurt or milk instead, since thick tahini is hard work in a small mouth and a roasted banana is sweet enough. Scoop the flesh out and cut it into short pieces.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

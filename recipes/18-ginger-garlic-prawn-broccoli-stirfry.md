@@ -48,6 +48,9 @@ Stir-frying alone scorches broccoli before the stems soften, so a covered steam 
 - **On the side:** A jar of chilli crisp on the table, and cucumber smacked with the flat of a knife and dressed with black vinegar and garlic.
 - **Leftovers:** Keeps 2 days. Eat cold or reheat fast in the wok; a microwave overcooks the prawns.
 
+## For the toddler
+Lift out a few prawns, some broccoli and a nest of noodles at the start of step 6, before the sauce goes in — it carries soy, chilli flakes and honey, and honey is not for a baby under one, so use maple syrup instead if you want them to share it. Whole cashews are a choking risk under five, so grind them fine or leave them off. Cut the noodles up and chop the prawns small.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

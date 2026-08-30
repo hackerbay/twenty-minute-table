@@ -31,6 +31,9 @@ Pineapple is acidic and very wet, so it needs high heat and thick pieces: cut sp
 - **On the side:** A jug of iced hibiscus tea, or coffee with a strip of orange peel dropped in.
 - **Leftovers:** Keeps 2 days chilled. Chop it cold into a salsa with red onion, coriander and more lime, and eat it with grilled fish.
 
+## For the toddler
+Set two spears aside before the honey goes on at step 2, since honey is not for a baby under one year old and pineapple is sweet enough as it is. Cook them dry alongside and keep the chilli salt and the coconut flakes off their plate. Let the fruit cool for a few minutes, then cut it into short pieces across the grain and serve it with plain yoghurt.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

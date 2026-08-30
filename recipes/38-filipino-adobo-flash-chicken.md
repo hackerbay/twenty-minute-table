@@ -42,6 +42,9 @@ Adobo is normally a slow braise because the vinegar needs time to lose its raw e
 - **On the side:** Ensaladang kamatis — tomato and red onion in a little vinegar — and a saucer of extra vinegar with chilli in it for anyone who wants the sourness sharper.
 - **Leftovers:** Genuinely better after a night in the fridge. Keeps 3 days chilled.
 
+## For the toddler
+Lift a few pieces of chicken out at the end of step 3, before the soy goes in at step 4, and keep back a handful of beans and broccoli to steam in a little water alongside. The honey arrives at step 5, and honey is not for a baby under one — theirs stays out of the sauce, with maple syrup standing in if you want it sweet. Chop the chicken small and split the beans lengthways.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

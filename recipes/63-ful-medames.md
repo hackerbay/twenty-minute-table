@@ -34,6 +34,9 @@ Crushing only half the beans gives you a thick base that holds the olive oil and
 - **On the side:** Warm flatbread for scooping, and add sliced cucumber and radish alongside.
 - **Leftovers:** The beans keep 3 days and thicken; loosen with water and a squeeze of lemon over low heat.
 
+## For the toddler
+Lift a couple of spoonfuls of beans out at the start of step 3, before the salt and chilli go in, and crush them smooth with a little water and a thread of the oil. A spoonful of tahini and a squeeze of lemon can still go through theirs. Chop their tomato small, leave the raw onion off, and serve it with soft strips of flatbread rather than torn pieces.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

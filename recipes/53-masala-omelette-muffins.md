@@ -37,6 +37,9 @@ You need 8 silicone muffin cases or 8 small ramekins — anything that sits flat
 - **On the side:** Serve two each on buttered toast, or with a spoonful of yoghurt and mango chutney.
 - **Leftovers:** Keep 3 days chilled. Eat cold from the fridge or warm for 3 minutes at 160°C (320°F).
 
+## For the toddler
+These suit them almost as they are. Pour a little of the egg and yoghurt into a cup at the end of step 2, before the chilli and salt go in, stir in a pinch of the turmeric and cumin and some tomato, and fill one case with it. Cook it in the basket with the rest. Turn it out and cut it into finger-length strips rather than handing over a whole muffin.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

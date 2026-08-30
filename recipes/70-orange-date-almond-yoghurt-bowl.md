@@ -35,6 +35,9 @@ Cutting the peel and pith away with a knife and slicing the oranges across into 
 - **On the side:** Stir a spoonful of rolled oats through the yoghurt at step 1; they soften while you slice the oranges.
 - **Leftovers:** Fruit and yoghurt keep three days apart. Assembled, the juice thins the yoghurt overnight.
 
+## For the toddler
+Spread their yoghurt at step 1 and set it aside before the honey, salt and last of the cinnamon go over at step 4. Honey is not for a baby under one, and the juice from the board sweetens it plenty, or stir through a little mashed ripe banana. Chopped almonds are a choking risk under five, so grind them fine or leave them off. Chop the dates small and cut the orange rounds into small pieces.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

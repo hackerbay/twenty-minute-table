@@ -34,6 +34,9 @@ Congee normally takes an hour because whole grains have to burst open from the i
 - **On the side:** Two handfuls of spinach wilted in at the end, or a soft-boiled egg halved into each bowl.
 - **Leftovers:** Sets solid when chilled. Loosen with boiling water a ladleful at a time and bring it back to a boil for 2 minutes.
 
+## For the toddler
+Use the unsalted stock and hold the salt back at step 3, then ladle a small bowlful out before you season the pan at step 5. Leave off the fried shallots, which are salty, and the white pepper. Peanuts are a choking risk under five, so grind them fine or keep them off their bowl. Chop the chicken small.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

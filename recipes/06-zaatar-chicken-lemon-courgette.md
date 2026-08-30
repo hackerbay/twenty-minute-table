@@ -45,6 +45,9 @@ Za'atar is mostly sesame and dried thyme, and both scorch quickly, so the blend 
 - **On the side:** Warm pitta, a dish of olives, and pickled turnips or cucumbers for the sharpness.
 - **Leftovers:** Cold, chopped through the bulgur with the yoghurt as a lunchbox salad. Keeps 3 days chilled.
 
+## For the toddler
+Set a piece of chicken and some courgette aside at step 2, before either meets the za'atar paste, and rub theirs with plain oil and a little lemon zest instead. Za'atar is mostly sesame, so crush any seeds fine or leave them off. Quarter the cherry tomatoes lengthways, cut the courgette into soft strips, slice the chicken finely, and crush the chickpeas through the bulgur.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

@@ -32,6 +32,9 @@ The peppers go in first and get five full minutes alone in the oil with the onio
 - **On the side:** Olives, cucumber and tomato in oil, and a bowl of thick yoghurt to spoon over the hot bread.
 - **Leftovers:** Eat it now. Menemen neither keeps nor reheats well.
 
+## For the toddler
+Menemen suits them almost as it is. Spoon a little of the softened pepper and onion out at the end of step 1, before the pul biber and salt go in, and cook it down with a spoonful of the grated tomato and an egg in a small pan. Keep the feta off their plate, since it is salt through and through. Cut the toast into finger-length strips rather than squares.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

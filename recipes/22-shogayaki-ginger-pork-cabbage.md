@@ -45,6 +45,9 @@ Ginger juice does the tenderising, so the pork needs no marinating window — it
 - **On the side:** Miso soup made while the pan heats, and a saucer of pickled ginger or shop-bought cucumber tsukemono.
 - **Leftovers:** 2 days chilled. Chop and fold through the leftover rice with an egg for a fast fried rice.
 
+## For the toddler
+Lift a few slices of pork onto a separate plate at the end of step 4, before the sauce goes into the pan at step 5 — it is soy, mirin and honey, and honey is not for a baby under one, with maple syrup as the stand-in. Take a little cabbage and carrot before the vinegar and salt at step 3. Chop the pork finely and crush the sesame seeds if any go on.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

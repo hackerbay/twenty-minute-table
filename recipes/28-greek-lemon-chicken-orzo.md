@@ -36,6 +36,9 @@ Orzo cooks through in nine minutes in a shallow layer of stock, and the starch i
 - **On the side:** A sharp cucumber, tomato and red onion salad with oregano and red wine vinegar, and a dish of olives.
 - **Leftovers:** Keeps 2 days chilled. Reheat with a splash of water — orzo drinks as it sits.
 
+## For the toddler
+The orzo drinks the stock, so the salt is built in and cannot be lifted out later. Either use a low-salt stock for the whole pan, or set aside a few strips of chicken and some courgette at step 2 and simmer them with a spoonful of orzo in plain water alongside. Keep the feta off their plate. Shred the chicken and cut the courgette small.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |

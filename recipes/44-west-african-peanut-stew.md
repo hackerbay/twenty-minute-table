@@ -39,6 +39,9 @@ Grating the sweet potato rather than cubing it takes the cooking time from forty
 - **On the side:** Fried plantain, or a plate of cucumber and red onion in lime juice to cut the richness of the peanut.
 - **Leftovers:** Four days chilled, better on day two. Loosen with water when reheating.
 
+## For the toddler
+The scotch bonnet goes in at step 2 and cannot come back out, so lift a few pieces of browned chicken at the end of step 1. Simmer them in a small pan with a spoonful of the tinned tomatoes, some grated sweet potato and a teaspoon of the peanut butter, no salt, until soft. Keep that sauce smooth, leave the chopped peanuts off as they are a choking risk under five, and shred the chicken finely.
+
 ## Nutrition (per serving, approx.)
 
 | Calories | Protein | Carbs | Fat | Fibre |
