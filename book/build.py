@@ -78,7 +78,7 @@ def build(recipes):
     <div class="cover-rule"></div>
     <div style="margin-top:5mm" class="eyebrow">A cookbook for weeknights, slow mornings and something afterwards</div>
     <h1 class="d">The<br>20&#8209;Minute<br><em>Table</em></h1>
-    <p class="cover-sub">Eighty-five fast, whole-food recipes for people who want breakfast in ten minutes, dinner in twenty and pudding in eight &mdash; and who would rather not spend the evening washing up.</p>
+    <p class="cover-sub">A hundred fast, whole-food recipes for people who want breakfast in ten minutes, dinner in twenty and pudding in eight &mdash; and who would rather not spend the evening washing up.</p>
     <div style="flex:1.05"></div>
     <div class="stats">{''.join(f'<div class="stat"><div class="sv d">{v}</div><div class="sl">{l}</div></div>' for v,l in stats)}</div>
     <div style="flex:1"></div>
@@ -87,7 +87,7 @@ def build(recipes):
     <div class="cover-chips">{chips(recipes)}</div>
     <div style="height:8mm"></div>
     <div class="cover-rule"></div>
-    <div class="cover-foot" style="margin-top:4mm"><div>Compiled for Nawaz Dhandala</div><div>August 2026</div></div>"""))
+    <div class="cover-foot" style="margin-top:4mm"><div>The 20-Minute Table</div><div>First edition</div></div>"""))
 
     # ============================== FOREWORD ==============================
     KEY = [
@@ -186,9 +186,9 @@ def build(recipes):
     </div>""", 'CONTENTS &nbsp;·&nbsp; LUNCH &amp; DINNER'))
 
     pages.append(page('', '#A5632A', f"""
-    <div class="pkicker">Twelve recipes &nbsp;·&nbsp; Section two</div>
+    <div class="pkicker">Fifteen recipes &nbsp;·&nbsp; Section two</div>
     <h2 class="ptitle d">On the Side</h2>
-    <p class="pintro" style="max-width:134mm">Twelve things to put next to a main course, all of them under fifteen minutes and most of them under ten. Every lunch and dinner in this book names three of them at the foot of its page, and every side names the mains it belongs to.</p>
+    <p class="pintro" style="max-width:134mm">Fifteen things to put next to a main course, all of them under fifteen minutes and most of them under ten. Every lunch and dinner in this book names three of them at the foot of its page, and every side names the mains it belongs to.</p>
     <div class="hrule" style="margin:5.5mm 0"></div>
     <div class="toc">
       <div>{toc_group('Air fryer', sides)}{toc_group('No cook', sides)}</div>
@@ -196,10 +196,10 @@ def build(recipes):
     </div>
     <div class="sunday">
       <div class="sun-head"><span class="sun-k">How to cook two things at once</span>
-        <span class="sun-s">The whole point of a twelve-minute side is that it costs you nothing</span></div>
+        <span class="sun-s">The whole point of a ten-minute side is that it costs you nothing</span></div>
       <div class="sun-grid">
         <div><h4>The basket is already hot</h4><p>An air-fryer side goes in after the main comes out, and is done in the time the meat needs to rest. Two of these want nothing but a shake halfway.</p></div>
-        <div><h4>Nothing to cook at all</h4><p>Five of the twelve never see heat. Smashed cucumber, a sumac salad, pickled onions &mdash; assembled on the same board you already have out.</p></div>
+        <div><h4>Nothing to cook at all</h4><p>Six of the fifteen never see heat. Smashed cucumber, a sumac salad, pickled onions &mdash; assembled on the same board you already have out.</p></div>
         <div><h4>One burner, one lid</h4><p>Greens wilt in ninety seconds in a covered pan. Start them when you plate the main and they arrive at the table at the same moment.</p></div>
       </div>
     </div>""", 'CONTENTS &nbsp;·&nbsp; ON THE SIDE'))
@@ -287,7 +287,7 @@ def build(recipes):
     pages.append(page('', '#2C6B7B', f"""
     <div class="pkicker">{esc(entries[cut][0])} to {esc(entries[-1][0])}</div>
     <h2 class="ptitle d">By Cuisine <span style="color:var(--ink4)">II</span></h2>
-    <p class="pintro">Seventy recipes, {len(by)} kitchens, and not one of them longer than twenty minutes.</p>
+    <p class="pintro">{len(recipes)} recipes, {len(by)} kitchens, and not one of them longer than twenty minutes.</p>
     <div class="hrule" style="margin:5mm 0"></div>
     <div class="cindex">{ci_block(entries[cut:])}</div>""", 'BY CUISINE &nbsp;·&nbsp; II'))
 
@@ -342,9 +342,9 @@ def build(recipes):
     def divider(kicker, title, blurb, rs, size, trio):
         cz = len({r['cuisine'] for r in rs})
         fastest = min(r['minutes'] for r in rs)
-        under = sum(1 for r in rs if r['minutes'] <= 12)
+        vg = sum(1 for r in rs if r['veg'])
         st = [(str(len(rs)), 'Recipes'), (str(cz), 'Cuisines'),
-              (str(fastest), 'Minutes, fastest'), (str(under), 'Under twelve minutes')]
+              (str(fastest), 'Fastest, min'), (str(vg), 'Vegetarian')]
         sh = ''.join(f'<div class="stat"><div class="sv d">{v}</div><div class="sl">{l}</div></div>' for v,l in st)
         return page('cover divider', None, f"""
         <div class="cover-rule"></div>
@@ -474,8 +474,8 @@ def build(recipes):
          ('29','Prawns, tomatoes and feta in a pan, on the table before anyone has finished a drink.')]))
     for r in mains: pages += recipe_pages(r)
 
-    pages.append(divider('Section two &nbsp;·&nbsp; Twelve recipes', 'On the<br><em>Side</em>',
-        'Twelve fast things to put next to a main course. Five never see heat at all, and every lunch and dinner in this book names three of them.', sides, 'dv-1',
+    pages.append(divider('Section two &nbsp;·&nbsp; Fifteen recipes', 'On the<br><em>Side</em>',
+        'Fifteen fast things to put next to a main course. Six never see heat at all, and every lunch and dinner in this book names three of them.', sides, 'dv-1',
         [('87','Cucumber smashed with the flat of a knife, dressed in garlic and sesame. Eight minutes.'),
          ('92','Potatoes that go crisp in the basket the main has just left.'),
          ('89','Greens, garlic, chilli and lemon, wilted in ninety seconds under a lid.')]))

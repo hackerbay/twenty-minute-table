@@ -73,7 +73,9 @@ def parse(path):
     return r
 
 def load_all():
-    return [parse(p) for p in sorted(glob.glob(str(REC / '*.md')))]
+    paths = sorted(glob.glob(str(REC / '*.md')),
+                   key=lambda f: int(Path(f).name.split('-', 1)[0]))
+    return [parse(p) for p in paths]
 
 if __name__ == '__main__':
     rs = load_all()

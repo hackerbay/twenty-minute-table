@@ -1,9 +1,10 @@
 import re, glob, os, sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-files = sorted(glob.glob(os.path.join(ROOT, 'recipes', '*.md')))
+files = sorted(glob.glob(os.path.join(ROOT, 'recipes', '*.md')),
+               key=lambda f: int(os.path.basename(f).split('-', 1)[0]))
 print(f"Files: {len(files)}")
-nums = [int(os.path.basename(f)[:2]) for f in files]
-missing = sorted(set(range(1,71)) - set(nums))
+nums = [int(os.path.basename(f).split('-', 1)[0]) for f in files]
+missing = sorted(set(range(1, len(files) + 1)) - set(nums))
 print("Missing numbers:", missing or "none")
 def section(t, name):
     m = re.search(r'^## ' + re.escape(name) + r'\s*$(.*?)(?=^## |\Z)', t, re.M | re.S)
@@ -51,7 +52,7 @@ for f in files:
     if not (3 <= len(steps) <= 7): problems.append(f"{n}: {len(steps)} method steps")
     for note in ['**Swap:**','**Make it faster:**','**On the side:**','**Leftovers:**']:
         if note not in t: problems.append(f"{n}: missing {note}")
-    rows.append((os.path.basename(f)[:2], h1[0], cuisine, method, mins))
+    rows.append((os.path.basename(f).split('-', 1)[0], h1[0], cuisine, method, mins))
 
 titles=[r[1] for r in rows]
 dupes=[x for x in titles if titles.count(x)>1]

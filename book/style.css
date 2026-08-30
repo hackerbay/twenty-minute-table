@@ -27,13 +27,14 @@ body{font-family:'Inter',sans-serif;color:var(--ink);background:#DDD6C8;font-fea
 .divider .inner{justify-content:flex-start;}
 .cover-sub{font-size:12.6pt;line-height:1.5;color:rgba(253,250,244,.74);max-width:124mm;margin-top:8mm;}
 .stats{display:flex;border-top:1px solid rgba(253,250,244,.18);border-bottom:1px solid rgba(253,250,244,.18);}
-.stat{flex:1;padding:6mm 0 5.5mm;border-right:1px solid rgba(253,250,244,.18);}
-.stat:last-child{border-right:none;}
+.stat{flex:1 1 0;min-width:0;padding:6mm 5mm 5.5mm;border-right:1px solid rgba(253,250,244,.18);}
+.stat:first-child{padding-left:0;}
+.stat:last-child{padding-right:0;border-right:none;}
 .stat .sv{font-size:31pt;font-weight:600;line-height:.95;letter-spacing:-.02em;color:#E8A87C;
   font-variation-settings:'SOFT' 50,'WONK' 1,'opsz' 90;}
 .stat .sl{font-size:7.2pt;letter-spacing:.22em;text-transform:uppercase;font-weight:600;
   color:rgba(253,250,244,.55);margin-top:2.6mm;}
-.texture{font-size:5.9pt;line-height:1.58;letter-spacing:.055em;color:rgba(253,250,244,.30);
+.texture{font-size:5.6pt;line-height:1.54;letter-spacing:.055em;color:rgba(253,250,244,.30);
   text-transform:uppercase;font-weight:500;text-align:justify;}
 .cover-chips{display:flex;gap:3.5mm;flex-wrap:wrap;}
 .cchip{border:1px solid;border-radius:99px;padding:2.2mm 5mm;display:flex;align-items:center;gap:2.2mm;}
