@@ -32,7 +32,7 @@ Turkey mince is lean enough to sear rather than stew, so pressing it flat and le
 ## Method
 1. Boil the kettle. Put the couscous and salt in a large bowl, pour over the boiling stock, cover with a plate and leave it while you cook — it drinks the lot in 5 minutes.
 2. Get a large frying pan properly hot over a high heat. Add half the oil, then the mince in one layer. Press it flat and leave it undisturbed for 2 minutes — you want a brown crust before you break it up.
-3. Break the mince into rough clumps, push it to one side and add the rest of the oil with the onion, garlic and courgette. Cook for 4 minutes, until the courgette is browning at the cut edges and the onion is slack and translucent.
+3. Break the mince into rough clumps and turn it until no pink remains, then push it to one side and add the rest of the oil with the onion, garlic and courgette. Cook for 4 minutes, until the courgette is browning at the cut edges and the onion is slack and translucent.
 4. Scatter over the ras el hanout and salt and stir everything together for 30 seconds, until the pan smells warm and resinous. Add the chickpeas and almonds and cook 3 minutes more, stirring twice, until the chickpeas take colour and the almonds smell toasted.
 5. Add the spinach in handfuls and stir 1 minute, until just wilted. Off the heat, stir through the lemon zest and juice and most of the herbs. Taste for salt — turkey needs more than you expect.
 6. Fork the couscous loose and spread it over four warm plates. Spoon the turkey over it with the yoghurt and the remaining herbs.

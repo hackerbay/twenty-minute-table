@@ -35,7 +35,7 @@ Thick yoghurt clings to paneer rather than sliding off, and the milk solids in t
 ## Method
 1. Heat the air fryer to 200°C (400°F). Whisk the yoghurt, garlic, ginger, garam masala, cumin, chilli, turmeric, oil and salt in a bowl until it is the colour of terracotta.
 2. Spread the dry chickpeas across the basket, spoon 2 tbsp of the marinade over them and toss them where they lie. Start them cooking for 5 minutes while you thread the skewers.
-3. Add the paneer, peppers and onion to the rest of the marinade. Fold gently so the cubes keep their corners, then thread onto the skewers, alternating cheese and vegetable.
+3. Add the paneer, the red, green and yellow peppers and the onion petals to the rest of the marinade. Fold gently so the cubes keep their corners, then thread onto the skewers, alternating cheese and vegetable.
 4. Shake the basket, lay the skewers over the chickpeas in one layer with a finger's gap between them, and spoon over any marinade left in the bowl.
 5. Air fry for 8 minutes more, turning the skewers at 5 minutes. They are ready when the yoghurt coating has dried to a crust and there are proper black blisters on the pepper skins.
 6. Lift everything out, then warm the chapatis in the hot empty basket for 1 minute. Scatter the skewers and chickpeas with coriander and squeeze over lemon while they still steam.

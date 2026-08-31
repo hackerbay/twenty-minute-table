@@ -26,7 +26,7 @@ You need 8 silicone muffin cases or 8 small ramekins — anything that sits flat
 ## Method
 1. Heat the air fryer to 170°C (340°F). Lightly oil the silicone muffin cases or ramekins and stand them on the worktop while you mix.
 2. Crack the eggs into a bowl, add the yoghurt and whisk for a good 20 seconds until no ribbons of white are left.
-3. Stir in the onion, tomato, chilli, coriander, turmeric, cumin, garam masala and salt.
+3. Stir in the onion, tomato, green chilli, coriander, turmeric, cumin, garam masala and salt.
 4. Fill each case about three-quarters full, then lift them into the basket in a single layer.
 5. Air fry for 10 minutes. They are done when risen, set to the centre and a skewer comes out clean. They will sink a little as they cool, which is exactly what should happen.
 6. Run a knife around the rims, turn them out and serve warm with lime wedges.

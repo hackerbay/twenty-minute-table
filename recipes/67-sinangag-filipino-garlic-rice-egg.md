@@ -24,7 +24,7 @@ Starting the garlic in cold oil draws out its sugars before the edges colour, so
 - 2 limes or calamansi, halved
 
 ## Method
-1. Break the cold rice apart with your fingers until no lumps remain. Lay the tomato and cucumber out on the plates.
+1. Break the cold rice apart with your fingers until no lumps remain. Lay the tomatoes and cucumber out on the plates.
 2. Put the garlic and 3 tbsp of the oil in a cold wok, then set it over a medium heat. Fry, stirring, 3 to 4 minutes until the slices are pale gold and the bubbling slows. Lift half onto kitchen paper at once, since they keep darkening off the heat.
 3. Turn the heat to high. Add the rice, salt and pepper to the garlic and oil left in the wok, press flat and leave 45 seconds, then toss. Repeat for 3 minutes, until the grains separate, smell toasted and carry crisp brown patches.
 4. Divide the rice between the plates and wipe out the wok. Add the last tablespoon of oil and crack in the eggs. Fry 2 minutes, spooning hot oil over the whites, until the edges are lacy and the yolks still run.

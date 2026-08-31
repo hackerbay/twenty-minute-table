@@ -35,7 +35,7 @@ Chermoula is a raw herb sauce, so the cumin and paprika only bloom once they hit
 
 ## Method
 1. Boil the kettle and heat the air fryer to 200°C (400°F). Put the couscous, chickpeas and their ½ tsp salt in a heatproof bowl, pour over the boiling water, cover with a plate and leave for 5 minutes.
-2. Chop the herbs, garlic and spices together on your board until fine, then scrape into a bowl with the lemon zest and juice, oil and the ¾ tsp salt.
+2. Chop the herbs and garlic together on your board until fine, then scrape into a bowl and stir in the cumin, paprika, chilli flakes, lemon zest and juice, oil and the ¾ tsp salt.
 3. Toss the prawns with half the chermoula directly in the basket, spreading them into a single layer. Air fry for 5 minutes, shaking at 3. They are ready the moment they curl into loose C-shapes and turn opaque — a tight O means a minute too far.
 4. Run a peeler down the courgettes into long ribbons, stopping at the seedy core. Toss with half of what is left of the chermoula and a pinch of salt, and leave to slacken while the prawns cook.
 5. Fork the couscous loose and fold through the tomatoes and the last of the chermoula.

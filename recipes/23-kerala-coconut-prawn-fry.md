@@ -38,7 +38,7 @@ Prawns need barely three minutes, so the masala is built first and they go in la
 - 15 g (½ cup, packed) coriander, chopped
 
 ## Method
-1. Boil the kettle. Put the rinsed rice, salt and boiling water in a small pan, bring back to the boil, then clamp on a lid and cook on the lowest heat for 10 minutes. Leave it covered off the heat until you serve.
+1. Boil the kettle. Cover the rinsed rice with the salted boiling water in a small pan, boil it again, then cook under a lid on the lowest heat for 10 minutes. Leave it covered off the heat until you serve.
 2. Toss the prawns with the turmeric, chilli powder, pepper and salt in a bowl.
 3. Heat the coconut oil in a wide frying pan over a medium-high heat. Add the mustard seeds and wait for them to pop, about 30 seconds, then the curry leaves — they will spit and crackle.
 4. Add the shallots and green beans and cook 4 minutes, stirring, until the shallots are soft and edged with brown and the beans have lost their squeak. Add the garlic, ginger and chillies and stir 1 minute, until the raw smell goes, then fold in the spinach and let it collapse, about a minute more.

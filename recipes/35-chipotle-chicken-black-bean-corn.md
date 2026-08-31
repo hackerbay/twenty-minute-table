@@ -33,7 +33,7 @@ Corn browns before it properly thaws, so it takes its char in a bare pan first a
 - 20 g (½ cup, packed) coriander, roughly chopped
 
 ## Method
-1. Boil the kettle. Put the rice, salt and boiling water in a small pan, bring back to the boil, then clamp on a lid and cook on the lowest heat for 10 minutes. Leave it covered off the heat until you serve.
+1. Boil the kettle. Get the rice on in a small pan with the salt and boiling water; once it is boiling again, lid it and drop to the lowest heat for 10 minutes. Leave it covered off the heat until you serve.
 2. Put a large frying pan over your highest heat with nothing in it. When it smokes faintly, tip in the frozen corn and spread it flat. Leave it 3 minutes, then stir once — you want blistered black patches, not even colour. Scrape into a bowl.
 3. Add the oil and lay the chicken in the same pan in one layer with a pinch of the salt. Leave it 3 minutes without touching it, then stir and fry 2 minutes more, until the strips are browned and no longer pink at the cut edge.
 4. Add the onion, peppers and garlic and fry 2 minutes, until the edges soften and colour, then stir in the cumin, oregano and chipotle for 30 seconds, until the spices smell toasted rather than raw.

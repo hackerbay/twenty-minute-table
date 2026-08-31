@@ -31,7 +31,7 @@ Walnuts blitzed with garlic, vinegar and a splash of starchy cooking water make 
 
 ## Method
 1. Boil the kettle. Set a wide pan over a medium-high heat with the oil and lay in the chicken in one layer with a pinch of the salt. Fry 6 minutes, turning once, until golden and firm and reading 74°C (165°F) at the thickest point. Scrape onto a plate with any juices.
-2. Meanwhile, put the walnuts, garlic, vinegar, spices, coriander leaves and ½ tsp salt into a small blender or a mortar and work them to a coarse, sandy paste.
+2. Meanwhile, put the walnuts, garlic, vinegar, ground coriander, fenugreek, cayenne, coriander leaves and ½ tsp salt into a small blender or a mortar and work them to a coarse, sandy paste.
 3. Pour the boiling water into the same pan with the rest of the salt, add the potatoes and boil hard for 8 minutes, dropping in the green beans for the last 4. The potatoes should give to a knife and the beans bend without snapping.
 4. Scoop out 150 ml (⅔ cup) of the cooking water, then drain and tip the potatoes and beans into a serving bowl.
 5. Loosen the paste with the reserved water a splash at a time until it falls from the spoon like thick double cream, then fold it through the warm potatoes and beans along with the chicken and its juices.

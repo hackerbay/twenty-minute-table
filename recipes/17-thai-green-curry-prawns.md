@@ -31,7 +31,7 @@ Cracking the coconut cream and frying the paste in it toasts the lemongrass and 
 - 1 red chilli, sliced
 
 ## Method
-1. Boil the kettle. Put the rinsed rice, salt and boiling water in a small pan, bring back to the boil, clamp on a lid and cook on the lowest heat for 10 minutes, then leave it covered off the heat until you serve.
+1. Boil the kettle. The rinsed rice goes into a small pan with the salt and boiling water, back to the boil, then 10 minutes under a lid on the lowest heat and a rest off the heat until you serve.
 2. Open the tin without shaking and spoon the thick cream from the top into a cold, wide pan. Set the thin milk beneath aside.
 3. Cook the cream over medium-high heat 2–3 minutes, stirring, until it thickens, sputters and green-tinged oil separates at the edges. Add the paste and fry 90 seconds, pressing it into the oil, until it smells fragrant and darkens.
 4. Pour in the reserved milk with the fish sauce, sugar and lime leaves and bring to a gentle simmer.

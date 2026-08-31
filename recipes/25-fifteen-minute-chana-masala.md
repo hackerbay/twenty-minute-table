@@ -39,7 +39,7 @@ Frying the ground spices in hot oil for thirty seconds before the tomatoes arriv
 - ¼ tsp fine sea salt
 
 ## Method
-1. Boil the kettle. Put the rinsed rice, salt and boiling water in a small pan, bring back to the boil, clamp on a lid and cook on the lowest heat for 10 minutes, then leave it covered off the heat. Stir the yoghurt, cucumber and salt together in a bowl and put it somewhere cold.
+1. Boil the kettle. Bring the rinsed rice, salt and boiling water to the boil in a small pan, cover it and cook 10 minutes at the lowest heat, then let it stand covered off the heat. Stir the yoghurt, cucumber and salt together in a bowl and put it somewhere cold.
 2. Heat the oil in a deep frying pan over a high heat. Add the cumin seeds, wait 20 seconds until they darken and smell nutty, then add the onion. Cook 3 minutes, stirring often, until browning at the edges.
 3. Add the garlic, ginger and chilli for 1 minute, then the ground coriander, cumin, turmeric and chilli powder. Fry 30 seconds — no longer, or they will catch.
 4. Tip in the tomatoes and cook 3 minutes over a high heat, stirring, until the sauce darkens and thickens enough to leave a trail behind the spoon.

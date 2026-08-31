@@ -76,9 +76,9 @@ def build(recipes):
     stats = [(str(len(recipes)), 'Recipes'), (str(allc), 'Cuisines'), ('20', 'Minutes, max'), ('1', 'Pan or basket')]
     pages.append(page('cover', None, f"""
     <div class="cover-rule"></div>
-    <div style="margin-top:5mm" class="eyebrow">A cookbook for weeknights, slow mornings and something afterwards</div>
+    <div style="margin-top:5mm" class="eyebrow">One dinner &nbsp;·&nbsp; the adults, and the toddler</div>
     <h1 class="d">The<br>20&#8209;Minute<br><em>Table</em></h1>
-    <p class="cover-sub">A hundred fast, whole-food recipes for people who want breakfast in ten minutes, dinner in twenty and pudding in eight &mdash; and who would rather not spend the evening washing up.</p>
+    <p class="cover-sub">A hundred fast, whole-food recipes for the years when dinner has to happen anyway. Twenty minutes from a cold start, one pan to wash, and a toddler&rsquo;s portion out of the same pan.</p>
     <div style="flex:1.05"></div>
     <div class="stats">{''.join(f'<div class="stat"><div class="sv d">{v}</div><div class="sl">{l}</div></div>' for v,l in stats)}</div>
     <div style="flex:1"></div>
@@ -105,11 +105,12 @@ def build(recipes):
     <div class="pkicker">A short note first</div>
     <h2 class="ptitle d">Twenty Minutes<br>Is Plenty</h2>
     <div class="fw">
-      <p class="lede">Most of what makes cooking slow has nothing to do with cooking. It is the deciding, the shopping, the hunting for a jar of something at the back of a cupboard, and the twenty minutes of washing up that follow a meal that took thirty to make.</p>
-      <p>So this book removes those parts rather than the good ones. Nothing here is a shortcut version of a longer dish &mdash; no simmering-for-an-hour recipe with the hour taken out. These are dishes that were always fast, drawn from the kitchens where fast cooking is not a compromise but the whole tradition: a wok of chicken and holy basil, a basket of cauliflower under harissa, eggs cooked in tomatoes in a pan the size of a dinner plate.</p>
-      <p>Everything is built on whole ingredients, which is less an ideology than a practical matter: they cook faster than you think, they taste of what they are, and they let you season a dish rather than negotiate with something already seasoned for you. And every recipe was written to leave one pan or one basket behind. That constraint is the reason these end up in the weekly rotation rather than the someday pile.</p>
-      <p>A word on the timings. They are honest, and they assume a cold start: knife out, nothing chopped, the pan not yet on. They also assume you read the recipe through once before you begin, which for a fifteen-minute dish is less a suggestion than the method itself.</p>
-      <p class="sign">Cook them in any order. Break them freely. The swap notes exist because you will not have everything, and that has never once mattered.</p>
+      <p class="lede">This book was written for the stretch of life when dinner has to happen anyway. There is a small person who needs feeding at six, an adult who has not eaten properly since breakfast, and about twenty minutes between the two.</p>
+      <p>Most of what makes cooking slow has nothing to do with cooking. It is the deciding, the shopping, the hunting for a jar of something at the back of a cupboard, and the twenty minutes of washing up that follow a meal that took thirty to make. Those are the parts a new parent has least of, so those are the parts this book removes.</p>
+      <p>What it does not remove is the cooking. Nothing here is a shortcut version of a longer dish &mdash; no simmering-for-an-hour recipe with the hour taken out. These are dishes that were always fast, drawn from the kitchens where speed is not a compromise but the whole tradition: a wok of chicken and holy basil, a basket of cauliflower under harissa, eggs cooked in tomatoes in a pan the size of a dinner plate. You are not being handed a lesser dinner because you have a baby.</p>
+      <p>Everything is built on whole ingredients, which is less an ideology than a practical matter: they cook faster than you think, and they let you season a dish rather than negotiate with something already seasoned for you. The timings are honest and assume a cold start &mdash; knife out, nothing chopped, the pan not yet on.</p>
+      <p>And every recipe ends by telling you how to lift a toddler&rsquo;s portion out of the same pan: before the salt, before the chilli, cut to a shape they can hold.</p>
+      <p class="sign">Cook them in any order. Break them freely. The swap notes exist because you will not have everything, and with a small child in the house you will very often not have everything.</p>
     </div>
     <div class="anat">
       <div class="anat-fig">{anatomy()}<div class="anat-cap">Every recipe page, without exception</div></div>
@@ -326,6 +327,10 @@ def build(recipes):
       ("You want the whole flat to smell extraordinary", "04 09 23 41 59"),
       ("Someone claims not to like vegetables", "16 20 35 61 67"),
       ("There is half a cabbage and a lot of optimism", "05 15 22 48 68"),
+      ("They have gone down and you have fifteen minutes", "18 24 32 62 66"),
+      ("You are eating at nine o&rsquo;clock again", "02 07 26 31 63"),
+      ("One of you is doing bathtime", "01 12 25 44 51"),
+      ("You want them to eat what you are eating", "16 20 28 35 57"),
     ]
     when_html = ''.join(
       f'<div class="when"><div class="wq d">{q}</div><div class="wl">' +
@@ -335,7 +340,7 @@ def build(recipes):
     <div class="pkicker">The real index</div>
     <h2 class="ptitle d">What to Cook When</h2>
     <p class="pintro">Nobody stands in the kitchen at seven o&rsquo;clock thinking in cuisines. This is the index for the way the question actually arrives.</p>
-    <div class="hrule" style="margin:5mm 0"></div>
+    <div class="hrule" style="margin:4mm 0"></div>
     <div class="whens">{when_html}</div>""", 'WHAT TO COOK WHEN'))
 
     # ============================== SECTION DIVIDERS + RECIPES ==============================

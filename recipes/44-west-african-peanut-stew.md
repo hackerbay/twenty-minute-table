@@ -28,7 +28,7 @@ Grating the sweet potato rather than cubing it takes the cooking time from forty
 ## Method
 1. Heat the oil in a wide, deep pan over a high heat. Brown the chicken in one layer for 3 minutes without stirring, then turn once.
 2. Add the onion, red pepper, garlic, ginger, chilli and ground coriander. Cook 2 minutes, until the pan smells sharp and sweet at once.
-3. Tip in the tomatoes, stock and sweet potato. Bring to the boil, then simmer briskly for 8 minutes. The shreds should vanish into the sauce and the liquid should coat a spoon. Put the rice pouches in the microwave for their 2 minutes while it simmers, and leave them sealed so they stay hot.
+3. Tip in the tomatoes, stock and sweet potato. Bring to the boil, then simmer briskly for 8 minutes. The shreds should vanish into the sauce, the liquid should coat a spoon and the chicken should be cooked through, with no pink left at the centre of a piece. Put the rice pouches in the microwave for their 2 minutes while it simmers, and leave them sealed so they stay hot.
 4. Drop the heat to low. Stir the peanut butter into a ladleful of the hot liquid in a mug, then pour it back — it emulsifies smoothly instead of clumping.
 5. Add the spinach in handfuls, stirring until just wilted, about 1 minute. Salt to taste.
 6. Fork the rice into four warm bowls and ladle the stew over, with the peanuts scattered on top and lime wedges to squeeze.

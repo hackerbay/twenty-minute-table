@@ -29,7 +29,7 @@
 2. Dice the tomatoes, cucumber and pepper on one board, small and even, and add them to the bowl with any juice left behind.
 3. Tip in the tuna and its oil, breaking it into large flakes rather than shredding, then add the beans and the olive oil.
 4. Fold it over twice with a big spoon. Taste: it should be noticeably sour and properly salted.
-5. Fold two-thirds of the torn bread through and give it 3 minutes to drink the juice at the bottom of the bowl. Tuck the rest in around the edge dry, for the contrast.
+5. Fold two-thirds of the torn flatbread through and give it 3 minutes to drink the juice at the bottom of the bowl. Tuck the rest in around the edge dry, for the contrast.
 6. Scatter over the parsley, crumbled cheese and a last pinch of sumac, and take the bowl to the table.
 
 ## Chef's notes

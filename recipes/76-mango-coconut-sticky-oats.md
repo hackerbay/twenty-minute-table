@@ -26,7 +26,7 @@ Coconut milk added at the start would split and go grainy over a long simmer, so
 1. Toast the coconut flakes and sesame seeds in a dry saucepan over a medium heat for 2 minutes, shaking constantly, until the coconut is patchy gold. Tip them onto a plate; left in the hot pan they burn.
 2. Put the oats, water and salt in the same pan, bring to a simmer and cook for 6 minutes, stirring often, until the oats have swollen and a spoon leaves a clear trail across the base.
 3. Off the heat, stir in two thirds of the coconut milk and all the maple syrup and leave to stand for 2 minutes. It thickens as it sits, so loosen with water if it goes claggy.
-4. Slice the mango cheeks away from the stones, peel them and cut the flesh into thin fans.
+4. Slice the cheeks off both mangoes, peel them and cut the flesh into thin fans.
 5. Spoon the oats into four bowls, lay the mango across one half, pour the remaining cold coconut milk down the middle, and scatter with the toasted coconut, sesame and lime zest. Serve with lime wedges.
 
 ## Chef's notes

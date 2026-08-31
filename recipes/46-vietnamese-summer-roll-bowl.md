@@ -31,11 +31,11 @@ Fine rice vermicelli is thin enough to soften right through in off-the-boil kett
 
 ## Method
 1. Boil the kettle. Put the vermicelli in a large bowl, cover with hot water by 2 cm (¾ in) and leave 6 minutes. Sit the soya beans in a sieve and pour the rest of the kettle over them, then leave them to drain and cool.
-2. Meanwhile whisk the nuoc cham in the serving bowl until the honey dissolves. Taste: sharp first, salty second, barely sweet.
-3. Cut the vegetables and pick the herbs on one board, leaves whole so they stay springy.
+2. Meanwhile whisk the fish sauce, lime juice, warm water, honey, garlic and red chilli in the serving bowl until the honey dissolves. Taste: sharp first, salty second, barely sweet.
+3. On one board, cut the cucumber into matchsticks, coarsely grate the carrots and shred the baby gem, then pick the mint, coriander and Thai basil, leaves whole so they stay springy.
 4. Drain the noodles and rinse under the cold tap until cool and no longer tacky — this is what stops them setting into a brick.
 5. Turn the tofu in 3 tbsp of the dressing and leave 2 minutes; it takes the liquid up like a sponge.
-6. Divide the noodles between four bowls, pile on the vegetables, soya beans, herbs and tofu, spoon over the rest of the dressing, finish with peanuts.
+6. Divide the noodles between four bowls, pile on the cucumber, carrot, baby gem, soya beans, herbs and tofu, spoon over the rest of the dressing, finish with peanuts.
 
 ## Chef's notes
 - **Swap:** 500 g cooked cold king prawns or shredded poached chicken in place of the tofu.

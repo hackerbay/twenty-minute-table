@@ -29,11 +29,11 @@ Adobo is normally a slow braise because the vinegar needs time to lose its raw e
 - 2 spring onions, sliced
 
 ## Method
-1. Boil the kettle. Put the rice, salt and boiling water in a small pan, bring back to the boil, then clamp on a lid and cook on the lowest heat for 10 minutes. Leave it covered off the heat until you serve.
+1. Boil the kettle. Give the rice a small pan with the salt and boiling water, bring back to the boil, then cook it covered on the lowest heat for 10 minutes. Leave it covered off the heat until you serve.
 2. Heat the oil in a large frying pan over a high heat. Lay the chicken in one layer, leave it 3 minutes to brown, then turn and give it a minute more.
 3. Push the chicken aside, drop the garlic into the clear space and fry 45 seconds, until it smells sweet and looks pale gold. Do not let it darken, or the sauce turns bitter.
 4. Pour in the vinegar and boil hard for 1 minute with the extractor on — this cooks off the sharpest edge. Add the soy, water, bay and peppercorns and simmer briskly for 5 minutes, turning the chicken once or twice.
-5. Stir in the honey, add the beans and broccoli, and cook 3 minutes more. It is ready when the sauce is dark and just coats a spoon, and the beans still squeak against your teeth.
+5. Stir in the honey, add the beans and broccoli, and cook 3 minutes more. It is ready when the chicken is cooked through with no pink at the centre of a thick slice, the sauce is dark and just coats a spoon, and the beans still squeak against your teeth.
 6. Fork the rice into four warm bowls, pile the chicken and greens on top, scatter with spring onion and spoon the reduced sauce over everything.
 
 ## Chef's notes

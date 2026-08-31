@@ -24,7 +24,7 @@ Frying the tomatoes over high heat until they darken and stop smelling raw is wh
 
 ## Method
 1. Warm the dry pan over medium-high heat and toast the tortillas for 20 seconds a side, until they smell nutty and flex without cracking. Stack them on the board under a cloth.
-2. Add the oil, onion, garlic, torn chilli and cumin to the same pan and fry 3 minutes, until the onion turns translucent and the chilli smells sweet.
+2. Add the oil, onion, garlic, torn chipotle and cumin to the same pan and fry 3 minutes, until the onion turns translucent and the chilli smells sweet.
 3. Tip in the tomatoes and raise the heat. Fry hard for 4 minutes, stirring, until the sauce darkens to brick red and a spoon dragged through leaves a clear channel. Stir in the beans and salt.
 4. Make eight shallow wells with the back of the spoon and crack an egg into each. Cover and cook 4 minutes, until the whites are opaque and the yolks still shiver when you nudge the pan.
 5. Scatter over avocado, feta and coriander, and take the pan to the table with the tortillas and lime.

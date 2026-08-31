@@ -1,12 +1,15 @@
-.PHONY: all deps verify book site clean
+.PHONY: all deps verify audit book site clean
 
-all: verify book site
+all: verify audit book site
 
 deps:
 	npm install
 
 verify:
 	python3 book/verify.py
+
+audit:
+	python3 book/audit.py
 
 book:
 	python3 book/build.py

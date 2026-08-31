@@ -24,8 +24,8 @@ Congee normally takes an hour because whole grains have to burst open from the i
 ## Method
 1. Slice the chicken across the grain as thinly as you can manage, about 3 mm (⅛ in). Toss the slices with the cornflour, 1 tsp of the sesame oil and a good pinch of salt, and leave them on the board.
 2. Put the cold rice in a blender jug with 300 ml (1¼ cups) of the stock. Pulse four or five times, one second each: you want fractured grains and cloudy liquid, not a purée.
-3. Tip it into a wide pan with the rest of the stock, the ginger coins, the spring onion whites and the salt. Bring to a hard, rolling boil and cook 10 minutes, stirring every couple of minutes and scraping the base so nothing catches. It is ready when a spoon dragged across the bottom leaves a trail that closes slowly behind it.
-4. Drop the heat until the surface barely moves. Scatter the chicken over in a single layer, leave it 30 seconds to take, then stir once to separate the slices. Give it 2 minutes more, until the pieces are white through and still yielding.
+3. Tip it into a wide pan with the rest of the 1.2 litres (5 cups) of stock, the ginger coins, the spring onion whites and the salt. Bring to a hard, rolling boil and cook 10 minutes, stirring every couple of minutes and scraping the base so nothing catches. It is ready when a spoon dragged across the bottom leaves a trail that closes slowly behind it.
+4. Drop the heat until the surface barely moves. Scatter the chicken over in a single layer, leave it 30 seconds to take, then stir once to separate the slices. Give it 2 minutes more, until the pieces are white all the way through with no pink at the centre of the thickest slice, and still yielding.
 5. Season with the white pepper and more salt than you expect. Ladle into bowls and top with the shredded ginger, spring onion greens, peanuts, fried shallots, coriander and the last 2 tsp of sesame oil.
 
 ## Chef's notes

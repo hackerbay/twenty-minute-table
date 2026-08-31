@@ -26,7 +26,7 @@ Starting the garlic and anchovies in cold oil over gentle heat lets them infuse 
 - Black pepper
 
 ## Method
-1. Boil a full kettle, pour it into a large pan, salt it well and bring it back to the boil. Add the penne and cook a minute under the packet time, about 10 minutes. Keep a mugful of the water back before you drain it.
+1. Fill and boil the kettle, tip it into a large pan, salt heavily and return it to the boil. Add the penne and cook a minute under the packet time, about 10 minutes. Keep a mugful of the water back before you drain it.
 2. Meanwhile, put the oil, garlic, anchovies and chilli into a cold frying pan and set it over medium heat. Cook 2 minutes as it warms, pressing the anchovies until they collapse and the garlic sizzles pale gold.
 3. Add both lots of tomatoes, the capers, olives and oregano. Simmer hard 5 minutes, until the cherry tomatoes burst under the back of a spoon and the sauce pulls away from the side of the pan when you push it.
 4. Stir in the beans with a splash of water ladled from the pasta pan and warm through for 2 minutes, so they take on the sauce without breaking up, then fold the spinach through in handfuls until it collapses.

@@ -23,10 +23,10 @@ Garlic goes into cold oil and heats with the pan, so it perfumes the whole lot o
 - Flaky sea salt
 
 ## Method
-1. Heat 1 tbsp of the oil in a wide frying pan over medium-high and toast the bread in two batches, about 1 minute a side. Rub each slice with the cut face of the halved garlic clove and stack them on the board.
+1. Heat 1 tbsp of the oil in a wide frying pan over medium-high and toast the bread in two batches, about 1 minute a side. Drag the halved clove cut side down over each hot slice and pile them on the board.
 2. Take the pan off the heat for a minute to lose its fierceness, then add the remaining oil, the sliced garlic and the chilli and set it back over medium. Let it come up slowly for 3 minutes, until the garlic is the colour of straw and the oil smells sweet. Coming up slowly is what stops it catching.
 3. Add the chickpeas, paprika and a pinch of salt. Fry 3 minutes, pressing some against the pan base with the back of a spoon, until their skins blister and split. Add the tomatoes and let them soften for 1 minute.
-4. Lay the prawns in one layer and salt them. Cook 1 minute, turn, then 1 minute more — they are done the moment they turn pink and curl loosely. Any longer and they tighten.
+4. Lay the prawns in one layer and salt them. Cook 1 minute, turn, then 1 minute more — they are done the moment they have turned pink and curled loosely, opaque right through at the thickest point. Any longer and they tighten.
 5. Pour in the sherry. Let it hiss and reduce for 30 seconds, scraping the base so nothing is left behind, then fold the spinach through in handfuls until it just wilts.
 6. Off the heat, add a good squeeze of lemon, the parsley and flaky salt. Bring the pan and the stack of toast to the table while the oil is still bubbling at the edges.
 

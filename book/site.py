@@ -143,11 +143,11 @@ def build_index(recipes):
     body = f"""{nav(0, 'index')}
 <section class="hero">
   <div class="wrap">
-    <p class="eyebrow">A cookbook for weeknights, slow mornings and something afterwards</p>
+    <p class="eyebrow">One dinner &middot; the adults, and the toddler</p>
     <h1 class="d">The<br>20&#8209;Minute<br><em>Table</em></h1>
-    <p class="lede">{len(recipes)} fast, whole-food recipes across {cuisines} cuisines. Nothing over twenty
-    minutes from a cold start, everything built on unprocessed ingredients, and every one designed to
-    leave a single pan or basket behind.</p>
+    <p class="lede">{len(recipes)} fast, whole-food recipes for the years when dinner has to happen anyway.
+    Nothing over twenty minutes from a cold start, one pan or basket to wash, and every recipe tells you
+    how to lift a toddler&rsquo;s portion out of the same pan &mdash; before the salt, before the chilli.</p>
     <div class="stats">
       <div><b class="d">{len(recipes)}</b><span>Recipes</span></div>
       <div><b class="d">{cuisines}</b><span>Cuisines</span></div>
@@ -177,7 +177,8 @@ def build_index(recipes):
 {footer(0)}"""
     (SITE / 'index.html').write_text(shell(
         'The 20-Minute Table', body, 0,
-        f'{len(recipes)} fast, whole-food recipes. Nothing over twenty minutes.'), encoding='utf-8')
+        f'{len(recipes)} fast, whole-food recipes for new parents. Twenty minutes, one pan, '
+        f'and a toddler portion out of the same pan.'), encoding='utf-8')
 
 
 # --------------------------------------------------------------- recipe page
@@ -312,16 +313,20 @@ def build_about(recipes, rules):
   <p class="eyebrow">A short note first</p>
   <h1 class="d">Twenty Minutes Is Plenty</h1>
   <div class="prose">
-    <p class="lede">Most of what makes cooking slow has nothing to do with cooking. It is the deciding,
-    the shopping, the hunting for a jar of something at the back of a cupboard, and the twenty minutes
-    of washing up that follow a meal that took thirty to make.</p>
-    <p>So this book removes those parts rather than the good ones. Nothing here is a shortcut version of
-    a longer dish — no simmering-for-an-hour recipe with the hour taken out. These are dishes that were
-    always fast, drawn from the kitchens where fast cooking is not a compromise but the whole tradition.</p>
+    <p class="lede">This book was written for the stretch of life when dinner has to happen anyway.
+    There is a small person who needs feeding at six, an adult who has not eaten properly since
+    breakfast, and about twenty minutes between the two.</p>
+    <p>Most of what makes cooking slow has nothing to do with cooking. It is the deciding, the shopping,
+    the hunting for a jar of something at the back of a cupboard, and the washing up that follows.
+    Those are the parts a new parent has least of, so those are the parts this book removes — not the
+    cooking. Nothing here is a shortcut version of a longer dish. These are dishes that were always
+    fast, drawn from the kitchens where speed is not a compromise but the whole tradition. You are not
+    being handed a lesser dinner because you have a baby.</p>
     <p>Everything is built on whole ingredients, which is less an ideology than a practical matter: they
     cook faster than you think, they taste of what they are, and they let you season a dish rather than
     negotiate with something already seasoned for you. Every recipe was written to leave one pan or one
-    basket behind, and the washing-up line at the foot of each page is the constraint it was designed around.</p>
+    basket behind, and the washing-up line at the foot of each page is the constraint it was designed
+    around. Every one also ends by telling you how to get a toddler&rsquo;s portion out of that same pan.</p>
   </div>
 </div></section>
 <main class="wrap">

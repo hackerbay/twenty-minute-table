@@ -18,13 +18,13 @@ Crushing a quarter of the beans against the side of the pan releases their starc
 - 300 g (10½ oz) cavolo nero or kale, stalks stripped, leaves shredded
 - 250 g (9 oz) cherry tomatoes, halved
 - 3 x 400 g (14 oz) tins cannellini beans, drained
-- 150 ml (⅔ cup) good chicken or vegetable stock
+- 150 ml (⅔ cup) good vegetable stock
 - 1 lemon — zest and juice
 - 70 g (2½ oz) Parmesan or pecorino, finely grated
 - Salt and black pepper
 
 ## Method
-1. Heat 2 tbsp of the oil in a large frying pan over medium-high. Toast the bread in two batches, about 1 minute a side, until striped brown. Rub each slice with the cut face of the halved garlic clove and stack them on the board.
+1. Heat 2 tbsp of the oil in a large frying pan over medium-high. Fry the bread in two batches, a minute a side, until dark stripes appear. Scrape the cut side of the halved garlic over each slice and stack them on the board.
 2. Turn the heat down to medium and add the remaining oil, the sliced garlic, rosemary, chilli and anchovies if using. Cook 2 minutes, pressing the anchovies until they dissolve. The garlic should be pale gold, never brown.
 3. Add the leek, kale and a pinch of salt and toss 3 minutes, until the leaves darken to deep green and slump into the oil.
 4. Tip in the beans, tomatoes and stock. Simmer 4 minutes, crushing about a quarter of the beans against the side of the pan with a wooden spoon, until the liquid thickens and clings to the leaves rather than running off them.

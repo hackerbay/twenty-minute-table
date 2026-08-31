@@ -30,7 +30,7 @@ Dry-frying the beans before any oil goes in blisters the skins and collapses the
 - 1 lime, cut into wedges
 
 ## Method
-1. Boil the kettle. Put the rice, salt and boiling water in a small pan, bring back to the boil, then clamp on a lid and cook on the lowest heat for 10 minutes. Leave it covered off the heat until you serve.
+1. Boil the kettle. Pour the boiling water over the rice and salt in a small pan, bring back to the boil, then lid it and cook 10 minutes at the lowest heat. Leave it covered off the heat until you serve.
 2. Put the wok over your highest heat, dry. Add the beans and toss every 30 seconds for 3 minutes, until streaked brown and beginning to wrinkle. Tip them into a bowl.
 3. Add 2 tbsp of the oil, then the shallots, garlic and red pepper, and fry 2 minutes until golden and fragrant.
 4. Stir in the sambal and fry 1 minute — it should deepen in colour and the oil separate slightly at the edges. Add the tamarind, honey and fish sauce, then return the beans with the cherry tomatoes. Toss 1 minute, until every bean is coated and glossy.

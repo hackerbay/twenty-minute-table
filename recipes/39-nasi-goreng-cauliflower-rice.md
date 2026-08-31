@@ -30,7 +30,7 @@ Cauliflower rice releases water the moment it meets heat, so the wok must be hot
 3. Turn the heat as high as it goes and add the cauliflower rice in two batches, tossing constantly for 3 minutes in total. Listen to it: a steady sizzle means the water is going, silence means it is stewing.
 4. Squeeze the pouches to break up the grains, tip the rice in and toss 2 minutes, until it is hot through and beginning to catch on the wok. Return the prawn mixture with the soy and honey and toss 1 minute more, until every grain is coloured and the wok is dry again. Divide between plates.
 5. Wipe the wok, add the last tablespoon of oil and fry the eggs over a high heat for 2 minutes, until the whites are lacy and brown at the rim, the yolks still running.
-6. Sit an egg on each plate and add cucumber, tomato, peanuts, spring onion and a lime wedge.
+6. Sit an egg on each plate and add the sliced cucumber and the tomatoes alongside, then scatter with the peanuts and spring onion and add a lime wedge to each.
 
 ## Chef's notes
 - **Swap:** Diced chicken thigh instead of prawns needs 4 minutes. Leave both out for 300 g of firm tofu cubes.

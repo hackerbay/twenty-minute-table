@@ -49,7 +49,7 @@ Allspice, thyme and scotch bonnet are the backbone of jerk, and a rub built on g
 
 ## Method
 1. Boil the kettle and heat the air fryer to 200°C (400°F). Put the rinsed rice, kidney beans, coconut milk, thyme, salt and boiling water in a pan, bring back to the boil, then clamp on a lid and cook on the lowest heat for 10 minutes. Leave it covered off the heat until you serve.
-2. Stir every rub ingredient together in a bowl into a thick, dark, spoonable paste.
+2. Stir the allspice, thyme, cinnamon, nutmeg, scotch bonnet, spring onions, garlic, ginger, soy sauce, honey, lime juice, oil and salt together in a bowl into a thick, dark, spoonable paste.
 3. Open the thighs out flat on the board so they are an even thickness, add them to the bowl and work the rub in by hand. Wash your hands afterwards; the scotch bonnet lingers. Lay the chicken in the basket in one layer and tuck the pineapple into the gaps.
 4. Air fry for 12 minutes, turning chicken and pineapple at 7 minutes. The chicken is ready when the rub has dried to a near-black crust and the juices run clear — 74°C (165°F) on a probe. The pineapple should be blistered and slumping.
 5. While the basket runs, toss the cabbage and carrot in a large bowl with the oil, lime juice and salt, scrunching with your hands until the cabbage slackens.

@@ -1,11 +1,14 @@
 # The 20-Minute Table
 
-**100 fast, whole-food recipes**, published two ways: a printable 217-page A4 cookbook
-and a static website you can host anywhere.
+**100 fast, whole-food recipes for new parents**, published two ways: a printable 217-page
+A4 cookbook and a static website you can host anywhere.
 
-Nothing takes over twenty minutes from a cold start. Everything is built on unprocessed
-ingredients. The lunches and dinners are proper main courses — the starch is in the recipe,
-not in a footnote — and every one is designed to leave a single pan or basket behind.
+Written for the stretch of life when dinner has to happen anyway: a small person who needs
+feeding at six, an adult who has not eaten properly since breakfast, and about twenty minutes
+between the two. Nothing takes over twenty minutes from a cold start. Everything is built on
+unprocessed ingredients. The lunches and dinners are proper main courses — the starch is in
+the recipe, not in a footnote — every one leaves a single pan or basket behind, and every one
+ends by telling you how to lift a toddler's portion out of that same pan.
 
 📕 **[dist/The-20-Minute-Table.pdf](dist/The-20-Minute-Table.pdf)** &nbsp;·&nbsp; 🌐 **[site/](site/)** — open `site/index.html`
 
@@ -73,7 +76,8 @@ book/        the typesetter and the site generator
   toddler_data.py the general toddler guidance, shared by both outputs
   pairings.py    which side goes with which main
   icons.py       method icons, the time dial, the page-anatomy diagram
-  verify.py      consistency checks across all 100 recipe files
+  verify.py      structural checks across all 100 recipe files
+  audit.py       content checks: conversions, unused ingredients, doneness, repetition
   art/           72 food icons, 20 action pictograms, colours, composition
 dist/        the built PDF
 site/        the built website
@@ -84,11 +88,18 @@ build/       intermediate HTML (gitignored)
 
 ```bash
 npm install     # fonts (Fraunces + Inter, embedded in both outputs)
-make verify     # check every recipe file against the template
+make verify     # structure: template, macro arithmetic, the twenty-minute limit
+make audit      # content: unit conversions, unused ingredients, doneness cues, repeated prose
 make book       # markdown -> HTML -> PDF
 make site       # markdown -> static website
-make            # all three
+make            # all of it
 ```
+
+`verify.py` checks that every recipe has the right shape. `audit.py` goes after the things
+that are actually wrong in cookbooks: metric-to-imperial conversions that have drifted,
+ingredients listed but never used in the method, steps calling for something the list does not
+have, meat cooked without a doneness cue, portions outside a sensible range for their section,
+and sentences copy-pasted between recipes. Both must come back clean.
 
 Requires Python 3 with `playwright` and a Chromium build available to it.
 

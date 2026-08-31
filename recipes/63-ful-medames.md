@@ -26,7 +26,7 @@ Crushing only half the beans gives you a thick base that holds the olive oil and
 2. Return them to the pan with the oil and garlic and fry for 30 seconds only — the garlic should stay pale and smell sweet, not toasted.
 3. Add the beans, water, salt and chilli. Simmer for 4 minutes, crushing about half of them against the side of the pan with a wooden spoon, until it is stew-thick and the whole beans still hold their shape.
 4. Stir through the lemon juice and tahini. Make four wells, crack in the eggs, cover and cook 3 minutes, until the whites are set and the yolks runny.
-5. Scatter over the tomato, onion and parsley, pour a thread of olive oil across the top and take the pan to the table.
+5. Scatter over the chopped tomatoes, onion and parsley, pour a thread of olive oil across the top and take the pan to the table.
 
 ## Chef's notes
 - **Swap:** Tinned brown lentils or borlotti beans crush the same way if fava beans are hard to find.

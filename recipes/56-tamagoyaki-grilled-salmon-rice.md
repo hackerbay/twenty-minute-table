@@ -24,7 +24,7 @@ Salting the salmon and leaving it while the eggs are beaten pulls a film of mois
 ## Method
 1. Salt the salmon on both sides and set it skin-up on a plate. Leave it there while you beat the eggs with the mirin, soy and the ¼ tsp salt for a full 30 seconds, until no ribbons of white remain.
 2. Blot the salmon dry, the skin especially. Set a 24 cm (10 in) non-stick frying pan over medium-high heat, lay the fillets in skin-side down and press each one flat with a spatula for the first 10 seconds. Cook 5 minutes without moving them, until the skin releases from the pan on its own.
-3. Turn them and give them 2 to 3 minutes more, until a knife tip slides into the thickest part with no resistance and the centre is still coral. Lift them onto four warm plates.
+3. Turn them and give them 2 to 3 minutes more, until the flesh has turned opaque up the sides and a knife tip slides into the thickest part with no resistance, the very centre still coral. Lift them onto four warm plates.
 4. Wipe the pan out, leaving a slick of the salmon fat behind, and add the oil. Over medium heat, pour in a third of the egg and tilt to cover the base. When the top is barely set but still glossy, 30 to 40 seconds, roll it towards you with a spatula.
 5. Push the roll to the far edge, pour in another third and lift the roll so raw egg runs underneath. Let it set, roll it around the first, then repeat with the last third. Slide the log out and cut it into 2 cm (¾ in) slices.
 6. Add the warm rice and the omelette slices to the plates. Scatter the nori, spring onion and sesame over the rice, and serve with lemon wedges and more soy.

@@ -23,7 +23,7 @@ Cooked rice has already gelatinised, so it only needs to swell and warm through:
 
 ## Method
 1. Warm the oil in a large saucepan over a medium heat. Add the garlic and ginger and stir for 1 minute, until the garlic is pale gold and smells sweet — any darker and it turns bitter.
-2. Pour in the stock, raise the heat and bring to a fast boil.
+2. Pour in the 1.2 litres (5 cups) of stock, raise the heat and bring to a fast boil.
 3. Break the cold rice apart with your fingers as you drop it in so no clumps survive. Simmer 5 minutes, until the grains plump and the broth coats the back of a spoon.
 4. Stir in the pak choi, fish sauce and white pepper. Slide in the prawns, lift the pan off the heat and put the lid on. Leave 2 minutes — they are ready when opaque right through and curled into a loose C.
 5. Ladle into deep bowls, scatter with spring onion and coriander, and squeeze lime over at the table.

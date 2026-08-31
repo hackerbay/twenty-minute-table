@@ -40,7 +40,7 @@ Pear carries enzymes that start softening muscle fibre on contact, so thin sirlo
 1. Boil the kettle. Put the rinsed rice, salt and boiling water in a small pan, bring back to the boil, clamp on a lid and cook on the lowest heat for 10 minutes, then leave it covered off the heat.
 2. Stir the pear, soy, honey, sesame oil, garlic, ginger and pepper together in a bowl. Add the beef, work it through with your fingers and leave it while you do everything else.
 3. Toss the cucumber and carrot with the vinegar and salt straight in the serving bowls.
-4. Heat the rapeseed oil in a large frying pan over a high heat. Lift half the beef out, letting the marinade drain back, and spread it in one layer. Leave it a minute, until the edges are lacquered dark, then toss a minute more. Move to a plate and repeat with the rest.
+4. Heat the rapeseed oil in a large frying pan over a high heat. Lift half the beef out, letting the marinade drain back, and spread it in one layer. Leave it a minute, until the edges are lacquered dark, then toss a minute more, until no pink remains in the slices. Move to a plate and repeat with the rest.
 5. Add the onion and mushrooms to the hot pan and stir-fry 2 minutes, until softened and browning at the edges. Pour in the leftover marinade and bubble 45 seconds, until syrupy, then return the beef and toss to coat.
 6. Fork the rice into the bowls, pile the beef, onion and mushrooms on with their sauce, and finish with the kimchi, spring onion, sesame and gochugaru.
 

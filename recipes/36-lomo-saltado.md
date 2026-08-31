@@ -29,10 +29,10 @@ The wok has to be properly hot and the beef dry and in one layer, or it steams g
 - 20 g (½ cup, packed) coriander, roughly chopped
 
 ## Method
-1. Boil the kettle. Put the rice, salt and boiling water in a small pan, bring back to the boil, then clamp on a lid and cook on the lowest heat for 10 minutes. Leave it covered off the heat until you serve.
+1. Boil the kettle. The rice goes on before the wok gets hot: salt, boiling water, a small pan, back to the boil, then a lid and 10 minutes at the lowest heat. Leave it covered off the heat until you serve.
 2. Put the potatoes in a bowl with a splash of water, cover, and microwave on full for 6 minutes while you slice everything else. Drain and pat dry — dry chips crisp, wet ones spit.
 3. Heat 2 tbsp of the oil in a wok until it shimmers. Fry the potatoes 3 minutes, turning twice, until golden and crisp on two sides. Tip them back into the bowl.
-4. Add the last tablespoon of oil and the beef, spread flat, in two goes if the wok looks crowded. Leave 60 seconds undisturbed for a crust, then toss a minute more. Push it up the side of the wok.
+4. Add the last tablespoon of oil and the beef, spread flat, in two goes if the wok looks crowded. Leave 60 seconds undisturbed for a crust, then toss a minute more, until the strips are browned outside and firm to the touch, still blushing pink at the centre. Push it up the side of the wok.
 5. Throw the onion, red pepper, chilli and garlic into the base. Two minutes on high — smoky at the edges, still snapping in the middle.
 6. Add the tomatoes, soy, vinegar and pepper. Toss for 1 minute, until the tomatoes slump and the liquid turns glossy and clings to the beef rather than pooling.
 7. Fold the potatoes back in with the coriander. Fork the rice loose, spoon it onto four warm plates and serve the saltado over it, straight from the wok.

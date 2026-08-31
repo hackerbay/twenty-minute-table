@@ -23,7 +23,7 @@ Pineapple is acidic and very wet, so it needs high heat and thick pieces: cut sp
 2. Turn the spears with the honey in a bowl and lay them in the basket in one layer, splitting the batch if they overlap. Crowded spears steam and stay pale.
 3. Air fry for 7 minutes, turning them once at 4 minutes. They are ready when the edges are properly black in places and the surface has gone glassy and wet-looking.
 4. Add the coconut flakes to the basket for the last 90 seconds only, shaking once. They go white to gold to burnt in seconds, so stay near.
-5. Pile the pineapple onto a platter, dust heavily with the chilli salt and squeeze over a lime wedge. Serve with the yoghurt, coconut, herbs and remaining limes.
+5. Pile the pineapple onto a platter, dust heavily with the chilli salt and squeeze over a lime wedge. Serve with the yoghurt, coconut, coriander or mint leaves and remaining limes.
 
 ## Chef's notes
 - **Swap:** Mango cheeks, watermelon batons or thick wedges of firm peach. Watermelon needs 4 minutes and no honey at all.

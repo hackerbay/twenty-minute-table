@@ -28,7 +28,7 @@ Hot-smoked mackerel arrives cooked and already salted, so the only real work is 
 2. Stir the crème fraîche with the horseradish, the lemon zest and half the juice until it stiffens a little. Taste it: it wants to be sharp enough to make you blink, because the fish will blunt it.
 3. Pull the skin off the mackerel and lift the flesh away in wide flakes, running a thumb along each one to find the line of fine pin bones. Leave the flakes whole.
 4. Squeeze the cucumber ribbons gently over the sink — a surprising amount of water comes out and they should feel limp and glassy — then toss them with the rest of the lemon juice.
-5. Spread the rye with the horseradish cream, two slices per plate. Lay the mackerel on in its flakes, drape the cucumber over, tuck the radish coins in among it, and finish with dill and a hard grind of black pepper.
+5. Spread the rye with the horseradish cream, two slices per plate. Lay the mackerel on in its flakes, drape the cucumber over, tuck the sliced radishes in among it, and finish with dill and a hard grind of black pepper.
 
 ## Chef's notes
 - **Swap:** Hot-smoked trout, or a peppered mackerel fillet if you want the heat doubled. Cold-smoked salmon works, though it wants the mustard rather than the horseradish.

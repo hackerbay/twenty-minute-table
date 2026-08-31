@@ -32,7 +32,7 @@ Ginger juice does the tenderising, so the pork needs no marinating window — it
 - 1 lemon, cut into wedges
 
 ## Method
-1. Boil the kettle. Put the rinsed rice, salt and boiling water in a small pan, bring back to the boil, then clamp on a lid and cook on the lowest heat for 10 minutes. Leave it covered off the heat until you serve.
+1. Boil the kettle. Start the rinsed rice in a small pan with the salt and boiling water, bring it back to the boil, lid it and cook 10 minutes on the lowest heat. Leave it covered off the heat until you serve.
 2. Stir the ginger, soy, mirin, sake and honey together in a small bowl.
 3. Shred the cabbage and grate the carrots. Pile them onto four plates, sprinkle with the vinegar and a pinch of salt, and put them somewhere cold.
 4. Heat the oil in a large frying pan over a high heat. Lay in half the pork in one layer and cook 60–90 seconds a side, until the edges are browned and no pink remains. Move to a plate and repeat with the rest.

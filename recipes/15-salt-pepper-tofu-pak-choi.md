@@ -32,7 +32,7 @@ A thin coat of cornflour pulls surface moisture off the tofu and sets into a she
 - ½ tsp caster sugar
 
 ## Method
-1. Boil the kettle and heat the air fryer to 200°C (400°F). Put the rinsed rice, salt and boiling water in a small pan, bring back to the boil, then clamp on a lid and cook on the lowest heat for 10 minutes. Leave it covered off the heat until you serve.
+1. Boil the kettle and heat the air fryer to 200°C (400°F). Tip the rinsed rice into a small pan with the salt and boiling water, return it to the boil, then cover and cook at the lowest heat for 10 minutes. Leave it covered off the heat until you serve.
 2. Roll the tofu in the cornflour on your board until evenly dusty, then tip into the basket and toss with 2 tbsp of the oil. Air fry 8 minutes, shaking firmly at 4 minutes and scattering the broccoli in as you do.
 3. Meanwhile, crush the peppercorns and mix with the white pepper, salt and sugar.
 4. Toss the pak choi with the remaining oil, pile it into the basket and air fry 2 minutes. Add the garlic, chilli and spring onions and air fry 2 minutes more — the tofu deep gold, the pak choi stems still squeaky at the base. The basket will be full by now, so shake it hard rather than stirring.

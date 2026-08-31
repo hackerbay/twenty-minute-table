@@ -23,7 +23,7 @@ Gomen be siga is normally a long braise, but the two halves want opposite treatm
 
 ## Method
 1. Put your widest frying pan over a medium heat, dry, and warm the flatbreads one at a time, 30 seconds a side, until they puff and freckle. Stack them in a tea towel to stay soft.
-2. Turn the heat to its highest and add 1 tbsp of the ghee. Sear the beef in two batches, 90 seconds a batch, until browned outside and still pink at the centre. Season and tip it onto a plate with any juices.
+2. Turn the heat to its highest and add 1 tbsp of the ghee. Sear the beef in two batches, 90 seconds a batch, until the outside is well browned and the centre is still pink but no longer translucent. Season and tip it onto a plate with any juices.
 3. Drop the heat to medium-high, add the rest of the ghee and fry the onion for 3 minutes, until translucent and catching at the edges.
 4. Add the garlic, ginger and berbere and stir for 45 seconds. The fat should turn brick red and the spice smell sweet and toasted rather than sharp.
 5. Pile in the greens with the tomatoes, water and salt. It will look like far too much; press it under a lid for 30 seconds and it collapses to a third. Cook uncovered 5 minutes, stirring twice, until the greens are dark and glossy, tender enough to cut with the side of a spoon, and the water has gone.
