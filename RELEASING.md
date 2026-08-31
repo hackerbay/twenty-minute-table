@@ -24,10 +24,19 @@ The workflow accepts either `FIREBASE_SERVICE_ACCOUNT_TWENTY_MINUTE_TABLE` (what
 CLI creates) or `FIREBASE_SERVICE_ACCOUNT` (what you would call a hand-made one), so use
 whichever route you prefer.
 
-*Route A — let the Firebase CLI do it (recommended).* From a clone of this repo:
+*Route A — let the Firebase CLI do it (recommended).*
+
+**Run it from the directory that contains `firebase.json`**, which is the repository root. Get
+that wrong and the CLI walks you through picking a project and then stops with
+`Didn't find a Hosting config in firebase.json` — it is describing the directory you are
+standing in, not a problem with the repo. On a machine where the working copy sits inside
+another folder, that is an easy mistake to make:
 
 ```bash
-firebase login          # if you are not already
+cd "$(git rev-parse --show-toplevel)"   # the repo root, wherever you cloned it
+ls firebase.json                        # this must exist before going further
+
+firebase login                          # if you are not already
 firebase init hosting:github
 ```
 
