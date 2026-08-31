@@ -27,6 +27,23 @@ NM = ROOT / 'node_modules'
 PDF_NAME = 'The-20-Minute-Table.pdf'
 PDF_SRC = ROOT / 'dist' / PDF_NAME
 
+GH_URL = 'https://github.com/hackerbay/twenty-minute-table'
+
+GH_ICON = ('<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" '
+           'aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 '
+           '7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09'
+           '-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 '
+           '1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59'
+           '.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36'
+           '.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 '
+           '2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 '
+           '.21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>')
+
+STAR_ICON = ('<svg width="15" height="15" viewBox="0 0 24 24" fill="none" '
+             'stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" '
+             'aria-hidden="true"><path d="m12 3 2.85 5.78 6.38.93-4.62 4.5 1.09 6.35L12 '
+             '17.56l-5.7 3 1.09-6.35-4.62-4.5 6.38-.93L12 3Z"/></svg>')
+
 DL_ICON = ('<svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" '
            'stroke="currentColor" stroke-width="2" stroke-linecap="round" '
            'stroke-linejoin="round" aria-hidden="true">'
@@ -117,7 +134,28 @@ def footer(depth=0):
             f'and is built on whole ingredients. Nutrition figures are estimates. '
             f'<a href="{up}toddlers.html">Cooking for a toddler</a> &nbsp;·&nbsp; '
             f'<a href="{up}about.html">More about the book</a>.</p>'
+            f'<p class="foot-gh">{GH_ICON}<span>Open source &mdash; the recipes and the '
+            f'typesetter that builds this are '
+            f'<a href="{GH_URL}">on GitHub</a>. Fork it, fix it, add a dinner.</span></p>'
             f'</div></footer>')
+
+
+def contribute(depth=0):
+    """The open-source invitation, shown at the foot of the longer pages."""
+    return (f'<section class="gh"><div class="wrap"><div class="gh-card">'
+            f'<p class="eyebrow">Open source</p>'
+            f'<h2 class="d">Take it, cook it, change it</h2>'
+            f'<p class="gh-lede">Every recipe, the typesetter that turns them into the '
+            f'book, and this website are on GitHub. The code is MIT, the recipes are '
+            f'CC&nbsp;BY&nbsp;4.0. Fork it, add the dinners your family actually eats, '
+            f'translate it, print it for the inside of a cupboard door. Nobody should '
+            f'have to choose between eating well and having twenty minutes.</p>'
+            f'<div class="gh-actions">'
+            f'<a class="btn btn-p" href="{GH_URL}">{GH_ICON}<span>View the repository</span></a>'
+            f'<a class="btn btn-s" href="{GH_URL}/stargazers">{STAR_ICON}<span>Star it</span></a>'
+            f'<a class="btn btn-s" href="{GH_URL}/blob/main/CONTRIBUTING.md">'
+            f'<span>Add a recipe</span></a>'
+            f'</div></div></div></section>')
 
 
 # ---------------------------------------------------------------- index page
@@ -193,6 +231,7 @@ def build_index(recipes):
 <main class="wrap" id="results">{cards}
   <p class="empty" id="empty" hidden>Nothing matches that. <button class="clear" data-clear>Clear the filters</button></p>
 </main>
+{contribute(0)}
 {footer(0)}"""
     (SITE / 'index.html').write_text(shell(
         'The 20-Minute Table', body, 0,
@@ -363,6 +402,7 @@ def build_about(recipes, rules):
   <p class="dl">The whole thing is also a printable{pages} book:
     <a href="{PDF_NAME}" download>download the PDF</a>.</p>
 </main>
+{contribute(0)}
 {footer(0)}"""
     (SITE / 'about.html').write_text(shell('About — The 20-Minute Table', body, 0,
         'Why these recipes are fast, and what the book is built on.'), encoding='utf-8')

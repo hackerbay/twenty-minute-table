@@ -246,10 +246,32 @@ a{color:inherit}
 .dl a{color:#C1502E;font-weight:600}
 
 /* ---------- footer ---------- */
+/* ---------- open source invitation ---------- */
+.gh{margin-top:76px}
+.gh-card{padding:40px 38px;border:1px solid var(--line);border-radius:var(--radius);
+  background:var(--panel)}
+.gh-card h2{margin:6px 0 14px;font-size:30px;letter-spacing:-.02em}
+.gh-lede{margin:0;max-width:64ch;color:var(--ink2);font-size:16px;line-height:1.65}
+.gh-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:10px 18px;border-radius:999px;
+  font-size:14.5px;font-weight:500;text-decoration:none;border:1px solid transparent}
+.btn-p{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn-p:hover{opacity:.88}
+.btn-s{background:var(--card);color:var(--ink2);border-color:var(--line)}
+.btn-s:hover{color:var(--ink);border-color:var(--ink3)}
+@media (max-width:640px){
+  .gh{margin-top:56px}
+  .gh-card{padding:28px 22px}
+  .gh-card h2{font-size:25px}
+  .btn{padding:9px 15px;font-size:14px}
+}
+
 .foot{margin-top:70px;padding:44px 0;border-top:1px solid var(--line);background:var(--panel)}
 .foot-t{margin:0 0 8px;font-family:'Fraunces',Georgia,serif;font-size:17px;font-weight:600}
 .foot p{margin:0;max-width:62ch;font-size:13.6px;line-height:1.6;color:var(--ink3)}
 .foot a{color:var(--ink2)}
+.foot .foot-gh{display:flex;align-items:flex-start;gap:9px;margin-top:15px;color:var(--ink3)}
+.foot .foot-gh svg{flex:none;margin-top:3px}
 [hidden]{display:none!important}
 
 /* ---------- toddler ---------- */

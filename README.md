@@ -146,9 +146,25 @@ published site does not drift from `recipes/`.
 
 ## Contributing
 
-`AGENTS.md` documents the recipe file contract, the house style rules the build enforces, and
-what not to hand-edit. Read it before changing a recipe — `make verify` and `make audit` must
-both come back clean, and generated output in `dist/` and `site/` is regenerated, never edited.
+Fork it, change it, cook from it, translate it. [CONTRIBUTING.md](CONTRIBUTING.md) covers the
+workflow; [AGENTS.md](AGENTS.md) documents the recipe file contract, the house style rules the
+build enforces, and what not to hand-edit. `make verify` and `make audit` must both come back
+clean, and generated output in `dist/` and `site/` is regenerated, never edited.
+
+Corrections are the most valuable contribution here — if you cooked something and it did not
+work, that is worth an issue on its own.
+
+## Licence
+
+Two licences, because this repo is two things:
+
+- **The software** — the toolchain in `book/`, the site's stylesheet and script — is
+  [MIT](LICENSE).
+- **The content** — the recipes in `recipes/`, the written text of the book, and the artwork in
+  `book/art/` — is [CC BY 4.0](LICENSE-CONTENT).
+
+So you may share and adapt any of it, for any purpose including commercially, as long as you
+give credit.
 
 
 ---
