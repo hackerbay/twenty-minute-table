@@ -29,6 +29,10 @@ This project uses [semantic versioning](https://semver.org) loosely, read for a 
   the 25% target, and says what list price each edition would need.
 - ISBNs allocated from HackerBay's own Bowker block, so the publisher of record
   is not Amazon.
+- The book says where it came from: HackerBay.io on the title page, the copyright
+  page, the colophon and both covers.
+- A "Why this book exists" page facing the title page, and an open-source note on
+  the back cover.
 
 ## 1.0.0
 

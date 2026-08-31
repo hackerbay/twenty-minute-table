@@ -12,7 +12,8 @@ printing-cost calculator before setting a price.
 TITLE = 'The 20-Minute Table'
 SUBTITLE = 'A hundred fast, whole-food recipes for the years when dinner has to happen anyway'
 AUTHOR = 'Nawaz Dhandala'
-PUBLISHER = ''          # your imprint name, if you use your own ISBN
+PUBLISHER = 'HackerBay'
+PUBLISHER_SITE = 'HackerBay.io'
 YEAR = 2026
 EDITION = 'First edition'
 SITE = 'twentyminutetable.hackerbay.io'

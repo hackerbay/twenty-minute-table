@@ -88,6 +88,9 @@ def wrap_html(recipes, g):
     .bk-list{{display:grid;grid-template-columns:1fr 1fr;gap:2.6mm 8mm;font-size:9.6pt;
       color:{mid}}}
     .bk-list b{{color:#E8A87C;font-weight:600}}
+    .bk-os{{margin-top:9mm;padding-top:6mm;border-top:1px solid {blurb_rule};
+      font-size:9.4pt;line-height:1.6;color:{mid};max-width:104mm}}
+    .bk-os b{{color:#E8A87C;font-weight:600}}
     .bk-foot{{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;
       font-size:8pt;letter-spacing:.14em;text-transform:uppercase;color:{faint}}}
     /* KDP prints the barcode over the lower right of the back cover: keep it clear */
@@ -120,7 +123,11 @@ def wrap_html(recipes, g):
         <div><b>20</b> minutes, maximum</div><div><b>{veg}</b> vegetarian</div>
         <div><b>1</b> pan or basket</div><div><b>4</b> servings throughout</div>
       </div>
-      <div class="bk-foot"><span>{IMP.SITE}</span><span>{IMP.PUBLISHER or ''}</span></div>
+      <p class="bk-os"><b>The whole book is open source.</b> Every recipe, and the
+      software that typesets them into this book, is published under an open licence at
+      {IMP.REPO}. Take it, change it, translate it, print it. We would rather eating well
+      did not depend on having time, money, or anybody&rsquo;s permission.</p>
+      <div class="bk-foot"><span>{IMP.SITE}</span><span>{IMP.PUBLISHER_SITE}</span></div>
     </div>
     <div class="barcode"></div>"""
 

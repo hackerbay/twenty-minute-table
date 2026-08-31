@@ -26,6 +26,20 @@ def resolve(base, href):
 def main():
     if not EPUB.exists():
         sys.exit('epubcheck: build the epub first (make epub)')
+    # A build that fails before writing leaves the previous archive in place, and
+    # validating that would report success for a file nobody just built. Compare
+    # against the newest input instead of trusting whatever is on disk.
+    built = EPUB.stat().st_mtime
+    sources = list((ROOT / 'recipes').glob('*.md')) + list((ROOT / 'book').rglob('*.py'))
+    cover = ROOT / 'dist' / 'cover-kindle.jpg'
+    if cover.exists():
+        sources.append(cover)
+    newer = [p for p in sources if p.stat().st_mtime > built]
+    if newer:
+        rel = [str(p.relative_to(ROOT)) for p in sorted(newer)[:4]]
+        sys.exit(f'epubcheck: {EPUB.name} is older than {len(newer)} of its sources '
+                 f'({", ".join(rel)}). Rebuild it — the epub build probably failed.')
+
     z = zipfile.ZipFile(EPUB)
     names = z.namelist()
     problems = []

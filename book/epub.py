@@ -171,12 +171,14 @@ def build():
         title=esc(IMP.TITLE), up='',
         body=(f'<div class="front"><h1>{esc(IMP.TITLE)}</h1>'
               f'<p>{esc(IMP.SUBTITLE)}</p><p>{esc(IMP.AUTHOR)}</p>'
+              f'<p class="small">{esc(IMP.PUBLISHER)} &#183; {esc(IMP.PUBLISHER_SITE)}</p>'
               f'<p class="small">{esc(IMP.SITE)}</p></div>')).encode()
 
     files['OEBPS/copyright.xhtml'] = XHTML.format(
         title='Copyright', up='',
         body=('<div class="front small">'
               f'<p>Copyright &#169; {IMP.YEAR} {esc(IMP.AUTHOR)}</p>'
+              f'<p>Published by {esc(IMP.PUBLISHER)}, {esc(IMP.PUBLISHER_SITE)}</p>'
               f'<p>{esc(IMP.LICENCE)}</p><p>{esc(IMP.MORAL_RIGHTS)}</p>'
               f'<p>{esc(IMP.EDITION)}, {IMP.YEAR}. Version {VERSION}.</p>'
               f'<p>{IMP.DISCLAIMER}</p><p>{esc(IMP.SITE)}</p></div>')).encode()
@@ -259,12 +261,16 @@ def build():
         'media-type="application/oebps-package+xml"/></rootfiles>\n</container>\n').encode()
 
     OUT.parent.mkdir(exist_ok=True)
-    with zipfile.ZipFile(OUT, 'w') as z:
+    # Written to one side and moved into place, so a crash mid-build leaves the
+    # previous archive intact rather than a truncated one that still opens.
+    tmp = OUT.with_name(OUT.name + '.tmp')
+    with zipfile.ZipFile(tmp, 'w') as z:
         # mimetype must be first and stored uncompressed
         z.writestr(zipfile.ZipInfo('mimetype'), 'application/epub+zip',
                    compress_type=zipfile.ZIP_STORED)
         for name in sorted(files):
             z.writestr(name, files[name], compress_type=zipfile.ZIP_DEFLATED)
+    tmp.replace(OUT)
 
     mb = OUT.stat().st_size / 1e6
     img_mb = sum(len(v) for k, v in files.items() if k.startswith('OEBPS/img/')) / 1e6

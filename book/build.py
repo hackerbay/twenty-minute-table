@@ -85,7 +85,7 @@ def cover_front_html(recipes):
     <div class="menu">{menu}</div>
     <div style="flex:.35"></div>
     <div class="cover-rule"></div>
-    <div class="cover-foot" style="margin-top:4mm"><div>The 20-Minute Table</div><div>First edition &nbsp;&middot;&nbsp; v{VERSION}</div></div>"""
+    <div class="cover-foot" style="margin-top:4mm"><div>{IMP.PUBLISHER_SITE}</div><div>First edition &nbsp;&middot;&nbsp; v{VERSION}</div></div>"""
 
 
 def build(recipes):
@@ -97,8 +97,8 @@ def build(recipes):
     allc  = len({r['cuisine'] for r in recipes})
     counts = Counter(r['method'] for r in recipes)
     pages = []
-    # Half title, blank, title page, copyright, the eleven prose pages, and a blank
-    # verso so the first divider opens on a recto.
+    # Half title, the why-this-exists note, title page, copyright, the eleven prose
+    # pages, and a blank verso so the first divider opens on a recto.
     FRONT = 16
     ORDERED = [mains, sides, brek, puds]   # the order the sections appear in the book
     pageno, _p = {}, FRONT
@@ -128,14 +128,37 @@ def build(recipes):
     <div style="flex:1"></div>
     <h1 class="ht d">The<br>20&#8209;Minute<br><em>Table</em></h1>
     <div style="flex:1.4"></div>"""))
-    pages.append(page('blankp', None, ''))
+    pages.append(page('whyp', None, f"""
+    <div style="flex:.6"></div>
+    <p class="why-k">Why this book exists</p>
+    <h2 class="why-t d">Eating well should not<br>depend on having time</h2>
+    <div class="why-body">
+      <p>Most of the reasons a household stops cooking are practical rather than
+      culinary: the deciding, the shopping, the hunting for a jar of something at the
+      back of a cupboard, and the twenty minutes of washing up after a meal that took
+      thirty to make. Those are the parts this book removes, and it removes them on
+      purpose &mdash; because once they are gone, cooking from whole ingredients stops
+      being an aspiration and becomes the easier option.</p>
+      <p>Every constraint here exists to make that true rather than merely say it.
+      Twenty minutes from a cold start. One pan or one basket. Four servings. A
+      toddler&rsquo;s portion out of the same pan, before the salt and before the chilli.
+      None of it assumes more time, more money or more equipment than you have.</p>
+      <p>Which is why the whole thing is <b>open source</b>. Every recipe, the
+      typesetter that turns them into this book, and the website that publishes them
+      are yours: the recipes under Creative Commons, the software under the MIT
+      licence, all of it at {IMP.REPO}. Take them, change them, translate them, print
+      them for the inside of a cupboard door. Add the dinners your own family actually
+      eats. Nobody needs permission, and that is the point &mdash; food this plain
+      should not belong to anyone.</p>
+    </div>
+    <div style="flex:1"></div>"""))
     pages.append(page('titlep', None, f"""
     <div style="flex:1"></div>
     <h1 class="tp-t d">The<br>20&#8209;Minute<br><em>Table</em></h1>
     <p class="tp-sub">{IMP.SUBTITLE}</p>
     <div style="flex:1.1"></div>
     <p class="tp-au d">{IMP.AUTHOR}</p>
-    <p class="tp-pub">{IMP.PUBLISHER or IMP.SITE}</p>"""))
+    <p class="tp-pub">{IMP.PUBLISHER} &nbsp;&middot;&nbsp; {IMP.PUBLISHER_SITE}</p>"""))
     isbns = ''.join(f'<p>ISBN ({k}): {v}</p>' for k, v in IMP.ISBN.items() if v)
     pages.append(page('copyr', None, f"""
     <div style="flex:.45"></div>
@@ -143,6 +166,7 @@ def build(recipes):
       <p class="cp-t d">{IMP.TITLE}</p>
       <p class="cp-sub">{IMP.SUBTITLE}</p>
       <p>Copyright &copy; {IMP.YEAR} {IMP.AUTHOR}</p>
+      <p>Published by {IMP.PUBLISHER}, {IMP.PUBLISHER_SITE}</p>
       <p>{IMP.LICENCE}</p>
       <p>{IMP.MORAL_RIGHTS}</p>
       <p>{IMP.EDITION}, {IMP.YEAR}. Version {VERSION}.</p>
@@ -595,7 +619,7 @@ def build(recipes):
         <div><h6>The type</h6><p>Set in Fraunces, drawn by Phaedra Charles and Flavia Zimbardi, and Inter, drawn by Rasmus Andersson. Both are open source.</p></div>
         <div><h6>The numbers</h6><p>Nutrition figures are estimates for a quarter of the finished dish, rounded, and exclude anything listed under &ldquo;bulk it out&rdquo;. Cook the food, not the numbers.</p></div>
       </div>
-      <div class="colo-edition">Version {VERSION} &nbsp;&middot;&nbsp; The recipes and the typesetter that made this book are open source at github.com/hackerbay/twenty-minute-table</div>
+      <div class="colo-edition">{IMP.PUBLISHER_SITE} &nbsp;&middot;&nbsp; Version {VERSION} &nbsp;&middot;&nbsp; The recipes and the typesetter that made this book are open source at github.com/hackerbay/twenty-minute-table</div>
     </div>""", 'A FEW THINGS WORTH KNOWING'))
 
     def stamp(p, i):
