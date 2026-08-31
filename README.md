@@ -1,6 +1,6 @@
 # The 20-Minute Table
 
-**100 fast, whole-food recipes for new parents**, published two ways: a printable 217-page
+**100 fast, whole-food recipes for new parents**, published two ways: a printable 224-page
 A4 cookbook and a static website you can host anywhere.
 
 Written for the stretch of life when dinner has to happen anyway: a small person who needs
@@ -23,7 +23,7 @@ ends by telling you how to lift a toddler's portion out of that same pan.
 | Vegetarian | 54, marked throughout |
 | Air fryer / one pan / wok / no cook | 30 / 44 / 7 / 19 |
 | Serves | 4 throughout |
-| Pages | 217 |
+| Pages | 224 |
 
 Metric quantities first, US cups and ounces alongside.
 
@@ -123,7 +123,7 @@ Each recipe occupies exactly two A4 pages, and recipes vary a lot in length. Bef
 a single parameter that expands or tightens a set of levers — leading between steps and
 ingredients, panel padding, and on the densest pages the body size itself — until the content
 sits a consistent 4.5 mm above the footer block. Long ingredient lists switch to a two-column
-panel automatically. Every one of the 217 pages fits, and none is conspicuously empty.
+panel automatically. Every one of the 224 pages fits, and none is conspicuously empty.
 
 ## Photographs
 
