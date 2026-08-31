@@ -46,36 +46,42 @@ MIN_KINDLE_MARGIN = 0.25        # royalty after delivery, as a share of list pri
 
 # --- print economics -------------------------------------------------------
 # KDP pays 60% of list minus the printing cost, so on a colour book the page
-# count sets the floor under the price. These figures are the ones to check
-# first in KDP's printing-cost calculator: everything below depends on them and
-# NONE of them is confirmed against a primary source.
+# count sets the floor under the price.
 #
-# Premium colour is the expensive ink. Standard colour is roughly a third of the
-# per-page cost and is what makes a book this long affordable; the numbers are
-# here so the trade is visible rather than assumed.
-PRINT_ROYALTY_RATE = 0.60
+# Every figure below was read from KDP's own Printing Cost & Royalty Calculator
+# on 2026-08-31, for 8.25x11 at 224 pages on Amazon.com, and cross-checked
+# against the published rate tables. 8.25x11 is a LARGE trim (over 6.12in wide
+# or over 9in tall), which is the more expensive per-page band.
+#
+# Ink and paper are locked permanently once a title is published — a book cannot
+# be moved between premium colour, standard colour and black-and-white later.
+PRINT_ROYALTY_RATE = 0.60       # verified: the calculator returns 60% at these prices
 MIN_PRINT_MARGIN = 0.25         # royalty after printing, as a share of list price
 
 # fixed cost, per-page cost — USD, Amazon.com, large trim
-# NOTE: ink and paper are locked permanently once a title is published. A book
-# cannot be moved between premium colour, standard colour and black-and-white
-# afterwards, so this is a one-way decision.
 INK = {
-    'premium colour':  (1.00, 0.0800),   # UNVERIFIED
-    'standard colour': (1.00, 0.0402),   # UNVERIFIED — roughly half of premium
+    'premium colour':  (1.00, 0.0800),   # verified — paperback, 42-828 pages
+    'standard colour': (1.00, 0.0402),   # verified — paperback, 72-600 pages
 }
-INK_CHOICE = 'premium colour'
+# The interior is entirely vector art and flat colour, with no photographs, so
+# premium colour buys nothing this book can use.
+INK_CHOICE = 'standard colour'
+
+# Hardcover is PREMIUM COLOUR ONLY — the calculator rejects standard colour with
+# "Standard color is currently not available for hardcover books", so a hardback
+# cannot be made cheaper the way the paperback can.
+HARDBACK_INK = 'premium colour'
 
 # List prices. Set these from KDP's calculator once the real print cost is known;
 # pricing.py will tell you the minimum each edition needs to clear MIN_PRINT_MARGIN.
 LIST_USD = {
-    'paperback': 20.00,
-    'hardback': 55.00,
+    'paperback': 28.99,
+    'hardback': 69.99,
 }
 
-# KDP publishes no hardcover printing formula. Rather than invent one, put the
-# figure from the cover/printing calculator here and the check will use it.
-HARDBACK_PRINT_COST_USD = None
+# Verified in the calculator: hardcover, 8.25x11, 224 pages, premium colour,
+# Amazon.com. $5.65 fixed + 224 * $0.08 = $23.57. Minimum list price $39.28.
+HARDBACK_PRINT_COST_USD = 23.57
 
 # The content is CC BY 4.0, so the copyright page says that rather than the
 # "all rights reserved" boilerplate, which would contradict the LICENSE files.

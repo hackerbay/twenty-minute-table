@@ -159,8 +159,11 @@ $EDITOR CHANGELOG.md                     # move Unreleased items under the new h
 make amazon
 open dist/The-20-Minute-Table.pdf        # the cover foot and colophon should read v1.1.0
 
-# 4. commit the sources and the regenerated output together
-git add -A
+# 4. commit the sources and the regenerated output together.
+#    Stage paths, not -A: the Firebase CLI drops a firebase-debug.log containing
+#    a live GitHub token, and a blanket add will happily sweep it in.
+git add recipes book dist site package.json CHANGELOG.md
+git status                               # look at what you are about to commit
 git commit -m "Release 1.1.0"
 git push origin main
 
@@ -246,18 +249,29 @@ delivery fee on Kindle. On a 224-page colour book the printing cost dominates ev
 `make amazon`, so you cannot prepare a submission whose economics do not work. CI does not run
 it — a business decision nobody has made yet should not turn the build red.
 
-Two things it will tell you that are worth knowing before you price anything:
+The figures come from KDP's own Printing Cost & Royalty Calculator, read on 2026-08-31 for
+8.25x11 at 224 pages on Amazon.com. KDP pays **60%** of list minus printing, and refuses any
+price below printing cost divided by that rate.
 
-- **Premium colour is the whole problem.** At 224 pages it costs about $18.92 a copy, so 25%
-  margin needs a list price around **$54**. Standard colour costs about $6.71 and clears the
-  same margin at about **$19**. Every 10 pages you cut takes roughly $2.29 off the minimum
-  price. That is the trade; the build states it rather than assuming an answer.
-- **Kindle is comfortable.** At 4.2 MB the delivery fee is about $0.63, so $9.99 returns about
-  64% — well clear of the target, and the figure is conservative because Amazon charges on the
-  converted file, which is smaller than the EPUB.
+| Edition | Ink | Printing cost | KDP minimum | List | Margin |
+|---|---|---|---|---|---|
+| Paperback | Standard colour | $10.00 | $16.67 | **$28.99** | 25% |
+| Hardback | Premium colour | $23.57 | $39.28 | **$69.99** | 26% |
+| Kindle | — | $0.63 delivery | — | **$9.99** | 64% |
 
-Every number behind this is marked UNVERIFIED in `imprint.py`. Put the real figures from KDP's
-printing-cost calculator in `INK` and `HARDBACK_PRINT_COST_USD` before trusting any of it.
+Three things worth knowing before changing any of it:
+
+- **The paperback is standard colour on purpose.** The interior is entirely vector art and flat
+  colour with no photographs, so premium colour buys nothing this book can use — it would cost
+  $18.92 a copy instead of $10.00 and put the KDP minimum at $31.53, above the price we want to
+  sell at.
+- **The hardback has no such choice.** KDP does not offer standard colour for hardcover; the
+  calculator rejects it outright. That is why the hardback is nearly $70 and the paperback is
+  under $30.
+- **Ink and paper are locked permanently at publication.** A title cannot be moved between
+  premium colour, standard colour and black-and-white afterwards. Page count is the only lever
+  left: each page costs $0.0402 in standard colour, so ten pages cut takes about $1.15 off the
+  minimum price.
 
 Before the first submission:
 

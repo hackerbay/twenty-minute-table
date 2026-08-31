@@ -66,11 +66,13 @@ def main():
                     IMP.PRINT_ROYALTY_RATE, target, IMP.LIST_USD.get('paperback')))
 
     if IMP.HARDBACK_PRINT_COST_USD is None:
-        notes.append('Hardback printing cost is unset — KDP publishes no hardcover formula. '
-                     'Put the calculator figure in imprint.HARDBACK_PRINT_COST_USD.')
+        notes.append('Hardback printing cost is unset. Read it off KDP\'s Printing Cost & '
+                     'Royalty Calculator and put it in imprint.HARDBACK_PRINT_COST_USD.')
     else:
-        rows.append(row('Hardback', IMP.HARDBACK_PRINT_COST_USD,
+        rows.append(row(f'Hardback ({IMP.HARDBACK_INK})', IMP.HARDBACK_PRINT_COST_USD,
                         IMP.PRINT_ROYALTY_RATE, target, IMP.LIST_USD.get('hardback')))
+        notes.append('Hardcover is premium colour only — KDP does not offer standard colour '
+                     'for it, so the hardback cannot be made cheaper the way the paperback can.')
 
     # ---- kindle ------------------------------------------------------------
     if EPUB.exists():
@@ -93,12 +95,16 @@ def main():
     print(f'pricing: {n} pages, ink "{IMP.INK_CHOICE}", '
           f'target margin {target:.0%} print / {IMP.MIN_KINDLE_MARGIN:.0%} Kindle\n')
     w = max(len(r['label']) for r in rows)
-    print(f'  {"edition".ljust(w)}  {"unit cost":>9}  {"min list":>9}  {"your list":>9}  {"margin":>7}')
+    print(f'  {"edition".ljust(w)}  {"unit cost":>9}  {"KDP min":>8}  '
+          f'{"25% at":>8}  {"your list":>9}  {"margin":>7}')
     for r in rows:
         need = f"${r['need']:.2f}" if r['need'] else 'impossible'
         listed = f"${r['listed']:.2f}" if r['listed'] else '—'
         marg = f"{r['margin']:.0%}" if r['margin'] is not None else '—'
-        print(f"  {r['label'].ljust(w)}  {'$%.2f' % r['cost']:>9}  {need:>9}  {listed:>9}  {marg:>7}")
+        # KDP will not accept a list price below printing cost / royalty rate
+        floor = f"${r['cost'] / r['rate']:.2f}"
+        print(f"  {r['label'].ljust(w)}  {'$%.2f' % r['cost']:>9}  {floor:>8}  "
+              f"{need:>8}  {listed:>9}  {marg:>7}")
     print()
 
     for r in rows:
@@ -129,21 +135,6 @@ def main():
             mark = '<-- selected' if ink == IMP.INK_CHOICE else ''
             print(f'    {ink:16s} cost ${cost:5.2f}   you keep ${per_copy:6.2f}   '
                   f'{m:>5.0%}   {verdict:14s} {mark}')
-        print()
-
-    # The hardback printing cost has to come from KDP's calculator. Until it does,
-    # show how the answer moves across a plausible range rather than pretend to one.
-    hb_list = IMP.LIST_USD.get('hardback')
-    if hb_list and IMP.HARDBACK_PRINT_COST_USD is None:
-        print(f'  hardback at ${hb_list:.2f}, if the print cost turns out to be:')
-        for cost in (18.00, 22.00, 26.00, 30.00):
-            m = margin_at(hb_list, cost, IMP.PRINT_ROYALTY_RATE)
-            keep = IMP.PRINT_ROYALTY_RATE * hb_list - cost
-            need = min_list(cost, IMP.PRINT_ROYALTY_RATE, target)
-            flag = 'clears' if m >= target else ('below cost' if keep < 0 else 'under')
-            print(f'    ${cost:5.2f}   you keep ${keep:6.2f}   {m:>5.0%}   {flag:11s} '
-                  f'({target:.0%} would need ${need:.2f})')
-        print('    ^ estimates only — put the real figure in imprint.HARDBACK_PRINT_COST_USD')
         print()
 
     per_page = IMP.INK[IMP.INK_CHOICE][1]
