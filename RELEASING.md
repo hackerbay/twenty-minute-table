@@ -13,15 +13,58 @@ Amazon](#publishing-to-amazon).
 
 Two things are missing until somebody with admin on the repo does them.
 
-**1. Let the release workflow deploy.** It needs a Firebase service account in the repository
-secrets as `FIREBASE_SERVICE_ACCOUNT`. From a clone, with the Firebase CLI logged in:
+**1. Let the release workflow deploy: `FIREBASE_SERVICE_ACCOUNT`.**
+
+The workflow deploys to Firebase from a GitHub runner, which cannot use your personal login. It
+needs a *service account* — a robot Google account whose private key lives in the repository
+secrets. Creating it is the one step here that mints a credential, which is why it is not
+automated.
+
+The workflow accepts either `FIREBASE_SERVICE_ACCOUNT_TWENTY_MINUTE_TABLE` (what the Firebase
+CLI creates) or `FIREBASE_SERVICE_ACCOUNT` (what you would call a hand-made one), so use
+whichever route you prefer.
+
+*Route A — let the Firebase CLI do it (recommended).* From a clone of this repo:
 
 ```bash
+firebase login          # if you are not already
 firebase init hosting:github
 ```
 
-That creates the service account, stores the secret, and grants it deploy rights. It is the
-only step here that mints a credential, which is why it is not automated.
+It will:
+
+1. Ask for the repository — answer `hackerbay/twenty-minute-table`.
+2. Open a browser to authorise the Firebase CLI's GitHub app. Approve it.
+3. Create the service account, grant it Firebase Hosting rights, and store its key as the
+   repository secret `FIREBASE_SERVICE_ACCOUNT_TWENTY_MINUTE_TABLE`.
+4. Offer to set up a build script and automatic deployment on merge to `main`. **Decline the
+   automatic deployment**, or delete the `firebase-hosting-*.yml` files it writes — this repo
+   deploys from the `release` branch, and leaving those in place would publish every commit to
+   `main` as well.
+
+*Route B — by hand, through the Google Cloud console.*
+
+1. Open the [service accounts page](https://console.cloud.google.com/iam-admin/serviceaccounts?project=twenty-minute-table)
+   for the `twenty-minute-table` project.
+2. **Create service account.** Name it something like `github-actions-deploy`.
+3. Grant it the **Firebase Hosting Admin** role. (Add **Firebase Authentication Admin** too if
+   you want preview channels to stop warning about auth domains.)
+4. Open the account, go to **Keys → Add key → Create new key → JSON**, and download it.
+5. In GitHub: **Settings → Secrets and variables → Actions → New repository secret.** Name it
+   `FIREBASE_SERVICE_ACCOUNT` and paste the **entire contents** of the JSON file as the value —
+   the whole `{ ... }`, not a path to it.
+6. **Delete the downloaded JSON.** It is a live credential; it must never be committed, and
+   there is no reason to keep a copy once GitHub has it.
+
+*Check it worked* — this lists names only, never values:
+
+```bash
+gh secret list --repo hackerbay/twenty-minute-table
+```
+
+If the deploy step later fails with a permissions error, the service account is missing the
+Hosting Admin role; if it fails parsing, the secret probably holds a file path or a partial
+paste rather than the whole JSON.
 
 **2. Create the `release` branch.** Everything on `main` is a candidate; `release` is what has
 actually shipped.
