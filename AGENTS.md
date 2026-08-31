@@ -108,6 +108,45 @@ And these are conventions to match, enforced by `audit.py` or by eye:
 - No sentence copy-pasted between recipes; `audit.py` flags repeated prose.
 - Plain, declarative voice. Describe what happens in the pan and why, not how good it tastes.
 
+## Print geometry — the rules the book is now built to
+
+The book is typeset for Amazon KDP at **8.25in x 11in trim**, the only size in KDP's
+catalogue that is both a standard hardcover trim and reachable as a paperback. One interior
+serves the premium colour hardback and the premium colour paperback. `docs/kdp-publishing-spec.md`
+is the full specification; these are the parts that will break if you edit carelessly.
+
+**The page box carries bleed.** `.page` is `8.375in x 11.25in` — trim plus 0.125in on the top,
+bottom and outer edge. The gutter never carries bleed. Anything that should reach the printed
+edge must run to the page box edge, not the trim line.
+
+**Margins are mirrored, and the side comes from the page index.** `build.py` stamps
+`data-side="recto|verso"` when it numbers the pages; the CSS keys the mirrored `.inner` padding,
+the folio centring and the page-number side off that attribute. Never derive the side from
+`:nth-of-type()` — divider and blank insertions make the DOM index wrong.
+
+**Pagination invariants, asserted in `build.py`.** A facing pair in a bound book is
+(even verso, odd recto), so every recipe's plate page must be even and its method page the next
+one, or the two-page spread the whole design rests on is split across a page turn. The build
+asserts this for all 100 recipes, that each recipe's contents entry matches where its plate
+actually lands, and that the total page count is even — KDP appends an uncontrolled blank
+otherwise. Blank versos close sections one to three so the next divider opens on a recto; front
+matter runs to 16 pages for the same reason. Change `FRONT`, add a page, or reorder a section
+and the assertion will tell you what you broke.
+
+**The cover is not an interior page.** KDP prints it from a separate wrap file. The artwork
+lives in `build.cover_front_html()` and is rendered by the cover build, not appended to `pages`.
+
+**Never write `rgba()`, `opacity`, or an eight-digit hex.** KDP requires a flattened interior.
+Every alpha in this book is one known colour over one known backdrop, so it is pre-composited at
+build time with `flatten.mix(fg, bg, alpha)`. Flattening downstream with Ghostscript instead
+would rasterise those regions and turn an all-vector book into a mixed one, reintroducing a
+resolution problem the book does not otherwise have. `make kdp` fails the build on any
+transparency group, soft mask, sub-1 alpha operator, wrong page box or odd page count.
+
+**ISBNs live in `book/imprint.py`** and are blank until KDP assigns them. The copyright page
+omits any empty field rather than printing a placeholder, so the book is always correct to
+print — but a paperback cannot be submitted without one.
+
 ## Typesetting
 
 Each recipe occupies exactly two A4 pages. `render.py` runs a vertical-justification pass in

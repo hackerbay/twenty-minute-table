@@ -6,6 +6,7 @@ layout so the same recipe always produces the same picture.
 """
 import math, random, re, sys
 from pathlib import Path
+from flatten import mix
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from food import PART as FOOD
@@ -161,10 +162,14 @@ def paint(key, sw=2.0):
 
 
 # --- the plate -------------------------------------------------------------
-def _vessel(method, cx, cy, r, ink):
-    """A plate, a pan or an air-fryer basket, seen from above."""
+def _vessel(method, cx, cy, r, surface):
+    """A plate, a pan or an air-fryer basket, seen from above.
+
+    `surface` is the hero background the shadow falls on; it is pre-composited
+    rather than drawn with alpha, because KDP requires a flattened interior.
+    """
     rim, face, edge = '#FFFFFF', '#FDFAF4', '#E4DACA'
-    sh = f'<ellipse cx="{cx:.0f}" cy="{cy + r * .10:.0f}" rx="{r * 1.03:.0f}" ry="{r * 1.0:.0f}" fill="#000" opacity=".07"/>'
+    sh = f'<ellipse cx="{cx:.0f}" cy="{cy + r * .10:.0f}" rx="{r * 1.03:.0f}" ry="{r * 1.0:.0f}" fill="{mix("#000000", surface, .07)}"/>'
     if method == 'Air fryer':
         k = r * .96
         return (sh + f'<rect x="{cx-k:.0f}" y="{cy-k:.0f}" width="{k*2:.0f}" height="{k*2:.0f}" rx="{k*.30:.0f}" '
@@ -222,8 +227,9 @@ def hero_svg(recipe, color, tint):
         rx, ry = rng.uniform(R * .50, R * .64), rng.uniform(R * .38, R * .50)
         mx = cx + rng.uniform(-R * .18, R * .18)
         my = cy + rng.uniform(-R * .16, R * .16)
+        # clipped to the plate shape, so the backdrop is the vessel face
         mound += (f'<ellipse cx="{mx:.0f}" cy="{my:.0f}" rx="{rx:.0f}" ry="{ry:.0f}" '
-                  f'transform="rotate({ang:.0f} {mx:.0f} {my:.0f})" fill="{mc}" opacity=".30"/>')
+                  f'transform="rotate({ang:.0f} {mx:.0f} {my:.0f})" fill="{mix(mc, "#FDFAF4", .30)}"/>')
 
     plate_items, placed = '', []
     for i, key in enumerate(on):
@@ -245,8 +251,9 @@ def hero_svg(recipe, color, tint):
         x, y = rng.uniform(10, VB_W - 10), rng.uniform(10, VB_H - 10)
         if math.hypot(x - cx, y - cy) < R * 1.04:
             continue
+        a = rng.choice([.18, .24, .3])
         flecks += (f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{rng.uniform(1.2, 2.6):.1f}" '
-                   f'fill="{color}" opacity="{rng.choice([.18, .24, .3]):.2f}"/>')
+                   f'fill="{mix(color, surface, a)}"/>')
 
     clip = f'plate{recipe["num"]}'
     shape = (f'<rect x="{cx-R*.96:.0f}" y="{cy-R*.96:.0f}" width="{R*1.92:.0f}" height="{R*1.92:.0f}" rx="{R*.29:.0f}"/>'
@@ -256,7 +263,7 @@ def hero_svg(recipe, color, tint):
             f'stroke-linecap="round" stroke-linejoin="round">'
             f'<defs><clipPath id="{clip}">{shape}</clipPath></defs>'
             f'<rect width="{VB_W}" height="{VB_H}" fill="{surface}"/>'
-            f'{flecks}{_vessel(method, cx, cy, R, color)}'
+            f'{flecks}{_vessel(method, cx, cy, R, surface)}'
             f'<g clip-path="url(#{clip})">{mound}</g>{plate_items}{counter_items}</svg>')
 
 

@@ -100,13 +100,46 @@ async def main(pdf=True):
         worst=sorted(over,key=lambda o:-o['spill'])[:5]
         print("closest to the edge:")
         for o in worst: print(f"  p{o['i']:>3} spill {o['spill']:>8}px  {o['label']}")
+        # --- KDP safe-area check ------------------------------------------------
+        # Measured from the TRIM edge. The gutter carries no bleed, so the page box
+        # edge is the trim edge there; the outer, top and bottom edges each sit
+        # 3.175mm of bleed outside trim. .mnum deliberately hangs outside the content
+        # box, so this measures real ink rather than trusting the padding.
+        safe = await pg.evaluate("""()=>{
+          const MM=96/25.4, BLEED=3.175, out=[];
+          document.querySelectorAll('.page').forEach((p,i)=>{
+            const pb=p.getBoundingClientRect();
+            const inner=p.querySelector('.inner'); if(!inner)return;
+            let minL=1e9,maxR=-1e9;
+            inner.querySelectorAll('*').forEach(e=>{const q=e.getBoundingClientRect();
+              if(q.width>0&&q.height>0){ if(q.left<minL)minL=q.left; if(q.right>maxR)maxR=q.right; }});
+            if(minL>1e8)return;                       // a blank page has no ink
+            const recto = p.dataset.side==='recto';
+            const fromPageL=(minL-pb.left)/MM, fromPageR=(pb.right-maxR)/MM;
+            // gutter side has no bleed; outer side must lose the bleed to reach trim
+            const gutter = recto ? fromPageL : fromPageR;
+            const outer  = (recto ? fromPageR : fromPageL) - BLEED;
+            out.push({i:i+1, gutter:+gutter.toFixed(2), outer:+outer.toFixed(2)});
+          });
+          return out;}""")
+        GUTTER_MIN, OUTER_MIN = 12.7, 6.35     # KDP, 151-300pp, measured from trim
+        tight = [s for s in safe if s['gutter'] < GUTTER_MIN or s['outer'] < OUTER_MIN]
+        g = min(s['gutter'] for s in safe); o = min(s['outer'] for s in safe)
+        print(f"safe area mm from trim | tightest gutter {g} (min {GUTTER_MIN})"
+              f" | tightest outer {o} (min {OUTER_MIN})")
+        if tight:
+            print(f"  KDP SAFE AREA VIOLATED on {len(tight)} page(s):")
+            for s in tight[:10]:
+                print(f"    p{s['i']:>3} gutter {s['gutter']}mm outer {s['outer']}mm")
+            raise SystemExit(1)
+
         gaps = await pg.evaluate("""()=>{const o=[];document.querySelectorAll('.page').forEach((p,i)=>{
           const b=p.querySelector('.rbody'),f=p.querySelector('.rfoot');if(!b||!f)return;
           o.push(Math.round((f.getBoundingClientRect().top-b.getBoundingClientRect().bottom)*25.4/96*10)/10);});return o;}""")
         gaps.sort()
         print("body-to-footer slack mm | min", gaps[0], "| median", gaps[len(gaps)//2], "| max", gaps[-1])
         if pdf:
-            await pg.pdf(path=str(ROOT/'dist'/'The-20-Minute-Table.pdf'), width='210mm', height='297mm',
+            await pg.pdf(path=str(ROOT/'dist'/'The-20-Minute-Table.pdf'), width='8.375in', height='11.25in',
                          print_background=True, margin={'top':'0','right':'0','bottom':'0','left':'0'},
                          prefer_css_page_size=True)
         await b.close()

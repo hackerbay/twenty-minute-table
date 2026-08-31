@@ -10,6 +10,8 @@ from pairings import sides_for, mains_for
 from pantry_data import SHELVES, KIT, RULES
 from toddler_data import INTRO as TOD_INTRO, POINTS as TOD_POINTS, DISCLAIMER as TOD_DISC
 from version import VERSION
+import imprint as IMP
+from flatten import mix
 
 ROOT = Path(__file__).resolve().parent.parent
 HERE = Path(__file__).resolve().parent
@@ -45,40 +47,16 @@ def page(cls, topcolor, inner, folio=None):
 
 def esc(s): return html.escape(s, quote=False)
 
-def build(recipes):
-    mains = [r for r in recipes if int(r['num']) <= 50]
-    brek  = [r for r in recipes if 50 < int(r['num']) <= 70]
-    puds  = [r for r in recipes if 70 < int(r['num']) <= 85]
-    sides = [r for r in recipes if int(r['num']) > 85]
+
+def cover_front_html(recipes):
+    """The front-cover artwork.
+
+    No longer an interior page — KDP prints the cover from its own wrap file — but
+    cover.py renders this markup as the front panel of the paperback and hardback
+    wraps, so the design survives where it belongs.
+    """
     byn2 = {r['num']: r for r in recipes}
-    allc  = len({r['cuisine'] for r in recipes})
-    counts = Counter(r['method'] for r in recipes)
-    pages = []
-    FRONT = 12                      # + the toddler page
-    ORDERED = [mains, sides, brek, puds]   # the order the sections appear in the book
-    pageno, _p = {}, FRONT + 1
-    for _sec in ORDERED:
-        _p += 1                                   # the section divider
-        for _i, _r in enumerate(_sec):
-            pageno[_r['num']] = _p + 2 * _i
-        _p += 2 * len(_sec)
-
-    def texture(rs):
-        return ' &nbsp;·&nbsp; '.join(esc(r['title']) for r in rs)
-
-    def chips(rs):
-        c = Counter(r['method'] for r in rs)
-        return ''.join(
-            f'<div class="cchip" style="border-color:{DARK[m]}55;color:{DARK[m]}">{icon(METHODS[m]["key"],"4mm")}'
-            f'<b class="d">{c[m]}</b><span>{METHODS[m]["label"]}</span></div>'
-            for m in ORDER if c[m])
-
-    # ============================== COVER ==============================
-    # A curated dozen rather than all hundred titles: a menu reads as appetite,
-    # a wall of names reads as filler.
-    # Twelve cuisines, all four sections. Titles must stay short enough to sit on
-    # one line beside their leader dots — the assert below stops a future edit
-    # from silently truncating one.
+    allc = len({r['cuisine'] for r in recipes})
     SHOWCASE = ['16', '29', '19', '25', '33', '44', '61', '57', '48', '63', '73', '91']
     for k in SHOWCASE:
         assert len(byn2[k]['title']) <= 34, f'cover title too long to fit: {byn2[k]["title"]}'
@@ -89,7 +67,7 @@ def build(recipes):
 
     stats = [(str(len(recipes)), 'Recipes'), (str(allc), 'Cuisines'),
              ('20', 'Minutes, max'), ('1', 'Pan or basket')]
-    pages.append(page('cover', None, f"""
+    return f"""
     <div class="cover-rule"></div>
     <div style="margin-top:5mm" class="eyebrow">One dinner &nbsp;·&nbsp; the adults, and the toddler</div>
     <h1 class="d">The<br>20&#8209;Minute<br><em>Table</em></h1>
@@ -107,7 +85,73 @@ def build(recipes):
     <div class="menu">{menu}</div>
     <div style="flex:.35"></div>
     <div class="cover-rule"></div>
-    <div class="cover-foot" style="margin-top:4mm"><div>The 20-Minute Table</div><div>First edition &nbsp;&middot;&nbsp; v{VERSION}</div></div>"""))
+    <div class="cover-foot" style="margin-top:4mm"><div>The 20-Minute Table</div><div>First edition &nbsp;&middot;&nbsp; v{VERSION}</div></div>"""
+
+
+def build(recipes):
+    mains = [r for r in recipes if int(r['num']) <= 50]
+    brek  = [r for r in recipes if 50 < int(r['num']) <= 70]
+    puds  = [r for r in recipes if 70 < int(r['num']) <= 85]
+    sides = [r for r in recipes if int(r['num']) > 85]
+    byn2 = {r['num']: r for r in recipes}
+    allc  = len({r['cuisine'] for r in recipes})
+    counts = Counter(r['method'] for r in recipes)
+    pages = []
+    # Half title, blank, title page, copyright, the eleven prose pages, and a blank
+    # verso so the first divider opens on a recto.
+    FRONT = 16
+    ORDERED = [mains, sides, brek, puds]   # the order the sections appear in the book
+    pageno, _p = {}, FRONT
+    for _si, _sec in enumerate(ORDERED):
+        _p += 1                                   # the section divider, always a recto
+        for _i, _r in enumerate(_sec):
+            pageno[_r['num']] = _p + 1 + 2 * _i
+        _p += 2 * len(_sec)
+        if _si < len(ORDERED) - 1:
+            _p += 1                               # blank verso closing the section
+
+    def texture(rs):
+        return ' &nbsp;·&nbsp; '.join(esc(r['title']) for r in rs)
+
+    def chips(rs):
+        c = Counter(r['method'] for r in rs)
+        return ''.join(
+            f'<div class="cchip" style="border-color:{mix(DARK[m], "#1B201D", 1/3)};color:{DARK[m]}">{icon(METHODS[m]["key"],"4mm")}'
+            f'<b class="d">{c[m]}</b><span>{METHODS[m]["label"]}</span></div>'
+            for m in ORDER if c[m])
+
+    # ============================== FRONT MATTER ==============================
+    # The cover is a separate KDP wrap file, so interior page 1 is the half title.
+    # Front matter runs to an even count so the first section divider opens on a
+    # recto and every recipe plate lands on a verso, facing its method page.
+    pages.append(page('halft', None, """
+    <div style="flex:1"></div>
+    <h1 class="ht d">The<br>20&#8209;Minute<br><em>Table</em></h1>
+    <div style="flex:1.4"></div>"""))
+    pages.append(page('blankp', None, ''))
+    pages.append(page('titlep', None, f"""
+    <div style="flex:1"></div>
+    <h1 class="tp-t d">The<br>20&#8209;Minute<br><em>Table</em></h1>
+    <p class="tp-sub">{IMP.SUBTITLE}</p>
+    <div style="flex:1.1"></div>
+    <p class="tp-au d">{IMP.AUTHOR}</p>
+    <p class="tp-pub">{IMP.PUBLISHER or IMP.SITE}</p>"""))
+    isbns = ''.join(f'<p>ISBN ({k}): {v}</p>' for k, v in IMP.ISBN.items() if v)
+    pages.append(page('copyr', None, f"""
+    <div style="flex:.45"></div>
+    <div class="cp-body">
+      <p class="cp-t d">{IMP.TITLE}</p>
+      <p class="cp-sub">{IMP.SUBTITLE}</p>
+      <p>Copyright &copy; {IMP.YEAR} {IMP.AUTHOR}</p>
+      <p>{IMP.LICENCE}</p>
+      <p>{IMP.MORAL_RIGHTS}</p>
+      <p>{IMP.EDITION}, {IMP.YEAR}. Version {VERSION}.</p>
+      {isbns}
+      <p>{IMP.DISCLAIMER}</p>
+      <p>{IMP.TYPE_NOTE}</p>
+      <p>{IMP.SITE}</p>
+    </div>
+    <div style="flex:1"></div>"""))
 
     # ============================== FOREWORD ==============================
     KEY = [
@@ -451,7 +495,7 @@ def build(recipes):
         </div>
         <div class="rfoot">
           <div class="notes">{notes}</div>
-          <div class="strip" style="background:{tint}">{macs}</div>
+          <div class="strip" style="background:{tint};--macline:{mix('#FFFFFF', tint, .6)}">{macs}</div>
           <div class="wash"><b style="color:{c}">Washing up</b><span>{inline(r['washing'])}</span></div>
           {goes}
         </div>""", f"{num} &nbsp;·&nbsp; {title.upper()}")
@@ -492,12 +536,14 @@ def build(recipes):
 
         return [page_a, page_b]
 
+    pages.append(page('blankp', None, ''))
     pages.append(divider('Section one &nbsp;·&nbsp; Fifty recipes', 'Lunch<br><em>&amp;</em> Dinner',
         'Everything on the table inside twenty minutes from a cold start, across thirty-six kitchens, leaving one pan or one basket behind.', mains, 'dv-1',
         [('16','Twelve minutes, one wok, and the dish that converts people to cooking fast.'),
          ('01','The whole dinner in one basket, and a sauce you stir in a mug while it cooks.'),
          ('29','Prawns, tomatoes and feta in a pan, on the table before anyone has finished a drink.')]))
     for r in mains: pages += recipe_pages(r)
+    pages.append(page('blankp', None, ''))
 
     pages.append(divider('Section two &nbsp;·&nbsp; Fifteen recipes', 'On the<br><em>Side</em>',
         'Fifteen fast things to put next to a main course. Six never see heat at all, and every lunch and dinner in this book names three of them.', sides, 'dv-1',
@@ -505,6 +551,7 @@ def build(recipes):
          ('92','Potatoes that go crisp in the basket the main has just left.'),
          ('89','Greens, garlic, chilli and lemon, wilted in ninety seconds under a lid.')]))
     for r in sides: pages += recipe_pages(r)
+    pages.append(page('blankp', None, ''))
 
     pages.append(divider('Section three &nbsp;·&nbsp; Twenty recipes', '<em>Breakfast</em>',
         'Savoury more often than sweet, hot more often than cold, and quick enough that eating standing up stops being the only option.', brek, 'dv-2',
@@ -512,6 +559,7 @@ def build(recipes):
          ('61','Eggs, beans and a charred tomato salsa. Weekend food that happens to take fifteen minutes.'),
          ('68','Bircher without the overnight wait, because the apple is grated rather than chopped.')]))
     for r in brek: pages += recipe_pages(r)
+    pages.append(page('blankp', None, ''))
 
     pages.append(divider('Section four &nbsp;·&nbsp; Fifteen recipes', 'Something<br><em>Afterwards</em>',
         'Small, sharp and mostly fruit. Nothing over twenty minutes, nothing over 320 calories, and not a cake among them.', puds, 'dv-1',
@@ -550,7 +598,28 @@ def build(recipes):
       <div class="colo-edition">Version {VERSION} &nbsp;&middot;&nbsp; The recipes and the typesetter that made this book are open source at github.com/hackerbay/twenty-minute-table</div>
     </div>""", 'A FEW THINGS WORTH KNOWING'))
 
-    pages = [p.replace('{{PN}}', str(i + 1), 1) for i, p in enumerate(pages)]
+    def stamp(p, i):
+        # Page 1 is a recto; odd folios are right-hand pages.
+        side = 'recto' if (i + 1) % 2 else 'verso'
+        p = p.replace('<section class="page', f'<section data-side="{side}" class="page', 1)
+        return p.replace('{{PN}}', str(i + 1), 1)
+
+    # ---- pagination invariants -------------------------------------------------
+    # A facing pair in a bound book is (even verso, odd recto). Every recipe's plate
+    # must therefore be even and its method the next page, or the spread the whole
+    # design is built around is split across a page turn. KDP also requires an even
+    # page count; left to itself it appends an uncontrolled blank.
+    assert len(pages) % 2 == 0, f'odd page count: {len(pages)} — KDP will insert a blank'
+    for _r in recipes:
+        want = pageno[_r['num']]
+        assert want % 2 == 0, f"recipe {_r['num']} plate on odd page {want}"
+        hit = [i + 1 for i, pg in enumerate(pages)
+               if f'<div class="folio">{_r["num"]} &nbsp;·&nbsp;' in pg
+               and 'METHOD</div>' not in pg]
+        assert len(hit) == 1, f"recipe {_r['num']}: found {len(hit)} plate pages"
+        assert hit[0] == want, f"recipe {_r['num']}: contents says p{want}, built at p{hit[0]}"
+
+    pages = [stamp(p, i) for i, p in enumerate(pages)]
 
     doc = (f'<!doctype html><html><head><meta charset="utf-8"><title>The 20-Minute Table</title>'
            f'<style>{FONTS}{CSS}</style></head><body>{"".join(pages)}</body></html>')
