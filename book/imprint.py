@@ -41,7 +41,9 @@ ISBN = {
 KINDLE_LIST_USD = 9.99          # must sit inside the 70% band to earn that rate
 KINDLE_ROYALTY_RATE = 0.70
 KDP_70_BAND = (2.99, 12.99)     # US; the upper bound rose from 9.99 in July 2026
-KDP_DELIVERY_PER_MB = 0.15      # USD, charged on the CONVERTED file size
+KDP_DELIVERY_PER_MB = 0.15      # USD, charged on the CONVERTED file size, which is
+                                # NOT the EPUB size: KDP measured 4.56 MB against our
+                                # 4.23 MB EPUB, so estimates from the EPUB run light.
 MIN_KINDLE_MARGIN = 0.25        # royalty after delivery, as a share of list price
 
 # --- print economics -------------------------------------------------------

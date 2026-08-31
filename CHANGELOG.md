@@ -12,8 +12,20 @@ This project uses [semantic versioning](https://semver.org) loosely, read for a 
 - **Major** — a change that reorganises the book: renumbering recipes, changing the recipe
   file contract, dropping a section.
 
-## Unreleased
+## 1.0.1
 
+- `PUBLISHING.md` records what actually went to Amazon — the prices, the royalties, and
+  the DRM, KDP Select and AI declarations, two of which cannot be changed later.
+- Kindle economics corrected to KDP's measured converted file size: 4.56 MB, so $0.68
+  of delivery and a $6.52 royalty rather than the estimated $6.36.
+- `make pricing` no longer claims the converted Kindle file is smaller than the EPUB.
+  It is larger — 4.23 MB became 4.56 MB — so the estimate runs optimistic, not
+  conservative, and now says so.
+
+## 1.0.0
+
+- 100 recipes across 49 cuisines, typeset into a 224-page book and a static website.
+- Every recipe serves four, is on the table inside twenty minutes, and carries a toddler note.
 - Open source: MIT for the toolchain, CC BY 4.0 for the recipes and the book text.
 - The website is published at https://twentyminutetable.hackerbay.io.
 - A PDF download in the site header, on every page.
@@ -40,12 +52,3 @@ This project uses [semantic versioning](https://semver.org) loosely, read for a 
 - The hardback case is now built like the other covers, to dimensions measured
   from KDP's Cover Calculator; both wraps are checked against their safe areas
   before the PDF is written.
-- `PUBLISHING.md`: how to list the three editions on Amazon, and a record of what was
-  actually submitted — prices, royalties, and the DRM, KDP Select and AI declarations.
-- Kindle economics corrected to KDP's measured converted file size: 4.56 MB, so $0.68
-  of delivery and a $6.52 royalty rather than the estimated $6.36.
-
-## 1.0.0
-
-- 100 recipes across 49 cuisines, typeset into a 217-page book and a static website.
-- Every recipe serves four, is on the table inside twenty minutes, and carries a toddler note.
