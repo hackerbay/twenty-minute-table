@@ -106,21 +106,35 @@ def main():
         if r['listed'] is None:
             problems.append(f"{r['label']}: no list price set — it needs at least "
                             f"${r['need']:.2f} to clear {tgt:.0%}")
+        elif r['rate'] * r['listed'] < r['cost']:
+            loss = r['cost'] - r['rate'] * r['listed']
+            problems.append(f"{r['label']}: ${r['listed']:.2f} does not cover the ${r['cost']:.2f} "
+                            f"it costs to make. Every copy sold LOSES ${loss:.2f}; KDP will not "
+                            f"accept the price. It needs ${r['need']:.2f} to clear {tgt:.0%}")
         elif r['margin'] < tgt:
             problems.append(f"{r['label']}: {r['margin']:.0%} margin at ${r['listed']:.2f}, "
                             f"below the {tgt:.0%} target — needs ${r['need']:.2f}")
 
-    # What would actually fix a print edition that cannot be priced sensibly?
-    alt = 'standard colour'
-    if IMP.INK_CHOICE != alt and alt in IMP.INK:
-        alt_cost = print_cost(n, alt)
-        alt_need = min_list(alt_cost, IMP.PRINT_ROYALTY_RATE, target)
-        notes.append(f'For comparison, {alt} at {n} pages costs ${alt_cost:.2f} a copy and '
-                     f'would clear {target:.0%} at ${alt_need:.2f}.')
-        per_page = IMP.INK[IMP.INK_CHOICE][1]
-        notes.append(f'Each page costs ${per_page:.4f} in {IMP.INK_CHOICE}, so every 10 pages '
-                     f'cut lowers the minimum list price by about '
-                     f'${10 * per_page / (IMP.PRINT_ROYALTY_RATE - target):.2f}.')
+    # The useful question is not "what is the minimum price" but "can I sell at the
+    # price I want", so answer that for each ink the book could be printed on.
+    pb_list = IMP.LIST_USD.get('paperback')
+    if pb_list:
+        print(f'  paperback at ${pb_list:.2f}, by ink:')
+        for ink in IMP.INK:
+            cost = print_cost(n, ink)
+            m = margin_at(pb_list, cost, IMP.PRINT_ROYALTY_RATE)
+            per_copy = IMP.PRINT_ROYALTY_RATE * pb_list - cost
+            verdict = ('below cost' if per_copy < 0
+                       else 'clears target' if m >= target else 'under target')
+            mark = '<-- selected' if ink == IMP.INK_CHOICE else ''
+            print(f'    {ink:16s} cost ${cost:5.2f}   you keep ${per_copy:6.2f}   '
+                  f'{m:>5.0%}   {verdict:14s} {mark}')
+        print()
+
+    per_page = IMP.INK[IMP.INK_CHOICE][1]
+    notes.append(f'Each page costs ${per_page:.4f} in {IMP.INK_CHOICE}, so every 10 pages '
+                 f'cut lowers the minimum list price by about '
+                 f'${10 * per_page / (IMP.PRINT_ROYALTY_RATE - target):.2f}.')
 
     for x in notes:
         print(f'  note: {x}')

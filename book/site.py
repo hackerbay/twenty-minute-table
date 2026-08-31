@@ -19,6 +19,7 @@ from compose import step_glyph, action_svg
 from pairings import sides_for, mains_for
 from pantry_data import SHELVES, KIT, RULES
 from toddler_data import INTRO as TOD_INTRO, POINTS as TOD_POINTS, DISCLAIMER as TOD_DISC
+import mission as MISSION
 from version import VERSION
 
 SITE = ROOT / 'site'
@@ -29,6 +30,7 @@ PDF_NAME = 'The-20-Minute-Table.pdf'
 PDF_SRC = ROOT / 'dist' / PDF_NAME
 
 GH_URL = 'https://github.com/hackerbay/twenty-minute-table'
+REPO_TEXT = 'github.com/hackerbay/twenty-minute-table'
 
 GH_ICON = ('<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" '
            'aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 '
@@ -370,6 +372,9 @@ def build_about(recipes, rules):
     rl = ''.join(f'<li><b>{t}</b> {b}</li>' for t, b in rules)
     n = pdf_pages()
     pages = f' {n}-page' if n else ''
+    why_paras = ''.join(
+        '<p>' + p.replace(REPO_TEXT, f'<a href="{GH_URL}">{REPO_TEXT}</a>') + '</p>'
+        for p in MISSION.paras(REPO_TEXT))
     body = f"""{nav(0, 'about')}
 <section class="phero"><div class="wrap">
   <p class="eyebrow">A short note first</p>
@@ -398,6 +403,11 @@ def build_about(recipes, rules):
     <div><b class="d">{counts['One pan'] + counts['Wok']}</b><span>Pan or wok</span></div>
     <div><b class="d">{counts['No cook']}</b><span>No heat at all</span></div>
     <div><b class="d">{sum(1 for r in recipes if r['veg'])}</b><span>Vegetarian</span></div>
+  </div>
+  <div class="whyw">
+    <p class="eyebrow">{MISSION.KICKER}</p>
+    <h2 class="whyw-t d">{' '.join(MISSION.HEADING_LINES)}</h2>
+    <div class="whyw-body">{why_paras}</div>
   </div>
   <h2 class="sect d">Ten rules for a twenty-minute dinner</h2>
   <ol class="rules">{rl}</ol>

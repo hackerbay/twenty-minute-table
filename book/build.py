@@ -11,6 +11,7 @@ from pantry_data import SHELVES, KIT, RULES
 from toddler_data import INTRO as TOD_INTRO, POINTS as TOD_POINTS, DISCLAIMER as TOD_DISC
 from version import VERSION
 import imprint as IMP
+import mission as MISSION
 from flatten import mix
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -128,29 +129,12 @@ def build(recipes):
     <div style="flex:1"></div>
     <h1 class="ht d">The<br>20&#8209;Minute<br><em>Table</em></h1>
     <div style="flex:1.4"></div>"""))
+    why_paras = ''.join(f'<p>{x}</p>' for x in MISSION.paras(IMP.REPO))
     pages.append(page('whyp', None, f"""
     <div style="flex:.6"></div>
-    <p class="why-k">Why this book exists</p>
-    <h2 class="why-t d">Eating well should not<br>depend on having time</h2>
-    <div class="why-body">
-      <p>Most of the reasons a household stops cooking are practical rather than
-      culinary: the deciding, the shopping, the hunting for a jar of something at the
-      back of a cupboard, and the twenty minutes of washing up after a meal that took
-      thirty to make. Those are the parts this book removes, and it removes them on
-      purpose &mdash; because once they are gone, cooking from whole ingredients stops
-      being an aspiration and becomes the easier option.</p>
-      <p>Every constraint here exists to make that true rather than merely say it.
-      Twenty minutes from a cold start. One pan or one basket. Four servings. A
-      toddler&rsquo;s portion out of the same pan, before the salt and before the chilli.
-      None of it assumes more time, more money or more equipment than you have.</p>
-      <p>Which is why the whole thing is <b>open source</b>. Every recipe, the
-      typesetter that turns them into this book, and the website that publishes them
-      are yours: the recipes under Creative Commons, the software under the MIT
-      licence, all of it at {IMP.REPO}. Take them, change them, translate them, print
-      them for the inside of a cupboard door. Add the dinners your own family actually
-      eats. Nobody needs permission, and that is the point &mdash; food this plain
-      should not belong to anyone.</p>
-    </div>
+    <p class="why-k">{MISSION.KICKER}</p>
+    <h2 class="why-t d">{'<br>'.join(MISSION.HEADING_LINES)}</h2>
+    <div class="why-body">{why_paras}</div>
     <div style="flex:1"></div>"""))
     pages.append(page('titlep', None, f"""
     <div style="flex:1"></div>

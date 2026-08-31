@@ -66,8 +66,8 @@ INK_CHOICE = 'premium colour'
 # List prices. Set these from KDP's calculator once the real print cost is known;
 # pricing.py will tell you the minimum each edition needs to clear MIN_PRINT_MARGIN.
 LIST_USD = {
-    'paperback': None,
-    'hardback': None,
+    'paperback': 20.00,
+    'hardback': 55.00,
 }
 
 # KDP publishes no hardcover printing formula. Rather than invent one, put the

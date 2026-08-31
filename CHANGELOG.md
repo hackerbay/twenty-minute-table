@@ -33,6 +33,9 @@ This project uses [semantic versioning](https://semver.org) loosely, read for a 
   page, the colophon and both covers.
 - A "Why this book exists" page facing the title page, and an open-source note on
   the back cover.
+- The same "why" on the website's about page, from a shared `mission.py` so the
+  book and the site cannot drift apart.
+- List prices set: paperback $20, hardback $55.
 
 ## 1.0.0
 

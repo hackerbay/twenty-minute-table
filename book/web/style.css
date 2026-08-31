@@ -231,6 +231,14 @@ a{color:inherit}
 .statband b{display:block;font-size:30px;font-weight:600;color:#C1502E;line-height:1}
 .statband span{display:block;margin-top:8px;font-size:10.5px;letter-spacing:.15em;
   text-transform:uppercase;color:var(--ink4);font-weight:600}
+.whyw{margin:52px 0 8px;padding:38px 36px;border:1px solid var(--line);
+  border-radius:var(--radius);background:var(--panel)}
+.whyw-t{margin:8px 0 18px;font-size:clamp(23px,2.8vw,30px);font-weight:600;letter-spacing:-.02em;
+  line-height:1.15}
+.whyw-body p{max-width:70ch;color:var(--ink2);font-size:16px;line-height:1.7;margin:0 0 14px}
+.whyw-body p:last-child{margin-bottom:0}
+.whyw-body b{color:var(--ink);font-weight:600}
+@media (max-width:640px){.whyw{padding:26px 20px}}
 .rules{margin:0 0 40px;padding:0 0 0 26px;max-width:78ch}
 .rules li{margin-bottom:16px;color:var(--ink2);font-size:15.6px;line-height:1.6}
 .rules li b{color:var(--ink)}
