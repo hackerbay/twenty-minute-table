@@ -69,13 +69,50 @@ you cannot revise.
 | Bleed | **Bleed (PDF only)** | **Bleed (PDF only)** | — |
 | Pages | 224 | 224 | — |
 | ISBN | 978-1-950600-01-4 | 978-1-950600-02-1 | none (ASIN) |
-| Printing cost | $10.00 | $23.57 | $0.63 delivery |
+| Printing cost | $10.00 | $23.57 | $0.68 delivery (4.56 MB converted) |
 | KDP minimum | $16.67 | $39.28 | — |
 | **List price** | **$28.99** | **$69.99** | **$9.99** |
-| Royalty | 60% → $7.39 | 60% → $18.42 | 70% → about $6.36 |
+| Royalty | 60% → $7.39 | 60% → $18.42 | 70% → $6.52 |
 
 The interior is built **with bleed** — 8.375 × 11.25 in page box against an 8.25 × 11 trim. If
 you tell KDP "no bleed" it will reject or rescale it.
+
+---
+
+## What was submitted
+
+All three editions went to KDP on 31 August 2026 from version 1.0.0, and each came back
+**In review**. KDP takes up to 72 hours to finish that review, and the Amazon product pages —
+and therefore the links this repo wants to put on the website — do not exist until it does.
+
+| | Paperback | Hardcover | Kindle |
+|---|---|---|---|
+| Status | In review | In review | In review |
+| List price | $28.99 | $69.99 | $9.99 |
+| Royalty | 60% → $7.39 | 60% → $18.42 | 70% → $6.52 |
+| Margin | 25.5% | 26.3% | 65.3% |
+
+Confirmed by KDP at submission, against what this repo predicted:
+
+- **Print cost.** $10.00 paperback, $23.57 hardcover — both exactly the figures in
+  [book/imprint.py](book/imprint.py).
+- **Minimum list price.** $16.67 and $39.28, again matching. Every edition clears the 25%
+  margin gate that `make pricing` enforces.
+- **Kindle file size.** 4.56 MB after conversion, so $0.68 of delivery comes off the 70%
+  royalty. The 70% band now runs to $12.99, as `KDP_70_BAND` already assumed.
+- **Trim and pages.** 8.25 × 11 in, 224 pages, bleed, on both print editions. The hardcover
+  previewer reported no issues.
+
+Three decisions worth knowing about, because they are not obvious and two are permanent:
+
+- **DRM is off** on the Kindle edition. The book carries a CC BY 4.0 notice that grants the
+  right to share and adapt it; shipping it under DRM would contradict the copyright page.
+  **This cannot be changed after publication.**
+- **KDP Select is not enrolled.** It demands exclusivity, and the PDF is a free download from
+  our own site. That costs the 70% rate in Japan, Brazil and Mexico, which drop to 35%.
+- **The AI declaration** is *Yes* on all three: texts *some sections, with minimal or no
+  editing*, tool *OpenCode*, images *None*, translations *None*. The same answer on every
+  edition, because it is the same content.
 
 ---
 

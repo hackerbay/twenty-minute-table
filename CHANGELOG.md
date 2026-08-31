@@ -40,7 +40,10 @@ This project uses [semantic versioning](https://semver.org) loosely, read for a 
 - The hardback case is now built like the other covers, to dimensions measured
   from KDP's Cover Calculator; both wraps are checked against their safe areas
   before the PDF is written.
-- `PUBLISHING.md`: how to list the three editions on Amazon.
+- `PUBLISHING.md`: how to list the three editions on Amazon, and a record of what was
+  actually submitted — prices, royalties, and the DRM, KDP Select and AI declarations.
+- Kindle economics corrected to KDP's measured converted file size: 4.56 MB, so $0.68
+  of delivery and a $6.52 royalty rather than the estimated $6.36.
 
 ## 1.0.0
 
