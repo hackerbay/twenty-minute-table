@@ -300,3 +300,19 @@ body{font-family:'Inter',sans-serif;color:var(--ink);background:#DDD6C8;font-fea
 .tod b{display:block;font-size:6.9pt;letter-spacing:.19em;text-transform:uppercase;
   font-weight:600;margin-bottom:2mm;}
 .tod p{font-size:8.6pt;line-height:1.55;color:var(--ink2);}
+
+/* ===== COVER: the promise, and a dozen of the hundred ===== */
+.promise{border-left:1.6px solid #E8A87C;padding-left:6mm;}
+.promise p{font-size:14.4pt;line-height:1.62;color:rgba(253,250,244,.9);font-style:normal;
+  font-variation-settings:'SOFT' 50,'WONK' 1,'opsz' 48;}
+.promise em{font-style:italic;color:#E8A87C;}
+.menu-k{font-size:7pt;letter-spacing:.28em;text-transform:uppercase;font-weight:600;
+  color:rgba(253,250,244,.42);margin-bottom:3.5mm;}
+.menu{column-count:2;column-gap:12mm;}
+.mrow{display:flex;align-items:baseline;gap:2.4mm;font-size:8.6pt;line-height:1.35;
+  padding:.85mm 0;break-inside:avoid;color:rgba(253,250,244,.78);}
+.mname{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.mdot{flex:1;border-bottom:1px dotted rgba(253,250,244,.22);transform:translateY(-1px);min-width:2mm;}
+.mmin{flex:none;font-size:7.6pt;font-weight:600;color:rgba(253,250,244,.5);
+  font-feature-settings:'tnum' 1;}
+.mmin::after{content:' min';font-size:6.4pt;letter-spacing:.1em;}

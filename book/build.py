@@ -73,19 +73,38 @@ def build(recipes):
             for m in ORDER if c[m])
 
     # ============================== COVER ==============================
-    stats = [(str(len(recipes)), 'Recipes'), (str(allc), 'Cuisines'), ('20', 'Minutes, max'), ('1', 'Pan or basket')]
+    # A curated dozen rather than all hundred titles: a menu reads as appetite,
+    # a wall of names reads as filler.
+    # Twelve cuisines, all four sections. Titles must stay short enough to sit on
+    # one line beside their leader dots — the assert below stops a future edit
+    # from silently truncating one.
+    SHOWCASE = ['16', '29', '19', '25', '33', '44', '61', '57', '48', '63', '73', '91']
+    for k in SHOWCASE:
+        assert len(byn2[k]['title']) <= 34, f'cover title too long to fit: {byn2[k]["title"]}'
+    menu = ''.join(
+        f'<div class="mrow"><span class="mname">{esc(byn2[k]["title"])}</span>'
+        f'<span class="mdot"></span><span class="mmin">{byn2[k]["minutes"]}</span></div>'
+        for k in SHOWCASE if k in byn2)
+
+    stats = [(str(len(recipes)), 'Recipes'), (str(allc), 'Cuisines'),
+             ('20', 'Minutes, max'), ('1', 'Pan or basket')]
     pages.append(page('cover', None, f"""
     <div class="cover-rule"></div>
     <div style="margin-top:5mm" class="eyebrow">One dinner &nbsp;·&nbsp; the adults, and the toddler</div>
     <h1 class="d">The<br>20&#8209;Minute<br><em>Table</em></h1>
-    <p class="cover-sub">A hundred fast, whole-food recipes for the years when dinner has to happen anyway. Twenty minutes from a cold start, one pan to wash, and a toddler&rsquo;s portion out of the same pan.</p>
-    <div style="flex:1.05"></div>
-    <div class="stats">{''.join(f'<div class="stat"><div class="sv d">{v}</div><div class="sl">{l}</div></div>' for v,l in stats)}</div>
+    <p class="cover-sub">A hundred fast, whole-food recipes for the years when dinner has to happen anyway.</p>
     <div style="flex:1"></div>
-    <div class="texture">{texture(recipes)}</div>
-    <div style="height:9mm"></div>
-    <div class="cover-chips">{chips(recipes)}</div>
-    <div style="height:8mm"></div>
+    <div class="promise d">
+      <p>Twenty minutes, <em>from a cold start</em>.</p>
+      <p>One pan or one basket, <em>and that is the washing up</em>.</p>
+      <p>A toddler&rsquo;s portion <em>out of the same pan</em>.</p>
+    </div>
+    <div style="flex:.5"></div>
+    <div class="stats">{''.join(f'<div class="stat"><div class="sv d">{v}</div><div class="sl">{l}</div></div>' for v,l in stats)}</div>
+    <div style="flex:.55"></div>
+    <div class="menu-k">A dozen of the hundred</div>
+    <div class="menu">{menu}</div>
+    <div style="flex:.35"></div>
     <div class="cover-rule"></div>
     <div class="cover-foot" style="margin-top:4mm"><div>The 20-Minute Table</div><div>First edition</div></div>"""))
 
