@@ -65,6 +65,12 @@ Small and single-purpose is easier to review than large and sweeping. Say what y
 changed and, for a recipe, say that you cooked it — that is the only real test
 this project has.
 
+## What CI will check
+
+Opening a pull request runs `make verify`, `make audit` and a full build. It also checks that
+the committed `site/` matches what your recipe files generate, so run `make` and commit the
+regenerated `dist/` and `site/` along with your change.
+
 ## Licensing your contribution
 
 By contributing you agree that your contribution is licensed on the same terms as

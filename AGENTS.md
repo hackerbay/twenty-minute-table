@@ -136,6 +136,26 @@ cross-reference. Prefer appending.
 There are none by design. The slots exist: drop `NN-hero.jpg` or `NN-step-K.jpg` into `images/`
 and the build picks them up. See `images/README.md`.
 
+## Versioning and releases
+
+`package.json` holds the version and nothing else does. `book/version.py` reads it, and it
+surfaces in three places: the book cover foot, the book colophon, and the website footer. Never
+hardcode a version anywhere else.
+
+To cut a release: bump `version` in `package.json`, add a `CHANGELOG.md` entry, run `make`,
+commit the regenerated `dist/` and `site/`, then merge to the `release` branch. The release
+workflow builds, deploys to Firebase, tags `v<version>` and publishes a GitHub release with the
+PDF attached. It refuses to run if the tag already exists — bump the version rather than trying
+to move a tag people may already have.
+
+## Continuous integration
+
+`.github/workflows/ci.yml` runs on every push to `main` and every pull request: `make verify`,
+`make audit`, then a full book and site build. It also fails if the committed `site/` does not
+match what the sources generate — that check is what stops a recipe change landing without its
+regenerated output. The PDF is excluded from that comparison because Chromium stamps a creation
+date into it, so it is not byte-reproducible.
+
 ## Deployment
 
 The site is a plain static directory — fonts are embedded in the stylesheet, so `site/` works on

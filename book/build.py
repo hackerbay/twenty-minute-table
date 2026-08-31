@@ -9,6 +9,7 @@ from compose import pick_icons, hero_svg, step_glyph, action_svg
 from pairings import sides_for, mains_for
 from pantry_data import SHELVES, KIT, RULES
 from toddler_data import INTRO as TOD_INTRO, POINTS as TOD_POINTS, DISCLAIMER as TOD_DISC
+from version import VERSION
 
 ROOT = Path(__file__).resolve().parent.parent
 HERE = Path(__file__).resolve().parent
@@ -106,7 +107,7 @@ def build(recipes):
     <div class="menu">{menu}</div>
     <div style="flex:.35"></div>
     <div class="cover-rule"></div>
-    <div class="cover-foot" style="margin-top:4mm"><div>The 20-Minute Table</div><div>First edition</div></div>"""))
+    <div class="cover-foot" style="margin-top:4mm"><div>The 20-Minute Table</div><div>First edition &nbsp;&middot;&nbsp; v{VERSION}</div></div>"""))
 
     # ============================== FOREWORD ==============================
     KEY = [
@@ -546,6 +547,7 @@ def build(recipes):
         <div><h6>The type</h6><p>Set in Fraunces, drawn by Phaedra Charles and Flavia Zimbardi, and Inter, drawn by Rasmus Andersson. Both are open source.</p></div>
         <div><h6>The numbers</h6><p>Nutrition figures are estimates for a quarter of the finished dish, rounded, and exclude anything listed under &ldquo;bulk it out&rdquo;. Cook the food, not the numbers.</p></div>
       </div>
+      <div class="colo-edition">Version {VERSION} &nbsp;&middot;&nbsp; The recipes and the typesetter that made this book are open source at github.com/hackerbay/twenty-minute-table</div>
     </div>""", 'A FEW THINGS WORTH KNOWING'))
 
     pages = [p.replace('{{PN}}', str(i + 1), 1) for i, p in enumerate(pages)]

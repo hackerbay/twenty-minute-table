@@ -265,6 +265,8 @@ a{color:inherit}
 .foot a{color:var(--ink2)}
 .foot .foot-gh{display:flex;align-items:flex-start;gap:9px;margin-top:15px;color:var(--ink3)}
 .foot .foot-gh svg{flex:none;margin-top:3px}
+.foot .ver{display:inline-block;padding:1px 7px;border:1px solid var(--line);border-radius:999px;
+  font-size:12px;color:var(--ink3);white-space:nowrap}
 [hidden]{display:none!important}
 
 /* ---------- toddler ---------- */

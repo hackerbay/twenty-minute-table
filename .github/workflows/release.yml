@@ -1,0 +1,115 @@
+name: Release
+
+# Anything landing on `release` is published: the site goes live on Firebase
+# and a GitHub release is cut, tagged with the version in package.json.
+on:
+  push:
+    branches: [release]
+  workflow_dispatch:
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build, deploy and release
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Read the version
+        id: version
+        run: |
+          V=$(node -p "require('./package.json').version")
+          echo "version=$V" >> "$GITHUB_OUTPUT"
+          echo "tag=v$V" >> "$GITHUB_OUTPUT"
+          echo "Releasing v$V"
+
+      # A release must be a version nobody has published before, otherwise the
+      # tag would move under people who already downloaded it.
+      - name: Refuse to reuse a version
+        run: |
+          if git rev-parse "refs/tags/${{ steps.version.outputs.tag }}" >/dev/null 2>&1; then
+            echo "::error::Tag ${{ steps.version.outputs.tag }} already exists. Bump \"version\" in package.json."
+            exit 1
+          fi
+
+      - name: Install fonts
+        run: npm ci
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Install Chromium
+        run: python -m playwright install --with-deps chromium
+
+      - name: Verify recipe structure
+        run: make verify
+
+      - name: Audit recipe content
+        run: make audit
+
+      - name: Build the book and the site
+        run: make book site
+
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          projectId: twenty-minute-table
+          channelId: live
+
+      - name: Tag the release
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "${{ steps.version.outputs.tag }}" -m "The 20-Minute Table ${{ steps.version.outputs.tag }}"
+          git push origin "${{ steps.version.outputs.tag }}"
+
+      - name: Publish the GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          RECIPES=$(ls recipes/*.md | wc -l | tr -d ' ')
+          cp dist/The-20-Minute-Table.pdf "The-20-Minute-Table-$TAG.pdf"
+          NOTES=$(mktemp)
+          {
+            echo "$RECIPES recipes. Every one on the table inside twenty minutes, serving four,"
+            echo "with a toddler portion out of the same pan."
+            echo
+            echo "- **Read it online:** https://twentyminutetable.hackerbay.io"
+            echo "- **The book:** attached below as a PDF."
+            echo
+            echo "### What changed"
+            echo
+            if [ -n "$(git tag --sort=-v:refname | sed -n 2p)" ]; then
+              PREV=$(git tag --sort=-v:refname | sed -n 2p)
+              git log --pretty='- %s' "$PREV..$TAG"
+            else
+              echo "- First release."
+            fi
+          } > "$NOTES"
+          gh release create "$TAG" \
+            --title "The 20-Minute Table $TAG" \
+            --notes-file "$NOTES" \
+            "The-20-Minute-Table-$TAG.pdf#The 20-Minute Table (PDF)"

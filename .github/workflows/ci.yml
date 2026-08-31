@@ -1,0 +1,74 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Verify, audit and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install fonts
+        run: npm ci
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Install Chromium
+        run: python -m playwright install --with-deps chromium
+
+      # The two gates. verify.py checks the shape of every recipe file;
+      # audit.py checks the content — conversions, unused ingredients,
+      # doneness cues, repeated prose. Both must be clean.
+      - name: Verify recipe structure
+        run: make verify
+
+      - name: Audit recipe content
+        run: make audit
+
+      - name: Build the book
+        run: make book
+
+      - name: Build the site
+        run: make site
+
+      # recipes/ is the source of truth and site/ is generated from it, so a
+      # commit that changes one without regenerating the other has drifted.
+      # The PDF is excluded: Chromium stamps a creation date into it, so it is
+      # not byte-reproducible. The HTML is.
+      - name: Check the committed site is up to date
+        run: |
+          if ! git diff --quiet -- site/ ':(exclude)site/*.pdf'; then
+            echo "::error::site/ is out of date with recipes/. Run 'make' and commit the result."
+            git diff --stat -- site/ ':(exclude)site/*.pdf'
+            exit 1
+          fi
+          echo "site/ matches the sources."
+
+      - name: Upload the built book
+        uses: actions/upload-artifact@v4
+        with:
+          name: the-20-minute-table-pdf
+          path: dist/The-20-Minute-Table.pdf
+          if-no-files-found: error

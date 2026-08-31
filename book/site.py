@@ -19,6 +19,7 @@ from compose import step_glyph, action_svg
 from pairings import sides_for, mains_for
 from pantry_data import SHELVES, KIT, RULES
 from toddler_data import INTRO as TOD_INTRO, POINTS as TOD_POINTS, DISCLAIMER as TOD_DISC
+from version import VERSION
 
 SITE = ROOT / 'site'
 ASSETS = SITE / 'assets'
@@ -136,7 +137,8 @@ def footer(depth=0):
             f'<a href="{up}about.html">More about the book</a>.</p>'
             f'<p class="foot-gh">{GH_ICON}<span>Open source &mdash; the recipes and the '
             f'typesetter that builds this are '
-            f'<a href="{GH_URL}">on GitHub</a>. Fork it, fix it, add a dinner.</span></p>'
+            f'<a href="{GH_URL}">on GitHub</a>. Fork it, fix it, add a dinner. '
+            f'<span class="ver">v{VERSION}</span></span></p>'
             f'</div></footer>')
 
 

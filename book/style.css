@@ -77,6 +77,8 @@ body{font-family:'Inter',sans-serif;color:var(--ink);background:#DDD6C8;font-fea
 .colo-grid h6{font-size:6.9pt;letter-spacing:.2em;text-transform:uppercase;font-weight:600;
   color:var(--ink4);margin-bottom:1.8mm;}
 .colo-grid p{font-size:7.8pt;line-height:1.5;color:var(--ink3);}
+.colo-edition{margin-top:4.5mm;padding-top:3mm;border-top:1px solid var(--line);
+  font-size:7pt;letter-spacing:.04em;color:var(--ink4);text-align:center;}
 
 /* ===== CONTENTS ===== */
 .toc{display:grid;grid-template-columns:1fr 1fr;gap:0 11mm;align-items:start;}

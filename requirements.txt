@@ -1,0 +1,3 @@
+# The only external Python dependency. render.py drives headless Chromium
+# through it to paginate and justify the book.
+playwright>=1.40
