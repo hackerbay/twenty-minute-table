@@ -39,9 +39,9 @@ DISCLAIMER = (
     'Cooking times and quantities assume a domestic kitchen and a cold start; ovens, '
     'pans and air fryers vary, so use the doneness cues rather than the clock. Nutrition '
     'figures are estimates for a quarter of the finished dish and are not dietary advice. '
-    'Check every recipe against your own household&rsquo;s allergies and dietary needs — '
+    'Check every recipe against your own household’s allergies and dietary needs — '
     'the ingredient lists name common allergens but cannot anticipate yours. The notes on '
-    'feeding a toddler are about cooking, not medicine; for anything concerning a child&rsquo;s '
+    'feeding a toddler are about cooking, not medicine; for anything concerning a child’s '
     'health, diet or development, ask your own health service.'
 )
 

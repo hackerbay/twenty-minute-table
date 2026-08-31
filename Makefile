@@ -1,4 +1,4 @@
-.PHONY: all deps verify audit book covers site kdp clean
+.PHONY: all deps verify audit book covers epub amazon site kdp clean
 
 all: verify audit book site
 
@@ -18,6 +18,13 @@ book:
 
 covers: book
 	python3 book/cover.py
+
+epub: covers
+	python3 book/epub.py
+	python3 book/epubcheck.py
+
+# everything needed to submit to Amazon: interior, wrap, Kindle edition
+amazon: verify audit book covers epub
 
 site: book
 	python3 book/site.py

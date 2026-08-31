@@ -147,6 +147,47 @@ transparency group, soft mask, sub-1 alpha operator, wrong page box or odd page 
 omits any empty field rather than printing a placeholder, so the book is always correct to
 print — but a paperback cannot be submitted without one.
 
+## The Amazon editions
+
+```bash
+make amazon     # verify, audit, interior, covers, Kindle edition
+```
+
+Three artefacts land in `dist/`:
+
+| File | What it is |
+|---|---|
+| `The-20-Minute-Table.pdf` | the interior, 8.25x11 trim with bleed, for both print editions |
+| `cover-paperback.pdf` | the full wrap: back cover, spine, front cover, bleed on all four sides |
+| `cover-kindle.jpg` | 2560x1600 front cover for the eBook |
+| `The-20-Minute-Table.epub` | reflowable EPUB3 for Kindle |
+
+**The spine width is derived, not configured.** `cover.py` reads the real page count out
+of the built interior and multiplies by KDP's premium colour figure. Rebuild the interior
+before the cover or the spine will be wrong for the book it wraps.
+
+**The hardback case is deliberately not generated.** KDP publishes no hardcover formula and
+defers to its own cover calculator; the case is larger than the paperback wrap in both axes
+because the sheet wraps a board that overhangs the text block, plus two hinge channels. Feed
+the calculator the trim, page count and paper that `make covers` prints, download its
+template, and composite the front panel onto it. Do not derive the size from the paperback.
+
+**The Kindle edition is reflowable, and the print design does not survive.** Full-bleed
+panels, the two-page spread and the vertical justification are print production, not content;
+`epub.py` rebuilds the book from `parse.py` as semantic XHTML the reader restyles. It is
+generated from `recipes/`, never from `build/cookbook.html`, which is print geometry. Keep
+body text at `1em` and set fonts on `body` only — an absolute size takes the reader's font
+control away. `make epub` runs a structural check, but run Adobe epubcheck and Kindle
+Previewer 3 before publishing.
+
+**Watch the EPUB's size.** KDP charges $0.15/MB of the converted file against the 70%
+royalty option, so illustration weight comes straight off the margin. `epub.py` reports the
+total and the implied fee; it is around 4 MB today, and the knobs are `IMG_W` and `JPEG_Q`.
+
+**Before submitting**, fill in the ISBNs in `book/imprint.py`, and confirm the numbers
+flagged as unverified at the end of `docs/kdp-publishing-spec.md` — in particular the
+printing cost, which decides whether the economics work at all.
+
 ## Typesetting
 
 Each recipe occupies exactly two A4 pages. `render.py` runs a vertical-justification pass in

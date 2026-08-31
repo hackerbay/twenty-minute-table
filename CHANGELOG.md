@@ -19,6 +19,10 @@ This project uses [semantic versioning](https://semver.org) loosely, read for a 
 - A PDF download in the site header, on every page.
 - Version stamped on the cover, in the colophon and in the site footer.
 - CI on every push and pull request; releases cut automatically from the `release` branch.
+- Typeset for Amazon KDP: 8.25x11 trim with bleed, mirrored margins, flattened
+  transparency, print front matter, and an even page count.
+- Fixed a pagination bug that split fifty recipes' spreads across a page turn.
+- Paperback cover wrap, Kindle cover, and a reflowable EPUB3 edition.
 
 ## 1.0.0
 
