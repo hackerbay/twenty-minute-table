@@ -72,3 +72,22 @@ jobs:
           name: the-20-minute-table-pdf
           path: dist/The-20-Minute-Table.pdf
           if-no-files-found: error
+
+      # The three Amazon artefacts are built from the same sources and have their
+      # own gates: kdpcheck.py on the interior, and a structural check on the EPUB.
+      # A cover whose spine no longer matches the page count is caught here.
+      - name: Build the covers and the Kindle edition
+        run: |
+          python3 book/cover.py
+          python3 book/epub.py
+          python3 book/epubcheck.py
+
+      - name: Upload the Amazon artefacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: amazon-editions
+          path: |
+            dist/cover-paperback.pdf
+            dist/cover-kindle.jpg
+            dist/The-20-Minute-Table.epub
+          if-no-files-found: error
