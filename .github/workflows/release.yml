@@ -99,6 +99,7 @@ jobs:
           cp dist/The-20-Minute-Table.pdf  "The-20-Minute-Table-$TAG.pdf"
           cp dist/The-20-Minute-Table.epub "The-20-Minute-Table-$TAG.epub"
           cp dist/cover-paperback.pdf      "cover-paperback-$TAG.pdf"
+          cp dist/cover-hardback.pdf       "cover-hardback-$TAG.pdf"
           cp dist/cover-kindle.jpg         "cover-kindle-$TAG.jpg"
           NOTES=$(mktemp)
           {
@@ -124,4 +125,5 @@ jobs:
             "The-20-Minute-Table-$TAG.pdf#The 20-Minute Table (print PDF)" \
             "The-20-Minute-Table-$TAG.epub#The 20-Minute Table (Kindle EPUB)" \
             "cover-paperback-$TAG.pdf#Paperback cover wrap" \
+            "cover-hardback-$TAG.pdf#Hardback case" \
             "cover-kindle-$TAG.jpg#Kindle cover"

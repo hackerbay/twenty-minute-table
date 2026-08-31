@@ -88,6 +88,7 @@ jobs:
           name: amazon-editions
           path: |
             dist/cover-paperback.pdf
+            dist/cover-hardback.pdf
             dist/cover-kindle.jpg
             dist/The-20-Minute-Table.epub
           if-no-files-found: error
