@@ -131,6 +131,26 @@ There are none, by design — the illustrations were removed because they were n
 their place. The slots remain: drop `NN-hero.jpg` or `NN-step-K.jpg` into `images/` and the
 build picks them up. See [images/README.md](images/README.md).
 
+## Hosting the site
+
+`site/` is self-contained — the fonts are embedded in the stylesheet and nothing is fetched at
+runtime — so it drops onto any static host unchanged.
+
+```bash
+make site                        # rebuild from recipes/
+firebase deploy --only hosting   # Firebase Hosting; serves site/ as the public root
+```
+
+`firebase.json` and `.firebaserc` hold the hosting config. Rebuild before deploying so the
+published site does not drift from `recipes/`.
+
+## Contributing
+
+`AGENTS.md` documents the recipe file contract, the house style rules the build enforces, and
+what not to hand-edit. Read it before changing a recipe — `make verify` and `make audit` must
+both come back clean, and generated output in `dist/` and `site/` is regenerated, never edited.
+
+
 ---
 
 ## Lunch & Dinner
