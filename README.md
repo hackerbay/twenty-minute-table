@@ -154,6 +154,11 @@ clean, and generated output in `dist/` and `site/` is regenerated, never edited.
 Corrections are the most valuable contribution here — if you cooked something and it did not
 work, that is worth an issue on its own.
 
+## Releasing and publishing
+
+[RELEASING.md](RELEASING.md) covers changing the book and publishing the website.
+[PUBLISHING.md](PUBLISHING.md) covers listing the three editions on Amazon.
+
 ## Licence
 
 Two licences, because this repo is two things:

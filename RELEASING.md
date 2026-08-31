@@ -227,74 +227,22 @@ causes more confusion than a fast follow-up.
 A release does not touch Amazon. It builds and attaches the files; uploading them to KDP is a
 human step, on purpose — pricing, categories and proofs are decisions, not automation.
 
-Take the four files from the GitHub release:
+**[PUBLISHING.md](PUBLISHING.md) is the guide** — what to upload, the exact KDP settings, and
+the two choices that cannot be undone once a title is live. It is kept separate so the two
+documents cannot drift: this one is about releasing the repo and the website, that one is about
+listing the book for sale.
+
+The release attaches everything you need:
 
 | File | Where it goes |
 |---|---|
-| `The-20-Minute-Table-vX.Y.Z.pdf` | interior for **both** the paperback and the hardback |
+| `The-20-Minute-Table-vX.Y.Z.pdf` | interior for **both** print editions |
 | `cover-paperback-vX.Y.Z.pdf` | the paperback cover wrap |
 | `The-20-Minute-Table-vX.Y.Z.epub` | the Kindle edition |
 | `cover-kindle-vX.Y.Z.jpg` | the Kindle cover |
 
-### Pricing and margin
-
-```bash
-make pricing
-```
-
-Amazon pays 60% of list minus the printing cost on a print book, and 70% minus a per-megabyte
-delivery fee on Kindle. On a 224-page colour book the printing cost dominates everything, so
-`pricing.py` computes the lowest list price each edition needs to clear its target margin
-(25%, set in `imprint.py`) and fails if a configured price does not. It runs as part of
-`make amazon`, so you cannot prepare a submission whose economics do not work. CI does not run
-it — a business decision nobody has made yet should not turn the build red.
-
-The figures come from KDP's own Printing Cost & Royalty Calculator, read on 2026-08-31 for
-8.25x11 at 224 pages on Amazon.com. KDP pays **60%** of list minus printing, and refuses any
-price below printing cost divided by that rate.
-
-| Edition | Ink | Printing cost | KDP minimum | List | Margin |
-|---|---|---|---|---|---|
-| Paperback | Standard colour | $10.00 | $16.67 | **$28.99** | 25% |
-| Hardback | Premium colour | $23.57 | $39.28 | **$69.99** | 26% |
-| Kindle | — | $0.63 delivery | — | **$9.99** | 64% |
-
-Three things worth knowing before changing any of it:
-
-- **The paperback is standard colour on purpose.** The interior is entirely vector art and flat
-  colour with no photographs, so premium colour buys nothing this book can use — it would cost
-  $18.92 a copy instead of $10.00 and put the KDP minimum at $31.53, above the price we want to
-  sell at.
-- **The hardback has no such choice.** KDP does not offer standard colour for hardcover; the
-  calculator rejects it outright. That is why the hardback is nearly $70 and the paperback is
-  under $30.
-- **Ink and paper are locked permanently at publication.** A title cannot be moved between
-  premium colour, standard colour and black-and-white afterwards. Page count is the only lever
-  left: each page costs $0.0402 in standard colour, so ten pages cut takes about $1.15 off the
-  minimum price.
-
-Before the first submission:
-
-- **Register the ISBNs at Bowker.** They are allocated in [book/imprint.py](book/imprint.py)
-  from HackerBay's own block — `978-1-950600-01-4` for the paperback, `978-1-950600-02-1` for
-  the hardback — so the publisher of record is yours rather than Amazon's. They are reserved,
-  not registered: assigning them against the title at
-  [myidentifiers.com](https://www.myidentifiers.com/isbn_dashboard) means entering real
-  publication metadata, so it is a deliberate step. The Kindle edition uses an ASIN and needs
-  no ISBN.
-- Generate the **hardback case** from KDP's cover calculator. `make covers` prints the trim,
-  page count and paper to feed it. KDP publishes no hardcover formula, so the build will not
-  invent one.
-- Confirm the numbers flagged as unverified at the end of
-  [docs/kdp-publishing-spec.md](docs/kdp-publishing-spec.md) — in particular the printing cost,
-  which decides whether the economics work at all.
-- Run the EPUB through Adobe epubcheck and Kindle Previewer 3. `make epub` runs a structural
-  check with no Java dependency, but it is not a substitute for those.
-- **Order a physical proof of both print editions** and check the gutter, the bleed and the
-  folio with a ruler. It is the only way to settle the margin question the spec flags.
-
-Note that the free PDF on the website makes the Kindle edition ineligible for KDP Select. The
-70% royalty in the US, UK and EU does not depend on Select; what you give up is Kindle Unlimited.
+Cut the release first, then publish from it, so the files on Amazon are a version you can point
+at later.
 
 ---
 
