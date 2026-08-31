@@ -184,9 +184,22 @@ Previewer 3 before publishing.
 royalty option, so illustration weight comes straight off the margin. `epub.py` reports the
 total and the implied fee; it is around 4 MB today, and the knobs are `IMG_W` and `JPEG_Q`.
 
-**Before submitting**, fill in the ISBNs in `book/imprint.py`, and confirm the numbers
-flagged as unverified at the end of `docs/kdp-publishing-spec.md` — in particular the
-printing cost, which decides whether the economics work at all.
+**Margins are gated, not assumed.** `make pricing` computes the lowest list price each
+edition needs to clear its target margin (25%, in `imprint.py`) and fails if a configured
+price misses it; `make amazon` runs it, so a submission bundle cannot be prepared with
+economics that do not work. CI deliberately does not run it — an unmade business decision
+should not turn the build red. On a colour book the page count sets the floor under the
+price: at 224 pages premium colour needs roughly a $54 list to clear 25%, standard colour
+about $19, and every 10 pages cut takes about $2.29 off the minimum.
+
+**Every pricing figure in `imprint.py` is marked UNVERIFIED** and none is confirmed against
+a primary source. They decide whether the book is worth selling, so replace them with the
+real ones from KDP's printing-cost calculator before trusting any output. The same applies
+to the numbers listed at the end of `docs/kdp-publishing-spec.md`.
+
+**The ISBNs are allocated but not registered.** They come from HackerBay's own Bowker block
+so the publisher of record is not Amazon. Assigning them against the title at Bowker means
+entering real publication metadata, and is left as a deliberate human step.
 
 ## Typesetting
 

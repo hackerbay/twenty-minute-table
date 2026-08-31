@@ -67,8 +67,9 @@ jobs:
       - name: Audit recipe content
         run: make audit
 
-      - name: Build the book and the site
-        run: make book site
+      # Named together so make builds the shared interior once, not once per target.
+      - name: Build the book, the covers, the Kindle edition and the site
+        run: make book covers epub site
 
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
@@ -91,14 +92,19 @@ jobs:
           TAG: ${{ steps.version.outputs.tag }}
         run: |
           RECIPES=$(ls recipes/*.md | wc -l | tr -d ' ')
-          cp dist/The-20-Minute-Table.pdf "The-20-Minute-Table-$TAG.pdf"
+          PAGES=$(python3 -c "import re,pathlib;print(len(re.findall(rb'/Type\s*/Page[^s]', pathlib.Path('dist/The-20-Minute-Table.pdf').read_bytes())))")
+          cp dist/The-20-Minute-Table.pdf  "The-20-Minute-Table-$TAG.pdf"
+          cp dist/The-20-Minute-Table.epub "The-20-Minute-Table-$TAG.epub"
+          cp dist/cover-paperback.pdf      "cover-paperback-$TAG.pdf"
+          cp dist/cover-kindle.jpg         "cover-kindle-$TAG.jpg"
           NOTES=$(mktemp)
           {
             echo "$RECIPES recipes. Every one on the table inside twenty minutes, serving four,"
             echo "with a toddler portion out of the same pan."
             echo
             echo "- **Read it online:** https://twentyminutetable.hackerbay.io"
-            echo "- **The book:** attached below as a PDF."
+            echo "- **The book:** $PAGES pages, attached below as a PDF."
+            echo "- **Kindle:** the EPUB is attached; the cover files are the print and store artwork."
             echo
             echo "### What changed"
             echo
@@ -112,4 +118,7 @@ jobs:
           gh release create "$TAG" \
             --title "The 20-Minute Table $TAG" \
             --notes-file "$NOTES" \
-            "The-20-Minute-Table-$TAG.pdf#The 20-Minute Table (PDF)"
+            "The-20-Minute-Table-$TAG.pdf#The 20-Minute Table (print PDF)" \
+            "The-20-Minute-Table-$TAG.epub#The 20-Minute Table (Kindle EPUB)" \
+            "cover-paperback-$TAG.pdf#Paperback cover wrap" \
+            "cover-kindle-$TAG.jpg#Kindle cover"

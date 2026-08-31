@@ -1,4 +1,4 @@
-.PHONY: all deps verify audit book covers epub amazon site kdp clean
+.PHONY: all deps verify audit book covers epub pricing amazon site kdp clean
 
 all: verify audit book site
 
@@ -23,8 +23,14 @@ epub: covers
 	python3 book/epub.py
 	python3 book/epubcheck.py
 
-# everything needed to submit to Amazon: interior, wrap, Kindle edition
-amazon: verify audit book covers epub
+pricing:
+	python3 book/pricing.py
+
+# everything needed to submit to Amazon: interior, wrap, Kindle edition, and the
+# margin check — you should not be able to prepare a submission whose economics
+# do not work. CI builds the artefacts without this, so a business decision that
+# has not been made yet cannot turn the build red.
+amazon: verify audit book covers epub pricing
 
 site: book
 	python3 book/site.py
