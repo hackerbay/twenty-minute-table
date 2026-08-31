@@ -131,6 +131,21 @@ def main():
                   f'{m:>5.0%}   {verdict:14s} {mark}')
         print()
 
+    # The hardback printing cost has to come from KDP's calculator. Until it does,
+    # show how the answer moves across a plausible range rather than pretend to one.
+    hb_list = IMP.LIST_USD.get('hardback')
+    if hb_list and IMP.HARDBACK_PRINT_COST_USD is None:
+        print(f'  hardback at ${hb_list:.2f}, if the print cost turns out to be:')
+        for cost in (18.00, 22.00, 26.00, 30.00):
+            m = margin_at(hb_list, cost, IMP.PRINT_ROYALTY_RATE)
+            keep = IMP.PRINT_ROYALTY_RATE * hb_list - cost
+            need = min_list(cost, IMP.PRINT_ROYALTY_RATE, target)
+            flag = 'clears' if m >= target else ('below cost' if keep < 0 else 'under')
+            print(f'    ${cost:5.2f}   you keep ${keep:6.2f}   {m:>5.0%}   {flag:11s} '
+                  f'({target:.0%} would need ${need:.2f})')
+        print('    ^ estimates only — put the real figure in imprint.HARDBACK_PRINT_COST_USD')
+        print()
+
     per_page = IMP.INK[IMP.INK_CHOICE][1]
     notes.append(f'Each page costs ${per_page:.4f} in {IMP.INK_CHOICE}, so every 10 pages '
                  f'cut lowers the minimum list price by about '

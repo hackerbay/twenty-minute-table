@@ -57,9 +57,12 @@ PRINT_ROYALTY_RATE = 0.60
 MIN_PRINT_MARGIN = 0.25         # royalty after printing, as a share of list price
 
 # fixed cost, per-page cost — USD, Amazon.com, large trim
+# NOTE: ink and paper are locked permanently once a title is published. A book
+# cannot be moved between premium colour, standard colour and black-and-white
+# afterwards, so this is a one-way decision.
 INK = {
     'premium colour':  (1.00, 0.0800),   # UNVERIFIED
-    'standard colour': (1.00, 0.0255),   # UNVERIFIED, for comparison only
+    'standard colour': (1.00, 0.0402),   # UNVERIFIED — roughly half of premium
 }
 INK_CHOICE = 'premium colour'
 
