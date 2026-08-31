@@ -1,0 +1,153 @@
+# Publishing to Amazon
+
+How to get the three editions onto KDP. [RELEASING.md](RELEASING.md) covers changing the book
+and publishing the website; this is the separate, manual step of listing it for sale.
+
+Do it once carefully. Two of the choices below — trim size and ink — **cannot be changed after
+publication**. Everything else can.
+
+---
+
+## Before you start
+
+Three things must be true first.
+
+**1. The release exists.** Publish a release so the files you upload are a version you can name
+later. `RELEASING.md` covers it. The release attaches all four:
+
+| File | Used for |
+|---|---|
+| `The-20-Minute-Table-vX.Y.Z.pdf` | interior of **both** print editions |
+| `cover-paperback-vX.Y.Z.pdf` | paperback cover |
+| `The-20-Minute-Table-vX.Y.Z.epub` | Kindle edition |
+| `cover-kindle-vX.Y.Z.jpg` | Kindle cover |
+
+You can also upload straight from `dist/` after `make amazon`.
+
+**2. The ISBNs are registered at Bowker.** They are reserved in
+[book/imprint.py](book/imprint.py) but not yet assigned to the title at
+[myidentifiers.com](https://www.myidentifiers.com/isbn_dashboard). Assign them, with format and
+publication details, before listing:
+
+- Paperback `978-1-950600-01-4`
+- Hardback `978-1-950600-02-1`
+- Kindle needs none; Amazon issues an ASIN.
+
+Using your own ISBNs means **HackerBay** is the publisher of record rather than Amazon, and the
+book could be printed elsewhere later without new numbers.
+
+**3. The hardback cover exists.** It is the one artefact the build does not produce, because KDP
+publishes no hardcover case formula and defers to its own template.
+
+1. Open the [KDP Cover Calculator](https://kdp.amazon.com/en_US/cover-calculator).
+2. Enter: **Hardcover**, trim **8.25 × 11 in**, **224** pages, **premium colour**, white paper.
+3. Download the template it generates — it carries the exact case size, hinge channels, wrap
+   allowance and barcode area for this book.
+4. Composite the front panel onto it. `make covers` prints the same numbers so you can check
+   they agree. Keep all type **0.635 in (16 mm)** from every edge and off the two 0.4 in hinge
+   channels — type in a hinge gets creased.
+
+---
+
+## Settings, verified
+
+These came from KDP's own calculator. Enter them exactly; the two marked permanent are the ones
+you cannot revise.
+
+| | Paperback | Hardcover | Kindle |
+|---|---|---|---|
+| Interior type | Standard colour, white paper **(permanent)** | Premium colour, white paper **(permanent — the only option)** | — |
+| Trim | **Custom**, 8.25 × 11 in **(permanent)** | 8.25 × 11 in (a standard size) **(permanent)** | — |
+| Bleed | **Bleed (PDF only)** | **Bleed (PDF only)** | — |
+| Pages | 224 | 224 | — |
+| ISBN | 978-1-950600-01-4 | 978-1-950600-02-1 | none (ASIN) |
+| Printing cost | $10.00 | $23.57 | $0.63 delivery |
+| KDP minimum | $16.67 | $39.28 | — |
+| **List price** | **$28.99** | **$69.99** | **$9.99** |
+| Royalty | 60% → $7.39 | 60% → $18.42 | 70% → about $6.36 |
+
+The interior is built **with bleed** — 8.375 × 11.25 in page box against an 8.25 × 11 trim. If
+you tell KDP "no bleed" it will reject or rescale it.
+
+---
+
+## Paperback
+
+1. KDP Bookshelf → **Create** → **Paperback**.
+2. **Details.** Title *The 20-Minute Table*, subtitle from
+   [book/imprint.py](book/imprint.py), author **Nawaz Dhandala**, publisher **HackerBay**.
+   Description: adapt the back cover copy in `book/cover.py`. Not a large-print or low-content
+   book.
+3. **ISBN.** Choose *Use my own ISBN* and enter `978-1-950600-01-4`. Imprint: HackerBay.
+4. **Content.** Print options exactly as the table above. Upload
+   `The-20-Minute-Table.pdf` as the manuscript and `cover-paperback.pdf` as the cover.
+5. **Previewer.** Work through every warning. It will confirm 224 pages and the trim.
+6. **Rights & Pricing.** Worldwide rights. Primary marketplace Amazon.com, **$28.99**, 60%.
+   Let other marketplaces convert automatically unless you have a reason not to.
+7. **Order a proof** before publishing, and check the gutter, the bleed on all three outer
+   edges, and the folio position with a ruler. It is the only way to be sure.
+
+### The trade you made by choosing 8.25 × 11
+
+Expanded Distribution is the bookstore, library and academic channel. Two things about it,
+both from KDP's own eligibility page:
+
+- **Hardcover is never eligible.** KDP states it outright.
+- **Eligibility is a fixed chart of standard trim sizes.** A custom trim — which 8.25 × 11 is,
+  for a paperback — is not on that chart, so it does not qualify. But **8.5 × 11 with standard
+  colour on white paper does.**
+
+So there was a genuine fork, and it is worth being clear which side we are on. 8.25 × 11 is the
+only trim that is *both* a hardcover size and reachable as a paperback, so one interior serves
+both editions. 8.5 × 11 would have opened Expanded Distribution for the paperback — at 40%
+royalty rather than 60% — but there is no 8.5 × 11 hardcover, so the hardback would have to go.
+
+**Hardback plus one interior, or Expanded Distribution.** Not both. We chose the hardback. If
+that turns out to be the wrong call, it means a new paperback at 8.5 × 11 with its own ISBN —
+trim cannot be changed on a published title.
+
+## Hardcover
+
+Same flow, **Create → Hardcover**, with `978-1-950600-02-1`, the premium colour interior, the
+same `The-20-Minute-Table.pdf`, and the cover you built from the template. List at **$69.99**.
+
+The hardback is expensive because it has to be: KDP does not offer standard colour for
+hardcover, so 224 colour pages cost $23.57 to print and 25% margin needs $67.34. If you would
+rather sell it cheaper, $55 still works at about 17%.
+
+## Kindle
+
+1. **Create** → **Kindle eBook**.
+2. Same details. **No ISBN needed.**
+3. **KDP Select: do not enrol.** The full PDF is free at
+   [twentyminutetable.hackerbay.io](https://twentyminutetable.hackerbay.io), and Select requires
+   the digital edition be exclusive to Amazon. You keep the 70% royalty in the US, UK and EU
+   without it; what you give up is Kindle Unlimited.
+4. **DRM: no.** The content is CC BY 4.0. Locking it would contradict the licence the book
+   itself prints on its copyright page.
+5. Upload `The-20-Minute-Table.epub` and `cover-kindle.jpg`.
+6. Check the converted file size KDP reports **before** setting the price — the delivery fee is
+   charged on that, not on the EPUB. It should be at or under 4.2 MB.
+7. Price **$9.99**, 70% royalty.
+
+Run the EPUB through Adobe epubcheck and Kindle Previewer 3 first. `make epub` runs a structural
+check with no Java dependency, but it is not a substitute.
+
+---
+
+## After publishing
+
+- **Link the editions** so paperback, hardcover and Kindle share one detail page. KDP usually
+  does this automatically for matching title and author; if not, ask KDP support.
+- **Categories** — two, plus up to seven keywords. Quick & easy cooking, baby and toddler
+  feeding, and whole-food or family cooking all fit this book.
+- **Author Central** for the author page and A+ content.
+
+## Updating a published book
+
+Interior and cover files, description, categories, keywords and price can all be changed after
+publication: upload a new file and republish, and Amazon relists within a couple of days.
+
+**Trim size and ink cannot.** Changing either means publishing a new title with a new ISBN.
+
+When you do update, cut a release first so the file you upload is a version you can point at.
