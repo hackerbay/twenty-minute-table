@@ -36,7 +36,7 @@ This project uses [semantic versioning](https://semver.org) loosely, read for a 
 - Fixed a pagination bug that split fifty recipes' spreads across a page turn.
 - Paperback cover wrap, Kindle cover, and a reflowable EPUB3 edition.
 - `RELEASING.md`: how to change the book and publish the result.
-- Releases now attach all four Amazon artefacts, not just the print PDF.
+- Releases now attach all five Amazon artefacts, not just the print PDF.
 - A margin gate: `make pricing` refuses a submission bundle whose economics miss
   the 25% target, and says what list price each edition would need.
 - ISBNs allocated from HackerBay's own Bowker block, so the publisher of record

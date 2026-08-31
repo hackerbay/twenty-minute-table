@@ -187,8 +187,8 @@ The release workflow, on any push to `release`:
 5. Deploys the website to Firebase Hosting, live.
 6. Tags the commit and pushes the tag.
 7. Publishes a GitHub release with notes generated from the commits since the previous tag,
-   with four files attached: the print PDF, the Kindle EPUB, the paperback cover wrap, and the
-   Kindle cover.
+   with five files attached: the print PDF, the Kindle EPUB, both print cover wraps, and
+   the Kindle cover.
 
 You can also run it by hand from the Actions tab — it accepts `workflow_dispatch`.
 
@@ -238,6 +238,7 @@ The release attaches everything you need:
 |---|---|
 | `The-20-Minute-Table-vX.Y.Z.pdf` | interior for **both** print editions |
 | `cover-paperback-vX.Y.Z.pdf` | the paperback cover wrap |
+| `cover-hardback-vX.Y.Z.pdf` | the hardback case wrap |
 | `The-20-Minute-Table-vX.Y.Z.epub` | the Kindle edition |
 | `cover-kindle-vX.Y.Z.jpg` | the Kindle cover |
 
