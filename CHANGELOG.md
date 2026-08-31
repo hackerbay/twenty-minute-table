@@ -35,7 +35,12 @@ This project uses [semantic versioning](https://semver.org) loosely, read for a 
   the back cover.
 - The same "why" on the website's about page, from a shared `mission.py` so the
   book and the site cannot drift apart.
-- List prices set: paperback $20, hardback $55.
+- List prices set from KDP's own calculator: paperback $28.99 (standard colour),
+  hardback $69.99 (premium colour, the only option), Kindle $9.99.
+- The hardback case is now built like the other covers, to dimensions measured
+  from KDP's Cover Calculator; both wraps are checked against their safe areas
+  before the PDF is written.
+- `PUBLISHING.md`: how to list the three editions on Amazon.
 
 ## 1.0.0
 

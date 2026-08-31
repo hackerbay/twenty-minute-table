@@ -7,7 +7,7 @@ Working notes for coding agents on **The 20-Minute Table**. Read this before edi
 A cookbook that is compiled, not laid out by hand. 100 markdown recipe files in `recipes/` are
 the single source of truth; a Python toolchain in `book/` turns them into two artefacts:
 
-- `dist/The-20-Minute-Table.pdf` — a 217-page A4 print book
+- `dist/The-20-Minute-Table.pdf` — a 224-page print book, 8.25x11 trim with bleed
 - `site/` — a static website with no build step and no external requests
 
 Every number that appears in either output — page numbers, contents pages, cuisine indexes,
@@ -143,9 +143,9 @@ would rasterise those regions and turn an all-vector book into a mixed one, rein
 resolution problem the book does not otherwise have. `make kdp` fails the build on any
 transparency group, soft mask, sub-1 alpha operator, wrong page box or odd page count.
 
-**ISBNs live in `book/imprint.py`** and are blank until KDP assigns them. The copyright page
-omits any empty field rather than printing a placeholder, so the book is always correct to
-print — but a paperback cannot be submitted without one.
+**ISBNs live in `book/imprint.py`**, allocated from HackerBay's own Bowker block so the
+publisher of record is not Amazon. The copyright page omits any empty field rather than printing
+a placeholder, so the book is always correct to print even while something there is unset.
 
 ## The Amazon editions
 
@@ -159,6 +159,7 @@ Three artefacts land in `dist/`:
 |---|---|
 | `The-20-Minute-Table.pdf` | the interior, 8.25x11 trim with bleed, for both print editions |
 | `cover-paperback.pdf` | the full wrap: back cover, spine, front cover, bleed on all four sides |
+| `cover-hardback.pdf` | the hardback case: turn-in, back, hinge, spine, hinge, front, turn-in |
 | `cover-kindle.jpg` | 2560x1600 front cover for the eBook |
 | `The-20-Minute-Table.epub` | reflowable EPUB3 for Kindle |
 
@@ -166,11 +167,17 @@ Three artefacts land in `dist/`:
 of the built interior and multiplies by KDP's premium colour figure. Rebuild the interior
 before the cover or the spine will be wrong for the book it wraps.
 
-**The hardback case is deliberately not generated.** KDP publishes no hardcover formula and
-defers to its own cover calculator; the case is larger than the paperback wrap in both axes
-because the sheet wraps a board that overhangs the text block, plus two hinge channels. Feed
-the calculator the trim, page count and paper that `make covers` prints, download its
-template, and composite the front panel onto it. Do not derive the size from the paperback.
+**The hardback case dimensions are measured, not derived.** KDP publishes no hardcover
+formula, so the numbers in `HC` at the top of `cover.py` were read from its Cover Calculator
+for 8.25x11 at 224 pages in premium colour. They are only correct at that page count, and the
+build refuses to guess: change the page count and `make covers` stops and tells you to
+re-measure. Do not compute the case from the paperback wrap — it is larger in both axes,
+because the sheet wraps a board that overhangs the text block and turns in to be glued down.
+
+**Both wraps are checked before the PDF is written.** Type in the turn-in would be glued out of
+sight; type in a hinge channel gets creased. `cover.py` measures every piece of text against the
+safe area in the live layout and fails the build rather than producing a cover that looks fine
+on screen and wrong in the hand.
 
 **The Kindle edition is reflowable, and the print design does not survive.** Full-bleed
 panels, the two-page spread and the vertical justification are print production, not content;

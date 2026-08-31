@@ -18,7 +18,8 @@ later. `RELEASING.md` covers it. The release attaches all four:
 | File | Used for |
 |---|---|
 | `The-20-Minute-Table-vX.Y.Z.pdf` | interior of **both** print editions |
-| `cover-paperback-vX.Y.Z.pdf` | paperback cover |
+| `cover-paperback-vX.Y.Z.pdf` | paperback cover wrap |
+| `cover-hardback-vX.Y.Z.pdf` | hardback case |
 | `The-20-Minute-Table-vX.Y.Z.epub` | Kindle edition |
 | `cover-kindle-vX.Y.Z.jpg` | Kindle cover |
 
@@ -36,16 +37,23 @@ publication details, before listing:
 Using your own ISBNs means **HackerBay** is the publisher of record rather than Amazon, and the
 book could be printed elsewhere later without new numbers.
 
-**3. The hardback cover exists.** It is the one artefact the build does not produce, because KDP
-publishes no hardcover case formula and defers to its own template.
+**3. Nothing else.** The hardback cover used to be the missing piece; it is now built like the
+others. KDP publishes no hardcover case formula, so the dimensions were read from its
+[Cover Calculator](https://kdp.amazon.com/en_US/cover-calculator) for 8.25 × 11 at 224 pages in
+premium colour and recorded in `HC` at the top of [book/cover.py](book/cover.py):
 
-1. Open the [KDP Cover Calculator](https://kdp.amazon.com/en_US/cover-calculator).
-2. Enter: **Hardcover**, trim **8.25 × 11 in**, **224** pages, **premium colour**, white paper.
-3. Download the template it generates — it carries the exact case size, hinge channels, wrap
-   allowance and barcode area for this book.
-4. Composite the front panel onto it. `make covers` prints the same numbers so you can check
-   they agree. Keep all type **0.635 in (16 mm)** from every edge and off the two 0.4 in hinge
-   channels — type in a hinge gets creased.
+| | |
+|---|---|
+| Full case | 18.79 × 12.417 in |
+| Front and back panels | 8.447 × 11.236 in each |
+| Spine | 0.715 in |
+| Turn-in (wrap) | 0.591 in — glued down, nothing here is visible |
+| Hinge channel | 0.394 in either side of the spine — type here gets creased |
+
+**Those numbers are measured, not derived, so they are only right for 224 pages.** If the page
+count changes, the build refuses to guess: it stops and tells you to re-measure. Both wraps are
+also checked against their safe areas before the PDF is written — type in the turn-in or a hinge
+fails the build rather than reaching a printer.
 
 ---
 
@@ -109,7 +117,7 @@ trim cannot be changed on a published title.
 ## Hardcover
 
 Same flow, **Create → Hardcover**, with `978-1-950600-02-1`, the premium colour interior, the
-same `The-20-Minute-Table.pdf`, and the cover you built from the template. List at **$69.99**.
+same `The-20-Minute-Table.pdf`, and `cover-hardback.pdf`. List at **$69.99**.
 
 The hardback is expensive because it has to be: KDP does not offer standard colour for
 hardcover, so 224 colour pages cost $23.57 to print and 25% margin needs $67.34. If you would
