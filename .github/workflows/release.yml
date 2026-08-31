@@ -75,7 +75,10 @@ jobs:
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          # `firebase init hosting:github` creates the secret under a name suffixed
+          # with the project id; a hand-made one is usually just FIREBASE_SERVICE_ACCOUNT.
+          # Accept either so whichever route was taken works.
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TWENTY_MINUTE_TABLE || secrets.FIREBASE_SERVICE_ACCOUNT }}
           projectId: twenty-minute-table
           channelId: live
 
