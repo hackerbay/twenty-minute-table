@@ -24,6 +24,22 @@ SITE = ROOT / 'site'
 ASSETS = SITE / 'assets'
 NM = ROOT / 'node_modules'
 
+PDF_NAME = 'The-20-Minute-Table.pdf'
+PDF_SRC = ROOT / 'dist' / PDF_NAME
+
+DL_ICON = ('<svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" '
+           'stroke="currentColor" stroke-width="2" stroke-linecap="round" '
+           'stroke-linejoin="round" aria-hidden="true">'
+           '<path d="M12 3v12"/><path d="m7 12 5 5 5-5"/><path d="M5 21h14"/></svg>')
+
+
+def pdf_pages():
+    """Page count read out of the built PDF, so the copy cannot drift from it."""
+    if not PDF_SRC.exists():
+        return None
+    counts = [int(m) for m in re.findall(rb'/Count\s+(\d+)', PDF_SRC.read_bytes())]
+    return max(counts) if counts else None
+
 esc = lambda s: html.escape(s, quote=False)
 b64 = lambda p: base64.b64encode(Path(p).read_bytes()).decode()
 
@@ -84,6 +100,9 @@ def nav(depth=0, active=''):
     for h, t in items:
         cls = ' class="on"' if active and h.startswith(active) else ''
         parts.append(f'<a href="{up}{h}"{cls}>{t}</a>')
+    parts.append(f'<a class="pdf" href="{up}{PDF_NAME}" download '
+                 f'aria-label="Download the PDF" title="Download the PDF">'
+                 f'{DL_ICON}<span>Download PDF</span></a>')
     links = ''.join(parts)
     return (f'<header class="nav"><a class="brand" href="{up}index.html">'
             f'<span class="brand-d">The 20-Minute Table</span></a>'
@@ -308,6 +327,8 @@ def build_toddlers(recipes):
 def build_about(recipes, rules):
     counts = Counter(r['method'] for r in recipes)
     rl = ''.join(f'<li><b>{t}</b> {b}</li>' for t, b in rules)
+    n = pdf_pages()
+    pages = f' {n}-page' if n else ''
     body = f"""{nav(0, 'about')}
 <section class="phero"><div class="wrap">
   <p class="eyebrow">A short note first</p>
@@ -339,8 +360,8 @@ def build_about(recipes, rules):
   </div>
   <h2 class="sect d">Ten rules for a twenty-minute dinner</h2>
   <ol class="rules">{rl}</ol>
-  <p class="dl">The whole thing is also a printable 184-page book:
-    <a href="The-20-Minute-Table.pdf">download the PDF</a>.</p>
+  <p class="dl">The whole thing is also a printable{pages} book:
+    <a href="{PDF_NAME}" download>download the PDF</a>.</p>
 </main>
 {footer(0)}"""
     (SITE / 'about.html').write_text(shell('About — The 20-Minute Table', body, 0,
@@ -364,9 +385,8 @@ def main():
                                       encoding='utf-8')
     shutil.copy(HERE / 'web' / 'app.js', ASSETS / 'app.js')
 
-    pdf = ROOT / 'dist' / 'The-20-Minute-Table.pdf'
-    if pdf.exists():
-        shutil.copy(pdf, SITE / 'The-20-Minute-Table.pdf')
+    if PDF_SRC.exists():
+        shutil.copy(PDF_SRC, SITE / PDF_NAME)
 
     build_index(recipes)
     for i, r in enumerate(recipes):

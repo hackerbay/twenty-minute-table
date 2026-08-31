@@ -41,6 +41,18 @@ a{color:inherit}
 .nav nav a{text-decoration:none;color:var(--ink3);padding:4px 0;border-bottom:1.5px solid transparent}
 .nav nav a:hover{color:var(--ink)}
 .nav nav a.on{color:var(--ink);border-color:var(--ink)}
+.nav nav a.pdf{display:inline-flex;align-items:center;gap:7px;padding:5px 12px;
+  border:1px solid var(--line);border-radius:999px;color:var(--ink2);background:var(--card)}
+.nav nav a.pdf:hover{color:var(--ink);border-color:var(--ink3);box-shadow:var(--shadow)}
+@media (max-width:640px){
+  .nav{flex-wrap:wrap;gap:9px;padding:12px 16px}
+  .brand{flex:0 0 100%}
+  .brand-d{font-size:16px;white-space:nowrap}
+  .nav nav{margin-left:0;width:100%;gap:15px;font-size:13px}
+  .nav nav a{white-space:nowrap}
+  .nav nav a.pdf{margin-left:auto;padding:5px 9px}
+  .nav nav a.pdf span{display:none}
+}
 
 /* ---------- hero ---------- */
 .hero{padding:76px 0 52px}
