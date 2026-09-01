@@ -12,6 +12,28 @@ This project uses [semantic versioning](https://semver.org) loosely, read for a 
 - **Major** — a change that reorganises the book: renumbering recipes, changing the recipe
   file contract, dropping a section.
 
+## 1.0.2
+
+- Both ISBNs are registered at Bowker against the title, so the numbers printed in the
+  book resolve to a real record rather than to nothing. `PUBLISHING.md` carries what was
+  filed, including the three subject schemes that do not map onto each other.
+- **The content gates actually fail now.** `book/audit.py` ended `sys.exit(0 if main() == 0
+  else 0)` — both branches zero — and `book/verify.py` never called `sys.exit` at all, so
+  neither could ever turn CI red. The recipe contract and house style in `AGENTS.md` were
+  conventions rather than gates for as long as they have existed.
+- The paperback spine is measured on the paper it is printed on. `cover.py` multiplied the
+  page count by the premium colour figure while the paperback interior is standard colour,
+  making the wrap 0.54mm too wide; the multiplier is now chosen from `INK_CHOICE`, and an
+  unrecognised ink stops the build rather than guessing. Covers rebuilt to match.
+- Corrected stale facts that had drifted since the book was retypeset for Amazon: the
+  README called it a 217-page book, `AGENTS.md` described the paperback as premium colour,
+  put the standard colour pricing floor $10 too low, and said every figure in `imprint.py`
+  was unverified when KDP has since confirmed them, and `RELEASING.md` listed four release
+  artefacts when there are five — omitting the one file the hardcover needs.
+
+No page of the book changed in this release. Nothing here is a reason to re-upload to
+Amazon: the editions on sale carry v1.0.0, which is the version that was published.
+
 ## 1.0.1
 
 - `PUBLISHING.md` records what actually went to Amazon — the prices, the royalties, and
@@ -21,13 +43,6 @@ This project uses [semantic versioning](https://semver.org) loosely, read for a 
 - `make pricing` no longer claims the converted Kindle file is smaller than the EPUB.
   It is larger — 4.23 MB became 4.56 MB — so the estimate runs optimistic, not
   conservative, and now says so.
-- Both ISBNs are registered at Bowker against the title, so the numbers printed in the
-  book resolve to a real record rather than to nothing. `PUBLISHING.md` carries what
-  was filed, including the three subject schemes that do not map onto each other.
-- Corrected stale facts that had drifted since the book was retypeset for Amazon: the
-  README called it a 217-page book, and `AGENTS.md` described the paperback as premium
-  colour, put the standard colour pricing floor $10 too low, and said every figure in
-  `imprint.py` was unverified when KDP has since confirmed them.
 
 ## 1.0.0
 
