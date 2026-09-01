@@ -112,7 +112,7 @@ And these are conventions to match, enforced by `audit.py` or by eye:
 
 The book is typeset for Amazon KDP at **8.25in x 11in trim**, the only size in KDP's
 catalogue that is both a standard hardcover trim and reachable as a paperback. One interior
-serves the premium colour hardback and the premium colour paperback. `docs/kdp-publishing-spec.md`
+serves the premium colour hardback and the standard colour paperback. `docs/kdp-publishing-spec.md`
 is the full specification; these are the parts that will break if you edit carelessly.
 
 **The page box carries bleed.** `.page` is `8.375in x 11.25in` — trim plus 0.125in on the top,
@@ -197,12 +197,15 @@ price misses it; `make amazon` runs it, so a submission bundle cannot be prepare
 economics that do not work. CI deliberately does not run it — an unmade business decision
 should not turn the build red. On a colour book the page count sets the floor under the
 price: at 224 pages premium colour needs roughly a $54 list to clear 25%, standard colour
-about $19, and every 10 pages cut takes about $2.29 off the minimum.
+about $29, and every 10 pages cut takes about $2.29 off the minimum in premium colour,
+$1.15 in standard.
 
-**Every pricing figure in `imprint.py` is marked UNVERIFIED** and none is confirmed against
-a primary source. They decide whether the book is worth selling, so replace them with the
-real ones from KDP's printing-cost calculator before trusting any output. The same applies
-to the numbers listed at the end of `docs/kdp-publishing-spec.md`.
+**The pricing figures in `imprint.py` are verified.** Every one was read from KDP's own
+printing-cost calculator on 2026-08-31 for 8.25x11 at 224 pages, and KDP confirmed the
+print costs and minimum list prices again at submission. They are correct at that page
+count and trim and nowhere else: change either and re-read them from the calculator rather
+than scaling them. The numbers at the end of `docs/kdp-publishing-spec.md` were not
+rechecked and still describe a 218-page premium colour book.
 
 **The ISBNs are allocated but not registered.** They come from HackerBay's own Bowker block
 so the publisher of record is not Amazon. Assigning them against the title at Bowker means
