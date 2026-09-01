@@ -218,17 +218,17 @@ The three covers — paperback, hardback, Kindle — are **three separate artefa
 
 ### 5.1 Spine width formula
 
-**Premium colour: spine width = page count × 0.002347″ (0.0596 mm).** Premium colour is offered on white paper only; there is no white/cream split and therefore exactly one multiplier.
+**Spine width = page count × the multiplier for the interior stock.** This book is not on one stock: the paperback interior is **standard colour** (× 0.002252″), the hardback is **premium colour** (× 0.002347″). Both colour interiors are offered on white paper only; there is no white/cream split, so each has exactly one multiplier.
 
-| Paper / ink | Multiplier (inches per page) |
-|---|---|
-| **Premium colour (white only)** | **0.002347** |
-| Standard colour (white) | 0.002252 |
-| B&W on white | 0.002252 |
-| B&W on cream | 0.0025 |
-| Groundwood | 0.00235 |
+| Paper / ink | Multiplier (inches per page) | Used by |
+|---|---|---|
+| **Standard colour (white)** | **0.002252** | **the paperback** |
+| **Premium colour (white only)** | **0.002347** | **the hardback** |
+| B&W on white | 0.002252 | — |
+| B&W on cream | 0.0025 | — |
+| Groundwood | 0.00235 | — |
 
-**⚠ Genuine contradiction in KDP's own documentation.** The Paperback Submission Guidelines page gives a single figure — "Color paper: page count × 0.002347″" — for all colour, while the Create a Paperback Cover page splits premium (0.002347″) from standard (0.002252″). For this book both pages agree, because we are on premium colour. No action needed here, but do not be surprised by the discrepancy.
+**⚠ Contradiction in KDP's own documentation, and it bites this book.** The Paperback Submission Guidelines page gives a single figure — "Color paper: page count × 0.002347″" — for all colour, while the Create a Paperback Cover page splits premium (0.002347″) from standard (0.002252″). The paperback is standard colour, so the two pages disagree about it by 0.021″ at 224 pages. **Follow the split table.** Settled against KDP's Cover Calculator on 2026-09-01: paperback, standard colour, white paper, 8.25 × 11, 224 pages returns a spine of 0.504″ and a full wrap of 17.254″, which is 0.002252″ per page. The lumped "Color paper" row predates the standard/premium split and is stale.
 
 **Worked example at 217 pages:** KDP rounds the page count up to an even number, so **compute on 218, not 217**.
 
@@ -461,7 +461,7 @@ Confirm each of these in KDP before submitting:
 | With-bleed margin datum: 0.375″ from trim, or from the bleed page edge | §3 | KDP does not state which. Adopted the safer reading. Worth 6.35 mm of live height. |
 | Premium colour print cost: $1.00 + $0.080/page at large trim | §5.5 | Not verified against a primary source, and it determines whether the project is viable at all. |
 | Hardcover case dimensions | §5.3 | KDP publishes no formula. Must come from the cover calculator. |
-| Colour spine multiplier for standard vs premium | §5.1 | KDP's two help pages contradict each other. Immaterial here (premium is unambiguous at 0.002347″), but do not generalise. |
+| ~~Colour spine multiplier for standard vs premium~~ | §5.1 | **Resolved 2026-09-01** against the Cover Calculator: standard colour is 0.002252″, premium 0.002347″. The Submission Guidelines page's lumped "Color paper" row is stale. |
 | Expanded Distribution ineligibility for 8.25×11 paperback | §1 | Reported, not independently confirmed. Check in the KDP dashboard if ED matters. |
 | Paperback premium colour page ceiling at custom 8.25×11 (reported 24–590 for 8.5×11-class trims) | §1 | 218 is far inside any reported band, so this is not a live risk — but confirm if the page count ever grows past ~580. |
 

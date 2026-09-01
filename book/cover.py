@@ -14,7 +14,8 @@ Three separate artefacts, sharing only the artwork:
              prints the numbers you need to feed it instead of inventing a size.
 
 Spine width comes from the real page count in the built interior, not a constant,
-because it changes whenever the book does.
+because it changes whenever the book does — and from the interior KDP prints it
+on, because standard and premium colour are different thicknesses of paper.
 """
 import asyncio, re, sys
 from pathlib import Path
@@ -31,7 +32,26 @@ from flatten import mix
 
 BLEED = 0.125          # inches, all four sides on a cover
 TRIM_W, TRIM_H = 8.25, 11.0
-PREMIUM_COLOUR_PER_PAGE = 0.002347     # inches of spine per page, KDP premium colour
+
+# Inches of spine per page. KDP publishes one multiplier per interior stock:
+#
+#   "Standard Color paper: page count x 0.002252" (0.0572 mm)"
+#   "Premium Color paper: page count x 0.002347" (0.0596 mm)"
+#
+# — Create a Paperback Cover, https://kdp.amazon.com/en_US/help/topic/G201953020,
+# read 2026-09-01, and confirmed against the Cover Calculator the same day: at
+# 8.25x11, 224 pages, paperback, standard colour, white paper it returns a
+# 0.504in spine and a 17.254in wrap, which is what the figures below give.
+#
+# KDP's older Paperback Submission Guidelines page still lumps every colour book
+# together as "Color paper: page count x 0.002347"". That row predates the
+# standard/premium split and is wrong for a standard-colour interior — see
+# docs/kdp-publishing-spec.md §5.1.
+SPINE_PER_PAGE = {
+    'standard colour': 0.002252,   # what the paperback is printed on
+    'premium colour':  0.002347,   # hardback only today, and that uses HC below
+}
+
 SAFE = 0.25            # inches: keep all type this far inside the trim
 
 # Hardcover case, read from KDP's Cover Calculator on 2026-08-31 for
@@ -46,7 +66,7 @@ HC = {
     'pages': 224,
     'sheet_w': 18.79, 'sheet_h': 12.417,
     'panel_w': 8.447, 'panel_h': 11.236,
-    'spine': 0.715,      # far wider than the paperback's 0.526
+    'spine': 0.715,      # far wider than the paperback's 0.504
     'wrap': 0.591,       # turn-in: nothing here survives on the visible face
     'hinge': 0.394,      # channel either side of the spine — type creases in it
     'margin': 0.125,
@@ -78,7 +98,10 @@ def page_count():
 
 
 def geometry(pages):
-    spine = pages * PREMIUM_COLOUR_PER_PAGE
+    """The paperback wrap. Its spine depends on the interior KDP will print it on."""
+    if IMP.INK_CHOICE not in SPINE_PER_PAGE:
+        sys.exit(f'cover: no KDP spine multiplier for a {IMP.INK_CHOICE!r} interior')
+    spine = pages * SPINE_PER_PAGE[IMP.INK_CHOICE]
     return {
         'pages': pages,
         'spine': spine,
