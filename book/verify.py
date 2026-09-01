@@ -65,3 +65,6 @@ print(" ", Counter(r[3] for r in rows))
 print(f"Cuisines ({len(set(r[2] for r in rows))} distinct):")
 for c,k in sorted(Counter(r[2] for r in rows).items()): print(f"   {c}: {k}")
 print("\nTime spread:", Counter(r[4] for r in rows))
+
+if problems:
+    sys.exit(1)
