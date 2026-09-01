@@ -1,6 +1,6 @@
 {
   "name": "the-20-minute-table",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": true,
   "description": "One hundred fast, whole-food recipes, typeset into a printable A4 cookbook and a static site.",
   "scripts": {

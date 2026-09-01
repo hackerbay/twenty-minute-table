@@ -29,6 +29,9 @@ NM = ROOT / 'node_modules'
 PDF_NAME = 'The-20-Minute-Table.pdf'
 PDF_SRC = ROOT / 'dist' / PDF_NAME
 
+EPUB_NAME = 'The-20-Minute-Table.epub'
+EPUB_SRC = ROOT / 'dist' / EPUB_NAME
+
 GH_URL = 'https://github.com/hackerbay/twenty-minute-table'
 REPO_TEXT = 'github.com/hackerbay/twenty-minute-table'
 
@@ -121,8 +124,11 @@ def nav(depth=0, active=''):
         cls = ' class="on"' if active and h.startswith(active) else ''
         parts.append(f'<a href="{up}{h}"{cls}>{t}</a>')
     parts.append(f'<a class="pdf" href="{up}{PDF_NAME}" download '
-                 f'aria-label="Download the PDF" title="Download the PDF">'
-                 f'{DL_ICON}<span>Download PDF</span></a>')
+                 f'aria-label="Download the book as a PDF" title="Download the PDF">'
+                 f'{DL_ICON}<span>PDF</span></a>')
+    parts.append(f'<a class="pdf" href="{up}{EPUB_NAME}" download '
+                 f'aria-label="Download the book as an EPUB" title="Download the EPUB">'
+                 f'{DL_ICON}<span>EPUB</span></a>')
     links = ''.join(parts)
     return (f'<header class="nav"><a class="brand" href="{up}index.html">'
             f'<span class="brand-d">The 20-Minute Table</span></a>'
@@ -411,8 +417,9 @@ def build_about(recipes, rules):
   </div>
   <h2 class="sect d">Ten rules for a twenty-minute dinner</h2>
   <ol class="rules">{rl}</ol>
-  <p class="dl">The whole thing is also a printable{pages} book:
-    <a href="{PDF_NAME}" download>download the PDF</a>.</p>
+  <p class="dl">The whole thing is also a{pages} book you can keep:
+    <a href="{PDF_NAME}" download>the PDF</a> to print, or
+    <a href="{EPUB_NAME}" download>the EPUB</a> for a reader.</p>
 </main>
 {contribute(0)}
 {footer(0)}"""
@@ -439,6 +446,8 @@ def main():
 
     if PDF_SRC.exists():
         shutil.copy(PDF_SRC, SITE / PDF_NAME)
+    if EPUB_SRC.exists():
+        shutil.copy(EPUB_SRC, SITE / EPUB_NAME)
 
     build_index(recipes)
     for i, r in enumerate(recipes):

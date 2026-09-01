@@ -12,8 +12,11 @@ This project uses [semantic versioning](https://semver.org) loosely, read for a 
 - **Major** — a change that reorganises the book: renumbering recipes, changing the recipe
   file contract, dropping a section.
 
-## Unreleased
+## 1.0.3
 
+- The website offers the EPUB as well as the PDF. Both sit in the header on every page,
+  and the about page says which is for what. The EPUB ships with the site, so the book
+  can be read on a device without going near a retailer.
 - **The Kindle edition declares a real, stable identifier.** `dc:identifier` was
   `urn:uuid:twenty-minute-table-1.0.1`: not a UUID at all, which Adobe epubcheck rejects,
   and carrying the version, so v1.0.1 and v1.0.2 presented as two different publications

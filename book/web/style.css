@@ -43,8 +43,8 @@ a{color:inherit}
   .brand-d{font-size:16px;white-space:nowrap}
   .nav nav{margin-left:0;width:100%;gap:15px;font-size:13px}
   .nav nav a{white-space:nowrap}
-  .nav nav a.pdf{margin-left:auto;padding:5px 9px}
-  .nav nav a.pdf span{display:none}
+  .nav nav a.pdf{padding:5px 10px}
+  .nav nav a.pdf:first-of-type{margin-left:auto}
 }
 
 /* ---------- hero ---------- */
