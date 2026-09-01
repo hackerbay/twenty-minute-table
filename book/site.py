@@ -55,6 +55,10 @@ DL_ICON = ('<svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="no
            'stroke-linejoin="round" aria-hidden="true">'
            '<path d="M12 3v12"/><path d="m7 12 5 5 5-5"/><path d="M5 21h14"/></svg>')
 
+CHEV_ICON = ('<svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" '
+             'stroke="currentColor" stroke-width="2.5" stroke-linecap="round" '
+             'stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>')
+
 
 def pdf_pages():
     """Page count read out of the built PDF, so the copy cannot drift from it."""
@@ -123,12 +127,16 @@ def nav(depth=0, active=''):
     for h, t in items:
         cls = ' class="on"' if active and h.startswith(active) else ''
         parts.append(f'<a href="{up}{h}"{cls}>{t}</a>')
-    parts.append(f'<a class="pdf" href="{up}{PDF_NAME}" download '
-                 f'aria-label="Download the book as a PDF" title="Download the PDF">'
-                 f'{DL_ICON}<span>PDF</span></a>')
-    parts.append(f'<a class="pdf" href="{up}{EPUB_NAME}" download '
-                 f'aria-label="Download the book as an EPUB" title="Download the EPUB">'
-                 f'{DL_ICON}<span>EPUB</span></a>')
+    # <details> rather than a scripted menu: it opens, closes and takes the
+    # keyboard on its own, so the downloads still work with JavaScript off.
+    parts.append(
+        f'<details class="dlm"><summary>{DL_ICON}<span>Download</span>{CHEV_ICON}</summary>'
+        f'<div class="dlm-list">'
+        f'<a href="{up}{PDF_NAME}" download>'
+        f'<b>PDF</b><span>The printable book, laid out in spreads</span></a>'
+        f'<a href="{up}{EPUB_NAME}" download>'
+        f'<b>EPUB</b><span>Reflowable, for a phone or an e-reader</span></a>'
+        f'</div></details>')
     links = ''.join(parts)
     return (f'<header class="nav"><a class="brand" href="{up}index.html">'
             f'<span class="brand-d">The 20-Minute Table</span></a>'

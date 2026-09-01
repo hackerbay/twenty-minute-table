@@ -72,4 +72,21 @@
   const resetPantry = $('#reset-pantry');
   if (resetPantry) resetPantry.addEventListener('click',
     () => $$('.shelf input').forEach(i => { i.checked = false; }));
+
+  /* ---------------- download menu ---------------- */
+  /* <details> already opens, closes and handles the keyboard by itself. All this
+     adds is the two things it does not do: shut when you click away, and shut on
+     Escape. With scripting off the menu still works, it just stays open. */
+  const dlm = $('.dlm');
+  if (dlm) {
+    document.addEventListener('click', e => {
+      if (dlm.open && !dlm.contains(e.target)) dlm.open = false;
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && dlm.open) {
+        dlm.open = false;
+        $('summary', dlm).focus();
+      }
+    });
+  }
 })();

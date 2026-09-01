@@ -12,6 +12,16 @@ This project uses [semantic versioning](https://semver.org) loosely, read for a 
 - **Major** — a change that reorganises the book: renumbering recipes, changing the recipe
   file contract, dropping a section.
 
+## 1.0.4
+
+- The two download buttons in the site header are one **Download** menu, listing the PDF
+  and the EPUB with a line each on what they are for. It is a `<details>` element, so it
+  opens, closes and takes the keyboard on its own and still works with scripting off;
+  the script only adds closing on Escape and on a click elsewhere.
+- Fixed a header that was wider than a phone. Four links and two pills needed about 412px
+  of a 343px row, so it spilled past the screen edge; one button needs 341px and fits,
+  and the row now wraps rather than overflowing if it ever stops fitting.
+
 ## 1.0.3
 
 - The website offers the EPUB as well as the PDF. Both sit in the header on every page,

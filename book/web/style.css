@@ -34,17 +34,41 @@ a{color:inherit}
 .nav nav a{text-decoration:none;color:var(--ink3);padding:4px 0;border-bottom:1.5px solid transparent}
 .nav nav a:hover{color:var(--ink)}
 .nav nav a.on{color:var(--ink);border-color:var(--ink)}
-.nav nav a.pdf{display:inline-flex;align-items:center;gap:7px;padding:5px 12px;
-  border:1px solid var(--line);border-radius:999px;color:var(--ink2);background:var(--card)}
-.nav nav a.pdf:hover{color:var(--ink);border-color:var(--ink3);box-shadow:var(--shadow)}
+.nav nav .dlm{position:relative}
+.nav nav .dlm>summary{display:inline-flex;align-items:center;gap:7px;padding:5px 12px;
+  border:1px solid var(--line);border-radius:999px;color:var(--ink2);background:var(--card);
+  cursor:pointer;list-style:none;-webkit-tap-highlight-color:transparent}
+.nav nav .dlm>summary::-webkit-details-marker{display:none}
+.nav nav .dlm>summary::marker{content:''}
+.nav nav .dlm>summary:hover{color:var(--ink);border-color:var(--ink3);box-shadow:var(--shadow)}
+.nav nav .dlm[open]>summary{color:var(--ink);border-color:var(--ink3)}
+.nav nav .dlm[open] .chev{transform:rotate(180deg)}
+.chev{transition:transform .15s ease}
+@media (prefers-reduced-motion:reduce){.chev{transition:none}}
+/* Drive the panel from [open] rather than leaning on how a browser happens to
+   hide <details> content. Chrome now hides it on a wrapper pseudo-element, so a
+   display on the child sticks and the menu would hang open everywhere that
+   still hides the child itself. */
+.nav nav .dlm-list{display:none}
+.nav nav .dlm[open] .dlm-list{position:absolute;right:0;top:calc(100% + 8px);z-index:70;
+  min-width:236px;display:flex;flex-direction:column;padding:6px;background:var(--card);
+  border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-lift)}
+.nav nav .dlm-list a{display:flex;flex-direction:column;gap:1px;padding:8px 10px;
+  border:0;border-radius:8px;text-decoration:none;white-space:normal}
+.nav nav .dlm-list a:hover{background:var(--panel)}
+.nav nav .dlm-list b{font-size:13px;font-weight:600;color:var(--ink)}
+.nav nav .dlm-list span{font-size:12px;line-height:1.45;color:var(--ink3)}
 @media (max-width:640px){
   .nav{flex-wrap:wrap;gap:9px;padding:12px 16px}
   .brand{flex:0 0 100%}
   .brand-d{font-size:16px;white-space:nowrap}
-  .nav nav{margin-left:0;width:100%;gap:15px;font-size:13px}
+  /* The row has to hold four links and the download button. At 11px it fits a
+     375px phone on one line; below that it wraps rather than pushing the page
+     into a horizontal scroll. */
+  .nav nav{margin-left:0;width:100%;gap:9px;row-gap:10px;flex-wrap:wrap;font-size:13px}
+  .nav nav .dlm>summary{padding:5px 10px}
   .nav nav a{white-space:nowrap}
-  .nav nav a.pdf{padding:5px 10px}
-  .nav nav a.pdf:first-of-type{margin-left:auto}
+  .nav nav .dlm{margin-left:auto}
 }
 
 /* ---------- hero ---------- */
