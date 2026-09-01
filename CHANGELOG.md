@@ -21,8 +21,9 @@ This project uses [semantic versioning](https://semver.org) loosely, read for a 
 - `make pricing` no longer claims the converted Kindle file is smaller than the EPUB.
   It is larger — 4.23 MB became 4.56 MB — so the estimate runs optimistic, not
   conservative, and now says so.
-- `PUBLISHING.md` carries the full Bowker registration record for both ISBNs, so the
-  numbers printed in the book can be registered without rederiving any of it.
+- Both ISBNs are registered at Bowker against the title, so the numbers printed in the
+  book resolve to a real record rather than to nothing. `PUBLISHING.md` carries what
+  was filed, including the three subject schemes that do not map onto each other.
 - Corrected stale facts that had drifted since the book was retypeset for Amazon: the
   README called it a 217-page book, and `AGENTS.md` described the paperback as premium
   colour, put the standard colour pricing floor $10 too low, and said every figure in
