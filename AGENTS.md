@@ -207,9 +207,11 @@ count and trim and nowhere else: change either and re-read them from the calcula
 than scaling them. The numbers at the end of `docs/kdp-publishing-spec.md` were not
 rechecked and still describe a 218-page premium colour book.
 
-**The ISBNs are allocated but not registered.** They come from HackerBay's own Bowker block
-so the publisher of record is not Amazon. Assigning them against the title at Bowker means
-entering real publication metadata, and is left as a deliberate human step.
+**The ISBNs are registered.** They come from HackerBay's own Bowker block so the publisher of
+record is not Amazon. Both were assigned against the title at Bowker on 2026-09-01 and sit at
+its Pending status while the records process into Books In Print; `PUBLISHING.md` carries what
+was filed. Registering a number means entering real publication metadata under a real account,
+so it stays a human step — change what is filed there by hand, never from a build.
 
 ## Typesetting
 

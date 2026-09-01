@@ -25,9 +25,14 @@ REPO = 'github.com/hackerbay/twenty-minute-table'
 # publisher of record is yours rather than Amazon's, and the book could be printed
 # somewhere else later without new numbers.
 #
-# These are reserved here but NOT yet registered against the title at Bowker.
-# Assigning them there means filling in real publication metadata — format, date,
-# contributors, price — so it is left as a deliberate step before publishing.
+# Both were registered against the title at Bowker on 2026-09-01, under the
+# HackerBay, Inc. account, so the numbers printed in the book resolve to a real
+# record rather than to nothing. Both sit at Bowker's Pending status while the
+# records process into Books In Print.
+#
+# PUBLISHING.md carries the metadata filed against each number. Those two records
+# have to go on agreeing with each other and with this file, so change them together
+# — and by hand, at Bowker, never from a build.
 ISBN = {
     'paperback': '978-1-950600-01-4',
     'hardback': '978-1-950600-02-1',

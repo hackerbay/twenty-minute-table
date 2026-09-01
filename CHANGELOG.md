@@ -22,11 +22,18 @@ This project uses [semantic versioning](https://semver.org) loosely, read for a 
   and `toc.ncx`. The version still appears where it belongs — the colophon prints it, and
   `dcterms:modified` carries the build time. `book/epubcheck.py` now asserts the
   identifier's form and that the two files agree, so it cannot drift back.
+- Three places still said the ISBNs were not registered at Bowker, which 1.0.2 had already
+  made untrue: the comment above the ISBN dict in `book/imprint.py`, the "Before you start"
+  prerequisite in `PUBLISHING.md` — which contradicted its own "Registering the ISBNs at
+  Bowker" section further down the same file — and `AGENTS.md`. All three now say what
+  happened: registered on 1 September 2026 under the HackerBay, Inc. account, and Pending
+  at Bowker while the records process into Books In Print. `README.md` and `RELEASING.md`
+  never carried the claim.
 
 No page of the book changed in this release. Nothing here is a reason to re-upload to
 Amazon: Kindle keys on the ASIN and never reads the EPUB's identifier, so the edition in
-review there is unaffected. This matters for future builds, and for any channel other
-than Amazon.
+review there is unaffected. The identifier fix matters for future builds, and for any
+channel other than Amazon.
 
 ## 1.0.2
 

@@ -25,10 +25,11 @@ later. `RELEASING.md` covers it. The release attaches all four:
 
 You can also upload straight from `dist/` after `make amazon`.
 
-**2. The ISBNs are registered at Bowker.** They are reserved in
-[book/imprint.py](book/imprint.py) but not yet assigned to the title at
-[myidentifiers.com](https://www.myidentifiers.com/isbn_dashboard). Assign them, with format and
-publication details, before listing:
+**2. The ISBNs are registered at Bowker.** Both were assigned to the title at
+[myidentifiers.com](https://www.myidentifiers.com/isbn_dashboard), with format and publication
+details, on 1 September 2026, and both sit at Bowker's **Pending** status while the records
+process into Books In Print. They are held in [book/imprint.py](book/imprint.py), and
+[Registering the ISBNs at Bowker](#registering-the-isbns-at-bowker) below records what was filed:
 
 - Paperback `978-1-950600-01-4`
 - Hardback `978-1-950600-02-1`
