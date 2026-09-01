@@ -33,6 +33,23 @@ ISBN = {
     'hardback': '978-1-950600-02-1',
 }
 
+# The Kindle edition's publication identifier, for the EPUB's dc:identifier.
+#
+# Minted once, on 2026-09-01, and never again. dc:identifier names the WORK, not
+# the build: it has to stay byte-for-byte identical across every release, because
+# retailers and libraries key on it and a new string presents the next version as
+# a different book. So it is a literal here rather than something derived from the
+# version or generated at build time — either would give every build a new identity
+# and break reproducibility along with it.
+#
+# Amazon is the exception that hides the problem: Kindle keys on the ASIN and
+# ignores this, so a wrong identifier costs nothing there and everything on any
+# other channel.
+#
+# It is a random (version 4) UUID in URN form, which is what EPUB 3 asks for when
+# no ISBN applies — and none does, since the Kindle edition has no ISBN.
+EPUB_ID = 'urn:uuid:268ba74a-0814-461d-90f1-6d133ea54145'
+
 # --- Kindle economics ------------------------------------------------------
 # KDP charges a delivery fee per megabyte against the 70% royalty option, so the
 # weight of the illustrations comes straight off the margin. epub.py fails the

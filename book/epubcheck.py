@@ -10,7 +10,17 @@ from pathlib import PurePosixPath, Path
 
 ROOT = Path(__file__).resolve().parent.parent
 EPUB = ROOT / 'dist' / 'The-20-Minute-Table.epub'
-OPF_NS = {'o': 'http://www.idpf.org/2007/opf'}
+OPF_NS = {'o': 'http://www.idpf.org/2007/opf',
+          'dc': 'http://purl.org/dc/elements/1.1/'}
+NCX_NS = {'n': 'http://www.daisy.org/z3986/2005/ncx/'}
+
+# RFC 4122: the urn:uuid: scheme has to be followed by an actual UUID. Adobe's
+# epubcheck rejects anything else; this checker used not to, which is how
+# 'urn:uuid:twenty-minute-table-1.0.1' survived several releases. Asserting the
+# shape here also rules out interpolating the version back in, since no version
+# string can match it.
+UUID_URN = re.compile(r'^urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}'
+                      r'-[0-9a-f]{4}-[0-9a-f]{12}$', re.I)
 
 
 def resolve(base, href):
@@ -58,6 +68,7 @@ def main():
             except ET.ParseError as e:
                 problems.append(f'{n} is not well-formed XML: {e}')
 
+    pub_uid = None
     if 'OEBPS/content.opf' in names:
         root = ET.fromstring(z.read('OEBPS/content.opf'))
         items = root.findall('.//o:manifest/o:item', OPF_NS)
@@ -75,6 +86,34 @@ def main():
         covers = [i for i in items if 'cover-image' in (i.get('properties') or '')]
         if len(covers) != 1:
             problems.append(f'{len(covers)} items declare cover-image; need exactly one')
+
+        # The publication identifier: well-formed, and the one the package points at.
+        # It is deliberately NOT checked against a literal, so imprint.py stays the
+        # single source of truth — only its form and its internal agreement matter.
+        uid_id = root.get('unique-identifier')
+        idents = {e.get('id'): (e.text or '').strip()
+                  for e in root.findall('.//dc:identifier', OPF_NS)}
+        if uid_id not in idents:
+            problems.append(f'package unique-identifier={uid_id!r} names no dc:identifier '
+                            f'(have {sorted(k for k in idents if k)})')
+        else:
+            pub_uid = idents[uid_id]
+            if not UUID_URN.match(pub_uid):
+                problems.append(f'dc:identifier {pub_uid!r} is not urn:uuid: followed by a '
+                                f'UUID; it must be EPUB_ID from imprint.py, and must never '
+                                f'be derived from the version')
+
+    # toc.ncx carries the same identifier as dtb:uid. Kindle's converter reads the
+    # NCX, so the two disagreeing is worse than either being wrong alone.
+    if 'OEBPS/toc.ncx' in names:
+        ncx = ET.fromstring(z.read('OEBPS/toc.ncx'))
+        uids = [m.get('content') for m in ncx.findall('.//n:head/n:meta', NCX_NS)
+                if m.get('name') == 'dtb:uid']
+        if len(uids) != 1:
+            problems.append(f'toc.ncx declares {len(uids)} dtb:uid values; need exactly one')
+        elif pub_uid is not None and uids[0] != pub_uid:
+            problems.append(f'toc.ncx dtb:uid {uids[0]!r} does not match dc:identifier '
+                            f'{pub_uid!r}')
 
     dead = []
     for n in names:

@@ -211,7 +211,10 @@ def build():
         f'<navPoint id="n{i}" playOrder="{i}"><navLabel><text>{esc(r["title"])}</text></navLabel>'
         f'<content src="r/{r["num"]}.xhtml"/></navPoint>\n'
         for i, r in enumerate(recipes, 1))
-    uid = f'urn:uuid:twenty-minute-table-{VERSION}'
+    # Stable for the life of the work, and deliberately not derived from VERSION:
+    # see EPUB_ID in imprint.py. The version belongs on the copyright page and in
+    # dcterms:modified below, not in the identity of the publication.
+    uid = IMP.EPUB_ID
     files['OEBPS/toc.ncx'] = (
         '<?xml version="1.0" encoding="utf-8"?>\n'
         '<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1">\n'

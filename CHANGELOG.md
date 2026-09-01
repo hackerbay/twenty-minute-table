@@ -12,6 +12,22 @@ This project uses [semantic versioning](https://semver.org) loosely, read for a 
 - **Major** — a change that reorganises the book: renumbering recipes, changing the recipe
   file contract, dropping a section.
 
+## Unreleased
+
+- **The Kindle edition declares a real, stable identifier.** `dc:identifier` was
+  `urn:uuid:twenty-minute-table-1.0.1`: not a UUID at all, which Adobe epubcheck rejects,
+  and carrying the version, so v1.0.1 and v1.0.2 presented as two different publications
+  rather than two versions of one. It is now a version 4 UUID, minted once and held as
+  `EPUB_ID` in `book/imprint.py` next to the ISBNs, and used verbatim in both `content.opf`
+  and `toc.ncx`. The version still appears where it belongs — the colophon prints it, and
+  `dcterms:modified` carries the build time. `book/epubcheck.py` now asserts the
+  identifier's form and that the two files agree, so it cannot drift back.
+
+No page of the book changed in this release. Nothing here is a reason to re-upload to
+Amazon: Kindle keys on the ASIN and never reads the EPUB's identifier, so the edition in
+review there is unaffected. This matters for future builds, and for any channel other
+than Amazon.
+
 ## 1.0.2
 
 - Both ISBNs are registered at Bowker against the title, so the numbers printed in the
