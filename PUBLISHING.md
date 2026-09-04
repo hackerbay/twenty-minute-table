@@ -82,13 +82,15 @@ you tell KDP "no bleed" it will reject or rescale it.
 
 ## What was submitted
 
-All three editions went to KDP on 31 August 2026 from version 1.0.0, and each came back
-**In review**. KDP takes up to 72 hours to finish that review, and the Amazon product pages —
-and therefore the links this repo wants to put on the website — do not exist until it does.
+All three editions went to KDP on 31 August 2026 from version 1.0.0 and went live on
+2 September 2026. The two print ASINs are the ISBN-10 forms of our own ISBNs; the Kindle
+edition has an ASIN of its own because it has no ISBN. They are held in `book/imprint.py`
+and the website links to them from there, so the numbers live in exactly one place.
 
 | | Paperback | Hardcover | Kindle |
 |---|---|---|---|
-| Status | In review | In review | In review |
+| Status | Live | Live | Live |
+| ASIN | 1950600017 | 1950600025 | B0HHL993SW |
 | List price | $28.99 | $69.99 | $9.99 |
 | Royalty | 60% → $7.39 | 60% → $18.42 | 70% → $6.52 |
 | Margin | 25.5% | 26.3% | 65.3% |

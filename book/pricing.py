@@ -87,8 +87,8 @@ def main():
                             f'{IMP.KINDLE_ROYALTY_RATE:.0%} band ${lo:.2f}-${hi:.2f}; '
                             f'it would earn 35%, not 70%')
         notes.append('KDP charges delivery on the CONVERTED file size, not the EPUB. '
-                     'Measured once, on 2026-08-31: a 4.23 MB EPUB converted to '
-                     '4.56 MB, so the estimate here runs slightly optimistic.')
+                     'Measured once, on the illustrated 1.0.0 edition: a 4.23 MB EPUB '
+                     'converted to 4.56 MB, so this estimate runs slightly optimistic.')
     else:
         notes.append('No EPUB built, so the Kindle edition was not checked (make epub).')
 

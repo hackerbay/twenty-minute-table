@@ -14,7 +14,7 @@ semantic XHTML the reader restyles at will.
 
 Built from parse.py, never from build/cookbook.html, which is print geometry.
 """
-import asyncio, html, io, re, sys, zipfile
+import html, io, re, sys, zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -24,13 +24,13 @@ sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(HERE / 'art'))
 
 from parse import load_all, inline
-from compose import hero_svg
 from version import VERSION
 import imprint as IMP
 
 OUT = ROOT / 'dist' / 'The-20-Minute-Table.epub'
-IMG_W = 1200          # px; KDP wants pictorial images to fill >=60% of screen width
-JPEG_Q = 78           # flat vector art compresses hard; watch the total in the report
+IMG_DIR = ROOT / 'images'
+# Same set build.py accepts, minus webp, which Kindle's converter does not take.
+PHOTO_MIME = {'.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png'}
 
 XHTML = ('<?xml version="1.0" encoding="utf-8"?>\n'
          '<!DOCTYPE html>\n'
@@ -84,7 +84,7 @@ nav ol { list-style: none; margin-left: 0; }
 """
 
 
-def recipe_xhtml(r, img_name):
+def recipe_xhtml(r, photo):
     veg = ' &#183; Vegetarian' if r['veg'] else ''
     ings = ''
     for g in r['ing_groups']:
@@ -94,11 +94,12 @@ def recipe_xhtml(r, img_name):
     steps = '<ol>\n' + ''.join(f'<li>{rich(s)}</li>\n' for s in r['steps']) + '</ol>\n'
     notes = ''.join(f'<p class="note"><b>{esc(t)}:</b> {rich(b)}</p>\n' for t, b in r['notes'])
     k, pr, ca, fa, fb = r['macros']
+    hero = ('<div class="hero"><img src="../img/%s" alt="A photograph of %s"/></div>\n'
+            % (photo[0], esc(r['title']))) if photo else ''
     body = f"""<h1>{esc(r['title'])}</h1>
 <p class="meta">{esc(r['cuisine'])} &#183; {esc(r['method'])} &#183; {esc(r['time'])}
  &#183; Serves {esc(r['serves'])}{veg}</p>
-<div class="hero"><img src="../img/{img_name}" alt="An illustration of {esc(r['title'])}"/></div>
-<p class="hook">{rich(r['hook'])}</p>
+{hero}<p class="hook">{rich(r['hook'])}</p>
 <h2>Why it works</h2>
 <p>{rich(r['why'])}</p>
 <h2>Ingredients</h2>
@@ -127,34 +128,31 @@ def section_of(num):
     return 'Recipes'
 
 
-async def render_images(recipes, dest):
-    """Rasterise each hero illustration. Kindle's converter does not handle SVG
-    reliably, and KDP forbids transparency in EPUB images."""
-    from playwright.async_api import async_playwright
-    dest.mkdir(parents=True, exist_ok=True)
+def supplied_photos(recipes):
+    """Hero images, on the same terms as the printed book.
+
+    `build.py` illustrates a recipe only when a photograph has been supplied for it
+    under `images/<num>-hero.<ext>`; the composed artwork was dropped there on
+    2026-08-29. The Kindle edition was written two days later and composed its own,
+    so it shipped a hundred illustrations the printed book no longer had. It now
+    follows the same rule, and with no photographs supplied it carries none.
+
+    Returns {num: (archive name, bytes, media type)}.
+    """
     out = {}
-    async with async_playwright() as p:
-        b = await p.chromium.launch()
-        pg = await b.new_page(viewport={'width': IMG_W, 'height': int(IMG_W * 0.62)})
-        for r in recipes:
-            svg = hero_svg(r, r['m']['color'], r['m']['tint'])
-            await pg.set_content(
-                f'<style>html,body{{margin:0;background:#FFF}}'
-                f'#h{{width:{IMG_W}px;height:{int(IMG_W*0.62)}px;overflow:hidden}}'
-                f'#h svg{{width:100%;height:100%;display:block}}</style>'
-                f'<div id="h">{svg}</div>')
-            name = f"{r['num']}.jpg"
-            await pg.locator('#h').screenshot(path=str(dest / name), type='jpeg', quality=JPEG_Q)
-            out[r['num']] = name
-        await b.close()
+    for r in recipes:
+        for ext, mime in PHOTO_MIME.items():
+            f = IMG_DIR / f"{r['num']}-hero{ext}"
+            if f.exists():
+                out[r['num']] = (f"{r['num']}{ext}", f.read_bytes(), mime)
+                break
     return out
 
 
 def build():
     recipes = load_all()
     tmp = ROOT / 'build' / 'epub'
-    img_dir = tmp / 'img'
-    imgs = asyncio.run(render_images(recipes, img_dir))
+    photos = supplied_photos(recipes)
 
     cover_jpg = ROOT / 'dist' / 'cover-kindle.jpg'
     if not cover_jpg.exists():
@@ -185,9 +183,9 @@ def build():
 
     # ---- recipes ------------------------------------------------------------
     for r in recipes:
-        files[f"OEBPS/r/{r['num']}.xhtml"] = recipe_xhtml(r, imgs[r['num']]).encode()
-    for num, name in imgs.items():
-        files[f'OEBPS/img/{name}'] = (img_dir / name).read_bytes()
+        files[f"OEBPS/r/{r['num']}.xhtml"] = recipe_xhtml(r, photos.get(r['num'])).encode()
+    for name, data, _ in photos.values():
+        files[f'OEBPS/img/{name}'] = data
     files['OEBPS/img/cover.jpg'] = cover_jpg.read_bytes()
     files['OEBPS/style.css'] = CSS.encode()
 
@@ -237,7 +235,9 @@ def build():
     for r in recipes:
         manifest.append(f'<item id="r{r["num"]}" href="r/{r["num"]}.xhtml" '
                         f'media-type="application/xhtml+xml"/>')
-        manifest.append(f'<item id="i{r["num"]}" href="img/{imgs[r["num"]]}" media-type="image/jpeg"/>')
+        if r['num'] in photos:
+            name, _, mime = photos[r['num']]
+            manifest.append(f'<item id="i{r["num"]}" href="img/{name}" media-type="{mime}"/>')
         spine.append(f'<itemref idref="r{r["num"]}"/>')
 
     modified = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
@@ -278,13 +278,13 @@ def build():
     mb = OUT.stat().st_size / 1e6
     img_mb = sum(len(v) for k, v in files.items() if k.startswith('OEBPS/img/')) / 1e6
     print(f'epub: {len(recipes)} recipes, {len(files) + 1} files -> {OUT.name} ({mb:.2f} MB)')
-    print(f'      illustrations {img_mb:.2f} MB '
-          f'({img_mb * 1000 / max(len(imgs), 1):.0f} KB each)')
+    print(f'      images {img_mb:.2f} MB — the cover'
+          + (f' and {len(photos)} supplied photographs' if photos else ', and nothing else'))
     print(f'      KDP delivery fee at $0.15/MB on the converted size: '
           f'about ${mb * 0.15:.2f} a sale under the 70% option')
     if mb > 25:
         print('      WARNING: over the 25 MB the delivery fee starts to bite; '
-              'lower JPEG_Q or IMG_W')
+              'supply fewer or smaller photographs')
 
 
 if __name__ == '__main__':

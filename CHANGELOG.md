@@ -12,6 +12,21 @@ This project uses [semantic versioning](https://semver.org) loosely, read for a 
 - **Major** — a change that reorganises the book: renumbering recipes, changing the recipe
   file contract, dropping a section.
 
+## 1.0.5
+
+- **The Kindle edition no longer carries illustrations the printed book does not have.**
+  `build.py` stopped composing per-recipe artwork on 2026-08-29, falling back to nothing
+  unless a photograph is supplied under `images/<num>-hero.<ext>`. The Kindle edition was
+  written two days later and composed its own, so it shipped a hundred pictures the print
+  editions had already dropped. It now follows the same rule as the printed book, and with
+  no photographs supplied it carries none. The EPUB falls from 4.23 MB to 0.37 MB, which
+  takes the KDP delivery fee from about $0.63 a sale to about $0.06.
+- The three Amazon editions are live, and the website links to them: an editions block on
+  the about page covering all five ways to get the book, and a line in the footer of every
+  page. The ASINs live in `book/imprint.py` beside the ISBNs, so the site and the book
+  cannot disagree about them, and the prices on the site are the ones the margin gate
+  checks rather than a second copy that could drift.
+
 ## 1.0.4
 
 - The two download buttons in the site header are one **Download** menu, listing the PDF

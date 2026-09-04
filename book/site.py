@@ -20,6 +20,7 @@ from pairings import sides_for, mains_for
 from pantry_data import SHELVES, KIT, RULES
 from toddler_data import INTRO as TOD_INTRO, POINTS as TOD_POINTS, DISCLAIMER as TOD_DISC
 import mission as MISSION
+import imprint as IMP
 from version import VERSION
 
 SITE = ROOT / 'site'
@@ -151,6 +152,10 @@ def footer(depth=0):
             f'and is built on whole ingredients. Nutrition figures are estimates. '
             f'<a href="{up}toddlers.html">Cooking for a toddler</a> &nbsp;·&nbsp; '
             f'<a href="{up}about.html">More about the book</a>.</p>'
+            f'<p>Also on Amazon in '
+            f'<a href="{IMP.amazon_url("paperback")}">paperback</a>, '
+            f'<a href="{IMP.amazon_url("hardback")}">hardcover</a> and for '
+            f'<a href="{IMP.amazon_url("kindle")}">Kindle</a>.</p>'
             f'<p class="foot-gh">{GH_ICON}<span>Open source &mdash; the recipes and the '
             f'typesetter that builds this are '
             f'<a href="{GH_URL}">on GitHub</a>. Fork it, fix it, add a dinner. '
@@ -425,9 +430,30 @@ def build_about(recipes, rules):
   </div>
   <h2 class="sect d">Ten rules for a twenty-minute dinner</h2>
   <ol class="rules">{rl}</ol>
-  <p class="dl">The whole thing is also a{pages} book you can keep:
-    <a href="{PDF_NAME}" download>the PDF</a> to print, or
-    <a href="{EPUB_NAME}" download>the EPUB</a> for a reader.</p>
+  <h2 class="sect d">Ways to get it</h2>
+  <div class="eds">
+    <div class="ed">
+      <p class="ed-k">Free, from here</p>
+      <a class="ed-a" href="{PDF_NAME}" download>
+        <b>PDF</b><span>The{pages} book as it prints, laid out in spreads</span></a>
+      <a class="ed-a" href="{EPUB_NAME}" download>
+        <b>EPUB</b><span>Reflowable, for a phone or an e-reader</span></a>
+    </div>
+    <div class="ed">
+      <p class="ed-k">In print, on Amazon</p>
+      <a class="ed-a" href="{IMP.amazon_url('paperback')}">
+        <b>Paperback <i>${IMP.LIST_USD['paperback']:.2f}</i></b>
+        <span>Softcover, colour throughout</span></a>
+      <a class="ed-a" href="{IMP.amazon_url('hardback')}">
+        <b>Hardcover <i>${IMP.LIST_USD['hardback']:.2f}</i></b>
+        <span>Printed case, no jacket, premium colour</span></a>
+      <a class="ed-a" href="{IMP.amazon_url('kindle')}">
+        <b>Kindle <i>${IMP.KINDLE_LIST_USD:.2f}</i></b>
+        <span>The same book, on the Kindle app or device</span></a>
+    </div>
+  </div>
+  <p class="dl">The files are free and will stay that way. Buying a copy is for having it
+    on the shelf, and it keeps the project going.</p>
 </main>
 {contribute(0)}
 {footer(0)}"""

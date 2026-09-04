@@ -55,6 +55,21 @@ ISBN = {
 # no ISBN applies — and none does, since the Kindle edition has no ISBN.
 EPUB_ID = 'urn:uuid:268ba74a-0814-461d-90f1-6d133ea54145'
 
+# Live on Amazon.com since 2 September 2026. The two print ASINs are simply the
+# ISBN-10 forms of the ISBNs above, which is Amazon's convention for a book that
+# brings its own ISBN; the Kindle edition has an ASIN of its own because it has
+# no ISBN. Verified against the live product pages before being put on the site.
+AMAZON = {
+    'paperback': '1950600017',
+    'hardback': '1950600025',
+    'kindle': 'B0HHL993SW',
+}
+AMAZON_DP = 'https://www.amazon.com/dp/'
+
+
+def amazon_url(edition):
+    return AMAZON_DP + AMAZON[edition]
+
 # --- Kindle economics ------------------------------------------------------
 # KDP charges a delivery fee per megabyte against the 70% royalty option, so the
 # weight of the illustrations comes straight off the margin. epub.py fails the
@@ -63,9 +78,12 @@ EPUB_ID = 'urn:uuid:268ba74a-0814-461d-90f1-6d133ea54145'
 KINDLE_LIST_USD = 9.99          # must sit inside the 70% band to earn that rate
 KINDLE_ROYALTY_RATE = 0.70
 KDP_70_BAND = (2.99, 12.99)     # US; the upper bound rose from 9.99 in July 2026
-KDP_DELIVERY_PER_MB = 0.15      # USD, charged on the CONVERTED file size, which is
-                                # NOT the EPUB size: KDP measured 4.56 MB against our
-                                # 4.23 MB EPUB, so estimates from the EPUB run light.
+KDP_DELIVERY_PER_MB = 0.15      # USD, charged on the CONVERTED file size, which is NOT
+                                # the EPUB size: on the illustrated 1.0.0 edition KDP
+                                # measured 4.56 MB against a 4.23 MB EPUB, so estimates
+                                # taken from the EPUB run light. The edition no longer
+                                # carries those illustrations and is far smaller, but
+                                # the direction of the error still holds.
 MIN_KINDLE_MARGIN = 0.25        # royalty after delivery, as a share of list price
 
 # --- print economics -------------------------------------------------------
