@@ -13,7 +13,7 @@ publication**. Everything else can.
 Three things must be true first.
 
 **1. The release exists.** Publish a release so the files you upload are a version you can name
-later. `RELEASING.md` covers it. The release attaches all four:
+later. `RELEASING.md` covers it. The release attaches all five:
 
 | File | Used for |
 |---|---|
@@ -70,10 +70,10 @@ you cannot revise.
 | Bleed | **Bleed (PDF only)** | **Bleed (PDF only)** | — |
 | Pages | 224 | 224 | — |
 | ISBN | 978-1-950600-01-4 | 978-1-950600-02-1 | none (ASIN) |
-| Printing cost | $10.00 | $23.57 | $0.68 delivery (4.56 MB converted) |
+| Printing cost | $10.00 | $23.57 | $0.06 delivery (0.37 MB converted) |
 | KDP minimum | $16.67 | $39.28 | — |
 | **List price** | **$28.99** | **$69.99** | **$9.99** |
-| Royalty | 60% → $7.39 | 60% → $18.42 | 70% → $6.52 |
+| Royalty | 60% → $7.39 | 60% → $18.42 | 70% → $6.95 |
 
 The interior is built **with bleed** — 8.375 × 11.25 in page box against an 8.25 × 11 trim. If
 you tell KDP "no bleed" it will reject or rescale it.
@@ -92,8 +92,8 @@ and the website links to them from there, so the numbers live in exactly one pla
 | Status | Live | Live | Live |
 | ASIN | 1950600017 | 1950600025 | B0HHL993SW |
 | List price | $28.99 | $69.99 | $9.99 |
-| Royalty | 60% → $7.39 | 60% → $18.42 | 70% → $6.52 |
-| Margin | 25.5% | 26.3% | 65.3% |
+| Royalty | 60% → $7.39 | 60% → $18.42 | 70% → $6.95 |
+| Margin | 25.5% | 26.3% | 69.6% |
 
 Confirmed by KDP at submission, against what this repo predicted:
 
@@ -101,10 +101,19 @@ Confirmed by KDP at submission, against what this repo predicted:
   [book/imprint.py](book/imprint.py).
 - **Minimum list price.** $16.67 and $39.28, again matching. Every edition clears the 25%
   margin gate that `make pricing` enforces.
-- **Kindle file size.** 4.56 MB after conversion, so $0.68 of delivery comes off the 70%
-  royalty. The 70% band now runs to $12.99, as `KDP_70_BAND` already assumed.
+- **Kindle file size.** 0.37 MB after conversion, so $0.06 of delivery comes off the 70%
+  royalty. The 70% band now runs to $12.99, as `KDP_70_BAND` already assumed. The first
+  upload converted to 4.56 MB and cost $0.68 a sale; see the note below.
 - **Trim and pages.** 8.25 × 11 in, 224 pages, bleed, on both print editions. The hardcover
   previewer reported no issues.
+
+**The Kindle edition was re-uploaded on 4 September 2026.** The first file carried a
+per-recipe illustration for all 100 recipes. The printed book has none — `build.py` stopped
+composing them on 2026-08-29 — so the Kindle edition was showing artwork no other edition
+had. The corrected EPUB is 0.37 MB against 4.23 MB, taking the delivery fee from $0.68 a
+sale to $0.06 and the royalty from $6.52 to $6.95. KDP keeps a live title on sale while an
+update is reviewed, so the listing read **Live, updates in review** rather than going dark.
+The print editions were not touched.
 
 Three decisions worth knowing about, because they are not obvious and two are permanent:
 
