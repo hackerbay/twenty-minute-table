@@ -194,42 +194,29 @@
 
   // --------------------------------------------------------------- drawing
 
+  /* The book's palette, so the sheet you print at home is recognisably the
+     same object as the one on the shelf. `book/style.css` and `book/parse.py`
+     are where these live; they are copied rather than derived because the
+     stylesheet is not on the page that writes the PDF. */
+  const C = {
+    ink: '#1B201D', ink2: '#4B554E', ink3: '#828C84', ink4: '#A9B1A9',
+    panel: '#F6F1E6', line: '#E2DACA', line2: '#EFE8D9',
+    terracotta: '#C1502E', ochre: '#A5632A', green: '#5A7A48',
+    tint: '#FAEDE7', white: '#FFFFFF',
+  };
+
+  function rgb(hex) {
+    const n = parseInt(hex.slice(1), 16);
+    return num(((n >> 16) & 255) / 255) + ' ' + num(((n >> 8) & 255) / 255) +
+      ' ' + num((n & 255) / 255);
+  }
+
   const F = { body: 'F1', bold: 'F2', serif: 'F3', serifBold: 'F4', italic: 'F5' };
 
-  /* Text that has to end before a given point: the size comes down in quarter
-     points until it does. Nothing here is ever allowed to draw past its
-     boundary, because a shopping list with a quantity through the tick box is
-     worse than one set a point smaller. */
-  function shrinkToFit(str, size, maxW, min) {
-    let s = size;
-    while (s > min && measure(winAnsi(str), s) > maxW) s -= 0.25;
-    return s;
-  }
-
-  function fitted(x, y, font, size, str, maxW, min, align) {
-    return text(x, y, font, shrinkToFit(str, size, maxW, min), str, align || 'right');
-  }
-
-  /* A quantity can be two amounts joined — `6 × 200 g tins + 8 × 160 g tins` —
-     and no size that is still readable will fit that on one line. It comes
-     down to the floor first and then wraps, right-aligned, rather than
-     overrunning into the tick box. */
-  function qtyBlock(x, y, str, maxW, size, min, lead) {
-    const s = shrinkToFit(str, size, maxW, min);
-    // Two amounts joined by a plus break at the plus, not wherever the words
-    // happen to fall: `6 × 200 g tins +` over `8 × 160 g tins` reads as two
-    // amounts, and `6 × 200 g tins + 8` over `× 160 g tins` reads as neither.
-    const lines = measure(winAnsi(str), s) <= maxW ? [str]
-      : (str.includes(' + ')
-        ? str.split(' + ').map((part, i, all) => i < all.length - 1 ? part + ' +' : part)
-        : wrap(str, s, maxW));
-    return {
-      lines: lines.length,
-      cs: lines.map((l, i) => text(x, y - i * lead, F.body, s, l, 'right')).join(''),
-    };
-  }
-
-  function text(x, y, font, size, str, align, spacing) {
+  /* One text run. Colour is part of the call rather than a state left behind,
+     because `rg` sets the fill for shapes and text alike and a rule drawn in
+     grey would otherwise take the next paragraph with it. */
+  function text(x, y, font, size, str, align, spacing, colour) {
     const bs = winAnsi(str);
     if (!bs) return '';
     const tc = spacing || 0;
@@ -240,30 +227,98 @@
     const tx = align === 'right' ? x - w : align === 'center' ? x - w / 2 : x;
     return 'BT\n/' + font + ' ' + num(size) + ' Tf\n' +
       (tc ? num(tc) + ' Tc\n' : '') +
+      (colour ? rgb(colour) + ' rg\n' : '') +
       '1 0 0 1 ' + num(tx) + ' ' + num(y) + ' Tm\n' +
-      lit(bs) + ' Tj\n' + (tc ? '0 Tc\n' : '') + 'ET\n';
+      lit(bs) + ' Tj\n' + (tc ? '0 Tc\n' : '') +
+      (colour ? '0 0 0 rg\n' : '') + 'ET\n';
   }
 
-  /* Every drawing block is wrapped in q/Q. `rg` sets the fill colour for text
-     as well as for shapes, so a rule drawn in grey turns the next paragraph
-     grey unless the state is restored. */
-  function rule(x1, x2, y, weight, grey) {
-    return 'q\n' + num(weight) + ' w\n' + num(grey) + ' ' + num(grey) + ' ' +
-      num(grey) + ' RG\n' + num(x1) + ' ' + num(y) + ' m ' + num(x2) + ' ' +
-      num(y) + ' l S\nQ\n';
+  const widthOf = (str, size, bold, spacing) =>
+    measure(winAnsi(str), size, bold) +
+    (spacing || 0) * Math.max(0, winAnsi(str).length - 1);
+
+  function rule(x1, x2, y, weight, colour) {
+    return 'q\n' + num(weight) + ' w\n' + rgb(colour) + ' RG\n' +
+      num(x1) + ' ' + num(y) + ' m ' + num(x2) + ' ' + num(y) + ' l S\nQ\n';
   }
 
-  function box(x, y, w, h, grey) {
-    return 'q\n' + num(grey) + ' ' + num(grey) + ' ' + num(grey) + ' rg\n' +
-      num(x) + ' ' + num(y) + ' ' + num(w) + ' ' + num(h) + ' re\nf\nQ\n';
+  function box(x, y, w, h, colour) {
+    return 'q\n' + rgb(colour) + ' rg\n' + num(x) + ' ' + num(y) + ' ' +
+      num(w) + ' ' + num(h) + ' re\nf\nQ\n';
   }
 
-  /* Filled white and stroked, so the box reads as empty even over a tint. */
+  // A rounded rectangle, drawn as four bezier corners. 0.5523 is the constant
+  // that makes a cubic curve indistinguishable from a quarter circle.
+  function roundPath(x, y, w, h, r) {
+    const k = r * 0.5523;
+    const x2 = x + w, y2 = y + h;
+    return num(x + r) + ' ' + num(y) + ' m\n' +
+      num(x2 - r) + ' ' + num(y) + ' l\n' +
+      num(x2 - r + k) + ' ' + num(y) + ' ' + num(x2) + ' ' + num(y + r - k) + ' ' +
+      num(x2) + ' ' + num(y + r) + ' c\n' +
+      num(x2) + ' ' + num(y2 - r) + ' l\n' +
+      num(x2) + ' ' + num(y2 - r + k) + ' ' + num(x2 - r + k) + ' ' + num(y2) + ' ' +
+      num(x2 - r) + ' ' + num(y2) + ' c\n' +
+      num(x + r) + ' ' + num(y2) + ' l\n' +
+      num(x + r - k) + ' ' + num(y2) + ' ' + num(x) + ' ' + num(y2 - r + k) + ' ' +
+      num(x) + ' ' + num(y2 - r) + ' c\n' +
+      num(x) + ' ' + num(y + r) + ' l\n' +
+      num(x) + ' ' + num(y + r - k) + ' ' + num(x + r - k) + ' ' + num(y) + ' ' +
+      num(x + r) + ' ' + num(y) + ' c\nh\n';
+  }
+
+  function roundBox(x, y, w, h, r, fill, strokeCol, weight) {
+    let s = 'q\n';
+    if (fill) s += rgb(fill) + ' rg\n';
+    if (strokeCol) s += rgb(strokeCol) + ' RG\n' + num(weight || 0.8) + ' w\n';
+    s += roundPath(x, y, w, h, r);
+    s += (fill && strokeCol ? 'B\n' : fill ? 'f\n' : 'S\n') + 'Q\n';
+    return s;
+  }
+
+  function circle(cx, cy, r, fill, strokeCol, weight) {
+    const k = r * 0.5523;
+    let s = 'q\n';
+    if (fill) s += rgb(fill) + ' rg\n';
+    if (strokeCol) s += rgb(strokeCol) + ' RG\n' + num(weight || 0.8) + ' w\n';
+    s += num(cx - r) + ' ' + num(cy) + ' m\n' +
+      num(cx - r) + ' ' + num(cy + k) + ' ' + num(cx - k) + ' ' + num(cy + r) + ' ' + num(cx) + ' ' + num(cy + r) + ' c\n' +
+      num(cx + k) + ' ' + num(cy + r) + ' ' + num(cx + r) + ' ' + num(cy + k) + ' ' + num(cx + r) + ' ' + num(cy) + ' c\n' +
+      num(cx + r) + ' ' + num(cy - k) + ' ' + num(cx + k) + ' ' + num(cy - r) + ' ' + num(cx) + ' ' + num(cy - r) + ' c\n' +
+      num(cx - k) + ' ' + num(cy - r) + ' ' + num(cx - r) + ' ' + num(cy - k) + ' ' + num(cx - r) + ' ' + num(cy) + ' c\nh\n';
+    s += (fill && strokeCol ? 'B\n' : fill ? 'f\n' : 'S\n') + 'Q\n';
+    return s;
+  }
+
+  /* The book's method pill: filled with the method's own colour, the label in
+     white small caps. The outlined variant carries `Vegetarian`. */
+  const PILL_SIZE = 6.6, PILL_TRACK = 0.9, PILL_H = 12.5;
+
+  function pill(x, y, label, fill, ink, border) {
+    const w = widthOf(label.toUpperCase(), PILL_SIZE, true, PILL_TRACK) + 15;
+    return {
+      w,
+      cs: roundBox(x, y - 3.6, w, PILL_H, PILL_H / 2, fill, border, 0.7) +
+        text(x + 7.5, y, F.bold, PILL_SIZE, label.toUpperCase(), null, PILL_TRACK, ink),
+    };
+  }
+
+  // The time dial from the recipe pages: minutes in a ring.
+  function dial(cx, cy, minutes, colour) {
+    return circle(cx, cy, 15.5, null, colour, 1.1) +
+      text(cx, cy + 0.5, F.serifBold, 11, String(minutes), 'center', 0, colour) +
+      text(cx, cy - 8, F.bold, 4.8, 'MIN', 'center', 1.1, colour);
+  }
+
+  // A section label: ochre small caps over a hairline, as in the book.
+  function sectionLabel(x, y, w, label, colour) {
+    return text(x, y, F.bold, 6.9, label.toUpperCase(), null, 1.05,
+      colour || C.ochre) + rule(x, x + w, y - 5.5, 0.6, C.line);
+  }
+
   function tickbox(x, baseline, size) {
-    const s = Math.round(size * 0.76 * 2) / 2;
-    return 'q\n0.7 w\n0.42 0.42 0.42 RG\n1 1 1 rg\n' +
-      num(x) + ' ' + num(baseline - 0.5) + ' ' + num(s) + ' ' + num(s) +
-      ' re\nB\nQ\n';
+    const s = Math.round(size * 0.78 * 2) / 2;
+    return roundBox(x, baseline - 0.8, s, s, 1.6, C.white, C.ink4, 0.7);
   }
 
   // -------------------------------------------------------------- assembly
@@ -338,7 +393,296 @@
     return out.blob();
   }
 
-  // ------------------------------------------------------------ the layout
+  // ------------------------------------------------------------ the blocks
+
+  /* A recipe is laid out as blocks — a heading, a paragraph, one ingredient,
+     one step — rather than as one long string, so a column that runs out of
+     room breaks between two of them instead of through the middle of a line.
+     Every block knows its own height at a given width and draws itself.
+     `k` is the fit scale: see fitRecipe. A block may name a `group`, which is
+     how a tinted panel gets drawn behind a run of them however the run falls
+     across the two columns. */
+
+  function bGap(h) {
+    return { h: () => h, draw: () => '' };
+  }
+
+  function bHead(label, k, colour) {
+    return {
+      h: () => 19 * k,
+      // A heading alone at the foot of a column, with what it announces in the
+      // next one, is the one break this layout must not make.
+      keep: 2,
+      draw: (x, y, w) => sectionLabel(x, y, w, label, colour),
+    };
+  }
+
+  function bPara(str, font, size, lead, after, colour) {
+    return {
+      h: (w) => wrap(str, size, w).length * lead + (after || 0),
+      draw: (x, y, w) => {
+        const lines = wrap(str, size, w);
+        return 'BT\n/' + font + ' ' + num(size) + ' Tf\n' + num(lead) + ' TL\n' +
+          rgb(colour || C.ink2) + ' rg\n' +
+          '1 0 0 1 ' + num(x) + ' ' + num(y) + ' Tm\n' +
+          lines.map((l, i) => (i ? 'T*\n' : '') + lit(winAnsi(l)) + ' Tj\n').join('') +
+          '0 0 0 rg\nET\n';
+      },
+    };
+  }
+
+  // An ingredient: a coloured dot, then the line, hanging so a wrapped second
+  // line sits under the first rather than under the dot.
+  function bItem(str, size, lead, colour, group) {
+    const IND = 11;
+    return {
+      group,
+      h: (w) => wrap(str, size, w - IND - 8).length * lead + 2.5,
+      draw: (x, y, w) => {
+        const lines = wrap(str, size, w - IND - 8);
+        return circle(x + 3, y + size * 0.32, 1.7, colour) +
+          'BT\n/' + F.body + ' ' + num(size) + ' Tf\n' + num(lead) + ' TL\n' +
+          rgb(C.ink2) + ' rg\n1 0 0 1 ' + num(x + IND) + ' ' + num(y) + ' Tm\n' +
+          lines.map((l, i) => (i ? 'T*\n' : '') + lit(winAnsi(l)) + ' Tj\n').join('') +
+          '0 0 0 rg\nET\n';
+      },
+    };
+  }
+
+  function bGroupName(str, size, group) {
+    return {
+      group,
+      h: () => size + 7,
+      draw: (x, y) => text(x, y, F.bold, size * 0.82, str.toUpperCase(), null,
+        0.9, C.ink3),
+    };
+  }
+
+  // A method step: the book's filled numeral disc, then the text.
+  function bStep(n, str, size, lead, colour) {
+    const IND = 21;
+    return {
+      h: (w) => Math.max(wrap(str, size, w - IND).length * lead + 8, 20),
+      draw: (x, y, w) => {
+        const lines = wrap(str, size, w - IND);
+        return circle(x + 6.4, y + size * 0.3, 6.6, colour) +
+          text(x + 6.4, y + size * 0.3 - 2.3, F.bold, 6.6, String(n), 'center', 0, C.white) +
+          'BT\n/' + F.body + ' ' + num(size) + ' Tf\n' + num(lead) + ' TL\n' +
+          rgb(C.ink2) + ' rg\n1 0 0 1 ' + num(x + IND) + ' ' + num(y) + ' Tm\n' +
+          lines.map((l, i) => (i ? 'T*\n' : '') + lit(winAnsi(l)) + ' Tj\n').join('') +
+          '0 0 0 rg\nET\n';
+      },
+    };
+  }
+
+  /* A chef's note: the label in ochre small caps on its own line, the note
+     under it, the way the book sets the four of them. */
+  function bNote(label, str, size, lead) {
+    return {
+      h: (w) => wrap(str, size, w).length * lead + size + 9,
+      draw: (x, y, w) => {
+        const lines = wrap(str, size, w);
+        return text(x, y, F.bold, size * 0.84, label.toUpperCase(), null, 0.95, C.ochre) +
+          'BT\n/' + F.body + ' ' + num(size) + ' Tf\n' + num(lead) + ' TL\n' +
+          rgb(C.ink2) + ' rg\n1 0 0 1 ' + num(x) + ' ' + num(y - size - 3) + ' Tm\n' +
+          lines.map((l, i) => (i ? 'T*\n' : '') + lit(winAnsi(l)) + ' Tj\n').join('') +
+          '0 0 0 rg\nET\n';
+      },
+    };
+  }
+
+  // The nutrition band: a tinted strip with hairline dividers, the figures in
+  // terracotta serif with their unit tucked in beside them.
+  function bMacros(macros, k) {
+    const keys = ['calories', 'protein', 'carbs', 'fat', 'fibre'];
+    const units = ['kcal', 'g', 'g', 'g', 'g'];
+    return {
+      h: () => 40 * k,
+      draw: (x, y, w) => {
+        const h = 36 * k;
+        let out = roundBox(x, y - h + 11, w, h, 3, C.panel);
+        const step = w / 5;
+        macros.forEach((v, i) => {
+          const cx = x + i * step + step / 2;
+          const vw = widthOf(String(v), 12.5 * k, true);
+          out += text(cx - vw / 2, y - 4, F.serifBold, 12.5 * k, String(v), null, 0, C.terracotta);
+          out += text(cx - vw / 2 + vw + 1.5, y - 4, F.body, 5.6 * k, units[i], null, 0, C.ochre);
+          out += text(cx, y - 15 * k, F.bold, 5.3 * k, keys[i].toUpperCase(), 'center', 1, C.ink3);
+          if (i) out += box(x + i * step, y - h + 15, 0.6, h - 9, C.line);
+        });
+        return out;
+      },
+    };
+  }
+
+  /* Pour blocks into one column, stopping before the first that will not fit
+     and handing the rest back. A block always gets one shot at an empty
+     column, so nothing can loop for ever. Where a run of blocks shares a
+     `group`, the span it occupied in this column is reported so a panel can
+     be drawn behind it. */
+  function fillColumn(blocks, x, top, w, bottom) {
+    let cs = '', y = top, i = 0;
+    const spans = {};
+    for (; i < blocks.length; i++) {
+      const b = blocks[i];
+      let h = b.h(w);
+      // A block that asks to be kept with what follows reserves their room too,
+      // so a heading never ends a column with its first line in the next one.
+      let need = h;
+      for (let j = 1; b.keep && j <= b.keep && i + j < blocks.length; j++) {
+        need += blocks[i + j].h(w);
+      }
+      if (y - need < bottom && y !== top) break;
+      cs += b.draw(x, y, w);
+      if (b.group) {
+        const s = spans[b.group] || (spans[b.group] = { top: y, bottom: y });
+        s.bottom = y - h;
+      }
+      y -= h;
+    }
+    return { cs, rest: blocks.slice(i), y, spans };
+  }
+
+  // ------------------------------------------------------------ the recipe
+
+  function recipeBlocks(r, k, colour) {
+    const b = [];
+    const ing = 8.4 * k, ingL = 11 * k;
+    const step = 8.5 * k, stepL = 11.5 * k;
+    const body = 8.1 * k, bodyL = 10.6 * k;
+
+    b.push(bHead('Ingredients', k));
+    b.push(bGap(4 * k));
+    for (const g of r.groups) {
+      if (g.name) b.push(bGroupName(g.name, 8.4 * k, 'ing'));
+      for (const item of g.items) b.push(bItem(item, ing, ingL, colour, 'ing'));
+    }
+    b.push(bGap(13 * k));
+    b.push(bHead('Nutrition, a serving', k));
+    b.push(bMacros(r.macros, k));
+    b.push(bGap(6 * k));
+    b.push(bHead('Why it works', k));
+    b.push(bPara(r.why, F.body, body, bodyL, 13 * k));
+    b.push(bHead('Method', k));
+    b.push(bGap(3 * k));
+    r.steps.forEach((s, i) => b.push(bStep(i + 1, s, step, stepL, colour)));
+    b.push(bGap(7 * k));
+    b.push(bHead('For the toddler', k, C.terracotta));
+    b.push(bGap(4 * k));
+    b.push(bPara(r.toddler, F.body, body, bodyL, 13 * k, C.ink2));
+    b.push(bHead('Chef’s notes', k));
+    b.push(bGap(4 * k));
+    for (const [label, note] of r.notes) b.push(bNote(label, note, body, bodyL));
+    b.push(bGap(6 * k));
+    b.push(bHead('Washing up', k));
+    b.push(bGap(3 * k));
+    b.push(bPara(r.washing, F.body, body, bodyL, 0, C.ink3));
+    return b;
+  }
+
+  /* The book's typesetter fits each recipe to its spread by searching one
+     parameter that tightens the type until the page holds. This does the same,
+     for the same reason: a recipe you cook from wants to be one sheet of
+     paper, and a page and a fifth is the worst of both. */
+  function fitRecipe(r, capacity, colour) {
+    let k = 1;
+    for (let i = 0; i < 10; i++) {
+      const blocks = recipeBlocks(r, k, colour);
+      let total = 0;
+      for (const b of blocks) total += b.h(COL_W);
+      if (total <= capacity || k <= 0.82) return { blocks, k };
+      k = Math.round((k - 0.02) * 100) / 100;
+    }
+    return { blocks: recipeBlocks(r, k, colour), k };
+  }
+
+  const METHOD_COLOUR = {
+    'Air Fryer': C.terracotta, 'One Pan': C.green, 'Wok': C.ochre,
+    'No Cook': '#2C6B7B',
+  };
+
+  function recipePages(r, doc) {
+    const colour = METHOD_COLOUR[r.ml] || C.terracotta;
+    const TOP_BAND = 13;
+    const BOTTOM = LETTER_FLOOR + 16;
+
+    const hookLines = wrap(r.hook, 10.5, PAGE.w - M.l - M.r - 12);
+    const ruleY = PAGE.h - 118 - hookLines.length * 14;
+    const colTop = ruleY - 26;
+    // Blocks do not split, and a heading reserves room for what follows it, so
+    // the two column breaks each waste up to a heading and its first entries.
+    // Ninety points of slack is what it takes for all fifty to hold one page.
+    const capacity = (colTop - BOTTOM) * 2 - 90;
+
+    const fit = fitRecipe(r, capacity, colour);
+    const pages = [];
+    let rest = fit.blocks;
+    let first = true;
+
+    const foot = () => {
+      const bits = [r.ml, r.time, 'Serves ' + r.serves];
+      return rule(M.l, RIGHT, LETTER_FLOOR + 22, 0.6, C.line) +
+        fitted(M.l, LETTER_FLOOR + 12, F.bold, 6.4,
+          bits.join('   ·   ').toUpperCase(), RIGHT - M.l - 70, 5, 'left', colour);
+    };
+
+    while (rest.length) {
+      let cs = box(0, PAGE.h - TOP_BAND, PAGE.w, TOP_BAND, colour);
+      let top;
+      if (first) {
+        const numW = widthOf(r.n, 30, true);
+        cs += text(M.l, PAGE.h - 62, F.serifBold, 30, r.n, null, 0, colour);
+        const tx = M.l + numW + 14;
+        const titleW = RIGHT - tx - 44;
+        cs += fitted(tx, PAGE.h - 58, F.serifBold, 19, r.t, titleW, 13, 'left', C.ink);
+
+        // the meta row: the method pill, then the plain facts, then Vegetarian
+        let mx = tx;
+        const p = pill(mx, PAGE.h - 78, r.ml, colour, C.white);
+        cs += p.cs; mx += p.w + 9;
+        const facts = [r.c, r.time, 'Serves ' + r.serves].join('   ·   ').toUpperCase();
+        cs += text(mx, PAGE.h - 78, F.body, 6.6, facts, null, 1, C.ink3);
+        mx += widthOf(facts, 6.6, false, 1) + 9;
+        if (r.veg) {
+          cs += pill(mx, PAGE.h - 78, 'Vegetarian', null, C.green, C.green).cs;
+        }
+        cs += dial(RIGHT - 16, PAGE.h - 62, r.min || parseInt(r.time, 10), colour);
+
+        let y = PAGE.h - 104;
+        cs += box(M.l, ruleY + 8, 1.6, y - ruleY + 2, colour);
+        for (const line of hookLines) {
+          cs += text(M.l + 12, y, F.italic, 10.5, line, null, 0, colour);
+          y -= 14;
+        }
+        cs += rule(M.l, RIGHT, ruleY, 0.7, C.line);
+        top = colTop;
+        first = false;
+      } else {
+        cs += text(M.l, PAGE.h - 40, F.bold, 6.6,
+          (r.n + ' · ' + r.t + ' · continued').toUpperCase(), null, 1, C.ink3);
+        top = PAGE.h - 62;
+      }
+
+      const a = fillColumn(rest, COL_X[0], top, COL_W, BOTTOM);
+      const b = fillColumn(a.rest, COL_X[1], top, COL_W, BOTTOM);
+      // Panels go behind the text, so they are composed before it.
+      let panels = '';
+      [[a, 0], [b, 1]].forEach(([col, i]) => {
+        const s = col.spans.ing;
+        if (s) {
+          panels += roundBox(COL_X[i] - 7, s.bottom - 3, COL_W + 14,
+            s.top - s.bottom + 16, 3, C.panel);
+        }
+      });
+      cs += panels + a.cs + b.cs + foot();
+      rest = b.rest;
+      pages.push(cs);
+      if (pages.length > 4) break;
+    }
+    return pages;
+  }
+
+  // ----------------------------------------------------- the shopping list
 
   const LEAD = 12.5;
   const SIZE = 9.5;
@@ -348,94 +692,118 @@
   const nameW = COL_W - BOX_W - QTY_W - 7;
   const qtyR = c => COL_X[c] + BOX_W + QTY_W;
 
+  /* Text that has to end before a given point: the size comes down in quarter
+     points until it does. Nothing is ever allowed to draw past its boundary. */
+  function shrinkToFit(str, size, maxW, min) {
+    let s = size;
+    while (s > min && measure(winAnsi(str), s) > maxW) s -= 0.25;
+    return s;
+  }
+
+  function fitted(x, y, font, size, str, maxW, min, align, colour, spacing) {
+    return text(x, y, font, shrinkToFit(str, size, maxW, min), str,
+      align || 'right', spacing || 0, colour);
+  }
+
+  /* A quantity can be two amounts joined — `6 × 200 g tins + 8 × 160 g tins` —
+     and no size that is still readable will fit that on one line. It comes
+     down to the floor first and then wraps, right-aligned, rather than
+     overrunning into the tick box. */
+  function qtyBlock(x, y, str, maxW, size, min, lead) {
+    const s = shrinkToFit(str, size, maxW, min);
+    // Two amounts joined by a plus break at the plus, not wherever the words
+    // happen to fall.
+    const lines = measure(winAnsi(str), s) <= maxW ? [str]
+      : (str.includes(' + ')
+        ? str.split(' + ').map((part, i, all) => i < all.length - 1 ? part + ' +' : part)
+        : wrap(str, s, maxW));
+    return {
+      lines: lines.length,
+      cs: lines.map((l, i) =>
+        text(x, y - i * lead, F.body, s, l, 'right', 0, C.ink)).join(''),
+    };
+  }
+
   /* doc = { title, subtitle, standfirst, meals: [string], sections: [{name,
-     note, items: [{qty, name, note}]}], footnote } */
+     note, items: [{qty, name, note}]}], recipes: [recipe], footnote } */
   function build(doc) {
     const pages = [];
     const hasList = (doc.sections || []).some(s => s.items && s.items.length);
     let cs = '', col = 0, y = 0, page = 1;
 
-    const head = (n) => {
-      let s = '';
-      s += text(M.l, PAGE.h - M.t - 12, F.serifBold, 15, doc.title);
-      s += text(RIGHT, PAGE.h - M.t - 12, F.body, 8.5,
-        doc.subtitle.toUpperCase(), 'right', 0.8);
-      s += rule(M.l, RIGHT, PAGE.h - M.t - 24, 0.8, 0.55);
-      if (doc.footnote) {
-        s += text(M.l, LETTER_FLOOR + 6, F.italic, 8, doc.footnote);
-      }
+    const head = () => {
+      let s = box(0, PAGE.h - 13, PAGE.w, 13, C.terracotta);
+      s += text(M.l, PAGE.h - 48, F.serifBold, 17, doc.title, null, 0, C.ink);
+      s += text(RIGHT, PAGE.h - 46, F.bold, 6.8,
+        doc.subtitle.toUpperCase(), 'right', 1.3, C.ochre);
+      s += rule(M.l, RIGHT, PAGE.h - 60, 0.7, C.line);
       return s;
     };
 
-    const TOP = PAGE.h - M.t - 48;
-    const BOTTOM = LETTER_FLOOR + M.b - 30;
+    const foot = () => (doc.footnote
+      ? text(M.l, LETTER_FLOOR + 12, F.body, 6.4,
+        doc.footnote.toUpperCase(), null, 1, C.ink4)
+      : '');
 
-    // Where a column starts. The first page carries the standfirst and the
-    // list of meals across both columns, so its columns begin lower down.
+    const TOP = PAGE.h - 84;
+    const BOTTOM = LETTER_FLOOR + 26;
+
     let colTop = TOP;
-
     const newPage = () => {
-      pages.push(cs);
+      pages.push(cs + foot());
       page += 1; col = 0; colTop = TOP; y = TOP;
-      cs = head(page);
+      cs = head();
     };
 
-    // Reserve h points of column. Flows column, then column, then page.
     const need = (h) => {
       if (y - h >= BOTTOM) return;
       if (col === 0) { col = 1; y = colTop; } else newPage();
     };
 
-    cs = head(page);
+    cs = head();
     y = TOP;
 
-    // The standfirst and the meals it came from run across both columns.
     if (doc.standfirst) {
-      for (const line of wrap(doc.standfirst, 9.5, PAGE.w - M.l - M.r)) {
-        cs += text(M.l, y, F.body, 9.5, line);
-        y -= 13;
+      for (const line of wrap(doc.standfirst, 9.2, PAGE.w - M.l - M.r)) {
+        cs += text(M.l, y, F.body, 9.2, line, null, 0, C.ink2);
+        y -= 12.5;
       }
-      y -= 6;
+      y -= 8;
     }
     if (doc.meals && doc.meals.length) {
-      cs += text(M.l, y, F.bold, 8.5, 'THIS WEEK', null, 0.8);
-      y -= 14;
+      cs += sectionLabel(M.l, y, PAGE.w - M.l - M.r, 'This week');
+      y -= 17;
       const half = Math.ceil(doc.meals.length / 2);
       const startY = y;
       let lowest = y;
       doc.meals.forEach((m, i) => {
         const c = i < half ? 0 : 1;
         const yy = startY - (i < half ? i : i - half) * 12.5;
-        cs += fitted(COL_X[c], yy, F.body, 9, m, COL_W, 6.5, 'left');
+        cs += fitted(COL_X[c], yy, F.body, 8.6, m, COL_W, 6.5, 'left', C.ink2);
         if (yy < lowest) lowest = yy;
       });
-      y = lowest - 20;
-      cs += rule(M.l, RIGHT, y + 6, 0.5, 0.78);
-      y -= 6;
+      y = lowest - 22;
     }
 
     colTop = y;
 
-    for (const sec of doc.sections) {
+    for (const sec of doc.sections || []) {
       if (!sec.items.length) continue;
-      // A heading alone at the foot of a column is worse than a short column.
-      need(26 + Math.min(sec.items.length, 3) * LEAD);
-      cs += box(COL_X[col] - 5, y - 6, COL_W + 10, 17, 0.925);
-      cs += text(COL_X[col], y, F.bold, 8.5, sec.name.toUpperCase(), null, 0.7);
+      need(28 + Math.min(sec.items.length, 3) * LEAD);
+      cs += box(COL_X[col] - 6, y - 7, COL_W + 12, 18, C.panel);
+      cs += text(COL_X[col], y, F.bold, 7.2, sec.name.toUpperCase(), null, 1.05, C.ochre);
       if (sec.note) {
-        cs += text(COL_X[col] + COL_W, y, F.italic, 8, sec.note, 'right');
+        cs += text(COL_X[col] + COL_W, y, F.italic, 7.4, sec.note, 'right', 0, C.ink4);
       }
-      y -= 23;
+      y -= 24;
 
       for (const item of sec.items) {
         const lines = wrap(item.name, SIZE, nameW);
-        const notes = item.note ? wrap(item.note, 7.5, nameW) : [];
+        const notes = item.note ? wrap(item.note, 7.4, nameW) : [];
         const qtyCount = item.qty
           ? wrap(item.qty, shrinkToFit(item.qty, SIZE, QTY_W - 2, 6.5), QTY_W - 2).length
           : 1;
-        // Measured whole, so a note is never orphaned from its item and a
-        // two-line quantity is never written over the row beneath it.
-        const h = Math.max(lines.length, qtyCount) * LEAD + 3.5 +
+        const h = Math.max(lines.length, qtyCount) * LEAD + 4 +
           (notes.length ? notes.length * 10 + 1 : 0);
         need(h);
         cs += tickbox(COL_X[col], y, SIZE);
@@ -443,297 +811,44 @@
           cs += qtyBlock(qtyR(col), y, item.qty, QTY_W - 2, SIZE, 6.5, LEAD).cs;
         }
         cs += 'BT\n/' + F.body + ' ' + num(SIZE) + ' Tf\n' + num(LEAD) + ' TL\n' +
-          '1 0 0 1 ' + num(nameX(col)) + ' ' + num(y) + ' Tm\n' +
+          rgb(C.ink) + ' rg\n1 0 0 1 ' + num(nameX(col)) + ' ' + num(y) + ' Tm\n' +
           lines.map((l, i) => (i ? 'T*\n' : '') + lit(winAnsi(l)) + ' Tj\n').join('') +
-          'ET\n';
-        y -= Math.max(lines.length, qtyCount) * LEAD + 3.5;
+          '0 0 0 rg\nET\n';
+        y -= Math.max(lines.length, qtyCount) * LEAD + 4;
         if (notes.length) {
-          cs += 'BT\n/' + F.italic + ' 7.5 Tf\n10 TL\n0.45 0.45 0.45 rg\n' +
+          cs += 'BT\n/' + F.italic + ' 7.4 Tf\n10 TL\n' + rgb(C.ink4) + ' rg\n' +
             '1 0 0 1 ' + num(nameX(col)) + ' ' + num(y + 2) + ' Tm\n' +
             notes.map((l, i) => (i ? 'T*\n' : '') + lit(winAnsi(l)) + ' Tj\n').join('') +
             '0 0 0 rg\nET\n';
           y -= notes.length * 10 + 1;
         }
       }
-      y -= 12;
+      y -= 14;
     }
 
-    if (hasList) pages.push(cs);
+    if (hasList) pages.push(cs + foot());
 
     // The recipes themselves, after the list.
     if (doc.recipes && doc.recipes.length) {
-      const headFor = () => {
-        let s = text(M.l, PAGE.h - M.t - 12, F.serifBold, 15, doc.title);
-        s += text(RIGHT, PAGE.h - M.t - 12, F.body, 8.5,
-          doc.subtitle.toUpperCase(), 'right', 0.8);
-        s += rule(M.l, RIGHT, PAGE.h - M.t - 24, 0.8, 0.55);
-        if (doc.footnote) {
-          s += text(M.l, LETTER_FLOOR + 6, F.italic, 8, doc.footnote);
-        }
-        return s;
-      };
       for (const r of doc.recipes) {
-        for (const p of recipePages(r, headFor)) pages.push(p);
+        for (const p of recipePages(r, doc)) pages.push(p);
       }
     }
 
     // A page tree with no leaves is not a valid PDF, and an empty week can
     // reach here — untick everything, press the button, press download.
     if (!pages.length) {
-      pages.push(head(1) +
-        text(M.l, PAGE.h - M.t - 70, F.italic, 11,
-          'Nothing is on this list. Pick a week first.'));
+      pages.push(head() + foot() +
+        text(M.l, PAGE.h - 100, F.italic, 11,
+          'Nothing is on this list. Pick a week first.', null, 0, C.ink3));
     }
 
     // Page numbers are stamped once the total is known, so they can read
     // `3 of 9` rather than counting up to a number nobody has yet.
     return assemble(pages.map((cs, i) =>
-      cs + text(PAGE.w / 2, LETTER_FLOOR + 6, F.body, 8,
-        (i + 1) + ' of ' + pages.length, 'center')),
+      cs + text(RIGHT, LETTER_FLOOR + 12, F.body, 6.8,
+        (i + 1) + ' of ' + pages.length, 'right', 0.6, C.ink4)),
       { title: doc.title });
-  }
-
-
-  // ---------------------------------------------------------- recipe pages
-
-  /* A recipe is laid out as blocks — a heading, a paragraph, one ingredient,
-     one step — rather than as one long string, so a column that runs out of
-     room breaks between two of them instead of through the middle of a line.
-     Every block knows its own height at a given width and draws itself.
-     `k` is the fit scale: see fitRecipe below. */
-
-  const GREY = 0.42;
-
-  function bGap(h) {
-    return { h: () => h, draw: () => '' };
-  }
-
-  function bHead(label, k) {
-    return {
-      h: () => 18 * k,
-      draw: (x, y, w) =>
-        text(x, y, F.bold, 7.5, label.toUpperCase(), null, 0.65) +
-        rule(x, x + w, y - 5.5, 0.5, 0.78),
-    };
-  }
-
-  function bPara(str, font, size, lead, after, grey) {
-    return {
-      h: (w) => wrap(str, size, w).length * lead + (after || 0),
-      draw: (x, y, w) => {
-        const lines = wrap(str, size, w);
-        const g = grey === undefined ? 0 : grey;
-        return 'BT\n/' + font + ' ' + num(size) + ' Tf\n' + num(lead) + ' TL\n' +
-          (g ? num(g) + ' ' + num(g) + ' ' + num(g) + ' rg\n' : '') +
-          '1 0 0 1 ' + num(x) + ' ' + num(y) + ' Tm\n' +
-          lines.map((l, i) => (i ? 'T*\n' : '') + lit(winAnsi(l)) + ' Tj\n').join('') +
-          (g ? '0 0 0 rg\n' : '') + 'ET\n';
-      },
-    };
-  }
-
-  // An ingredient, hanging so a wrapped second line lines up under the first.
-  function bItem(str, size, lead) {
-    const IND = 10;
-    return {
-      h: (w) => wrap(str, size, w - IND).length * lead + 2,
-      draw: (x, y, w) => {
-        const lines = wrap(str, size, w - IND);
-        return text(x, y, F.body, size, '–') +
-          'BT\n/' + F.body + ' ' + num(size) + ' Tf\n' + num(lead) + ' TL\n' +
-          '1 0 0 1 ' + num(x + IND) + ' ' + num(y) + ' Tm\n' +
-          lines.map((l, i) => (i ? 'T*\n' : '') + lit(winAnsi(l)) + ' Tj\n').join('') +
-          'ET\n';
-      },
-    };
-  }
-
-  function bStep(n, str, size, lead) {
-    const IND = 17;
-    return {
-      h: (w) => wrap(str, size, w - IND).length * lead + 7,
-      draw: (x, y, w) => {
-        const lines = wrap(str, size, w - IND);
-        return text(x, y - 0.5, F.serifBold, size + 2.5, String(n)) +
-          'BT\n/' + F.body + ' ' + num(size) + ' Tf\n' + num(lead) + ' TL\n' +
-          '1 0 0 1 ' + num(x + IND) + ' ' + num(y) + ' Tm\n' +
-          lines.map((l, i) => (i ? 'T*\n' : '') + lit(winAnsi(l)) + ' Tj\n').join('') +
-          'ET\n';
-      },
-    };
-  }
-
-  /* A chef's note: the label runs on into the note, as it does in the book.
-     The label is set bold and dark, the note itself grey — including the part
-     of it that shares the first line, which used to come out black while its
-     own continuation lines were grey. The first line is wrapped against the
-     room the label leaves it rather than against the full column, since it is
-     measured in roman and drawn after something bold. */
-  function bNote(label, str, size, lead) {
-    const prefix = label + ':';
-    const gap = () => measure(winAnsi(prefix), size, true) + size * 0.36;
-    return {
-      h: (w) => wrapIndent(str, size, w - gap(), w).length * lead + 5,
-      draw: (x, y, w) => {
-        const labelW = gap();
-        const lines = wrapIndent(str, size, w - labelW, w);
-        const g = num(GREY) + ' ' + num(GREY) + ' ' + num(GREY) + ' rg\n';
-        let out = text(x, y, F.bold, size, prefix);
-        out += 'BT\n/' + F.body + ' ' + num(size) + ' Tf\n' + num(lead) + ' TL\n' + g +
-          '1 0 0 1 ' + num(x + labelW) + ' ' + num(y) + ' Tm\n' +
-          lit(winAnsi(lines[0])) + ' Tj\n0 0 0 rg\nET\n';
-        if (lines.length > 1) {
-          out += 'BT\n/' + F.body + ' ' + num(size) + ' Tf\n' + num(lead) + ' TL\n' + g +
-            '1 0 0 1 ' + num(x) + ' ' + num(y - lead) + ' Tm\n' +
-            lines.slice(1).map((l, i) => (i ? 'T*\n' : '') +
-              lit(winAnsi(l)) + ' Tj\n').join('') + '0 0 0 rg\nET\n';
-        }
-        return out;
-      },
-    };
-  }
-
-  function bMacros(macros, k) {
-    const keys = ['kcal', 'protein', 'carbs', 'fat', 'fibre'];
-    const units = ['', ' g', ' g', ' g', ' g'];
-    return {
-      h: () => 27 * k,
-      draw: (x, y, w) => {
-        let out = '';
-        const step = w / 5;
-        macros.forEach((v, i) => {
-          out += text(x + i * step, y, F.serifBold, 10.5, String(v) + units[i]);
-          out += text(x + i * step, y - 10, F.body, 6.5,
-            keys[i].toUpperCase(), null, 0.5);
-        });
-        return out;
-      },
-    };
-  }
-
-  /* Pour blocks into one column, stopping before the first that will not fit
-     and handing the rest back. A block always gets one shot at an empty
-     column, so nothing can loop for ever. */
-  function fillColumn(blocks, x, top, w, bottom) {
-    let cs = '', y = top, i = 0;
-    for (; i < blocks.length; i++) {
-      const h = blocks[i].h(w);
-      if (y - h < bottom && y !== top) break;
-      cs += blocks[i].draw(x, y, w);
-      y -= h;
-    }
-    return { cs, rest: blocks.slice(i), y };
-  }
-
-  /* One flow through both columns rather than two fixed halves. A full recipe
-     is more than a single column holds, so splitting it left/right by kind
-     would leave one column short and the other spilling onto a page of its
-     own. Poured as one sequence it fills the left column and carries on into
-     the right. */
-  function recipeBlocks(r, k) {
-    const b = [];
-    const ing = 8.5 * k, ingL = 11 * k;
-    const step = 8.5 * k, stepL = 11.5 * k;
-    const body = 8 * k, bodyL = 10.5 * k;
-    b.push(bHead('Ingredients', k));
-    for (const g of r.groups) {
-      if (g.name) {
-        b.push(bGap(3 * k));
-        b.push(bPara(g.name, F.serifBold, 9 * k, 11 * k, 3));
-      }
-      for (const item of g.items) b.push(bItem(item, ing, ingL));
-    }
-    b.push(bGap(10 * k));
-    b.push(bHead('Nutrition, a serving', k));
-    b.push(bMacros(r.macros, k));
-    b.push(bGap(8 * k));
-    b.push(bHead('Why it works', k));
-    b.push(bPara(r.why, F.body, body, bodyL, 12 * k, GREY));
-    b.push(bHead('Method', k));
-    r.steps.forEach((s, i) => b.push(bStep(i + 1, s, step, stepL)));
-    b.push(bGap(6 * k));
-    b.push(bHead('For the toddler', k));
-    b.push(bPara(r.toddler, F.body, body, bodyL, 12 * k, GREY));
-    b.push(bHead('Chef’s notes', k));
-    for (const [label, note] of r.notes) b.push(bNote(label, note, body, bodyL));
-    b.push(bGap(8 * k));
-    b.push(bHead('Washing up', k));
-    b.push(bPara(r.washing, F.body, body, bodyL, 0, GREY));
-    return b;
-  }
-
-  /* The book's own typesetter fits each recipe to its spread by searching one
-     parameter that tightens the type until the page holds. This does the same,
-     for the same reason: a recipe you cook from wants to be one sheet of
-     paper, and a page and a fifth is the worst of both. The floor is 0.84,
-     below which it would stop being comfortable to read across a hob, and a
-     recipe that still does not fit is allowed its second page.
-     Fifty of fifty fit at 0.90 or better. */
-  function fitRecipe(r, capacity) {
-    let k = 1;
-    for (let i = 0; i < 9; i++) {
-      const blocks = recipeBlocks(r, k);
-      let total = 0;
-      for (const b of blocks) total += b.h(COL_W);
-      if (total <= capacity || k <= 0.84) return { blocks, k };
-      k = Math.round((k - 0.02) * 100) / 100;
-    }
-    return { blocks: recipeBlocks(r, k), k };
-  }
-
-  function recipePages(r, head) {
-    const TOP = PAGE.h - M.t - 46;
-    const BOTTOM = LETTER_FLOOR + 12;
-
-    // The title block runs across both columns, so measure it before deciding
-    // how much room the recipe itself has.
-    const hookLines = wrap(r.hook, 10, PAGE.w - M.l - M.r);
-    const ruleY = PAGE.h - M.t - 104 - hookLines.length * 13 + 13 - 4;
-    const colTop = ruleY - 22;
-    // Blocks do not split, so whatever straddles the column break is pushed
-    // whole into the next column and the room it would have used is lost. One
-    // block's worth of slack is taken off the target before fitting.
-    const capacity = (colTop - BOTTOM) * 2 - 40;
-
-    const fit = fitRecipe(r, capacity);
-    const pages = [];
-    let rest = fit.blocks;
-    let first = true;
-
-    while (rest.length) {
-      let cs = head();
-      let top;
-      if (first) {
-        const meta = [r.ml, r.c, r.time, 'Serves ' + r.serves]
-          .concat(r.veg ? ['Vegetarian'] : []).join('  ·  ');
-        cs += text(M.l, PAGE.h - M.t - 74, F.serifBold, 32, r.n);
-        const tx = M.l + measure(winAnsi(r.n), 32) + 13;
-        // Times-Bold is narrower than the Helvetica table this measures with,
-        // so the estimate is conservative and the title lands inside the rule
-        // under it either way.
-        cs += fitted(tx, PAGE.h - M.t - 68, F.serifBold, 20, r.t, RIGHT - tx, 14, 'left');
-        cs += text(tx, PAGE.h - M.t - 85, F.body, 7.5, meta.toUpperCase(), null, 0.55);
-        let y = PAGE.h - M.t - 104;
-        for (const line of hookLines) {
-          cs += text(M.l, y, F.italic, 10, line);
-          y -= 13;
-        }
-        cs += rule(M.l, RIGHT, ruleY, 0.8, 0.55);
-        top = colTop;
-        first = false;
-      } else {
-        cs += text(M.l, PAGE.h - M.t - 62, F.body, 8,
-          (r.n + ' · ' + r.t + ' · continued').toUpperCase(), null, 0.5);
-        top = PAGE.h - M.t - 82;
-      }
-      const a = fillColumn(rest, COL_X[0], top, COL_W, BOTTOM);
-      const b = fillColumn(a.rest, COL_X[1], top, COL_W, BOTTOM);
-      cs += a.cs + b.cs;
-      rest = b.rest;
-      pages.push(cs);
-      if (pages.length > 4) break;
-    }
-    return pages;
   }
 
   function download(blob, filename) {

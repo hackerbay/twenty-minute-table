@@ -398,6 +398,12 @@ a{color:inherit}
   text-decoration:line-through;text-decoration-thickness:1px}
 .pticks .chip i{font-style:normal;font-size:11.5px;color:var(--ink4);font-weight:600}
 
+/* A pan chip carries its own method colour, the same one the recipe cards and
+   the numerals in the week use, so the row reads as the book's four methods
+   rather than as four more checkboxes. */
+.ppans .chip:has(input:checked){color:var(--ink);border-color:var(--c)}
+.ppans .chip:has(input:checked)::before{background:var(--c);border-color:var(--c)}
+
 /* the week */
 .week{list-style:none;margin:22px 0 0;padding:0;border-top:1px solid var(--line)}
 .night{--c:var(--ink3);display:grid;grid-template-columns:74px 40px 1fr auto auto;
@@ -409,6 +415,19 @@ a{color:inherit}
 .night:hover{background:linear-gradient(90deg,color-mix(in srgb,var(--c) 6%,transparent),transparent 42%)}
 @media (prefers-reduced-motion:reduce){.night{transition:none}}
 .n-title:hover{text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--c)}
+/* What kind of dinner it is, said plainly and first — the thing somebody
+   scanning the week actually wants to know. */
+.n-tags{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0 0}
+/* Deliberately not --c: that is the method colour, which is already carrying
+   the numeral and the pan chips, and a protein wearing it would read as a
+   claim about the pan. */
+.ntag{display:inline-flex;align-items:center;padding:3px 10px;border-radius:99px;
+  border:1px solid var(--ink4);color:var(--ink2);background:var(--card);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.ntag-veg{border-color:#5A7A48;color:#5A7A48;background:color-mix(in srgb,#5A7A48 9%,transparent)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ntag-veg{
+  border-color:#8FB86B;color:#8FB86B}}
+.ntag-also{border-color:var(--line);color:var(--ink4);background:none;font-weight:600}
 .n-meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:7px 0 0;font-size:11.5px;
   letter-spacing:.11em;text-transform:uppercase;font-weight:600;color:var(--ink4)}
 .n-act{display:flex;gap:8px;justify-content:flex-end;align-self:center}
@@ -484,6 +503,7 @@ a{color:inherit}
 
 @media (max-width:700px){
   .night{grid-template-columns:40px 1fr auto;gap:2px 14px;padding:18px 0}
+  .n-tags{margin-top:7px}
   .n-ord{grid-column:1/-1;margin-bottom:5px}
   .n-body{grid-column:2}
   .cnum{grid-row:2}
@@ -523,6 +543,8 @@ a{color:inherit}
   .night{padding:5px 0;break-inside:avoid;grid-template-columns:64px 30px 1fr auto}
   .n-title{font-size:13px}
   .n-meta{font-size:8.5px;margin-top:2px}
+  .n-tags{margin-top:3px}
+  .ntag{padding:1px 5px;font-size:7.5px;background:none}
   .glist,.cupboard>div{columns:2;column-gap:22px}
   .shelf,.gaisle{break-inside:avoid}
   .glist label{min-height:0;padding:2px 0;font-size:11px;color:#000}

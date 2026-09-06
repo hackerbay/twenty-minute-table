@@ -114,8 +114,19 @@ including its two-byte line ending. If you touch that file, check the result wit
 **Recipes are fitted to one page the way the book fits them to a spread.** `render.py`
 binary-searches a parameter until a recipe sits right on its two printed pages;
 `fitRecipe()` in `pdf.js` does the same, scaling the type down in two-percent steps
-until the recipe fits one A4 sheet. Forty-nine of the fifty fit at full size and the
-fiftieth at 0.92.
+until the recipe fits one A4 sheet. Thirty-eight of the fifty fit at full size and the
+tightest at 0.86.
+
+**The PDF is set like the printed book, in fonts it does not have.** `pdf.js` carries
+the book's palette and its ornament — the terracotta band, the serif numeral, the
+method pill, the time dial, the hook against its rule, the tinted ingredient panel, the
+numbered step discs, the nutrition band, the ochre small-caps labels. What it does not
+carry is Fraunces and Inter: embedding them would mean a TrueType build of each (the
+repo has only woff2, which needs Brotli and a glyf reconstruction to undo), a widths
+table, and about a megabyte of font sent to anybody who presses the button. Times-Bold
+stands in for Fraunces and Helvetica for Inter. If you change the layout, keep the
+palette constants in `C` in step with `book/style.css` — they are copied, not derived,
+because the stylesheet is not on the page that writes the PDF.
 
 ## Recipe file contract
 

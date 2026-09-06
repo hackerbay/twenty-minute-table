@@ -12,6 +12,27 @@ This project uses [semantic versioning](https://semver.org) loosely, read for a 
 - **Major** — a change that reorganises the book: renumbering recipes, changing the recipe
   file contract, dropping a section.
 
+## 1.1.1
+
+- **The pan is a filter too.** Air Fryer, One Pan, Wok and No Cook join the diet ticks
+  on the planner, each carrying its own count, so a week can be picked around the hob
+  being busy or the air fryer being the only thing you feel like washing. The counts are
+  worth reading before unticking: half the dinners in the book are one pan and only four
+  need no heat at all.
+- **The week says what each dinner is.** Every night now carries its type as a tag —
+  Vegetarian, Chicken, Beef, Prawns, Salmon — with a second, quieter tag when the dish
+  also contains a protein it is not about, which is exactly what the ticks above act on.
+  A chicken stir-fry seasoned with fish sauce reads "Chicken · also fish", so unticking
+  Fish and losing it is no longer a surprise.
+- **The PDF is set like the book.** The shopping list and the recipe pack now carry the
+  printed book's design: the terracotta band, the serif numeral beside the title, the
+  method pill and the time dial, the hook in italic against its rule, the tinted
+  ingredient panel with its coloured dots, the numbered step discs, the nutrition band
+  and the ochre small-caps section labels. The typefaces are the fourteen a PDF reader
+  already has rather than Fraunces and Inter — embedding those would mean shipping a
+  megabyte of font and a subsetter to the browser — so the display serif is Times where
+  the book sets Fraunces. Everything else is the book's.
+
 ## 1.1.0
 
 - **A meal planner.** A new page, `/plan.html`, that picks a week of dinners and turns

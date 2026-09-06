@@ -32,6 +32,7 @@
   const AISLES = DATA.aisles;
   const BASE_SERVES = DATA.serves || 4;
   const ALL_TAGS = ['veg', 'chicken', 'redmeat', 'fish', 'shellfish'];
+  const ALL_PANS = [...new Set(DATA.recipes.map(r => r.m))];
 
   const ORDINALS = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth',
     'Seventh', 'Eighth', 'Ninth', 'Tenth'];
@@ -50,6 +51,7 @@
     nights: DATA.week.length,
     serves: BASE_SERVES,
     eat: new Set(ALL_TAGS),
+    pans: new Set(ALL_PANS),
     week: DATA.week.slice(),
     ticked: new Set(),
     hideTicked: false,
@@ -73,12 +75,15 @@
     if (serves > 0 && serves <= 12) state.serves = serves;
     const eat = (h.get('eat') || '').split(',').filter(t => ALL_TAGS.includes(t));
     if (eat.length) state.eat = new Set(eat);
+    const pans = (h.get('pan') || '').split(',').filter(m => ALL_PANS.includes(m));
+    if (pans.length) state.pans = new Set(pans);
     return true;
   }
 
   function writeHash(push) {
     const h = 'n=' + state.nights + '&s=' + state.serves +
-      '&eat=' + [...state.eat].join(',') + '&w=' + state.week.join(',');
+      '&eat=' + [...state.eat].join(',') + '&pan=' + [...state.pans].join(',') +
+      '&w=' + state.week.join(',');
     if (location.hash.slice(1) === h) return;
     // Pushing on a pick makes Back an undo. Swapping and changing the servings
     // replace instead, so eight swaps do not cost nine presses of Back.
@@ -197,7 +202,8 @@
 
   // ------------------------------------------------------------- the picker
 
-  const pool = () => DATA.recipes.filter(r => r.tg.every(t => state.eat.has(t)));
+  const pool = () => DATA.recipes.filter(
+    r => r.tg.every(t => state.eat.has(t)) && state.pans.has(r.m));
 
   /* Softmax over the marginal gain of each candidate. Pure greedy would return
      the same week every time and a uniform draw would return a poor one, so the
@@ -475,6 +481,29 @@
   const esc = s => String(s).replace(/[&<>"]/g,
     c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
+  /* The kind of dinner it is, said in the words somebody would use. The first
+     tag is what the dish is built on — beef, prawns, vegetarian. Any further
+     one is a protein the dish carries without being about it, which is exactly
+     what the filters act on, so it is shown rather than left to surprise
+     anybody. Mirrors night_tags() in site.py. */
+  const EXTRA_TAG = { fish: 'fish', shellfish: 'shellfish', chicken: 'chicken',
+    redmeat: 'red meat' };
+  const OWN_TAGS = { seafood: ['fish', 'shellfish'], poultry: ['chicken'],
+    'red meat': ['redmeat'] };
+
+  function nightTags(r) {
+    const own = OWN_TAGS[r.fam] || [];
+    const out = [isVeg(r)
+      ? '<span class="ntag ntag-veg">Vegetarian</span>'
+      : `<span class="ntag">${esc(r.src)}</span>`];
+    for (const t of r.tg) {
+      if (EXTRA_TAG[t] && own.indexOf(t) === -1) {
+        out.push(`<span class="ntag ntag-also">also ${EXTRA_TAG[t]}</span>`);
+      }
+    }
+    return out.join('');
+  }
+
   function renderWeek() {
     const week = state.week.map(n => BY_NUM.get(n)).filter(Boolean);
     $('#plan-empty').hidden = week.length > 0;
@@ -484,10 +513,10 @@
         <span class="cnum d">${r.n}</span>
         <div class="n-body">
           <a class="n-title d" href="r/${r.s}.html">${esc(r.t)}</a>
+          <p class="n-tags">${nightTags(r)}</p>
           <p class="n-meta"><span>${esc(r.ml)}</span><span class="dot"></span>
             <span>${esc(r.c)}</span><span class="dot"></span>
-            <span>${esc(r.src)}</span>${isVeg(r) ? '<span class="vtag">Veg</span>' : ''}
-            <span class="dot"></span><span>${r.pr} g protein a serving</span></p>
+            <span>${r.pr} g protein a serving</span></p>
         </div>
         <span class="cmin d">${r.min}<i>min</i></span>
         <div class="n-act"><button class="swap" type="button" data-slot="${i}"
@@ -662,7 +691,9 @@
     const total = DATA.recipes.length;
     let text;
     if (!size) {
-      text = 'Nothing matches. Tick at least one thing you eat.';
+      text = state.eat.size === 0 ? 'Nothing matches. Tick at least one thing you eat.'
+        : state.pans.size === 0 ? 'Nothing matches. Tick at least one pan.'
+        : 'Nothing matches those ticks together. Put one of them back.';
     } else if (size < state.nights) {
       text = `${size} of the ${total} dinners match — ${word(state.nights - size)} short of ${word(state.nights)}.`;
     } else if (size === state.nights) {
@@ -815,6 +846,7 @@
     $$('.pctl input[name=nights]').forEach(el => { el.checked = +el.value === state.nights; });
     $$('.pctl input[name=serves]').forEach(el => { el.checked = +el.value === state.serves; });
     $$('.pctl input[name=eat]').forEach(el => { el.checked = state.eat.has(el.value); });
+    $$('.pctl input[name=pan]').forEach(el => { el.checked = state.pans.has(el.value); });
   }
 
   function wire() {
@@ -824,8 +856,9 @@
       if (el.name === 'nights') { state.nights = +el.value; writeHash(false); poolLine(); }
       else if (el.name === 'serves') {
         state.serves = +el.value; writeHash(false); renderBand(); renderShop();
-      } else if (el.name === 'eat') {
-        if (el.checked) state.eat.add(el.value); else state.eat.delete(el.value);
+      } else if (el.name === 'eat' || el.name === 'pan') {
+        const set = el.name === 'eat' ? state.eat : state.pans;
+        if (el.checked) set.add(el.value); else set.delete(el.value);
         state.cursors.clear();
         writeHash(false);
         poolLine();
@@ -834,6 +867,7 @@
 
     $('#plan-all').addEventListener('click', () => {
       state.eat = new Set(ALL_TAGS);
+      state.pans = new Set(ALL_PANS);
       syncControls();
       pick();
     });

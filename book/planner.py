@@ -19,7 +19,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
-from parse import load_all, METHODS  # noqa: E402
+from parse import load_all, METHODS, ORDER  # noqa: E402
 import grocery as G  # noqa: E402
 import diet as D  # noqa: E402
 
@@ -183,6 +183,22 @@ def tag_counts(records):
     return {t: sum(1 for r in records if t in r['tg']) for t in D.TAGS}
 
 
+def method_counts(records):
+    """How many dinners each pan accounts for, in the book's own order.
+
+    One pan is half the dinners and there are only four no-cook ones, which is
+    worth showing on the chip: it is the difference between a filter somebody
+    chooses knowingly and one that empties the week.
+    """
+    out = []
+    for name in ORDER:
+        m = METHODS[name]
+        n = sum(1 for r in records if r['m'] == m['key'])
+        if n:
+            out.append({'key': m['key'], 'label': m['label'], 'col': m['color'], 'n': n})
+    return out
+
+
 if __name__ == '__main__':
     import json
     recipes = load_all()
@@ -194,6 +210,7 @@ if __name__ == '__main__':
           f"{sum(len(r['ing']) for r in data['recipes'])} ingredient entries, "
           f"{len(json.dumps(data, separators=(',', ':')))/1000:.1f} kB of JSON")
     print('\ntag counts:', tag_counts(data['recipes']))
+    print('methods:', [(m['label'], m['n']) for m in method_counts(data['recipes'])])
     from collections import Counter
     print('regions:', dict(Counter(r['g'] for r in data['recipes'])))
     print('families:', dict(Counter(r['fam'] for r in data['recipes'])))

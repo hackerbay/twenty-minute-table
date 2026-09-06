@@ -365,19 +365,39 @@ PLAN_INTRO = (
     'night you do not fancy and the list follows.')
 
 
+def night_tags(r):
+    """The kind of dinner it is, said in the words somebody would use.
+
+    Mirrors nightTags() in web/plan.js. The first tag is what the dish is built
+    on — beef, prawns, vegetarian. Any further one is a protein the dish carries
+    without being about it, which is exactly what the filter above acts on, so
+    it is shown rather than left to surprise anybody.
+    """
+    veg = r['tg'] == ['veg']
+    out = [('<span class="ntag ntag-veg">Vegetarian</span>' if veg
+            else f'<span class="ntag">{esc(r["src"])}</span>')]
+    extra = {'fish': 'fish', 'shellfish': 'shellfish', 'chicken': 'chicken',
+             'redmeat': 'red meat'}
+    fam = {'seafood': ('fish', 'shellfish'), 'poultry': ('chicken',),
+           'red meat': ('redmeat',)}.get(r['fam'], ())
+    for t in r['tg']:
+        if t in extra and t not in fam:
+            out.append(f'<span class="ntag ntag-also">also {extra[t]}</span>')
+    return ''.join(out)
+
+
 def night_row(r, i, ordinals):
     """One night. Mirrors renderWeek() in web/plan.js exactly."""
-    veg = '<span class="vtag">Veg</span>' if r['tg'] == ['veg'] else ''
     return (
         f'\n      <li class="night" data-num="{r["n"]}" style="--c:{r["col"]}">'
         f'\n        <span class="n-ord">{ordinals[i]}</span>'
         f'\n        <span class="cnum d">{r["n"]}</span>'
         f'\n        <div class="n-body">'
         f'\n          <a class="n-title d" href="r/{r["s"]}.html">{esc(r["t"])}</a>'
+        f'\n          <p class="n-tags">{night_tags(r)}</p>'
         f'\n          <p class="n-meta"><span>{esc(r["ml"])}</span><span class="dot"></span>'
         f'\n            <span>{esc(r["c"])}</span><span class="dot"></span>'
-        f'\n            <span>{esc(r["src"])}</span>{veg}'
-        f'\n            <span class="dot"></span><span>{r["pr"]} g protein a serving</span></p>'
+        f'\n            <span>{r["pr"]} g protein a serving</span></p>'
         f'\n        </div>'
         f'\n        <span class="cmin d">{r["min"]}<i>min</i></span>'
         f'\n        <div class="n-act"><button class="swap" type="button" data-slot="{i}"'
@@ -405,6 +425,12 @@ def build_plan(recipes):
     ticks = ''.join(
         f'<label class="chip"><input type="checkbox" name="eat" value="{t}" checked>'
         f'{TAG_LABEL[t]}<i>{counts[t]}</i></label>' for t in DIET_TAGS)
+
+    pans = ''.join(
+        f'<label class="chip" style="--c:{m["col"]}">'
+        f'<input type="checkbox" name="pan" value="{m["key"]}" checked>'
+        f'{m["label"]}<i>{m["n"]}</i></label>'
+        for m in PLANNER.method_counts(data['recipes']))
 
     # Every figure on the band is read straight off the recipes, so the build
     # and the browser can agree on it without the shopping list being worked
@@ -459,6 +485,13 @@ def build_plan(recipes):
     the recipes list, not an allergen check &mdash; a jar of kimchi or a shop-bought curry
     paste can carry shrimp without the recipe saying so &mdash; so read the ingredients if
     it matters.</p>
+  </div>
+  <div class="pctl-row">
+    <span class="pctl-k">The pan</span>
+    <div class="pchips pticks ppans" role="group" aria-label="What you feel like washing up">{pans}</div>
+    <p class="pctl-h">Half the dinners in the book are one pan and only four need no heat at all,
+    so unticking is quick work &mdash; the counts say how much of the book each one is. Leave them
+    all on unless the air fryer is in use or the hob is not.</p>
   </div>
   <div class="pctl-tail">
     <p class="poolline" id="pool">{len(data['recipes'])} of the {len(data['recipes'])} dinners match. Enough for {words[n]}.</p>
