@@ -59,9 +59,14 @@ jobs:
       # not byte-reproducible. The HTML is.
       - name: Check the committed site is up to date
         run: |
-          if ! git diff --quiet -- site/ ':(exclude)site/*.pdf'; then
+          # --porcelain rather than `git diff`, because a diff only sees files
+          # git already tracks: a new page that nobody committed would generate
+          # here and pass silently. This catches a modified file and an
+          # uncommitted new one alike.
+          CHANGED=$(git status --porcelain -- site/ ':(exclude)site/*.pdf')
+          if [ -n "$CHANGED" ]; then
             echo "::error::site/ is out of date with recipes/. Run 'make' and commit the result."
-            git diff --stat -- site/ ':(exclude)site/*.pdf'
+            echo "$CHANGED"
             exit 1
           fi
           echo "site/ matches the sources."

@@ -12,6 +12,44 @@ This project uses [semantic versioning](https://semver.org) loosely, read for a 
 - **Major** — a change that reorganises the book: renumbering recipes, changing the recipe
   file contract, dropping a section.
 
+## 1.1.0
+
+- **A meal planner.** A new page, `/plan.html`, that picks a week of dinners and turns
+  it into one shopping list. You say how many nights, how many you are feeding and what
+  the house eats; it picks that many out of the fifty lunches and dinners, spreads the
+  protein, the pan and the part of the world they come from, adds every ingredient up
+  into one list in the order a shop is walked, and hands it back as a PDF. Swapping a
+  single night you do not fancy leaves the rest of the week alone and rewrites the list.
+  The week lives in the address bar, so it is a link you can bookmark or send to whoever
+  is going to the shop, and the page arrives with a real week already picked so it says
+  something with JavaScript off.
+- **The PDF is written by hand.** `book/web/pdf.js` emits PDF bytes using the fourteen
+  fonts every reader already has, because the site makes no external requests and there
+  was no library to load. Two files come out of it: the shopping list on its own, and
+  the whole week — the list, then every recipe in full, one to a sheet, fitted to the
+  page the same way `render.py` fits the printed book to its spreads.
+- **The protein filter is strict on purpose.** `book/diet.py` tags a dinner with every
+  kind of flesh it contains rather than the one it is named after, so a chicken stir-fry
+  seasoned with fish sauce is chicken and fish and unticking either one drops it. Eight
+  of the fifty carry fish only as a seasoning. All 100 tag sets agree with the
+  `**Vegetarian**` markers in the recipe files, which is checked by
+  `python3 book/diet.py`.
+- **The shopping list does not lose things.** `book/grocery.py` parses all 1,288
+  ingredient lines into an amount, a unit and something you can buy, files each under an
+  aisle, and separates the fifty-odd cupboard staples from the things you actually have
+  to carry home. Amounts only add up within their own family. A line it cannot read
+  keeps its own words rather than being dropped.
+- Fixed two things on the way past. The sticky filter bar on the recipe index was
+  offset by a hard-coded 57px against a nav that is 63px tall on a desktop and 98px on
+  a phone, so 6px and then 35px of it sat behind the header; both now read one
+  `--navh` token. And `.btn` set a font size but never a font family, which was
+  invisible while it was only ever worn by a link and would have rendered the planner's
+  buttons in the browser's default face.
+- The download menu is now a sibling of the nav links rather than a child of them.
+  That is what makes a fifth link free: brand and Download share the first row on a
+  phone and the five links get the second, where four links beside the button had
+  already stopped fitting at 320px.
+
 ## 1.0.5
 
 - **The Kindle edition no longer carries illustrations the printed book does not have.**

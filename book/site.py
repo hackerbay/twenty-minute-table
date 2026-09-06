@@ -18,6 +18,8 @@ from icons import icon
 from compose import step_glyph, action_svg
 from pairings import sides_for, mains_for
 from pantry_data import SHELVES, KIT, RULES
+import planner as PLANNER
+from diet import TAGS as DIET_TAGS, TAG_LABEL
 from toddler_data import INTRO as TOD_INTRO, POINTS as TOD_POINTS, DISCLAIMER as TOD_DISC
 import mission as MISSION
 import imprint as IMP
@@ -99,8 +101,9 @@ def fonts_css():
     return css
 
 
-def shell(title, body, depth=0, desc='', extra_head=''):
+def shell(title, body, depth=0, desc='', extra_head='', scripts=()):
     up = '../' * depth
+    more = ''.join(f'\n<script src="{up}assets/{s}" defer></script>' for s in scripts)
     return f"""<!doctype html>
 <html lang="en-GB">
 <head>
@@ -115,33 +118,36 @@ def shell(title, body, depth=0, desc='', extra_head=''):
 </head>
 <body>
 {body}
-<script src="{up}assets/app.js" defer></script>
+<script src="{up}assets/app.js" defer></script>{more}
 </body>
 </html>"""
 
 
 def nav(depth=0, active=''):
     up = '../' * depth
-    items = [('index.html', 'Recipes'), ('pantry.html', 'Pantry'),
-             ('toddlers.html', 'Toddlers'), ('about.html', 'About')]
+    items = [('index.html', 'Recipes'), ('plan.html', 'Plan'),
+             ('pantry.html', 'Pantry'), ('toddlers.html', 'Toddlers'),
+             ('about.html', 'About')]
     parts = []
     for h, t in items:
         cls = ' class="on"' if active and h.startswith(active) else ''
         parts.append(f'<a href="{up}{h}"{cls}>{t}</a>')
-    # <details> rather than a scripted menu: it opens, closes and takes the
-    # keyboard on its own, so the downloads still work with JavaScript off.
-    parts.append(
-        f'<details class="dlm"><summary>{DL_ICON}<span>Download</span>{CHEV_ICON}</summary>'
-        f'<div class="dlm-list">'
-        f'<a href="{up}{PDF_NAME}" download>'
-        f'<b>PDF</b><span>The printable book, laid out in spreads</span></a>'
-        f'<a href="{up}{EPUB_NAME}" download>'
-        f'<b>EPUB</b><span>Reflowable, for a phone or an e-reader</span></a>'
-        f'</div></details>')
     links = ''.join(parts)
+    # The download menu is a sibling of <nav>, not a child of it. On a phone the
+    # brand and the menu share the first row and the links get the second, which
+    # is what makes a fifth link cost nothing: five links fit one row at 320px.
+    # <details> rather than a scripted menu, so it opens, closes and takes the
+    # keyboard on its own and the downloads still work with JavaScript off.
+    menu = (f'<details class="dlm"><summary>{DL_ICON}<span>Download</span>{CHEV_ICON}</summary>'
+            f'<div class="dlm-list">'
+            f'<a href="{up}{PDF_NAME}" download>'
+            f'<b>PDF</b><span>The printable book, laid out in spreads</span></a>'
+            f'<a href="{up}{EPUB_NAME}" download>'
+            f'<b>EPUB</b><span>Reflowable, for a phone or an e-reader</span></a>'
+            f'</div></details>')
     return (f'<header class="nav"><a class="brand" href="{up}index.html">'
             f'<span class="brand-d">The 20-Minute Table</span></a>'
-            f'<nav>{links}</nav></header>')
+            f'{menu}<nav>{links}</nav></header>')
 
 
 def footer(depth=0):
@@ -344,6 +350,188 @@ def build_recipe(r, prev, nxt):
         shell(f"{r['title']} — The 20-Minute Table", body, 1, r['hook']), encoding='utf-8')
 
 
+# ------------------------------------------------------------- the planner
+# The page arrives with a week already on it. That is not a placeholder: it is
+# a real week chosen by planner.default_week(), which is deterministic, so the
+# committed plan.html is the same file every build and CI's check that site/
+# matches its sources still passes. With JavaScript off it stays a complete
+# week of dinners, each one a link to its recipe.
+
+PLAN_INTRO = (
+    'Say how many dinners you want, how many you are feeding, and what the house '
+    'eats. This picks that many out of the fifty lunches and dinners in the book, '
+    'spreads the protein, the pan and the part of the world they come from, and '
+    'adds every ingredient into one list in the order a shop is walked. Swap any '
+    'night you do not fancy and the list follows.')
+
+
+def night_row(r, i, ordinals):
+    """One night. Mirrors renderWeek() in web/plan.js exactly."""
+    veg = '<span class="vtag">Veg</span>' if r['tg'] == ['veg'] else ''
+    return (
+        f'\n      <li class="night" data-num="{r["n"]}" style="--c:{r["col"]}">'
+        f'\n        <span class="n-ord">{ordinals[i]}</span>'
+        f'\n        <span class="cnum d">{r["n"]}</span>'
+        f'\n        <div class="n-body">'
+        f'\n          <a class="n-title d" href="r/{r["s"]}.html">{esc(r["t"])}</a>'
+        f'\n          <p class="n-meta"><span>{esc(r["ml"])}</span><span class="dot"></span>'
+        f'\n            <span>{esc(r["c"])}</span><span class="dot"></span>'
+        f'\n            <span>{esc(r["src"])}</span>{veg}'
+        f'\n            <span class="dot"></span><span>{r["pr"]} g protein a serving</span></p>'
+        f'\n        </div>'
+        f'\n        <span class="cmin d">{r["min"]}<i>min</i></span>'
+        f'\n        <div class="n-act"><button class="swap" type="button" data-slot="{i}"'
+        f'\n          aria-label="Swap the {ordinals[i].lower()} dinner">Swap</button></div>'
+        f'\n      </li>')
+
+
+def build_plan(recipes):
+    data = PLANNER.payload(recipes)
+    by = {r['n']: r for r in data['recipes']}
+    week = [by[n] for n in data['week']]
+    counts = PLANNER.tag_counts(data['recipes'])
+    ordinals = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh',
+                'Eighth', 'Ninth', 'Tenth']
+    words = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight',
+             'nine', 'ten']
+    n = len(week)
+    serves = data['serves']
+
+    def chips(name, values, current):
+        return ''.join(
+            f'<label class="chip"><input type="radio" name="{name}" value="{v}"'
+            f'{" checked" if v == current else ""}>{v}</label>' for v in values)
+
+    ticks = ''.join(
+        f'<label class="chip"><input type="checkbox" name="eat" value="{t}" checked>'
+        f'{TAG_LABEL[t]}<i>{counts[t]}</i></label>' for t in DIET_TAGS)
+
+    # Every figure on the band is read straight off the recipes, so the build
+    # and the browser can agree on it without the shopping list being worked
+    # out twice — once here in Python and once in the browser.
+    band = [
+        (n, 'Dinners'),
+        (sum(r['min'] for r in week), 'Minutes, all in'),
+        ('%d g' % round(sum(r['pr'] for r in week) / n), 'Protein a serving, average'),
+        ('%d g' % round(sum(r['fb'] for r in week) / n), 'Fibre a serving, average'),
+        (serves, 'Serves'),
+    ]
+    band_html = ''.join(f'<div><b class="d">{v}</b><span>{k}</span></div>'
+                        for v, k in band)
+    rows = ''.join(night_row(r, i, ordinals) for i, r in enumerate(week))
+    blob = json.dumps(data, sort_keys=True, separators=(',', ':'),
+                      ensure_ascii=False).replace('</', r'<\/')
+
+    body = f"""{nav(0, 'plan')}
+<section class="phero"><div class="wrap">
+  <p class="eyebrow">Decide once &middot; shop once</p>
+  <h1 class="d">Pick My Meals<br>for a <em>Week</em></h1>
+  <p class="lede">{PLAN_INTRO}</p>
+  <p class="pnote">A week is already picked below. Nothing is stored: the week you are
+  looking at is in the address bar, so you can bookmark it or send it to whoever is going
+  to the shop. <a class="jump" href="#shop">Straight to the list</a></p>
+</div></section>
+
+<form class="pctl" id="pctl"><div class="wrap">
+  <div class="pctl-row">
+    <span class="pctl-k">Dinners</span>
+    <div class="pchips pnum" role="group" aria-label="How many dinners">{chips('nights', [3, 4, 5, 6, 7], n)}</div>
+    <p class="pctl-h">Most weeks are not seven dinners. Pick the number you will actually
+    cook. Picked from the fifty lunches and dinners; breakfasts, puddings and the sides
+    stay where they are.</p>
+  </div>
+  <div class="pctl-row">
+    <span class="pctl-k">Serves</span>
+    <div class="pchips pnum" role="group" aria-label="How many servings">{chips('serves', [2, 4, 6, 8], serves)}</div>
+    <p class="pctl-h">Every recipe in the book is written for four. Another number scales
+    the shopping list &mdash; whole things and tins round up, since you cannot buy two
+    thirds of a tin, and weights round to the nearest sensible figure. The recipe pages
+    still read for four, so halve or double as you cook.</p>
+  </div>
+  <div class="pctl-row">
+    <span class="pctl-k">On the table</span>
+    <div class="pchips pticks" role="group" aria-label="What the house eats">{ticks}</div>
+    <p class="pctl-h">Untick anything nobody in the house eats. The numbers are how many
+    dinners contain each thing, and they add up to more than fifty because some dishes are
+    on two lists &mdash; a chicken stir-fry seasoned with fish sauce is chicken and fish,
+    and unticking either one drops it. Anchovies melted into oil until they have vanished
+    still count; eight of the fifty carry fish only as a seasoning. It is a filter on what
+    the recipes list, not an allergen check &mdash; a jar of kimchi or a shop-bought curry
+    paste can carry shrimp without the recipe saying so &mdash; so read the ingredients if
+    it matters.</p>
+  </div>
+  <div class="pctl-tail">
+    <p class="poolline" id="pool">{len(data['recipes'])} of the {len(data['recipes'])} dinners match. Enough for {words[n]}.</p>
+    <button class="btn btn-p" id="pick" type="submit">Pick these meals</button>
+    <p class="pctl-h">Picking again replaces every night. To change one night, swap it.</p>
+    <noscript><p class="pctl-h">The controls need JavaScript. Without it this is still one
+    full week, already picked, and every dinner links to its recipe.</p></noscript>
+  </div>
+</div></form>
+
+<main>
+  <div class="wrap">
+  <p class="printhead">The 20-Minute Table &mdash; {words[n]} dinners for {words[serves]}</p>
+  <div class="statband" id="wkband">{band_html}</div>
+
+  <h2 class="sect d" id="week">The week<span id="wkcount">{words[n].capitalize()} nights</span></h2>
+  <ol class="week" id="weeklist">{rows}
+  </ol>
+  <p class="n-short" id="short" hidden></p>
+  <p class="empty" id="plan-empty" hidden>Nothing matches those ticks.
+    <button class="clear" id="plan-all" type="button">Allow everything again</button></p>
+  <p class="weeknote">Every one of these ends with a note on feeding a toddler. Most lift a
+  small portion out of the same pan before the salt and before the chilli; a few say plainly
+  that theirs is easier cooked alongside. The note is at the foot of each recipe.</p>
+
+  <h2 class="sect d">What is in this week</h2>
+  <div class="spread" id="spread"></div>
+  <div class="report" id="report"></div>
+  <p class="rdisc">The figures are the estimates printed in each recipe, for a quarter of the
+  finished dish. They describe the dinner alone &mdash; not what you put beside it, and not
+  the rest of the day &mdash; and they are not dietary advice.</p>
+
+  <h2 class="sect d" id="shop">The shop<span id="shopcount"></span></h2>
+  <p class="pnote">One list for the whole week, aisle by aisle, with the amounts added up and
+  scaled to the number you are feeding. Ticks last while this page is open. Staples are at the
+  foot &mdash; check the <a href="pantry.html">Fast Pantry</a> before you buy them twice.</p>
+  <div class="plan-actions">
+    <button class="btn btn-p" id="plan-pack" type="button">{DL_ICON}<span>Download the week as a PDF</span></button>
+    <button class="btn btn-s" id="plan-pdf" type="button"><span>Shopping list only</span></button>
+    <button class="btn btn-s" id="plan-copy" type="button"><span>Copy as text</span></button>
+  </div>
+  <p class="pctl-h plan-note">The first is the shopping list and then every recipe in full,
+  laid out to print &mdash; about {words[n + 2]} sheets of paper, and the week is on the fridge door.
+  The second is the list on its own.</p>
+  </div>
+
+  <div class="filters gbar" id="gbar"><div class="wrap"><div class="frow ftail">
+    <span id="gcount"></span>
+    <button class="chip" id="hide-ticked" type="button" aria-pressed="false">Hide what is in the trolley</button>
+  </div></div></div>
+
+  <div class="wrap">
+  <div class="shelves glist" id="glist"></div>
+  <details class="cupboard" id="cupboard" hidden>
+    <summary>From the cupboard<span id="cupcount"></span></summary>
+    <div id="cuplist"></div>
+  </details>
+  <noscript><p class="empty">The shopping list is added up in your browser, so it needs
+  JavaScript. Every dinner above carries its own ingredients on its recipe page.</p></noscript>
+  <p class="vh" id="say" aria-live="polite" role="status"></p>
+  </div>
+</main>
+{contribute(0)}
+{footer(0)}
+<script>window.PLAN={blob}</script>"""
+
+    (SITE / 'plan.html').write_text(shell(
+        'Plan a Week — The 20-Minute Table', body, 0,
+        'Pick a week of dinners from the book and get one shopping list, aisle by '
+        'aisle, as a PDF you can take to the shop.',
+        scripts=('pdf.js', 'plan.js')), encoding='utf-8')
+
+
 # ---------------------------------------------------------- pantry and about
 def build_pantry(shelves, kit, n_recipes):
     cols = ''.join(
@@ -474,9 +662,22 @@ def main():
     (SITE / 'r').mkdir(parents=True)
     ASSETS.mkdir(parents=True)
 
-    (ASSETS / 'style.css').write_text(fonts_css() + '\n' + (HERE / 'web' / 'style.css').read_text(),
-                                      encoding='utf-8')
-    shutil.copy(HERE / 'web' / 'app.js', ASSETS / 'app.js')
+    (ASSETS / 'style.css').write_text(
+        fonts_css() + '\n' +
+        (HERE / 'web' / 'style.css').read_text(encoding='utf-8'),
+        encoding='utf-8')
+    for js in ('app.js', 'pdf.js', 'plan.js'):
+        shutil.copy(HERE / 'web' / js, ASSETS / js)
+
+    # The recipes in full, for the printable pack. It is twice the size of
+    # everything else the planner needs, and only somebody who asks for the
+    # recipes ever loads it, so it is a script the page fetches on demand
+    # rather than another 180 kB in every visit. A script rather than JSON so
+    # it works from a file:// copy of the site as well as from a server.
+    pack = json.dumps(PLANNER.recipe_pack(recipes), sort_keys=True,
+                      separators=(',', ':'), ensure_ascii=False)
+    (ASSETS / 'recipes.js').write_text('window.PLAN_RECIPES=' + pack,
+                                       encoding='utf-8')
 
     if PDF_SRC.exists():
         shutil.copy(PDF_SRC, SITE / PDF_NAME)
@@ -488,6 +689,7 @@ def main():
         build_recipe(r, recipes[i - 1] if i else None,
                      recipes[i + 1] if i + 1 < len(recipes) else None)
 
+    build_plan(recipes)
     build_pantry(SHELVES, KIT, len(recipes))
     build_toddlers(recipes)
     build_about(recipes, RULES)

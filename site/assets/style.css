@@ -37,45 +37,55 @@ a{color:inherit}
 .brand{text-decoration:none;font-weight:600;letter-spacing:-.01em}
 .brand-d{font-family:'Fraunces',Georgia,serif;font-size:17px;
   font-variation-settings:'SOFT' 50,'WONK' 1,'opsz' 40}
-.nav nav{margin-left:auto;display:flex;gap:22px;font-size:14px;font-weight:500}
+.nav nav{order:3;margin-left:auto;display:flex;gap:22px;font-size:14px;font-weight:500}
+.nav .dlm{order:4;position:relative}
 .nav nav a{text-decoration:none;color:var(--ink3);padding:4px 0;border-bottom:1.5px solid transparent}
 .nav nav a:hover{color:var(--ink)}
 .nav nav a.on{color:var(--ink);border-color:var(--ink)}
-.nav nav .dlm{position:relative}
-.nav nav .dlm>summary{display:inline-flex;align-items:center;gap:7px;padding:5px 12px;
+.nav .dlm>summary{display:inline-flex;align-items:center;gap:7px;padding:5px 12px;
   border:1px solid var(--line);border-radius:999px;color:var(--ink2);background:var(--card);
   cursor:pointer;list-style:none;-webkit-tap-highlight-color:transparent}
-.nav nav .dlm>summary::-webkit-details-marker{display:none}
-.nav nav .dlm>summary::marker{content:''}
-.nav nav .dlm>summary:hover{color:var(--ink);border-color:var(--ink3);box-shadow:var(--shadow)}
-.nav nav .dlm[open]>summary{color:var(--ink);border-color:var(--ink3)}
-.nav nav .dlm[open] .chev{transform:rotate(180deg)}
+.nav .dlm>summary::-webkit-details-marker{display:none}
+.nav .dlm>summary::marker{content:''}
+.nav .dlm>summary:hover{color:var(--ink);border-color:var(--ink3);box-shadow:var(--shadow)}
+.nav .dlm[open]>summary{color:var(--ink);border-color:var(--ink3)}
+.nav .dlm[open] .chev{transform:rotate(180deg)}
 .chev{transition:transform .15s ease}
 @media (prefers-reduced-motion:reduce){.chev{transition:none}}
 /* Drive the panel from [open] rather than leaning on how a browser happens to
    hide <details> content. Chrome now hides it on a wrapper pseudo-element, so a
    display on the child sticks and the menu would hang open everywhere that
    still hides the child itself. */
-.nav nav .dlm-list{display:none}
-.nav nav .dlm[open] .dlm-list{position:absolute;right:0;top:calc(100% + 8px);z-index:70;
+.nav .dlm-list{display:none}
+.nav .dlm[open] .dlm-list{position:absolute;right:0;top:calc(100% + 8px);z-index:70;
   min-width:236px;display:flex;flex-direction:column;padding:6px;background:var(--card);
   border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-lift)}
-.nav nav .dlm-list a{display:flex;flex-direction:column;gap:1px;padding:8px 10px;
+.nav .dlm-list a{display:flex;flex-direction:column;gap:1px;padding:8px 10px;
   border:0;border-radius:8px;text-decoration:none;white-space:normal}
-.nav nav .dlm-list a:hover{background:var(--panel)}
-.nav nav .dlm-list b{font-size:13px;font-weight:600;color:var(--ink)}
-.nav nav .dlm-list span{font-size:12px;line-height:1.45;color:var(--ink3)}
+.nav .dlm-list a:hover{background:var(--panel)}
+.nav .dlm-list b{font-size:13px;font-weight:600;color:var(--ink)}
+.nav .dlm-list span{font-size:12px;line-height:1.45;color:var(--ink3)}
 @media (max-width:640px){
-  .nav{flex-wrap:wrap;gap:9px;padding:12px 16px}
-  .brand{flex:0 0 100%}
+  .nav{flex-wrap:wrap;gap:9px 12px;padding:12px 16px}
+  /* Two rows on a phone: the brand and the download button share the first,
+     the links get the second to themselves. Five links then fit one line at
+     320px, where four links beside the button already did not. */
+  .brand{flex:0 1 auto;min-width:0}
   .brand-d{font-size:16px;white-space:nowrap}
-  /* The row has to hold four links and the download button. At 11px it fits a
-     375px phone on one line; below that it wraps rather than pushing the page
-     into a horizontal scroll. */
-  .nav nav{margin-left:0;width:100%;gap:9px;row-gap:10px;flex-wrap:wrap;font-size:13px}
-  .nav nav .dlm>summary{padding:5px 10px}
+  .nav .dlm{order:2;margin-left:auto}
+  .nav nav{order:3;flex:0 0 100%;margin-left:0;gap:14px;row-gap:8px;
+    flex-wrap:wrap;font-size:13.5px}
+  .nav .dlm>summary{padding:5px 10px}
   .nav nav a{white-space:nowrap}
-  .nav nav .dlm{margin-left:auto}
+}
+/* At 320px the brand and a labelled Download button want 305px of a 288px row,
+   so the word goes and the arrow stays. The accessible name is kept — the
+   label is moved out of sight rather than removed — and the menu it opens
+   still says PDF and EPUB in full. */
+@media (max-width:360px){
+  .nav{padding:12px 14px}
+  .nav .dlm>summary span{position:absolute;width:1px;height:1px;overflow:hidden;
+    clip-path:inset(50%);white-space:nowrap}
 }
 
 /* ---------- hero ---------- */
@@ -337,3 +347,194 @@ a{color:inherit}
 .tcard p{margin:0;font-size:15.4px;line-height:1.62;color:var(--ink2)}
 .disclaimer{max-width:78ch;padding:22px 24px;margin-bottom:40px;background:var(--panel);
   border-radius:var(--radius);font-size:13.6px;line-height:1.6;color:var(--ink3)}
+
+/* ---------- fixes the planner turned up ---------- */
+/* The sticky offset was a hard-coded 57px, and the nav has not been 57px tall
+   for a while: it measures 63px at desktop and 98px on a phone, so 6px and then
+   35px of the filter bar sat behind it. One token, used by both sticky bars. */
+:root{--navh:64px}
+/* The nav goes to two rows before the mobile breakpoint does: at about 735px
+   the five links stop fitting beside the brand and the button. Measured 83px
+   there, 104px once the mobile layout takes over. */
+@media (max-width:735px){:root{--navh:84px}}
+@media (max-width:640px){:root{--navh:104px}}
+.filters{top:var(--navh)}
+/* .btn was only ever worn by an <a>, which inherits Inter from body. On a
+   <button> it fell back to the UA font, so set both explicitly. */
+.btn{font-family:inherit;cursor:pointer}
+/* .stats b gets a lighter terracotta in the dark; .statband b never did. */
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .statband b{color:#E8A87C}}
+
+/* ---------- planner ---------- */
+.phero h1 em{font-style:italic;color:#C1502E}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .phero h1 em{color:#E8A87C}}
+
+/* The controls read as one panel rather than three loose rows: it is the only
+   part of the page you operate rather than read. */
+.pctl{margin-top:30px;padding:6px 0 4px;background:var(--panel);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.pctl-row{display:grid;grid-template-columns:120px 1fr;gap:9px 22px;align-items:start;
+  padding:15px 0;border-bottom:1px solid var(--line2)}
+.pctl-row:last-of-type{border-bottom:0}
+.pctl-k{padding-top:9px;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;
+  font-weight:700;color:var(--ink4)}
+.pctl-h{grid-column:2;margin:0;max-width:70ch;font-size:13px;line-height:1.55;color:var(--ink4)}
+.pchips{display:flex;flex-wrap:wrap;gap:8px}
+.pctl-tail{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;
+  padding:18px 0 20px;border-top:1px solid var(--line)}
+.pctl-tail .btn-p{padding:12px 24px;font-size:15px}
+.pctl-tail .pctl-h{grid-column:auto;flex:1 1 100%}
+.poolline{margin:0;flex:1 1 240px;font-size:13.5px;color:var(--ink3)}
+.poolline.warn{color:#C1502E;font-weight:500}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .poolline.warn{color:#E8A87C}}
+
+/* A chip worn by a <label> so a native input carries the state: the arrow keys,
+   the screen reader and the form all work without a line of script. */
+.pchips .chip{position:relative;cursor:pointer;background:var(--card);--c:var(--ink)}
+.chip>input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.pchips .chip:focus-within{outline:2px solid #C1502E;outline-offset:2px}
+.pnum .chip:has(input:checked){background:var(--c);border-color:var(--c);color:var(--bg)}
+/* Ticked is the resting state, because the honest default is that you eat
+   everything. Unticking crosses the line out, so the row reads as a printed
+   list with things struck off rather than as five filled pills. */
+.pticks .chip::before{content:"";flex:none;width:12px;height:12px;border-radius:3px;
+  border:1.5px solid var(--ink4);background:var(--card)}
+.pticks .chip:has(input:checked){color:var(--ink);border-color:var(--ink4)}
+.pticks .chip:has(input:checked)::before{background:var(--ink);border-color:var(--ink)}
+.pticks .chip:not(:has(input:checked)){color:var(--ink4);border-style:dashed;
+  text-decoration:line-through;text-decoration-thickness:1px}
+.pticks .chip i{font-style:normal;font-size:11.5px;color:var(--ink4);font-weight:600}
+
+/* the week */
+.week{list-style:none;margin:22px 0 0;padding:0;border-top:1px solid var(--line)}
+.night{--c:var(--ink3);display:grid;grid-template-columns:74px 40px 1fr auto auto;
+  gap:0 18px;align-items:baseline;padding:20px 0;border-bottom:1px solid var(--line2)}
+.n-ord{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
+  color:var(--ink4)}
+.n-title{display:block;font-size:22px;line-height:1.2;font-weight:600;letter-spacing:-.018em;
+  text-decoration:none;font-variation-settings:'SOFT' 50,'WONK' 1,'opsz' 48}
+.night:hover{background:linear-gradient(90deg,color-mix(in srgb,var(--c) 6%,transparent),transparent 42%)}
+@media (prefers-reduced-motion:reduce){.night{transition:none}}
+.n-title:hover{text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--c)}
+.n-meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:7px 0 0;font-size:11.5px;
+  letter-spacing:.11em;text-transform:uppercase;font-weight:600;color:var(--ink4)}
+.n-act{display:flex;gap:8px;justify-content:flex-end;align-self:center}
+.swap{display:inline-flex;align-items:center;justify-content:center;height:44px;padding:0 17px;
+  border:1px solid var(--line);border-radius:99px;background:var(--card);color:var(--ink3);
+  font:inherit;font-size:13.5px;cursor:pointer;transition:.14s}
+.swap:hover{color:var(--ink);border-color:var(--ink4)}
+.n-none{align-self:center;font-size:12.5px;color:var(--ink4)}
+.n-short,.weeknote{max-width:66ch;margin:18px 0 0;font-size:13.5px;line-height:1.6;
+  color:var(--ink4)}
+.n-short b{color:var(--ink2)}
+.jump{color:#C1502E;font-weight:600;white-space:nowrap}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .jump{color:#E8A87C}}
+
+/* The week's shape. One square a night, grouped and named — a count you can
+   read at a glance without asking anybody to tell four earth tones apart. */
+.spread{margin:6px 0 26px;padding:20px 22px;background:var(--panel);
+  border:1px solid var(--line);border-radius:var(--radius)}
+.sprow{display:grid;grid-template-columns:132px 1fr;gap:6px 20px;align-items:center;
+  padding:11px 0;border-bottom:1px solid var(--line)}
+.sprow:last-child{border-bottom:0;padding-bottom:0}
+.sprow:first-child{padding-top:0}
+.spk{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;
+  color:var(--ink4)}
+.spgs{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center}
+.spg{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--ink2)}
+.spd{display:inline-flex;gap:3px}
+.spd i{width:10px;height:10px;border-radius:2.5px;background:var(--ink);
+  display:inline-block}
+.spg b{font-weight:500}
+
+/* what is in this week */
+.rlist{list-style:none;margin:0;padding:0;display:grid;gap:10px 30px;
+  grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr))}
+.rlist li{position:relative;padding-left:20px;font-size:15px;line-height:1.55;color:var(--ink2)}
+.rlist li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;
+  border-radius:99px;background:var(--line);border:1px solid var(--ink4)}
+.rlist b{color:var(--ink);font-weight:600}
+.rnote{margin:18px 0 0;max-width:68ch;font-size:13.5px;line-height:1.6;color:var(--ink4);
+  padding-left:16px;border-left:2px solid var(--line)}
+.rdisc{margin:16px 0 0;max-width:68ch;font-size:12.5px;line-height:1.6;color:var(--ink4)}
+
+/* the shop */
+.glist{columns:3 260px;column-gap:36px}
+.gaisle{break-inside:avoid;margin-bottom:26px}
+.gaisle h3{display:flex;justify-content:space-between;gap:10px}
+.gaisle h3 span{color:var(--ink4);font-weight:600}
+.glist .shelf li{margin:0;border-bottom:1px solid var(--line2)}
+.glist label{flex-wrap:wrap;align-items:center;gap:12px;min-height:44px;padding:7px 0;
+  font-size:15.5px;color:var(--ink)}
+.glist input{width:20px;height:20px;margin:0;border-radius:6px}
+.gqty{margin-left:auto;padding-left:14px;white-space:nowrap;font-size:13px;font-weight:600;
+  color:var(--ink2);font-feature-settings:'tnum' 1}
+.glist input:checked~.gqty{text-decoration:line-through;color:var(--ink4)}
+.glist em{flex-basis:100%;margin-top:-4px;padding-left:32px;font-style:normal;font-size:10.5px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--ink4)}
+.plan-actions{display:flex;flex-wrap:wrap;gap:12px;margin:18px 0 4px}
+.plan-actions .btn-p{padding:12px 22px;font-size:15px}
+.plan-note{margin:12px 0 0;max-width:70ch}
+.gbar{top:var(--navh);z-index:45;margin-top:22px}
+#gcount{font-feature-settings:'tnum' 1}
+#shop{scroll-margin-top:calc(var(--navh) + 40px)}
+#week{scroll-margin-top:calc(var(--navh) + 20px)}
+.cupboard{margin-top:2px;padding-bottom:40px}
+.cupboard summary{display:flex;justify-content:space-between;gap:12px;padding:14px 0;
+  border-top:1px solid var(--line);cursor:pointer;list-style:none;font-size:11.5px;
+  letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--ink3)}
+.cupboard summary::-webkit-details-marker{display:none}
+.cupboard summary::marker{content:''}
+.cupboard summary span{color:var(--ink4)}
+.cupboard>div{margin-top:12px;columns:3 260px;column-gap:36px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+@media (max-width:700px){
+  .night{grid-template-columns:40px 1fr auto;gap:2px 14px;padding:18px 0}
+  .n-ord{grid-column:1/-1;margin-bottom:5px}
+  .n-body{grid-column:2}
+  .cnum{grid-row:2}
+  .n-act{grid-column:2/-1;justify-content:flex-start;margin-top:10px}
+  .n-title{font-size:19px}
+}
+@media (max-width:640px){
+  .sprow{grid-template-columns:1fr;gap:8px}
+  .spread{padding:16px 16px}
+  .pctl-row{grid-template-columns:1fr;gap:8px}
+  .pctl-k{padding-top:0}
+  .pctl-h{grid-column:1}
+  .pchips .chip,.gbar .chip{padding:11px 15px;font-size:14.5px}
+  .plan-actions .btn{width:100%;justify-content:center}
+  .glist,.cupboard>div{columns:1}
+}
+
+/* Print. The PDF button writes a proper file, but a page that prints badly is
+   still a page that prints badly, so this makes one clean sheet of it. */
+.printhead{display:none;margin:0 0 14px;font-family:'Fraunces',Georgia,serif;font-size:15px}
+@media print{
+  @page{margin:14mm}
+  html,body{background:#fff;color:#000}
+  .nav,.foot,.gh,.pctl,.plan-actions,.gbar,.n-act,.statband,.weeknote,.jump,
+  .lede,.pnote,.eyebrow,.plan-note,.spread{display:none!important}
+  .report{margin-bottom:6px}
+  .rlist li{font-size:10px;line-height:1.4;color:#000}
+  /* The figures print, so the line that says what they are prints with them. */
+  .rdisc,.rnote{font-size:8.5px;line-height:1.4;color:#444;margin-top:6px;
+    padding-left:0;border-left:0}
+  .printhead{display:block}
+  .wrap{max-width:none;padding:0}
+  .phero{padding:0 0 6px}
+  .phero h1{font-size:24px}
+  .sect{margin:16px 0 8px;font-size:16px}
+  .week{margin-top:8px}
+  .night{padding:5px 0;break-inside:avoid;grid-template-columns:64px 30px 1fr auto}
+  .n-title{font-size:13px}
+  .n-meta{font-size:8.5px;margin-top:2px}
+  .glist,.cupboard>div{columns:2;column-gap:22px}
+  .shelf,.gaisle{break-inside:avoid}
+  .glist label{min-height:0;padding:2px 0;font-size:11px;color:#000}
+  .glist input{width:11px;height:11px;border-color:#666;background:#fff}
+  .gqty{font-size:10px;color:#444}
+  .glist em{display:none}
+  a{color:#000;text-decoration:none}
+}
