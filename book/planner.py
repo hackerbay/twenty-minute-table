@@ -24,9 +24,25 @@ from version import VERSION  # noqa: E402
 import grocery as G  # noqa: E402
 import diet as D  # noqa: E402
 
-# Recipes 01-50 are the lunches and dinners. The planner picks from those and
-# leaves breakfast, pudding and the sides where they are.
+# The book is numbered by course. The planner picks from the first three; the
+# sides are left where they are, because a side is chosen to go beside a main
+# rather than on its own, and `pairings.py` already answers that question on
+# the recipe pages.
+COURSES = [
+    ('dinner', 'Dinners', 1, 50),
+    ('breakfast', 'Breakfasts', 51, 70),
+    ('afters', 'Something afterwards', 71, 85),
+]
 MAINS = 50
+PICKABLE = 85
+
+
+def course_of(num):
+    n = int(num)
+    for key, _, lo, hi in COURSES:
+        if lo <= n <= hi:
+            return key
+    return None
 
 # Thirty-six cuisines over fifty dinners means a week of six distinct cuisines
 # is nearly free, and says nothing. Grouped into regions it becomes a real
@@ -94,6 +110,7 @@ def record(recipe):
         'ml': m['label'],
         'col': m['color'],
         'min': recipe['minutes'],
+        'sec': course_of(recipe['num']),
         'kc': macros[0], 'pr': macros[1], 'cb': macros[2],
         'fa': macros[3], 'fb': macros[4],
         'tg': p['tags'],
@@ -109,6 +126,10 @@ def record(recipe):
     }
 
 
+def dinners(records):
+    return [r for r in records if r['sec'] == 'dinner']
+
+
 def default_week(records, n=5):
     """The week the page is built with, chosen the same way every time.
 
@@ -118,7 +139,7 @@ def default_week(records, n=5):
     brings a protein, a method and a region the week does not have yet,
     loosening the test each pass until it has enough.
     """
-    week = []
+    week, records = [], dinners(records)
     for wanted in (3, 2, 1, 0):
         for r in records:
             if len(week) >= n:
@@ -164,15 +185,16 @@ def full(recipe):
 
 
 def recipe_pack(recipes):
-    """Every dinner in full, keyed by number, for the recipe asset."""
-    return {r['num']: full(r) for r in recipes if int(r['num']) <= MAINS}
+    """Every pickable recipe in full, keyed by number, for the recipe asset."""
+    return {r['num']: full(r) for r in recipes if int(r['num']) <= PICKABLE}
 
 
 def payload(recipes):
     """Everything plan.html embeds, ready for json.dumps."""
-    records = [record(r) for r in recipes if int(r['num']) <= MAINS]
+    records = [record(r) for r in recipes if int(r['num']) <= PICKABLE]
     return {
         'recipes': records,
+        'courses': [[k, label] for k, label, _, _ in COURSES],
         'aisles': [[k, G.AISLE_LABEL[k]] for k in G.AISLE_ORDER],
         'week': default_week(records),
         'serves': int(recipes[0]['serves']) if recipes else 4,
@@ -183,7 +205,14 @@ def payload(recipes):
 
 
 def tag_counts(records):
-    """How many dinners carry each protein tag, for the filter chips."""
+    """How many dinners carry each protein tag, for the filter chips.
+
+    Counted over the dinners alone even though the ticks also govern breakfast
+    and pudding: the dinners are the part of the book somebody is deciding
+    about when they read the row, and a number that moved when a breakfast was
+    switched on would say less, not more. The copy beside it says which fifty.
+    """
+    records = dinners(records)
     return {t: sum(1 for r in records if t in r['tg']) for t in D.TAGS}
 
 
@@ -195,6 +224,7 @@ def method_counts(records):
     chooses knowingly and one that empties the week.
     """
     out = []
+    records = dinners(records)
     for name in ORDER:
         m = METHODS[name]
         n = sum(1 for r in records if r['m'] == m['key'])
@@ -215,6 +245,8 @@ if __name__ == '__main__':
           f"{len(json.dumps(data, separators=(',', ':')))/1000:.1f} kB of JSON")
     print('\ntag counts:', tag_counts(data['recipes']))
     print('methods:', [(m['label'], m['n']) for m in method_counts(data['recipes'])])
+    from collections import Counter as _C
+    print('courses:', dict(_C(r['sec'] for r in data['recipes'])))
     from collections import Counter
     print('regions:', dict(Counter(r['g'] for r in data['recipes'])))
     print('families:', dict(Counter(r['fam'] for r in data['recipes'])))

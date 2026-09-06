@@ -364,6 +364,10 @@ a{color:inherit}
 .btn{font-family:inherit;cursor:pointer}
 /* .stats b gets a lighter terracotta in the dark; .statband b never did. */
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .statband b{color:#E8A87C}}
+/* `Protein a serving, average` needs two lines where `Serves` needs one. Giving
+   every label the room for two keeps the row of figures level rather than
+   shortening a label that is carrying the honest qualifier. */
+.statband span{min-height:2.5em}
 
 /* ---------- planner ---------- */
 .phero h1 em{font-style:italic;color:#C1502E}
@@ -413,10 +417,19 @@ a{color:inherit}
 
 /* the week */
 .week{list-style:none;margin:22px 0 0;padding:0;border-top:1px solid var(--line)}
-.night{--c:var(--ink3);display:grid;grid-template-columns:74px 40px 1fr auto auto;
-  gap:0 18px;align-items:baseline;padding:20px 0;border-bottom:1px solid var(--line2)}
-.n-ord{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
-  color:var(--ink4)}
+/* Four columns, and everything in them sits on the title's first baseline:
+   the ordinal, the numeral, the title and — through .n-right, whose baseline
+   a flex box takes from its first item — the time. The Swap button is then
+   centred on that time rather than on the whole row, which is what used to
+   put it at a different height on every row depending on how many tags the
+   dinner carried. */
+.night{--c:var(--ink3);display:grid;grid-template-columns:76px 34px 1fr auto;
+  gap:0 16px;align-items:baseline;padding:19px 0;border-bottom:1px solid var(--line2)}
+.n-right{display:flex;align-items:center;gap:18px;align-self:baseline}
+.n-right .cmin{min-width:52px;text-align:right}
+.n-body{min-width:0}
+.n-ord{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;
+  color:var(--ink4);white-space:nowrap}
 .n-title{display:block;font-size:22px;line-height:1.2;font-weight:600;letter-spacing:-.018em;
   text-decoration:none;font-variation-settings:'SOFT' 50,'WONK' 1,'opsz' 48}
 .night:hover{background:linear-gradient(90deg,color-mix(in srgb,var(--c) 6%,transparent),transparent 42%)}
@@ -424,7 +437,7 @@ a{color:inherit}
 .n-title:hover{text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--c)}
 /* What kind of dinner it is, said plainly and first — the thing somebody
    scanning the week actually wants to know. */
-.n-tags{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0 0}
+.n-tags{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:7px 0 0}
 /* Deliberately not --c: that is the method colour, which is already carrying
    the numeral and the pan chips, and a protein wearing it would read as a
    claim about the pan. */
@@ -435,14 +448,13 @@ a{color:inherit}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ntag-veg{
   border-color:#8FB86B;color:#8FB86B}}
 .ntag-also{border-color:var(--line);color:var(--ink4);background:none;font-weight:600}
-.n-meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:7px 0 0;font-size:11.5px;
+.n-meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0 0;font-size:11px;
   letter-spacing:.11em;text-transform:uppercase;font-weight:600;color:var(--ink4)}
-.n-act{display:flex;gap:8px;justify-content:flex-end;align-self:center}
 .swap{display:inline-flex;align-items:center;justify-content:center;height:44px;padding:0 17px;
   border:1px solid var(--line);border-radius:99px;background:var(--card);color:var(--ink3);
   font:inherit;font-size:13.5px;cursor:pointer;transition:.14s}
 .swap:hover{color:var(--ink);border-color:var(--ink4)}
-.n-none{align-self:center;font-size:12.5px;color:var(--ink4)}
+.n-none{font-size:12.5px;color:var(--ink4);white-space:nowrap}
 .n-short,.weeknote{max-width:66ch;margin:18px 0 0;font-size:13.5px;line-height:1.6;
   color:var(--ink4)}
 .n-short b{color:var(--ink2)}
@@ -465,6 +477,51 @@ a{color:inherit}
 .spd i{width:10px;height:10px;border-radius:2.5px;background:var(--ink);
   display:inline-block}
 .spg b{font-weight:500}
+
+/* Taking a night out again, so a week you have curated by hand stays yours. */
+.drop{display:inline-flex;align-items:center;justify-content:center;width:34px;height:44px;
+  padding:0;border:0;background:none;color:var(--ink4);font:inherit;font-size:19px;
+  line-height:1;cursor:pointer;border-radius:99px;transition:.14s}
+.drop:hover{color:#C1502E;background:var(--panel)}
+.drop:focus-visible{outline:2px solid #C1502E;outline-offset:1px}
+.n-right{margin-right:-8px}
+
+/* A second heading rhythm for breakfast and pudding, quieter than the week's. */
+.sect-sub{margin:44px 0 14px;font-size:clamp(20px,2.4vw,25px)}
+
+/* Looking a dinner up rather than being handed one. */
+.findbar{display:grid;grid-template-columns:118px 1fr;gap:8px 20px;align-items:start;
+  margin:26px 0 0;padding:20px 22px;background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--radius)}
+.find-k{padding-top:11px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:700;color:var(--ink4)}
+.find-in{display:flex;gap:10px;align-items:center}
+#find{flex:1 1 auto;min-width:0;padding:11px 15px;border:1px solid var(--line);
+  border-radius:99px;background:var(--card);color:var(--ink);font:inherit;font-size:14.5px}
+#find:focus{outline:2px solid #C1502E;outline-offset:1px;border-color:transparent}
+.find-h{grid-column:2;margin:0;max-width:66ch;font-size:13px;line-height:1.55;color:var(--ink4)}
+.find-results{grid-column:2;list-style:none;margin:4px 0 0;padding:0;
+  border:1px solid var(--line);border-radius:12px;background:var(--card);overflow:hidden}
+.find-results li+li{border-top:1px solid var(--line2)}
+/* Named areas rather than auto-placement: two of these cells span both rows,
+   and letting the browser flow the rest around them put the title in the
+   quantity column on a phone. */
+.find-hit{display:grid;grid-template-columns:34px 1fr auto auto;gap:2px 14px;width:100%;
+  grid-template-areas:"num title add min" "num meta add min";
+  padding:11px 14px;border:0;background:none;color:inherit;font:inherit;text-align:left;
+  cursor:pointer;align-items:baseline}
+.find-hit:hover:not([disabled]),.find-hit:focus-visible{background:var(--panel);outline:0}
+.find-hit[disabled]{cursor:default;opacity:.55}
+.find-num{grid-area:num;align-self:center;font-size:17px;font-weight:600}
+.find-t{grid-area:title;font-size:16px;font-weight:600;letter-spacing:-.01em}
+.find-meta{grid-area:meta;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  font-weight:600;color:var(--ink4)}
+.find-add{grid-area:add;align-self:center;font-size:11px;letter-spacing:.13em;
+  text-transform:uppercase;font-weight:700;color:#C1502E;white-space:nowrap}
+.find-hit[disabled] .find-add{color:var(--ink4)}
+.find-hit .cmin{grid-area:min;align-self:center;font-size:16px}
+.find-none{padding:14px;font-size:14px;color:var(--ink4)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .find-add{color:#E8A87C}}
 
 /* what is in this week */
 .rlist{list-style:none;margin:0;padding:0;display:grid;gap:10px 30px;
@@ -520,9 +577,13 @@ a{color:inherit}
 @media (max-width:640px){
   .sprow{grid-template-columns:1fr;gap:8px}
   .spread{padding:16px 16px}
-  .pctl-row{grid-template-columns:1fr;gap:8px}
-  .pctl-k{padding-top:0}
-  .pctl-h{grid-column:1}
+  .pctl-row,.findbar{grid-template-columns:1fr;gap:8px}
+  .pctl-k,.find-k{padding-top:0}
+  .pctl-h,.find-h,.find-results,.find-in{grid-column:1}
+  .findbar{padding:16px}
+  .find-hit{grid-template-columns:30px 1fr auto;
+    grid-template-areas:"num title add" "num meta add"}
+  .find-hit .cmin{display:none}
   .pchips .chip,.gbar .chip{padding:11px 15px;font-size:14.5px}
   .plan-actions .btn{width:100%;justify-content:center}
   .glist,.cupboard>div{columns:1}
@@ -534,7 +595,7 @@ a{color:inherit}
 @media print{
   @page{margin:14mm}
   html,body{background:#fff;color:#000}
-  .nav,.foot,.gh,.pctl,.plan-actions,.gbar,.n-act,.statband,.weeknote,.jump,
+  .nav,.foot,.gh,.pctl,.plan-actions,.gbar,.swap,.drop,.findbar,.statband,.weeknote,.jump,
   .lede,.pnote,.eyebrow,.plan-note,.spread{display:none!important}
   .report{margin-bottom:6px}
   .rlist li{font-size:10px;line-height:1.4;color:#000}
@@ -546,8 +607,9 @@ a{color:inherit}
   .phero{padding:0 0 6px}
   .phero h1{font-size:24px}
   .sect{margin:16px 0 8px;font-size:16px}
+  .sect-sub{margin:12px 0 6px;font-size:13px}
   .week{margin-top:8px}
-  .night{padding:5px 0;break-inside:avoid;grid-template-columns:64px 30px 1fr auto}
+  .night{padding:5px 0;break-inside:avoid;grid-template-columns:64px 26px 1fr auto}
   .n-title{font-size:13px}
   .n-meta{font-size:8.5px;margin-top:2px}
   .n-tags{margin-top:3px}

@@ -12,6 +12,24 @@ This project uses [semantic versioning](https://semver.org) loosely, read for a 
 - **Major** — a change that reorganises the book: renumbering recipes, changing the recipe
   file contract, dropping a section.
 
+## 1.2.0
+
+- **Breakfast and pudding.** The planner picks from the whole book bar the sides: five
+  dinners, and as many breakfasts and puddings as you ask for. Both start at nought,
+  because they are something you ask for rather than something you have to turn off, and
+  both land on the same shopping list and in the same PDF. The protein and fibre figures
+  stay about the dinners and say so — averaging a bowl of yoghurt into a protein-a-serving
+  number would drag it somewhere it does not describe.
+- **A way to find a particular dinner.** A search under the week takes a name, a cuisine,
+  a pan or anything in an ingredient list — `anchovy` finds the three dishes with one in
+  them — and choosing a result puts it on the end of the week. Everything matching is
+  offered, including things the ticks above would not have picked, because choosing one
+  by hand is not the filter's business. Every meal can be taken out again.
+- **The week's rows line up.** The time and the Swap button were in separate grid columns
+  and the button was centred on the whole row, so it sat at a different height on every
+  row depending on how many tags the dinner carried. They are now one group sitting on
+  the title's baseline, and every row is the same height.
+
 ## 1.1.2
 
 - **Stylesheets and scripts carry the release in their address.** The pages are served

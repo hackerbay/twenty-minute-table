@@ -405,9 +405,14 @@ def night_row(r, i, ordinals):
         f'\n            <span>{esc(r["c"])}</span><span class="dot"></span>'
         f'\n            <span>{r["pr"]} g protein a serving</span></p>'
         f'\n        </div>'
-        f'\n        <span class="cmin d">{r["min"]}<i>min</i></span>'
-        f'\n        <div class="n-act"><button class="swap" type="button" data-slot="{i}"'
-        f'\n          aria-label="Swap the {ordinals[i].lower()} dinner">Swap</button></div>'
+        f'\n        <div class="n-right">'
+        f'\n          <span class="cmin d">{r["min"]}<i>min</i></span>'
+        f'\n          <button class="swap" type="button" data-slot="{i}"'
+        f'\n            aria-label="Swap the {ordinals[i].lower()} dinner">Swap</button>'
+        f'\n          <button class="drop" type="button" data-drop="{i}"'
+        f'\n            aria-label="Take the {ordinals[i].lower()} dinner out of the week">'
+        f'\n            <span aria-hidden="true">&times;</span></button>'
+        f'\n        </div>'
         f'\n      </li>')
 
 
@@ -441,6 +446,8 @@ def build_plan(recipes):
     # Every figure on the band is read straight off the recipes, so the build
     # and the browser can agree on it without the shopping list being worked
     # out twice — once here in Python and once in the browser.
+    # The page ships with dinners only, so these are the no-extras labels that
+    # bandCells() in web/plan.js produces for the same week.
     band = [
         (n, 'Dinners'),
         (sum(r['min'] for r in week), 'Minutes, all in'),
@@ -473,6 +480,18 @@ def build_plan(recipes):
     stay where they are.</p>
   </div>
   <div class="pctl-row">
+    <span class="pctl-k">Breakfasts</span>
+    <div class="pchips pnum" role="group" aria-label="How many breakfasts">{chips('breakfast', [0, 2, 3, 5, 7], 0)}</div>
+    <p class="pctl-h">Twenty breakfasts in the book, most of them eggs, oats or yoghurt and all of
+    them under twenty minutes. Leave it at nought if breakfast is not a thing you plan.</p>
+  </div>
+  <div class="pctl-row">
+    <span class="pctl-k">Afterwards</span>
+    <div class="pchips pnum" role="group" aria-label="How many puddings">{chips('afters', [0, 1, 2, 3], 0)}</div>
+    <p class="pctl-h">Fifteen puddings, from a bowl of skyr and berries to cardamom kheer. They go
+    on the same shopping list.</p>
+  </div>
+  <div class="pctl-row">
     <span class="pctl-k">Serves</span>
     <div class="pchips pnum" role="group" aria-label="How many servings">{chips('serves', [2, 4, 6, 8], serves)}</div>
     <p class="pctl-h">Every recipe in the book is written for four. Another number scales
@@ -483,8 +502,8 @@ def build_plan(recipes):
   <div class="pctl-row">
     <span class="pctl-k">On the table</span>
     <div class="pchips pticks" role="group" aria-label="What the house eats">{ticks}</div>
-    <p class="pctl-h">Untick anything nobody in the house eats. The numbers are how many
-    dinners contain each thing, and they add up to more than fifty because some dishes are
+    <p class="pctl-h">Untick anything nobody in the house eats; it governs breakfast and
+    pudding too. The numbers are how many of the fifty dinners contain each thing, and they add up to more than fifty because some dishes are
     on two lists &mdash; a chicken stir-fry seasoned with fish sauce is chicken and fish,
     and unticking either one drops it. Anchovies melted into oil until they have vanished
     still count; eight of the fifty carry fish only as a seasoning. It is a filter on what
@@ -516,6 +535,23 @@ def build_plan(recipes):
   <h2 class="sect d" id="week">The week<span id="wkcount">{words[n].capitalize()} nights</span></h2>
   <ol class="week" id="weeklist">{rows}
   </ol>
+  <div id="course-extra"></div>
+  <div class="findbar">
+    <label class="find-k" for="find">Add a dinner</label>
+    <div class="find-in">
+      <input type="search" id="find" autocomplete="off" role="combobox" aria-expanded="false"
+        aria-controls="find-results" aria-autocomplete="list"
+        placeholder="Search a dish, a cuisine, an ingredient&hellip;">
+      <button class="mini find-clear" id="find-clear" type="button" hidden>Clear</button>
+    </div>
+    <p class="find-h">Every dinner, breakfast and pudding in the book, by name, cuisine, pan
+    or anything in the ingredient list &mdash; type <em>anchovy</em> or <em>Peruvian</em> and
+    see. Two letters is enough. Picking one puts it on the end of the week and the list
+    follows. Everything that matches is offered, including things your ticks above would not
+    have picked, because choosing one by hand is your business and not the filter&rsquo;s.</p>
+    <ul class="find-results" id="find-results" role="listbox" aria-label="Matching dinners" hidden></ul>
+  </div>
+
   <p class="n-short" id="short" hidden></p>
   <p class="empty" id="plan-empty" hidden>Nothing matches those ticks.
     <button class="clear" id="plan-all" type="button">Allow everything again</button></p>

@@ -1,19 +1,22 @@
 /* The meal planner.
  *
  * Everything the page needs was worked out at build time and embedded as JSON:
- * the fifty dinners, what protein each is built on, which part of the world it
- * comes from, and every ingredient line already parsed into an amount, a unit
- * and a thing you can buy. This file does four jobs with that.
+ * the eighty-five dinners, breakfasts and puddings, what protein each is built
+ * on, which part of the world it comes from, and every ingredient line already
+ * parsed into an amount, a unit and a thing you can buy. This file does five
+ * jobs with that.
  *
- *   1. Filters the dinners by what the household eats.
+ *   1. Filters by what the household eats and what it feels like washing up.
  *   2. Picks a week that spreads the protein, the pan and the region rather
  *      than shuffling. A uniform draw of seven from fifty puts the same protein
  *      family on four nights or more about a third of the time and leaves no
  *      meat-free night at all about a quarter of the time. Those are the two
  *      failures worth fixing, and they are what the score below is for.
- *   3. Adds every ingredient in the week up into one list, scaled to the number
- *      of servings and ordered the way a shop is walked.
- *   4. Writes that list out as a PDF, using the writer in pdf.js.
+ *   3. Lets a dinner be looked up by name, cuisine or ingredient and put in by
+ *      hand, or taken out again — a week nobody can edit is a toy.
+ *   4. Adds every ingredient of every meal up into one list, scaled to the
+ *      number of servings and ordered the way a shop is walked.
+ *   5. Writes that list out as a PDF, using the writer in pdf.js.
  *
  * What the page claims is held to what it can count: how many proteins, how
  * many regions, how much protein and fibre a serving carries by the book's own
@@ -32,7 +35,10 @@
   const AISLES = DATA.aisles;
   const BASE_SERVES = DATA.serves || 4;
   const ALL_TAGS = ['veg', 'chicken', 'redmeat', 'fish', 'shellfish'];
-  const ALL_PANS = [...new Set(DATA.recipes.map(r => r.m))];
+  const ALL_PANS = [...new Set(DATA.recipes.filter(r => r.sec === 'dinner').map(r => r.m))];
+  // The three courses the planner picks from, in the order they are eaten.
+  const COURSES = DATA.courses || [['dinner', 'Dinners']];
+  const COURSE_LABEL = new Map(COURSES);
 
   const ORDINALS = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth',
     'Seventh', 'Eighth', 'Ninth', 'Tenth'];
@@ -48,15 +54,18 @@
   // ------------------------------------------------------------------ state
 
   const state = {
-    nights: DATA.week.length,
     serves: BASE_SERVES,
     eat: new Set(ALL_TAGS),
     pans: new Set(ALL_PANS),
+    // How many of each course to pick, and what was picked. Breakfast and
+    // pudding start at nought: they are something you ask for.
+    want: { dinner: DATA.week.length, breakfast: 0, afters: 0 },
+    picked: { dinner: DATA.week.slice(), breakfast: [], afters: [] },
     week: DATA.week.slice(),
     ticked: new Set(),
     hideTicked: false,
-    cursors: new Map(),      // one shuffled queue of alternatives per night
-    picked: false,
+    cursors: new Map(),      // one shuffled queue of alternatives per slot
+    hasPicked: false,        // whether the button has been pressed yet
   };
 
   /* The week lives in the address, not in storage. A picked week is then a
@@ -67,10 +76,18 @@
     const h = new URLSearchParams(location.hash.replace(/^#/, ''));
     const week = (h.get('w') || '').split(',').filter(n => BY_NUM.has(n));
     if (!week.length) return false;
-    state.week = week;
-    state.picked = true;
+    // The address carries one list; the course each recipe belongs to is a
+    // property of the recipe, so it does not have to be carried as well.
+    for (const c of COURSES) state.picked[c[0]] = [];
+    for (const n of week) {
+      const r = BY_NUM.get(n);
+      (state.picked[r.sec] || state.picked.dinner).push(n);
+    }
+    state.week = state.picked.dinner;
+    for (const [key] of COURSES) state.want[key] = state.picked[key].length;
+    state.hasPicked = true;
     const nights = parseInt(h.get('n'), 10);
-    state.nights = nights > 0 && nights <= 10 ? nights : week.length;
+    if (nights > 0 && nights <= 10) state.want.dinner = nights;
     const serves = parseInt(h.get('s'), 10);
     if (serves > 0 && serves <= 12) state.serves = serves;
     const eat = (h.get('eat') || '').split(',').filter(t => ALL_TAGS.includes(t));
@@ -80,10 +97,12 @@
     return true;
   }
 
+  const allPicked = () => COURSES.reduce((a, c) => a.concat(state.picked[c[0]]), []);
+
   function writeHash(push) {
-    const h = 'n=' + state.nights + '&s=' + state.serves +
+    const h = 'n=' + state.want.dinner + '&s=' + state.serves +
       '&eat=' + [...state.eat].join(',') + '&pan=' + [...state.pans].join(',') +
-      '&w=' + state.week.join(',');
+      '&w=' + allPicked().join(',');
     if (location.hash.slice(1) === h) return;
     // Pushing on a pick makes Back an undo. Swapping and changing the servings
     // replace instead, so eight swaps do not cost nine presses of Back.
@@ -202,8 +221,15 @@
 
   // ------------------------------------------------------------- the picker
 
-  const pool = () => DATA.recipes.filter(
-    r => r.tg.every(t => state.eat.has(t)) && state.pans.has(r.m));
+  /* The ticks govern every course: somebody who does not eat fish should not
+     be handed a smoked mackerel breakfast either. The pan ticks are read only
+     against the dinners, because they are a question about the evening and
+     nobody unticks the wok to rule out a bowl of yoghurt. */
+  const poolFor = (course) => DATA.recipes.filter(r =>
+    r.sec === course && r.tg.every(t => state.eat.has(t)) &&
+    (course !== 'dinner' || state.pans.has(r.m)));
+
+  const pool = () => poolFor('dinner');
 
   /* Softmax over the marginal gain of each candidate. Pure greedy would return
      the same week every time and a uniform draw would return a poor one, so the
@@ -282,8 +308,8 @@
     return out;
   }
 
-  function pickWeek(n, avoid) {
-    const p = pool();
+  function pickWeek(n, avoid, course) {
+    const p = poolFor(course || 'dinner');
     const C = poolCaps(p, n);
     if (!C.n) return { set: [], caps: C, alternatives: 0 };
 
@@ -313,15 +339,17 @@
      holds its own queue, ordered by how well the candidate would keep the
      week's spread and shuffled a little, so pressing Swap three times gives
      three different dinners rather than the same second-best one. */
-  function nextForSlot(slot) {
-    const p = pool();
-    const week = state.week.map(n => BY_NUM.get(n));
-    const inWeek = new Set(state.week);
-    let queue = state.cursors.get(slot);
+  function nextForSlot(course, slot) {
+    const p = poolFor(course);
+    const list = state.picked[course];
+    const week = list.map(n => BY_NUM.get(n));
+    const inWeek = new Set(allPicked());
+    const key = course + ':' + slot;
+    let queue = state.cursors.get(key);
     if (!queue) {
       const C = poolCaps(p, week.length);
       queue = p
-        .filter(r => r.n !== state.week[slot])
+        .filter(r => r.n !== list[slot])
         .map(r => {
           const trial = week.slice();
           trial[slot] = r;
@@ -329,13 +357,13 @@
         })
         .sort((a, b) => b.v - a.v)
         .map(x => x.r.n);
-      state.cursors.set(slot, queue);
+      state.cursors.set(key, queue);
     }
     // A rotation, not a drain: a candidate that happens to be in the week now
     // goes to the back rather than being thrown away, and the slot's own
     // current dinner rejoins the queue so it can come round again. Only a full
     // pass that finds nothing outside the week means there is nothing left.
-    if (!queue.includes(state.week[slot])) queue.push(state.week[slot]);
+    if (!queue.includes(list[slot])) queue.push(list[slot]);
     for (let i = 0; i < queue.length; i++) {
       const n = queue.shift();
       queue.push(n);
@@ -428,7 +456,7 @@
   function shoppingList() {
     const scale = state.serves / BASE_SERVES;
     const items = new Map();
-    for (const num of state.week) {
+    for (const num of allPicked()) {
       const r = BY_NUM.get(num);
       if (!r) continue;
       for (const e of r.ing) {
@@ -504,12 +532,10 @@
     return out.join('');
   }
 
-  function renderWeek() {
-    const week = state.week.map(n => BY_NUM.get(n)).filter(Boolean);
-    $('#plan-empty').hidden = week.length > 0;
-    $('#weeklist').innerHTML = week.map((r, i) => `
-      <li class="night" data-num="${r.n}" style="--c:${r.col}">
-        <span class="n-ord">${ORDINALS[i] || i + 1}</span>
+  function nightRow(r, i, course) {
+    return `
+      <li class="night" data-num="${r.n}" data-course="${course}" style="--c:${r.col}">
+        <span class="n-ord">${course === 'dinner' ? (ORDINALS[i] || i + 1) : (COURSE_ORD[course] || '')}</span>
         <span class="cnum d">${r.n}</span>
         <div class="n-body">
           <a class="n-title d" href="r/${r.s}.html">${esc(r.t)}</a>
@@ -518,32 +544,60 @@
             <span>${esc(r.c)}</span><span class="dot"></span>
             <span>${r.pr} g protein a serving</span></p>
         </div>
-        <span class="cmin d">${r.min}<i>min</i></span>
-        <div class="n-act"><button class="swap" type="button" data-slot="${i}"
-          aria-label="Swap the ${(ORDINALS[i] || String(i + 1)).toLowerCase()} dinner">Swap</button></div>
-      </li>`).join('');
+        <div class="n-right">
+          <span class="cmin d">${r.min}<i>min</i></span>
+          <button class="swap" type="button" data-slot="${i}" data-course="${course}"
+            aria-label="Swap ${esc(r.t)}">Swap</button>
+          <button class="drop" type="button" data-drop="${i}" data-course="${course}"
+            aria-label="Take ${esc(r.t)} out of the week"><span aria-hidden="true">×</span></button>
+        </div>
+      </li>`;
+  }
+
+  // Breakfast and pudding rows are labelled by course rather than by ordinal:
+  // `First, Second, Third` belongs to the run of dinners, and repeating it
+  // down a second list would read as a second week.
+  const COURSE_ORD = { breakfast: 'Breakfast', afters: 'Afterwards' };
+
+  function renderWeek() {
+    const week = state.picked.dinner.map(n => BY_NUM.get(n)).filter(Boolean);
+    const others = COURSES.slice(1).filter(([k]) => state.picked[k].length);
+    $('#plan-empty').hidden = week.length > 0 || others.length > 0;
+    $('#weeklist').innerHTML = week.map((r, i) => nightRow(r, i, 'dinner')).join('');
+    $('#weeklist').hidden = !week.length;
+    $('#course-extra').innerHTML = others.map(([key, label]) => {
+      const rows = state.picked[key].map(n => BY_NUM.get(n)).filter(Boolean);
+      return `<h2 class="sect d sect-sub">${esc(label)}<span>${cap(word(rows.length))}</span></h2>` +
+        `<ol class="week">${rows.map((r, i) => nightRow(r, i, key)).join('')}</ol>`;
+    }).join('');
     $('#wkcount').textContent = week.length
-      ? cap(word(week.length)) + (week.length === 1 ? ' night' : ' nights') : '';
+      ? cap(word(week.length)) + (week.length === 1 ? ' night' : ' nights') : 'Nothing yet';
   }
 
   /* The same five figures the build put here, recomputed. Every one is read
      straight off the recipes, so nothing on this band depends on the shopping
      list having been worked out yet. */
-  function bandCells(week) {
-    const n = week.length || 1;
+  /* `all` is everything picked, `dinners` only the evening meals. The counts
+     cover everything; the protein and fibre averages cover the dinners alone
+     and say so, because averaging a bowl of yoghurt into a protein-a-serving
+     figure would drag it somewhere it does not describe. */
+  function bandCells(all) {
+    const dinner = all.filter(r => r.sec === 'dinner');
+    const n = dinner.length || 1;
+    const extra = all.length - dinner.length;
     return [
-      [week.length, week.length === 1 ? 'Dinner' : 'Dinners'],
-      [sum(week.map(r => r.min)), 'Minutes, all in'],
-      // Averages, and labelled as averages: on a skewed week one high night
-      // carries a mean above what most of the dinners actually give you.
-      [Math.round(sum(week.map(r => r.pr)) / n) + ' g', 'Protein a serving, average'],
-      [Math.round(sum(week.map(r => r.fb)) / n) + ' g', 'Fibre a serving, average'],
+      [all.length, extra ? 'Meals' : (all.length === 1 ? 'Dinner' : 'Dinners')],
+      [sum(all.map(r => r.min)), 'Minutes, all in'],
+      [Math.round(sum(dinner.map(r => r.pr)) / n) + ' g',
+        extra ? 'Protein a dinner, average' : 'Protein a serving, average'],
+      [Math.round(sum(dinner.map(r => r.fb)) / n) + ' g',
+        extra ? 'Fibre a dinner, average' : 'Fibre a serving, average'],
       [state.serves, 'Serves'],
     ];
   }
 
   function renderBand() {
-    const week = state.week.map(n => BY_NUM.get(n)).filter(Boolean);
+    const week = allPicked().map(n => BY_NUM.get(n)).filter(Boolean);
     $('#wkband').innerHTML = bandCells(week).map(([v, k]) =>
       `<div><b class="d">${v}</b><span>${esc(k)}</span></div>`).join('');
     // Both of these are written into the HTML at build time from the week the
@@ -565,7 +619,7 @@
      alongside the hits. No comparison with anybody's requirement: nothing here
      knows how old you are, how big you are or what else you ate today. */
   function renderReport(caps, alternatives) {
-    const week = state.week.map(n => BY_NUM.get(n)).filter(Boolean);
+    const week = state.picked.dinner.map(n => BY_NUM.get(n)).filter(Boolean);
     const el = $('#report');
     if (!week.length) { el.innerHTML = ''; return; }
     const n = week.length;
@@ -604,6 +658,10 @@
     }
     if (caps.sources && caps.sources < 3) {
       notes.push(`Your ticks leave ${word(caps.sources)} protein${caps.sources === 1 ? '' : 's'} to choose between, so that is what the week has.`);
+    }
+    const extra = COURSES.slice(1).reduce((a, c) => a + state.picked[c[0]].length, 0);
+    if (extra) {
+      notes.push(`These figures are the ${word(n)} dinner${n === 1 ? '' : 's'} alone. The ${word(extra)} other meal${extra === 1 ? '' : 's'} you picked ${extra === 1 ? 'is' : 'are'} on the shopping list but not in the count.`);
     }
     const others = Math.max(0, (alternatives || 0) - 1);
     if (others) {
@@ -688,41 +746,42 @@
   function poolLine() {
     const size = pool().length;
     const el = $('#pool');
-    const total = DATA.recipes.length;
+    const total = DATA.recipes.filter(r => r.sec === 'dinner').length;
     let text;
     if (!size) {
       text = state.eat.size === 0 ? 'Nothing matches. Tick at least one thing you eat.'
         : state.pans.size === 0 ? 'Nothing matches. Tick at least one pan.'
         : 'Nothing matches those ticks together. Put one of them back.';
-    } else if (size < state.nights) {
-      text = `${size} of the ${total} dinners match — ${word(state.nights - size)} short of ${word(state.nights)}.`;
-    } else if (size === state.nights) {
-      text = `${size} of the ${total} dinners match. Exactly ${word(state.nights)}, with nothing spare to swap in.`;
+    } else if (size < state.want.dinner) {
+      text = `${size} of the ${total} dinners match — ${word(state.want.dinner - size)} short of ${word(state.want.dinner)}.`;
+    } else if (size === state.want.dinner) {
+      text = `${size} of the ${total} dinners match. Exactly ${word(state.want.dinner)}, with nothing spare to swap in.`;
     } else {
-      text = `${size} of the ${total} dinners match. Enough for ${word(state.nights)}.`;
+      text = `${size} of the ${total} dinners match. Enough for ${word(state.want.dinner)}.`;
     }
     el.textContent = text;
-    el.classList.toggle('warn', size < state.nights);
-    $('#pick').textContent = state.picked ? 'Pick a different week' : 'Pick these meals';
+    el.classList.toggle('warn', size < state.want.dinner);
+    $('#pick').textContent = state.hasPicked ? 'Pick a different week' : 'Pick these meals';
   }
 
   function renderAll(caps, alternatives) {
-    const c = caps || poolCaps(pool(), state.week.length || state.nights);
+    const c = caps || poolCaps(pool(), state.picked.dinner.length || state.want.dinner);
     renderWeek();
     renderBand();
     renderSpread();
     renderReport(c, alternatives || 0);
     renderShop();
     poolLine();
+    if ($('#find') && $('#find').value) renderFind();
     const short = $('#short');
     const size = pool().length;
     // Only when the pool is genuinely the limit. Turning the Dinners chip up
     // without picking again also leaves a short week, and blaming the diet
     // ticks for that would be a lie.
-    if (state.week.length && size && size < state.nights &&
-        state.week.length < state.nights) {
+    const dn = state.picked.dinner.length;
+    if (dn && size && size < state.want.dinner && dn < state.want.dinner) {
       short.hidden = false;
-      short.innerHTML = `<b>${cap(word(state.week.length))} night${state.week.length === 1 ? '' : 's'}, not ${word(state.nights)}.</b> Only ${word(size)} dinner${size === 1 ? '' : 's'} match those ticks, and a week is never padded out with a repeat. Untick something above, or cook fewer nights.`;
+      short.innerHTML = `<b>${cap(word(dn))} night${dn === 1 ? '' : 's'}, not ${word(state.want.dinner)}.</b> Only ${word(size)} dinner${size === 1 ? '' : 's'} match those ticks, and a week is never padded out with a repeat. Untick something above, or cook fewer nights.`;
     } else {
       short.hidden = true;
     }
@@ -730,24 +789,121 @@
 
   const say = msg => { $('#say').textContent = msg; };
 
+  /* Looking a dinner up rather than being handed one. The index is built once
+     from everything the planner can pick — the title, the cuisine, the region,
+     the protein, the pan and every ingredient the recipe lists — so `anchovy`
+     and `Peruvian` and `air fryer` all find their way there. It is the same
+     material the recipe index searches, and it is searched the same way. */
+  const FIND_INDEX = DATA.recipes.map(r => ({
+    r,
+    hay: [r.n, r.t, r.c, r.g, r.src, r.ml, COURSE_LABEL.get(r.sec) || '',
+      r.ing.map(e => e.n).join(' ')].join(' ').toLowerCase(),
+  }));
+
+  function findMatches(q) {
+    const needle = q.trim().toLowerCase();
+    if (needle.length < 2) return [];
+    const words = needle.split(/\s+/);
+    return FIND_INDEX
+      .filter(x => words.every(w => x.hay.includes(w)))
+      // A title match is what somebody typing a dish name wants first.
+      .sort((a, b) => {
+        const at = a.r.t.toLowerCase().includes(needle) ? 0 : 1;
+        const bt = b.r.t.toLowerCase().includes(needle) ? 0 : 1;
+        return at - bt || a.r.n.localeCompare(b.r.n);
+      })
+      .slice(0, 8)
+      .map(x => x.r);
+  }
+
+  function renderFind() {
+    const box = $('#find');
+    const list = $('#find-results');
+    const matches = findMatches(box.value);
+    $('#find-clear').hidden = !box.value;
+    if (!box.value.trim()) {
+      list.hidden = true; list.innerHTML = '';
+      box.setAttribute('aria-expanded', 'false');
+      return;
+    }
+    const inWeek = new Set(allPicked());
+    list.hidden = false;
+    box.setAttribute('aria-expanded', 'true');
+    if (!matches.length) {
+      list.innerHTML = '<li class="find-none">Nothing matches that.</li>';
+      return;
+    }
+    list.innerHTML = matches.map(r => {
+      const has = inWeek.has(r.n);
+      return `<li role="option" aria-selected="false">
+        <button class="find-hit" type="button" data-add="${r.n}"${has ? ' disabled' : ''}>
+          <span class="find-num d" style="color:${r.col}">${r.n}</span>
+          <span class="find-t d">${esc(r.t)}</span>
+          <span class="find-meta">${esc(COURSE_LABEL.get(r.sec) || '')} · ${esc(r.ml)} · ${esc(r.c)}</span>
+          <span class="find-add">${has ? 'Already in' : 'Add'}</span>
+          <span class="cmin d">${r.min}<i>min</i></span>
+        </button></li>`;
+    }).join('');
+  }
+
+  function addRecipe(numStr) {
+    const r = BY_NUM.get(numStr);
+    if (!r || allPicked().includes(numStr)) return;
+    const course = state.picked[r.sec] ? r.sec : 'dinner';
+    state.picked[course].push(numStr);
+    state.want[course] = state.picked[course].length;
+    state.week = state.picked.dinner;
+    state.cursors.clear();
+    state.hasPicked = true;
+    syncControls();
+    writeHash(false);
+    renderAll();
+    say(`${r.t} added. The list has been updated.`);
+  }
+
+  function dropRecipe(course, slot) {
+    const list = state.picked[course];
+    const r = BY_NUM.get(list[slot]);
+    list.splice(slot, 1);
+    state.want[course] = list.length;
+    state.week = state.picked.dinner;
+    state.cursors.clear();
+    syncControls();
+    writeHash(false);
+    renderAll();
+    say(`${r ? r.t : 'That meal'} taken out. The list has been updated.`);
+  }
+
   // ------------------------------------------------------------ the actions
 
   function pick() {
-    const res = pickWeek(state.nights, state.week);
-    state.week = res.set.map(r => r.n);
+    let res = { caps: null, alternatives: 0 };
+    for (const [key] of COURSES) {
+      const n = state.want[key] || 0;
+      if (!n) { state.picked[key] = []; continue; }
+      const r = pickWeek(n, state.picked[key], key);
+      state.picked[key] = r.set.map(x => x.n);
+      if (key === 'dinner') res = r;
+    }
+    state.week = state.picked.dinner;
     state.ticked.clear();
     state.cursors.clear();
-    state.picked = true;
+    state.hasPicked = true;
     writeHash(true);
     renderAll(res.caps, res.alternatives);
-    say(`${cap(word(state.week.length))} dinners picked. The list has been rewritten.`);
+    const total = allPicked().length;
+    say(`${cap(word(total))} meal${total === 1 ? '' : 's'} picked. The list has been rewritten.`);
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
       $('#week').scrollIntoView({ block: 'start' });
     }
   }
 
   function planTitle() {
-    return `${cap(word(state.week.length))} dinner${state.week.length === 1 ? '' : 's'} for ${word(state.serves)}`;
+    const d = state.picked.dinner.length;
+    const extra = COURSES.slice(1).reduce((a, c) => a + state.picked[c[0]].length, 0);
+    const head = d ? `${cap(word(d))} dinner${d === 1 ? '' : 's'}` : 'A week';
+    const tail = extra ? ` and ${word(extra)} other meal${extra === 1 ? '' : 's'}` : '';
+    return `${head}${tail} for ${word(state.serves)}`;
   }
 
 
@@ -774,7 +930,7 @@
     const list = shoppingList();
     const groups = grouped(list);
     const staples = cupboard(list);
-    const week = state.week.map(n => BY_NUM.get(n)).filter(Boolean);
+    const week = allPicked().map(n => BY_NUM.get(n)).filter(Boolean);
     const scaleNote = state.serves === BASE_SERVES
       ? `Every recipe serves ${word(BASE_SERVES)}, and these amounts are the sum of all ${word(week.length)}.`
       : `Every recipe is written for ${word(BASE_SERVES)}; the amounts on the list are scaled to ${word(state.serves)} — whole things and tins rounded up, weights to the nearest sensible figure. The recipes themselves are printed as written, for ${word(BASE_SERVES)}.`;
@@ -813,7 +969,7 @@
 
   function asText() {
     const list = shoppingList();
-    const week = state.week.map(n => BY_NUM.get(n)).filter(Boolean);
+    const week = allPicked().map(n => BY_NUM.get(n)).filter(Boolean);
     const lines = ['The 20-Minute Table — ' + planTitle().toLowerCase(), ''];
     for (const r of week) lines.push(`${r.n}  ${r.t}  (${r.min} min)`);
     lines.push('');
@@ -835,15 +991,21 @@
   // ------------------------------------------------------------------ wire
 
   function syncControls() {
-    // A hand-written address can name a number of nights the control does not
-    // offer. Rather than leaving the row with nothing selected, the nearest
-    // one it does offer is chosen.
-    const offered = $$('.pctl input[name=nights]').map(el => +el.value);
-    if (offered.length && !offered.includes(state.nights)) {
-      state.nights = offered.reduce((best, v) =>
-        Math.abs(v - state.nights) < Math.abs(best - state.nights) ? v : best, offered[0]);
+    // A hand-written address, or a dinner added by hand, can name a number the
+    // control does not offer. Rather than leaving a row with nothing selected,
+    // the nearest value it does offer is chosen.
+    for (const [key] of COURSES) {
+      const name = key === 'dinner' ? 'nights' : key;
+      const inputs = $$('.pctl input[name=' + name + ']');
+      if (!inputs.length) continue;
+      const offered = inputs.map(el => +el.value);
+      if (!offered.includes(state.want[key])) {
+        state.want[key] = offered.reduce((best, v) =>
+          Math.abs(v - state.want[key]) < Math.abs(best - state.want[key]) ? v : best,
+          offered[0]);
+      }
+      inputs.forEach(el => { el.checked = +el.value === state.want[key]; });
     }
-    $$('.pctl input[name=nights]').forEach(el => { el.checked = +el.value === state.nights; });
     $$('.pctl input[name=serves]').forEach(el => { el.checked = +el.value === state.serves; });
     $$('.pctl input[name=eat]').forEach(el => { el.checked = state.eat.has(el.value); });
     $$('.pctl input[name=pan]').forEach(el => { el.checked = state.pans.has(el.value); });
@@ -853,7 +1015,11 @@
     $('#pctl').addEventListener('submit', e => { e.preventDefault(); pick(); });
     $('#pctl').addEventListener('change', e => {
       const el = e.target;
-      if (el.name === 'nights') { state.nights = +el.value; writeHash(false); poolLine(); }
+      if (el.name === 'nights' || el.name === 'breakfast' || el.name === 'afters') {
+        state.want[el.name === 'nights' ? 'dinner' : el.name] = +el.value;
+        writeHash(false);
+        poolLine();
+      }
       else if (el.name === 'serves') {
         state.serves = +el.value; writeHash(false); renderBand(); renderShop();
       } else if (el.name === 'eat' || el.name === 'pan') {
@@ -872,25 +1038,65 @@
       pick();
     });
 
-    $('#weeklist').addEventListener('click', e => {
+    const onWeekClick = e => {
+      const drop = e.target.closest('[data-drop]');
+      if (drop) { dropRecipe(drop.dataset.course, +drop.dataset.drop); return; }
       const btn = e.target.closest('[data-slot]');
       if (!btn) return;
+      const course = btn.dataset.course || 'dinner';
       const slot = +btn.dataset.slot;
-      const next = nextForSlot(slot);
+      const next = nextForSlot(course, slot);
       if (!next) {
         const none = document.createElement('span');
         none.className = 'n-none';
-        none.textContent = 'Nothing else matches those ticks';
+        none.textContent = 'Nothing else matches';
         btn.replaceWith(none);
-        say('There is nothing else to put in that night.');
+        say('There is nothing else to put in that place.');
         return;
       }
-      state.week[slot] = next.n;
+      state.picked[course][slot] = next.n;
+      state.week = state.picked.dinner;
       writeHash(false);
       renderAll();
-      say(`${ORDINALS[slot] || 'That'} dinner is now ${next.t}. The list has been updated.`);
-      const b = $(`#weeklist [data-slot="${slot}"]`);
+      say(`That ${course === 'dinner' ? 'dinner' : 'one'} is now ${next.t}. The list has been updated.`);
+      const b = $(`[data-course="${course}"][data-slot="${slot}"]`);
       if (b) b.focus();
+    };
+    $('#weeklist').addEventListener('click', onWeekClick);
+    $('#course-extra').addEventListener('click', onWeekClick);
+
+    let findTimer;
+    $('#find').addEventListener('input', () => {
+      clearTimeout(findTimer);
+      findTimer = setTimeout(renderFind, 90);
+    });
+    $('#find').addEventListener('keydown', e => {
+      if (e.key === 'Escape') { $('#find').value = ''; renderFind(); }
+      if (e.key === 'ArrowDown') {
+        const first = $('#find-results .find-hit:not([disabled])');
+        if (first) { e.preventDefault(); first.focus(); }
+      }
+    });
+    $('#find-clear').addEventListener('click', () => {
+      $('#find').value = ''; renderFind(); $('#find').focus();
+    });
+    $('#find-results').addEventListener('click', e => {
+      const hit = e.target.closest('[data-add]');
+      if (!hit) return;
+      addRecipe(hit.dataset.add);
+      $('#find').value = '';
+      renderFind();
+      $('#find').focus();
+    });
+    $('#find-results').addEventListener('keydown', e => {
+      const hits = $$('#find-results .find-hit:not([disabled])');
+      const i = hits.indexOf(document.activeElement);
+      if (e.key === 'ArrowDown' && i > -1 && hits[i + 1]) { e.preventDefault(); hits[i + 1].focus(); }
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (i > 0) hits[i - 1].focus(); else $('#find').focus();
+      }
+      if (e.key === 'Escape') { $('#find').value = ''; renderFind(); $('#find').focus(); }
     });
 
     const onTick = e => {
@@ -939,7 +1145,7 @@
       label.textContent = 'Gathering the recipes…';
       try {
         const pack = await loadRecipes();
-        const recipes = state.week.map(n => pack[n]).filter(Boolean);
+        const recipes = allPicked().map(n => pack[n]).filter(Boolean);
         writePdf(pdfDoc(recipes), 'a-week-of-dinners.pdf', label, was);
       } catch (err) {
         label.textContent = 'The recipes would not load';
