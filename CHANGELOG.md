@@ -12,6 +12,16 @@ This project uses [semantic versioning](https://semver.org) loosely, read for a 
 - **Major** — a change that reorganises the book: renumbering recipes, changing the recipe
   file contract, dropping a section.
 
+## 1.1.2
+
+- **Stylesheets and scripts carry the release in their address.** The pages are served
+  no-cache and the assets for an hour, so for that hour after a deploy a returning
+  visitor was given today's HTML to run with yesterday's script. On the planner that is
+  not cosmetic — the week is written into the HTML at build time and re-rendered by
+  `plan.js`, so the two have to be the same version to agree, and a stale script quietly
+  dropped the pan filter and the type tags. Every asset URL now ends `?v=<version>`,
+  including the recipe pack the planner fetches for itself.
+
 ## 1.1.1
 
 - **The pan is a filter too.** Air Fryer, One Pan, Wok and No Cook join the diet ticks

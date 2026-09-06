@@ -762,7 +762,7 @@
     if (packLoading) return packLoading;
     packLoading = new Promise((resolve, reject) => {
       const s = document.createElement('script');
-      s.src = 'assets/recipes.js';
+      s.src = 'assets/recipes.js' + (DATA.v ? '?v=' + DATA.v : '');
       s.onload = () => resolve(window.PLAN_RECIPES);
       s.onerror = () => reject(new Error('assets/recipes.js did not load'));
       document.head.appendChild(s);

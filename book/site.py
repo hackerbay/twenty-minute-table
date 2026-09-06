@@ -103,7 +103,13 @@ def fonts_css():
 
 def shell(title, body, depth=0, desc='', extra_head='', scripts=()):
     up = '../' * depth
-    more = ''.join(f'\n<script src="{up}assets/{s}" defer></script>' for s in scripts)
+    # The pages are served no-cache and the assets for an hour, so without a
+    # key that changes with the release a returning visitor gets today's HTML
+    # driven by yesterday's script. On the planner that is not cosmetic: the
+    # week is rendered into the HTML at build time and re-rendered by plan.js,
+    # and the two have to be the same version to agree.
+    v = f'?v={VERSION}'
+    more = ''.join(f'\n<script src="{up}assets/{s}{v}" defer></script>' for s in scripts)
     return f"""<!doctype html>
 <html lang="en-GB">
 <head>
@@ -112,13 +118,13 @@ def shell(title, body, depth=0, desc='', extra_head='', scripts=()):
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
 <meta name="theme-color" content="#1B201D">
-<link rel="stylesheet" href="{up}assets/style.css">
+<link rel="stylesheet" href="{up}assets/style.css{v}">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%F0%9F%A5%A3%3C/text%3E%3C/svg%3E">
 {extra_head}
 </head>
 <body>
 {body}
-<script src="{up}assets/app.js" defer></script>{more}
+<script src="{up}assets/app.js{v}" defer></script>{more}
 </body>
 </html>"""
 

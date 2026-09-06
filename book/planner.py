@@ -20,6 +20,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
 from parse import load_all, METHODS, ORDER  # noqa: E402
+from version import VERSION  # noqa: E402
 import grocery as G  # noqa: E402
 import diet as D  # noqa: E402
 
@@ -175,6 +176,9 @@ def payload(recipes):
         'aisles': [[k, G.AISLE_LABEL[k]] for k in G.AISLE_ORDER],
         'week': default_week(records),
         'serves': int(recipes[0]['serves']) if recipes else 4,
+        # The recipe pack is fetched on demand, so it carries the same cache
+        # key the rest of the assets get from shell().
+        'v': VERSION,
     }
 
 
